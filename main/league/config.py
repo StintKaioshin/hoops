@@ -6,8 +6,6 @@
 # main league application.
 # ------------------------------------------------
 
-from main.league.config import config
-
 current_season = 2
 
 max_players = 1
