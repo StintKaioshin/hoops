@@ -1,0 +1,39 @@
+{% extends 'stats/base.html' %}
+{% block content %}
+<!-- Add game page -->
+<div class="container mt-5">
+    <!-- Game title -->
+    <h1>Season {{ season }}</h1>
+    <!-- Sort types -->
+    <form>
+        {% csrf_token %}
+        <!-- Sort type chooser -->
+        <select name="sort_type" class="form-control mt-1" hx-post="{% url 'stats:find_options' %}" hx-trigger="click" hx-target="#sort_options" hx-swap="innerHTML">
+            <option value="averages">Averages</option>
+            <option value="totals">Totals</option>
+        </select>
+    </form>
+    <!-- Sort options -->
+    <form>
+        {% csrf_token %}
+        <input type="hidden" name="season" value="{{ season }}">
+        <!-- Sort option chooser -->
+        <div id="sort_options">
+            {% include 'stats/ajax/sort_options_fragment.html' %}
+        </div>
+        <!-- Sorted table fragment -->
+        <div id="sorted_stats_table" class="mt-2">
+            <p>Choose options to display sorted player statistics.</p>
+        </div>
+        <!-- Table pagination -->
+        <div class="mt-2" style="padding: 0px;">
+            <ul class="pagination">
+                {% for page_number in page.paginator.page_range %}
+                    <li class="page-item"><button class="page-link text-white" aria-label="{{ page_number }}" hx-post="{% url 'stats:sort_stats' page_number %}" hx-trigger="click" hx-target="#sorted_stats_table" hx-swap="innerHTML" hx-include="[name='season']">{{ page_number }}</button></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </form>
+        
+</div>
+{% endblock %}
