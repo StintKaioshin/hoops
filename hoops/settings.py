@@ -63,7 +63,6 @@ INSTALLED_APPS = [
     "main.apps.MainConfig",
     # Third Party Apps
     "jsoneditor",
-    "mathfilters",
 ]
 
 MIDDLEWARE = [
