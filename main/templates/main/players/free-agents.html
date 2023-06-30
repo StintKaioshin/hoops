@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+{% load main_filters %}
+{% block content %}
+    <div class="container-fluid mt-5 mb-5 p-5">
+        <h1>Players</h1>
+        <p id="offer-status">View all league players</p>
+        <form>
+            {% csrf_token %}
+            <input type="search" name="search" placeholder="Search fields" class="form-control mt-3 mb-2" style="width: 300px;" hx-post="/players/free-agents/search/" hx-trigger="keyup delay:200ms" hx-target="#search-results" hx-swap="innerHTML" onkeydown="return event.key != 'Enter';"></input>
+        </form>
+        <div id="search-results">
+            {% include 'main/ajax/free_agent_list_fragment.html' with page=page %}
+        </div>
+        <!-- Table pagination -->
+        <div class="mt-2" style="padding: 0px;">
+            <ul class="pagination">
+                {% if page.has_previous %} 
+                    <li class="page-item"><a class="page-link" aria-label="Previous" href="?page={{ page.previous_page_number }}"><span aria-hidden="true">Back</span></a></li>
+                {% endif %}
+                {% for page in page.paginator.page_range %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                {% endfor %}
+                {% if page.has_next %}
+                    <li class="page-item"><a class="page-link" aria-label="Next" href="?page={{ page.next_page_number }}"><span aria-hidden="true">Next</span></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
