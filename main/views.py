@@ -69,7 +69,7 @@ def home(request):
     current_user = request.user
     # Find the game of the day for the past three days
     gotd_list = []
-    gotd_list.append(stats_compile.game_of_the_day(season=league_config.current_season))
+    gotd = stats_compile.game_of_the_day(season=league_config.current_season)
     if gotd is not None:
         gotd_list.append(gotd)
         day_index = gotd_list[0]["day"]
