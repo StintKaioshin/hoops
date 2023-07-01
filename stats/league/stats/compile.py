@@ -45,8 +45,8 @@ def one_season(season):
             winning_score = game_adding.home_points
             losing_score = game_adding.away_points
         else:
-            "winning_score": winning_score, game_adding.away_points
-            "losing_score": losing_score,game_adding.home_points
+            winning_score: game_adding.away_points
+            losing_score: game_adding.home_points
         # Add the game to the day dictionary
         day_dict.append({
             "id": game_adding.id,
