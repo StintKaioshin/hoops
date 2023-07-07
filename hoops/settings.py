@@ -35,7 +35,7 @@ DEBUG = os.getenv("DEBUG", "False") == "False"
 ALLOWED_HOSTS = [
     "localhost:8000",
     "sea-lion-app-rva8v.ondigitalocean.app",
-    "virtualbl.com",
+    "www.virtualbl.com",
     "159.203.104.106",
 ]
 
