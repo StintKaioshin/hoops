@@ -18,7 +18,7 @@ def send_webhook(url, title="", message=""):
     # Create an embed
     webhook_embed = DiscordEmbed(title=title, description=message, color="03b2f8")
     webhook_embed.set_timestamp()
-    webhook_embed.set_footer(text="Powered by hoopsim.com")
+    webhook_embed.set_footer(text="Powered by virtualbl.com")
     # Add embed object to webhook
     webhook.add_embed(webhook_embed)
     # Send webhook
