@@ -61,7 +61,6 @@ INSTALLED_APPS = [
     # Local Apps
     "main.apps.MainConfig",
     "stats",
-    "polls",
     "events",
     # Third Party Apps
     "jsoneditor",
