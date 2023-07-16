@@ -143,13 +143,13 @@ def login_discord_redirect(request):
         django_login(request, discord_user, backend="main.authorize.DiscordBackend")
         # Send a success message
         messages.error(request, "You have successfully logged in!")
-    except Exception as e:
-        # Log the exception
-        print(f"Exception occurred: {e}")
+    except:
         # Sometimes the user will be redirected to this page without a code
         messages.error(request, "Something went wrong while logging you in, try again!")
     # Redirect the user to the home page
     return redirect(home)
+
+
 
 
 def logout(request):
