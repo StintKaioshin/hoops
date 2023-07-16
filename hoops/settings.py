@@ -61,10 +61,8 @@ INSTALLED_APPS = [
     # Local Apps
     "main.apps.MainConfig",
     "stats",
-    "events",
     # Third Party Apps
     "jsoneditor",
-    "mathfilters",
 ]
 
 MIDDLEWARE = [
