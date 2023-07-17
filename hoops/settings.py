@@ -35,8 +35,8 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 ALLOWED_HOSTS = [
     "159.203.104.106",
     "sea-lion-app-rva8v.ondigitalocean.app",
-    "hoopsim.com",
-    "localhost:8000",
+    "virtualbl.com",
+    "www.virtualbl.com",
 ]
 
 AUTHENTICATION_BACKENDS = [
