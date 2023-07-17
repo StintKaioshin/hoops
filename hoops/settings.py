@@ -36,7 +36,7 @@ ALLOWED_HOSTS = [
     "159.203.104.106",
     "sea-lion-app-rva8v.ondigitalocean.app",
     "hoopsim.com",
-    "stats.hoopsim.com",
+    "localhost:8000",
 ]
 
 AUTHENTICATION_BACKENDS = [
