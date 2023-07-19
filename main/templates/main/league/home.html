@@ -1,17 +1,18 @@
 {% extends 'main/base.html' %}
 {% block content %}
-<div class="row">
-    <div class="col-md-6 col-xl-6">
 <div class="container mt-5">
     <h1 class="text-uppercase fw-bold">DASHBOARD</h1><span style="font-size: 14px;">{{ current_user.discord_tag }}</span>
     <p><span class="fw-bold text-warning">MOTD </span> <i style="font-size: 12px;">"{{ motd }}"</i></p>
-<style>
-    .carousel, .carousel-item, .carousel-item img {
-        height: 200px; /* adjust this value as needed */
-        max-width: 200px; /* adjust this value as needed */
-        margin: autho;
-    }
-</style>
+
+    <style>
+        .carousel, .carousel-item, .carousel-item img {
+            height: 200px; /* adjust this value as needed */
+            max-width: 200px; /* adjust this value as needed */
+            margin: autho;
+        }
+    </style>
+<div class="row">
+  <div class="col-md-6 col-xl-6">
    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -39,7 +40,7 @@
         </button>
     </div>
 </div>
-    <div class="col-md-6 col-xl-6">
+        <div class="col-md-6 col-xl-6">
         <!-- Documents -->
             <div class="" style="height: 400px;">
                 <div class="" style="padding-bottom: 0px;padding-top: 0px;">
