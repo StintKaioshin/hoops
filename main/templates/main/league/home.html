@@ -221,6 +221,37 @@
         </div>
     </div>
 </div>
+<style>
+  /* CSS for sticky footer */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  .content {
+    flex: 1;
+  }
+
+  .footer {
+    background-color: #f5f5f5;
+    padding: 20px;
+    text-align: center;
+  }
+</style>
+
+<div class="wrapper">
+  <div class="content">
+    <!-- Your main content goes here -->
+  </div>
+
+  <div class="footer">
 <div class="footer-wrap" style="display: block;">
   <footer>
     <div class="primary">
@@ -295,5 +326,19 @@
     </div>
   </footer>
 </div>
+    <div class="footer-wrap">
+      <footer>
+        <div class="primary">
+          <!-- Rest of the footer content -->
+        </div>
+        <div class="secondary">
+          <!-- Rest of the footer content -->
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+
 
 {% endblock %}
