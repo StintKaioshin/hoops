@@ -1,22 +1,18 @@
 {% extends 'main/base.html' %}
 {% block content %}
+<div class="row">
+    <div class="col-md-6 col-xl-6">
 <div class="container mt-5">
     <h1 class="text-uppercase fw-bold">DASHBOARD</h1><span style="font-size: 14px;">{{ current_user.discord_tag }}</span>
     <p><span class="fw-bold text-warning">MOTD </span> <i style="font-size: 12px;">"{{ motd }}"</i></p>
 <style>
     .carousel, .carousel-item, .carousel-item img {
         height: 200px; /* adjust this value as needed */
-        width: auto;
         max-width: 200px; /* adjust this value as needed */
-        margin: auto;
+        margin: autho;
     }
 </style>
    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="https://i.imgur.com/hUXLGz9.png" class="d-block w-100" alt="...">
@@ -28,15 +24,41 @@
                 <img src="..." class="d-block w-100" alt="...">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
+</div>
+    <div class="col-md-6 col-xl-6">
+        <!-- Documents -->
+            <div class="" style="height: 400px;">
+                <div class="" style="padding-bottom: 0px;padding-top: 0px;">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                <span class="text-white" style="font-size: 12px;">DOCS</span>
+                            </div><hr>
+                            <div class="text-white h5 mb-0" style="margin-top: -6px;">
+                                <svg class="bi bi-activity" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
+                                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"></path>
+                                </svg>
+                                <a class="fw-bold"href="https://docs.google.com/spreadsheets/d/1X5jjdQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 10px; text-decoration: none;">VBL Trackers</a><br>
+                                <a class="fw-bold"href="https://docs.google.com/spreadsheets/d/1X5jjdQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 10px; text-decoration: none;"> Trackers</a><br>
+                                <svg class="bi bi-activity" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
+                                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"></path>
+                                </svg>
+                                <a class="fw-bold"href="https://docs.google.com/document/d/19gvgpuWeMTpr4km_AMftrPfzhGqsjaq2C6QcRPkElDM/edit" style="font-size: 10px; text-decoration: none;">VBL Rulebook</a><br>
+                                <a class="fw-bold"href="https://docs.google.com/document/d/19gvgpuWeMTpr4km_AMftrPfzhGqsjaq2C6QcRPkElDM/edit" style="font-size: 10px; text-decoration: none;"> Rulebook</a><br>
+                                <svg class="bi bi-activity" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
+                                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"></path>
+                                </svg>
+                                <a class="fw-bold"href="{% url 'mock_builder' %}" style="font-size: 10px; text-decoration: none;">VBL Builder</a><br>
+                            </div>
+                                <a class="fw-bold"href="{% url 'mock_builder' %}" style="font-size: 10px; text-decoration: none;"> Builder</a><br>
+                            </div
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
 <!-- Home dashbaord -->
 <div class="container">
     <hr>
@@ -146,38 +168,6 @@
                                 </svg>
                                 <a class="fw-bold" href="https://discord.gg/QweZVsvDxs" style="font-size: 10px; text-decoration: none;">Discord</a><br>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Documents -->
-        <div class="col-md-6 col-xl-3 mb-4">
-            <div class="" style="height: 400px;">
-                <div class="" style="padding-bottom: 0px;padding-top: 0px;">
-                    <div class="row align-items-center no-gutters">
-                        <div class="col me-2">
-                            <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                <span class="text-white" style="font-size: 12px;">DOCS</span>
-                            </div><hr>
-                            <div class="text-white h5 mb-0" style="margin-top: -6px;">
-                                <svg class="bi bi-activity" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
-                                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"></path>
-                                </svg>
-                                <a class="fw-bold"href="https://docs.google.com/spreadsheets/d/1X5jjdQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 10px; text-decoration: none;">VBL Trackers</a><br>
-                                <a class="fw-bold"href="https://docs.google.com/spreadsheets/d/1X5jjdQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 10px; text-decoration: none;"> Trackers</a><br>
-                                <svg class="bi bi-activity" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
-                                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"></path>
-                                </svg>
-                                <a class="fw-bold"href="https://docs.google.com/document/d/19gvgpuWeMTpr4km_AMftrPfzhGqsjaq2C6QcRPkElDM/edit" style="font-size: 10px; text-decoration: none;">VBL Rulebook</a><br>
-                                <a class="fw-bold"href="https://docs.google.com/document/d/19gvgpuWeMTpr4km_AMftrPfzhGqsjaq2C6QcRPkElDM/edit" style="font-size: 10px; text-decoration: none;"> Rulebook</a><br>
-                                <svg class="bi bi-activity" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
-                                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"></path>
-                                </svg>
-                                <a class="fw-bold"href="{% url 'mock_builder' %}" style="font-size: 10px; text-decoration: none;">VBL Builder</a><br>
-                            </div>
-                                <a class="fw-bold"href="{% url 'mock_builder' %}" style="font-size: 10px; text-decoration: none;"> Builder</a><br>
-                            </div
                         </div>
                     </div>
                 </div>
