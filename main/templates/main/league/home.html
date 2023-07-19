@@ -221,123 +221,122 @@
         </div>
     </div>
 </div>
-<style>
-  /* CSS for sticky footer */
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+<!DOCTYPE html>
+<html>
 
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-  }
+<head>
+  <style>
+    /* CSS for sticky footer */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-  .content {
-    flex: 1;
-  }
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
 
-  .footer {
-    background-color: #f5f5f5;
-    padding: 20px;
-    text-align: center;
-  }
-</style>
+    .content {
+      flex: 1;
+    }
 
-<div class="wrapper">
-  <div class="content">
-    <!-- Your main content goes here -->
-  </div>
+    .footer {
+      background-color: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
 
-  <div class="footer">
-<div class="footer-wrap" style="display: block;">
-  <footer>
-    <div class="primary">
-      <div class="w">
-        <div class="footer-column image" ng-class="{ open: footer.open == 0 }">
-          <div>
-            <img src="https://digitalshift-assets.sfo2.cdn.digitaloceanspaces.com/pw/5458cf0b-64c6-4450-8ddd-36af89d4f8d0/p-af960429-56c2-4c6e-b5f8-488a1618e762/1682442536-grid.png" alt="">
-          </div>
-        </div>
-        <div class="footer-column links" ng-class="{ open: footer.open == 1 }">
-          <div>
-            <h3 ng-click="footer.open = footer.open == 1 ? null : 1">About</h3>
-            <div class="link"><a href="/about">The League</a></div>
-            <div class="link"><a href="/faq">FAQ</a></div>
-            <div class="link"><a href="/events">Events</a></div>
-            <div class="link"><a href="/staff">Staff</a></div>
-            <div class="link"><a href="/partners">Partners</a></div>
-            <div class="link"><a href="/contact">Contact</a></div>
-          </div>
-        </div>
-        <div class="footer-column links" ng-class="{ open: footer.open == 2 }">
-          <div>
-            <h3 ng-click="footer.open = footer.open == 2 ? null : 2">News</h3>
-            <div class="link"><a href="/news">News</a></div>
-            <div class="link"><a href="/stats#/2311/transactions?season_id=5432">Transactions</a></div>
-          </div>
-        </div>
-        <div class="footer-column links" ng-class="{ open: footer.open == 3 }">
-          <div>
-            <h3 ng-click="footer.open = footer.open == 3 ? null : 3">Season</h3>
-            <div class="link"><a href="/stats#/2311/schedule?season_id=5432">Schedule</a></div>
-            <div class="link"><a href="/stats#/2311/leaders?season_id=5432">Leaders</a></div>
-            <div class="link"><a href="/stats#/2311/stars?season_id=5432">Stars</a></div>
-            <div class="link"><a href="/stats#/2311/standings?season_id=5432">Standings</a></div>
-            <div class="link"><a href="/stats#/2311/brackets?season_id=5432">Playoffs</a></div>
-          </div>
-        </div>
-        <div class="footer-column links" ng-class="{ open: footer.open == 4 }">
-          <div>
-            <h3 ng-click="footer.open = footer.open == 4 ? null : 4">Media</h3>
-            <div class="link"><a href="/photos">Photos</a></div>
-            <div class="link"><a href="/videos">Videos</a></div>
-          </div>
-        </div>
-        <div class="footer-column links" ng-class="{ open: footer.open == 5 }">
-          <div>
-            <h3 ng-click="footer.open = footer.open == 5 ? null : 5">Network</h3>
-            <div class="link"><a href="https://sectorsixapparel.com/pages/sfl" target="_blank" aria-label="">Apparel</a></div>
-            <div class="link"><a href="https://simulation.football/" target="_blank" aria-label="">Player Login</a></div>
-            <div class="link"><a href="https://www.youtube.com/simulationfl" target="_blank" aria-label="">SFL Network</a></div>
-            <div class="link"><a href="https://stats.simulationfl.net/" target="_blank" aria-label="">Historical Stats</a></div>
-          </div>
-        </div>
-      </div>
+<body>
+  <div class="wrapper">
+    <div class="content">
+      <!-- Your main content goes here -->
     </div>
-    <div class="secondary">
-      <div class="w">
-        <div class="pull-right">
-          <div class="menu" ng-class="{ show: openMenu }" role="menu">
-            <div class="item ng-scope" ng-controller="MenuItemCtrl" ng-class="{ 'submenu-shown': openMenu }">
-              <div class="name" ng-click="toggleMenu()">
-                <a href="https://admin.footballshift.com" ng-click="closeMenuRoot()" target="_blank" aria-label="Admin Login">Admin Login</a>
+
+    <div class="footer">
+      <!-- Footer content goes here -->
+      <div class="footer-wrap">
+        <footer>
+          <div class="primary">
+            <div class="w">
+              <div class="footer-column image" ng-class="{ open: footer.open == 0 }">
+                <div><img src="https://digitalshift-assets.sfo2.cdn.digitaloceanspaces.com/pw/5458cf0b-64c6-4450-8ddd-36af89d4f8d0/p-af960429-56c2-4c6e-b5f8-488a1618e762/1682442536-grid.png" alt=""></div>
+              </div>
+              <div class="footer-column links" ng-class="{ open: footer.open == 1 }">
+                <div>
+                  <h3 ng-click="footer.open = footer.open == 1 ? null : 1">About</h3>
+                  <div class="link"><a href="/about">The League</a></div>
+                  <div class="link"><a href="/faq">FAQ</a></div>
+                  <div class="link"><a href="/events">Events</a></div>
+                  <div class="link"><a href="/staff">Staff</a></div>
+                  <div class="link"><a href="/partners">Partners</a></div>
+                  <div class="link"><a href="/contact">Contact</a></div>
+                </div>
+              </div>
+              <div class="footer-column links" ng-class="{ open: footer.open == 2 }">
+                <div>
+                  <h3 ng-click="footer.open = footer.open == 2 ? null : 2">News</h3>
+                  <div class="link"><a href="/news">News</a></div>
+                  <div class="link"><a href="/stats#/2311/transactions?season_id=5432">Transactions</a></div>
+                </div>
+              </div>
+              <div class="footer-column links" ng-class="{ open: footer.open == 3 }">
+                <div>
+                  <h3 ng-click="footer.open = footer.open == 3 ? null : 3">Season</h3>
+                  <div class="link"><a href="/stats#/2311/schedule?season_id=5432">Schedule</a></div>
+                  <div class="link"><a href="/stats#/2311/leaders?season_id=5432">Leaders</a></div>
+                  <div class="link"><a href="/stats#/2311/stars?season_id=5432">Stars</a></div>
+                  <div class="link"><a href="/stats#/2311/standings?season_id=5432">Standings</a></div>
+                  <div class="link"><a href="/stats#/2311/brackets?season_id=5432">Playoffs</a></div>
+                </div>
+              </div>
+              <div class="footer-column links" ng-class="{ open: footer.open == 4 }">
+                <div>
+                  <h3 ng-click="footer.open = footer.open == 4 ? null : 4">Media</h3>
+                  <div class="link"><a href="/photos">Photos</a></div>
+                  <div class="link"><a href="/videos">Videos</a></div>
+                </div>
+              </div>
+              <div class="footer-column links" ng-class="{ open: footer.open == 5 }">
+                <div>
+                  <h3 ng-click="footer.open = footer.open == 5 ? null : 5">Network</h3>
+                  <div class="link"><a href="https://sectorsixapparel.com/pages/sfl" target="_blank" aria-label="">Apparel</a></div>
+                  <div class="link"><a href="https://simulation.football/" target="_blank" aria-label="">Player Login</a></div>
+                  <div class="link"><a href="https://www.youtube.com/simulationfl" target="_blank" aria-label="">SFL Network</a></div>
+                  <div class="link"><a href="https://stats.simulationfl.net/" target="_blank" aria-label="">Historical Stats</a></div>
+                </div>
               </div>
             </div>
           </div>
-          <span class="copyright">Copyright © 2023 Simulation Football</span>
-        </div>
-        <div class="powered-by">
-          <a href="https://www.footballshift.com" title="Powered by FootballShift"></a>
-        </div>
+          <div class="secondary">
+            <div class="w">
+              <div class="pull-right">
+                <div class="menu" ng-class="{ show: openMenu }" role="menu">
+                  <div class="item ng-scope" ng-controller="MenuItemCtrl" ng-class="{ 'submenu-shown': openMenu }">
+                    <div class="name" ng-click="toggleMenu()">
+                      <a href="https://admin.footballshift.com" ng-click="closeMenuRoot()" target="_blank" aria-label="Admin Login">Admin Login</a>
+                    </div>
+                  </div>
+                </div>
+                <span class="copyright">Copyright © 2023 Simulation Football</span>
+              </div>
+              <div class="powered-by">
+                <a href="https://www.footballshift.com" title="Powered by FootballShift"></a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
-  </footer>
-</div>
-    <div class="footer-wrap">
-      <footer>
-        <div class="primary">
-          <!-- Rest of the footer content -->
-        </div>
-        <div class="secondary">
-          <!-- Rest of the footer content -->
-        </div>
-      </footer>
-    </div>
   </div>
-</div>
+</body>
+
+</html>
+
 
 
 
