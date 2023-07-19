@@ -1,18 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Website Title</title>
-  <style>
-    body {
-      background-color: blue; /* Replace "blue" with the desired color */
-      /* OR */
-      /* background-image: url("path/to/your/image.jpg"); */
-      /* Uncomment the above line and replace "path/to/your/image.jpg" with the path to your image file */
-      /* You can also use additional background properties such as background-repeat, background-position, etc. */
-    }
-  </style>
+{% load static %}
+<html lang="en" data-bs-theme="success">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -22,6 +10,7 @@
         <link rel="stylesheet" href="{% static 'main/fonts/ionicons.min.css' %}">
         <link rel="stylesheet" href="{% static 'main/css/Navbar-Right-Links-Dark-icons.css' %}">
         <link rel="stylesheet" href="{% static 'main/css/home-styles.css' %}">
+        <link rel="stylesheet" href="{% static 'main/css/dark-mode.css' %}">
         <!-- Scripts -->
         <script src="{% static 'main/bootstrap/js/bootstrap.min.js' %}"></script>
         <!-- Dark mode css variant -->
