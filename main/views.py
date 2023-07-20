@@ -316,6 +316,11 @@ def upgrade_player(request, id):
     return render(request, "main/players/upgrade.html", context)
 
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 @login_required(login_url="/login/discord/")
 def create_player(request):
     # Collect user & player information
