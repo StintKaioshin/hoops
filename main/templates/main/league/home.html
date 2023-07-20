@@ -1,135 +1,25 @@
 {% extends 'main/base.html' %}
 {% block content %}
-<div class="HomeHero_hero__ArLh4">
-  <div class="HomeHero_heroLayer__fKsod">
-    <div class="CarouselContainer_container__3UHEu">
-      <div class="CarouselContainer_slidesContainer__1tz_H">
-        <!-- Slide 1 -->
-        <div class="CarouselContainer_slide__1vW_B">
-          <img
-            data-is-visible="true"
-            data-should-scale="true"
-            src="https://cdn.nba.com/manage/2023/07/Miami_Pro_League_Hub16x9-1.png"
-            srcset="https://cdn.nba.com/manage/2023/07/Miami_Pro_League_Hub16x9-1.png?w=694&amp;h=568 1x, https://cdn.nba.com/manage/2023/07/Miami_Pro_League_Hub16x9-1.png?w=1388&amp;h=1136 2x"
-            alt="Watch Live: Miami Pro League"
-            class="BackgroundImageLayer_background__IEXRc"
-            loading="lazy"
-          >
-          <div class="CarouselContainer_slideContent__3HQy8">
-            <a
-              href="/watch/event/miami-pro-league"
-              class="Anchor_anchor__cSc3P"
-              data-is-external="false"
-              data-has-more="false"
-              data-has-children="true"
-              data-track="click"
-              data-type="headline"
-              data-id="nba:home:hero:headline"
-              data-text="Watch Live: Miami Pro League"
-              data-section="hero"
-              data-content="1170710"
-              data-pos="1"
-              data-premium="false"
-            >
-              <h2 class="Text_text__I2GnQ GenericSlide_title__xATM6">
-                <span class="MultiLineEllipsis_ellipsis___1H7z" style="-webkit-line-clamp:3">Watch Live: Miami Pro League</span>
-              </h2>
-            </a>
-            <p class="Text_text__I2GnQ GenericSlide_desc__K_stI">
-              <span class="MultiLineEllipsis_ellipsis___1H7z" style="-webkit-line-clamp:3">Check out all of the action from Miami on Wednesday night.</span>
-            </p>
-            <div class="GenericSlide_buttons__UKfgC">
-              <a
-                href="/watch/event/miami-pro-league"
-                class="Anchor_anchor__cSc3P mr-5 last:m-0 Link_outline__BAMHf"
-                data-is-external="false"
-                data-has-more="false"
-                data-has-children="false"
-                data-track="video"
-                data-id="nba:home:hero:cta"
-                data-content="1170710"
-                data-text="Watch"
-                data-pos="1"
-                data-type="cta"
-                data-section="hero"
-                data-premium="false"
-                data-franchise=""
-                data-cat-type=""
-                data-live-vod="live"
-                title="Watch"
-              >
-                Watch
-              </a>
+<div class="container mt-5">
+    <h1 class="text-uppercase fw-bold">DASHBOARD</h1><span style="font-size: 14px;">{{ current_user.discord_tag }}</span>
+    <p><span class="fw-bold text-warning">MOTD </span> <i style="font-size: 12px;">"{{ motd }}"</i></p>
+    <style>
+        .carousel, .carousel-item, .carousel-item img {
+            height: 500px; /* adjust this value as needed */
+            max-width: 500px; /* adjust this value as needed */
+        }
+    </style>
+<div class="row">
+  <div class="col-md-6 col-xl-6">
+   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+             <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://i.imgur.com/hUXLGz9.png" class="d-block w-100" alt="...">
             </div>
-          </div>
         </div>
-
-        <!-- Slide 2 -->
-        <div class="CarouselContainer_slide__1vW_B">
-          <img
-            data-is-visible="false"
-            data-should-scale="false"
-            src="https://cdn.nba.com/manage/2023/07/pascal-siakam-kawhi-leonard.jpg"
-            srcset="https://cdn.nba.com/manage/2023/07/pascal-siakam-kawhi-leonard.jpg?w=694&amp;h=568 1x, https://cdn.nba.com/manage/2023/07/pascal-siakam-kawhi-leonard.jpg?w=1388&amp;h=1136 2x"
-            alt="12 potential free agents to target in 2024"
-            class="BackgroundImageLayer_background__IEXRc"
-            loading="lazy"
-          >
-          <!-- Add content for slide 2 here -->
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="CarouselContainer_slide__1vW_B">
-          <img
-            data-is-visible="false"
-            data-should-scale="false"
-            src="https://cdn.nba.com/manage/2023/07/cam-whitmore-dunk.jpg"
-            srcset="https://cdn.nba.com/manage/2023/07/cam-whitmore-dunk.jpg?w=694&amp;h=568 1x, https://cdn.nba.com/manage/2023/07/cam-whitmore-dunk.jpg?w=1388&amp;h=1136 2x"
-            alt="Top Plays: Cam Whitmore's high-flying dunks"
-            class="BackgroundImageLayer_background__IEXRc"
-            loading="lazy"
-          >
-          <!-- Add content for slide 3 here -->
-        </div>
-
-        <!-- Add more slides here -->
-      </div>
     </div>
-  </div>
 </div>
-<div class="countdown-bar">
-  <div class="countdown-progress"></div>
-</div>
-
-<script>
-  // Countdown bar implementation
-  var countdownBar = document.querySelector('.countdown-bar');
-  var progressElement = countdownBar.querySelector('.countdown-progress');
-  var duration = 60; // Countdown duration in seconds
-  var interval;
-
-  function startCountdown() {
-    var startTime = Date.now();
-    interval = setInterval(updateProgress, 1000);
-
-    function updateProgress() {
-      var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-      var progress = (elapsedTime / duration) * 100;
-      progressElement.style.width = progress + '%';
-
-      if (elapsedTime >= duration) {
-        clearInterval(interval);
-        // Countdown finished, perform any desired action here
-      }
-    }
-  }
-
-  // Call startCountdown to begin the countdown
-  startCountdown();
-</script>
-
-
-
+        <div class="col-md-6 col-xl-6">
         <!-- Documents -->
             <div class="" style="height: 400px;">
                 <div class="" style="padding-bottom: 0px;padding-top: 0px;">
