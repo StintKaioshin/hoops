@@ -39,6 +39,12 @@ ALLOWED_HOSTS = [
     "www.virtualbl.com",
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    "https://www.virtualbl.com",
+    # any other domains you want to allow
+]
+
+
 AUTHENTICATION_BACKENDS = [
     "main.authorize.DiscordBackend",
     "django.contrib.auth.backends.ModelBackend",
