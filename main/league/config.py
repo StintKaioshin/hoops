@@ -6,7 +6,7 @@
 # main league application.
 # ------------------------------------------------
 
-current_season = 2
+current_season = 1
 
 max_players = 1
 primary_currency_start = 1000
@@ -43,18 +43,18 @@ free_agent_salary = 60
 # Description: For height & weight limits
 
 min_max_heights = {
-    "PG": {"min": 72, "max": 76},
-    "SG": {"min": 74, "max": 78},
-    "SF": {"min": 76, "max": 80},
-    "PF": {"min": 78, "max": 82},
-    "C": {"min": 80, "max": 84},
+    "PG": {"min": 72, "max": 79},
+    "SG": {"min": 72, "max": 81},
+    "SF": {"min": 72, "max": 82},
+    "PF": {"min": 72, "max": 84},
+    "C": {"min": 72, "max": 86},
 }
 min_max_weights = {
     "PG": {"min": 150, "max": 250},
     "SG": {"min": 155, "max": 255},
     "SF": {"min": 160, "max": 260},
     "PF": {"min": 165, "max": 265},
-    "C": {"min": 170, "max": 270},
+    "C": {"min": 170, "max": 300},
 }
 
 # Description: For starting attributes
