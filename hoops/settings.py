@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
     "sea-lion-app-rva8v.ondigitalocean.app",
     "virtualbl.com",
     "www.virtualbl.com",
+    "https://www.virtualbl.com/player/create/",
 ]
 
 CORS_ORIGIN_WHITELIST = [
