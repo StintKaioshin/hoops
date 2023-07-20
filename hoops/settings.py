@@ -32,6 +32,19 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
+# Allow all origins
+CORS_ORIGIN_ALLOW_ALL = True
+
+# Or specify a whitelist
+CORS_ORIGIN_WHITELIST = [
+    'https://www.virtualbl.com',
+    # add more origins if needed
+]
+
+
+
+
+
 ALLOWED_HOSTS = [
     "159.203.104.106",
     "sea-lion-app-rva8v.ondigitalocean.app",
@@ -40,10 +53,10 @@ ALLOWED_HOSTS = [
     "https://www.virtualbl.com/player/create/",
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    "https://www.virtualbl.com",
-    # any other domains you want to allow
-]
+CORS_ALLOW_CREDENTIALS = True
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 
 AUTHENTICATION_BACKENDS = [
