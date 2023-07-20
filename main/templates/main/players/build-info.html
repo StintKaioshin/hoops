@@ -25,12 +25,11 @@
     });
 </script>
 
-
 {% block content %}
     <div class="container mt-5">
         <!-- HTMX live updater/changer -->
         <h1 class="mb-3">Mock Builder</h1>
-        <form>
+        <form method="post">
             {% csrf_token %}
             <!-- Position label -->
             <select class="form-select mb-1" name="position">
