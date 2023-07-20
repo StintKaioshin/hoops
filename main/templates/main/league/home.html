@@ -148,12 +148,6 @@
                                     <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"></path>
                                     <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"></path>
                                 </svg>
-                                <a class="fw-bold" href="{% url 'frivolities' %}" style="font-size: 10px; text-decoration: none;">Frivolities</a><br>
-                                <hr style="margin-bottom: 2px;">
-                                <svg class="bi bi-person-bounding-box" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
-                                    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"></path>
-                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
-                                </svg>
                                 <a class="fw-bold" href="" style="font-size: 10px; text-decoration: none;">YouTube</a><br>
                                 <svg class="bi bi-person-bounding-box" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
                                     <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"></path>
@@ -178,21 +172,6 @@
                             <div class="text-white h5 mb-0" style="margin-top: -6px;">
                                 {% if current_user.can_update_players %}
                                     <a class="fw-bold"href="{% url 'upgrades_pending' %}" style="font-size: 10px; text-decoration: none;">Export Pending Upgrades</a><br>
-                                {% endif %}
-                    <div class="row align-items-center no-gutters">
-                        <div class="col me-2">
-                            <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                <span class="text-white" style="font-size: 12px;">Headlines</span>
-                            </div><hr>
-                            {% for gotd in gotd_list %}
-                                {% if gotd %}
-                                    <div class="text-white h5 mb-0" style="margin-top: -6px;">
-                                        <h3 class="mb-0 mt-3" style="font-size: 12px;">Day #{{ gotd.day }}<p><hr class="mb-2 mt-2">  
-                                        <p class="mb-0 mt-0" style="font-size: 11px;"><span class="text-success fw-bold">Statline:</span> {{ gotd.points }}/{{ gotd.rebounds }}/{{ gotd.assists }}/{{ gotd.steals }}/{{ gotd.blocks }}</p>
-                                        <p class="mb-0 mt-0" style="font-size: 11px;"><span style="text-transform: capitalize;" class="text-success fw-bold">{{ gotd.player }}</span> achieved a gamescore of <span class="text-success fw-bold">{{ gotd.gamescore }}</span>.<p>
-                                        <a class="fw-bold mb-0 mt-2 btn btn-primary btn-sm text-white" href="{% url 'stats:view_game' gotd.id %}" style="font-size: 10px; text-decoration: none;">View box score</a> 
-                                        <a class="fw-bold mb-0 mt-2 btn btn-primary btn-sm text-white" href="{% url 'player' gotd.pid %}" style="font-size: 10px; text-decoration: none;">View player</a><hr class="mb-2"> 
-                                    </div>
                                 {% endif %}
                             {% endfor %}
                         </div>
