@@ -101,6 +101,10 @@ INSTALLED_APPS = [
     "jsoneditor",
 ]
 
+
+CSRF_TRUSTED_ORIGINS = ['https://www.virtualbl.com','https://*.127.0.0.1']
+
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
