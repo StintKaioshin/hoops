@@ -28,7 +28,7 @@
         }
     </style>
     <div class="row">
-       <div class="col-md-6 col-xl-6">
+        <div class="col-md-6 col-xl-6">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -86,47 +86,44 @@
                                 <span style="font-size: 12px; color: white;">CAREERS</span>
                             </div><hr>
                             <div class="h5 mb-0" style="margin-top: -6px;">
-
-                                    {% if players %}
-                            {% for player in players %}
-                                <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                                    <!-- svg path -->
-                                </svg>
-                                <div class="text-center">
-                                    <a class="fw-bold ml-0 mb-0" href="{% url 'player' player.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
-                                        <span style="font-size: 15px;">({{ player.id }}) </span>
-                                        <span style="font-size: 15px;">{{ player.first_name }} {{ player.last_name }}</span>
-                                    </a>
-                                </div>
-                                <!-- Player headshot -->
-                                <div class="text-center">
-                                    {% if player.headshot %}
-                                        <img src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 200px; height: 200px; display: block; margin-left: auto; margin-right: auto;">
-                                    {% else %}
-                                        <img src="/static/default_headshot.jpg" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;">
-                                    {% endif %}
-                                </div>
-                                <!-- Player details -->
-                                <p style="font-size: 15px;">Position: {{ player.primary_position }}</p>
-                                <p style="font-size: 15px;">Salary: {{ player.salary }}</p>
-                            {% endfor %}
-                            <hr style="margin-bottom: 2px;">
-                        {% else %}
-                            <p style="font-size: 12px;">No players available.</p>
-                            <hr style="margin-bottom: 2px;">
-                            <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Start new career</a><br>
-                            <svg class="bi bi-ticket-detailed" width="0.67em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                                <!-- svg path -->
-                            </svg>
-                        {% endif %}
+                                {% if players %}
+                                    {% for player in players %}
+                                        <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                                            <!-- svg path -->
+                                        </svg>
+                                        <div class="text-center">
+                                            <a class="fw-bold ml-0 mb-0" href="{% url 'player' player.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
+                                                <span style="font-size: 15px;">({{ player.id }}) </span>
+                                                <span style="font-size: 15px;">{{ player.first_name }} {{ player.last_name }}</span>
+                                            </a>
+                                        </div>
+                                        <!-- Player headshot -->
+                                        <div class="text-center">
+                                            {% if player.headshot %}
+                                                <img src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 200px; height: 200px; display: block; margin-left: auto; margin-right: auto;">
+                                            {% else %}
+                                                <img src="/static/default_headshot.jpg" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;">
+                                            {% endif %}
+                                        </div>
+                                        <!-- Player details -->
+                                        <p style="font-size: 15px;">Position: {{ player.primary_position }}</p>
+                                        <p style="font-size: 15px;">Salary: {{ player.salary }}</p>
+                                    {% endfor %}
+                                    <hr style="margin-bottom: 2px;">
+                                {% else %}
+                                    <p style="font-size: 12px;">No players available.</p>
+                                    <hr style="margin-bottom: 2px;">
+                                    <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Start new career</a><br>
+                                    <svg class="bi bi-ticket-detailed" width="0.67em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                                        <!-- svg path -->
+                                    </svg>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
         <!-- League Pages -->
         <div class="col-md-6 col-xl-3 mb-4">
             <div class="" style="height: 400px;">
@@ -163,12 +160,12 @@
                             </div><hr>
                             <div class="text-white h5 mb-0" style="margin-top: -6px;">
                                 {% if current_user.can_update_players %}
-                                    <a class="fw-bold"href="{% url 'upgrades_pending' %}" style="font-size: 10px; text-decoration: none;">Export Pending Upgrades</a><br>
+                                    <a class="fw-bold" href="{% url 'upgrades_pending' %}" style="font-size: 10px; text-decoration: none;">Export Pending Upgrades</a><br>
                                 {% endif %}
                                 {% if current_user.can_approve_trades %}
-                                    <a class="fw-bold"href="{% url 'trade_panel' %}" style="font-size: 10px; text-decoration: none;">Trade Panel</a><br>
+                                    <a class="fw-bold" href="{% url 'trade_panel' %}" style="font-size: 10px; text-decoration: none;">Trade Panel</a><br>
                                 {% endif %}
-                                <a class="fw-bold"href="{% url 'trade' %}" style="font-size: 10px; text-decoration: none;">Trade Machine</a><br>
+                                <a class="fw-bold" href="{% url 'trade' %}" style="font-size: 10px; text-decoration: none;">Trade Machine</a><br>
                             </div>
                         </div>
                     </div>
@@ -177,4 +174,26 @@
         </div>
     </div>
 </div>
+<aside class="widget widget-promo ng-scope" data-widget="ce56cc78-9c50-484d-b708-64e55c603bd5" data-type="promo">
+    <div class="widget-content ng-scope loading-container" loading="loading" connection-error="connectionError">
+        <a href="https://www.hilton.com/en/book/reservation/rooms/?ctyhocn=CVGCVES&amp;arrivalDate=2023-07-27&amp;departureDate=2023-07-31&amp;groupCode=CESSF5&amp;room1NumAdults=1&amp;cid=OM%2CWW%2CHILTONLINK%2CEN%2CDirectLink" target="_blank" aria-label="Open in new window" class="flex flex-row flex-pcenter promo-logo">
+            <div class="photo"></div>
+            <div class="sep">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 100" preserveAspectRatio="none" shape-rendering="optimizeQuality">
+                    <path d="M0 0 L1 0 L36 100 L0 100 Z" class="black"></path>
+                    <path d="M0 0 L35 100 L40 100 L5 0 Z" fill="#CACACA"></path>
+                    <path d="M15 0 L50 100 L60 100 L25 0 Z" class="site-color"></path>
+                </svg>
+            </div>
+            <div class="info">
+                <h1>2023 Convention</h1>
+                <p>Cincinnati, OH / July 28-30</p>
+                <button>Reserve your Room</button>
+            </div>
+        </a>
+        <div class="loading-overlay ng-scope">
+            <loader><svg viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20"></circle></svg></loader>
+        </div>
+    </div>
+</aside>
 {% endblock %}
