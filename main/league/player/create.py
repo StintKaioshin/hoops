@@ -56,14 +56,6 @@ def validatePlayerCreation(user, formData):
     if (int(formData["weight"])) > (
         min_max_weights[formData["secondary_position"]]["max"]
     ):
-        return [False, "❌ You are trying to make a player over the maximum weight."]
-    # Check if the user is trying to make a player with duplicate traits
-    selected_traits = [
-        formData["trait_one"],
-        formData["trait_two"],
-    ]
-    if len(selected_traits) != len(set(selected_traits)):
-        return [False, "❌ You are trying to make a player with duplicate traits."]
     # Check if the user is trying to make a player with an existing cyberface
     if Player.objects.filter(cyberface=formData["cyberface"]).exists():
         if int(formData["cyberface"]) != 1:
