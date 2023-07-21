@@ -1,5 +1,4 @@
 {% extends 'main/base.html' %}
-{% load custom_filters %}
 {% block content %}
 
 <section class="py-4 py-xl-5">
@@ -36,7 +35,7 @@
                                             <select name="secondary_attr{{ i }}" class="form-select">
                                                 <option value="">Select Attribute</option>
                                                 {% for category, attributes in attribute_categories.items %}
-                                                    {% for attribute in attributes|split:", " %}
+                                                    {% for attribute in attributes %}
                                                         <option value="{{ attribute }}">{{ attribute }}</option>
                                                     {% endfor %}
                                                 {% endfor %}
@@ -47,7 +46,7 @@
                                             <select name="secondary_badge{{ i }}" class="form-select">
                                                 <option value="">Select Badge</option>
                                                 {% for badge_category, badges in badge_categories.items %}
-                                                    {% for badge in badges|split:", " %}
+                                                    {% for badge in badges %}
                                                         <option value="{{ badge }}">{{ badge }}</option>
                                                     {% endfor %}
                                                 {% endfor %}
