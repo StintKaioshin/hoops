@@ -1,5 +1,50 @@
 {% extends 'main/base.html' %}
 {% block content %}
+
+.widget-box {
+    width: 300px;
+    background: #877b53;
+    border-radius: 10px;
+    color: #ffffff;
+    text-align: center; /* New property for centering text */
+}
+
+.widget-header {
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ffffff;
+}
+
+.widget-body {
+    padding: 10px;
+}
+
+.icon {
+    height: 20px;
+    width: 20px;
+    fill: #ffffff;
+    margin-right: 10px;
+    margin-left: calc(50% - 10px); /* New property for centering icon */
+}
+
+.player-list-item, .no-players, .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* New property for centering elements */
+    margin-bottom: 10px;
+}
+
+.player-link, .style-editor-link, .career-link, .action-link, .notification-link {
+    text-decoration: none;
+    color: #ffffff;
+    margin: 0 10px; /* Adjusted property for centering links */
+}
+
+.style-editor-link {
+    font-size: 12px;
+}
+
 <div class="container mt-5">
     <h1 class="text-uppercase fw-bold">DASHBOARD</h1><span style="font-size: 14px;">{{ current_user.discord_tag }}</span>
     <p><span class="fw-bold text-warning">MOTD </span> <i style="font-size: 12px;">"{{ motd }}"</i></p>
