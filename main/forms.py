@@ -7,7 +7,7 @@ player_styles = open("main/league/looyh/styles.json")
 player_styles = json.load(player_styles)
 
 
-class PlayerForm(forms.Form):
+class PlayerForm(forms.ModelForm):
     first_name = forms.CharField(max_length=100, required=True)
     last_name = forms.CharField(max_length=100, required=True)
     height = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
