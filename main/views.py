@@ -378,7 +378,7 @@ def player(request, id):
         "secondary_playstyle": secondary_playstyle,
     }
 
-    return render(request, "main/players/player.html", context
+    return render(request, "main/players/player.html", context)
 def free_agents(request):
     context = {
         "title": "Free Agents",
