@@ -26,6 +26,9 @@ from .models import Award
 from .forms import PlayerForm
 from .forms import UpgradeForm
 from .forms import StylesForm
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 # Custom imports
 from .discord import auth as discord_auth
 from .discord import webhooks as discord_webhooks
@@ -298,12 +301,6 @@ logger = logging.getLogger(__name__)
 
 
 @login_required(login_url="/login/discord/")
-def create_player(request):
-    # Collect user & player information
-   from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-
-@login_required
 def create_player(request):
     attribute_categories = {
         "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
