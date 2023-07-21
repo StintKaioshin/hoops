@@ -299,37 +299,6 @@ def upgrade_player(request, id):
 import logging
 
 logger = logging.getLogger(__name__)
-
-
-
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.core.paginator import Paginator
-from django.contrib.auth.decorators import login_required
-from django.core import validators
-
-from .forms import PlayerForm
-from .models import Player
-from .league import config as league_config
-
-import json
-
-# Helper function to validate player creation
-def validatePlayerCreation(data):
-    # Add your validation logic here
-    # You can check if the data is valid and return a tuple with success and status
-    # Example:
-    first_name = data.get('first_name')
-    last_name = data.get('last_name')
-    if not first_name or not last_name:
-        return (False, "First name and last name are required.")
-    
-    # Perform other validations as needed
-
-    # If everything is valid, return success as True
-    return (True, "Player creation validation successful.")
-
-
 @login_required(login_url="/login/discord/")
 def create_player(request):
     attribute_categories = { 
@@ -380,6 +349,21 @@ def create_player(request):
     }
 
     return render(request, "main/players/create.html", context)
+
+@login_required(login_url="/login/discord/")
+def player(request, id):
+    player = get_object_or_404(Player, id=id, discord_user=request.user)
+
+    primary_playstyle = league_config.playstyles[player.statics["playstyles"]["playstyle1"]]["name"]
+    secondary_playstyle = league_config.playstyles[player.statics["playstyles"]["playstyle2"]]["name"]
+
+    context = {
+        "player": player,
+        "primary_playstyle": primary_playstyle,
+        "secondary_playstyle": secondary_playstyle,
+    }
+
+    return render(request, "main/players/player.html", context)
 
 @login_required(login_url="/login/discord/")
 def player(request, id):
