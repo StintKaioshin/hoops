@@ -480,6 +480,30 @@ archetype_attribute_bonuses = {
 
 # Description: Initials for models
 
+playstyles = [
+    {
+        "name": "Slasher",
+        "description": "Players who excel at driving to the hoop and finishing around the rim.",
+    },
+    {
+        "name": "Sharpshooter",
+        "description": "Players with exceptional shooting and scoring ability from long range.",
+    },
+    {
+        "name": "Lockdown Defender",
+        "description": "Players known for their defensive skills and the ability to lock down opponents.",
+    },
+    {
+        "name": "Playmaker",
+        "description": "Players who excel at ball-handling, passing, and creating opportunities for teammates.",
+    },
+    {
+        "name": "Post Scorer",
+        "description": "Players with strong post moves and scoring ability in the paint.",
+    },
+]
+
+
 initial_statics = {
     "playstyles": {
         "playstyle1": "0",
