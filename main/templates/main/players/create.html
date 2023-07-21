@@ -1,56 +1,51 @@
 {% extends 'main/base.html' %}
-{% block content %}
 {% load main_filters %}
-
-<section class="py-4 py-xl-5">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-                <div class="card mb-5">
-                    <div class="card-body p-sm-5">
-                        <h3 class="text-uppercase fw-bold mb-2">PLAYER DETAILS</h3>
-                        <form action="/player/create/" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <!-- your form fields code here -->
-                                                                <div class="mb-3">
-                                        <label for="first_name" class="form-label">First Name</label>
-                                        {{ create_player_form.first_name|addclass:"form-control" }}
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="last_name" class="form-label">Last Name</label>
-                                        {{ create_player_form.last_name|addclass:"form-control" }}
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="cyberface" class="form-label">Cyberface</label>
-                                        {{ create_player_form.cyberface|addclass:"form-control" }}
+{% block content %}
+    <section class="py-4 py-xl-5">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
+                    <div>
+                        <h2 class="text-uppercase fw-bold mb-3">CREATE A PLAYER</h2>
+                        <p class="mb-4">Create a player by filling out the form below.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="py-4 py-xl-5">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                        <div class="card mb-5">
+                            <div class="card-body p-sm-5">
+                                <h3 class="text-uppercase fw-bold mb-2">REGISTER</h3>
+                                <form action="/player/create/" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <!-- First & Last names -->
+                                    <div class="">
+                                        <label for="first_name" class="label label-primary">First Name</label>
+                                        {{ create_player_form.first_name|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="last_name" class="label label-primary">Last Name</label>
+                                        {{ create_player_form.last_name|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="cyberface" class="label label-primary">Cyberface</label>
+                                        {{ create_player_form.cyberface|addclass:"form-control form-control-sm mb-2" }}
                                     </div>
                                     <!-- Height & Weight -->
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <label for="height" class="form-label">Height (in ft)</label>
-                                            {{ create_player_form.height|addclass:"form-control" }}
-                                        </div>
-                                        <div class="col">
-                                            <label for="weight" class="form-label">Weight (in lb)</label>
-                                            {{ create_player_form.weight|addclass:"form-control" }}
-                                        </div>
+                                    <div class="">
+                                        <label for="height" class="label label-primary">Height</label>
+                                        {{ create_player_form.height|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="weight" class="label label-primary">Weight</label>
+                                        {{ create_player_form.weight|addclass:"form-control form-control-sm mb-2" }}
                                     </div>
                                     <!-- Positions & Jersey Number -->
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <label for="primary_position" class="form-label">Primary Position</label>
-                                            {{ create_player_form.primary_position|addclass:"form-control" }}
-                                        </div>
-                                        <div class="col">
-                                            <label for="secondary_position" class="form-label">Secondary Position</label>
-                                            {{ create_player_form.secondary_position|addclass:"form-control" }}
-                                        </div>
-                                        <div class="col">
-                                            <label for="jersey_number" class="form-label">Jersey Number</label>
-                                            {{ create_player_form.jersey_number|addclass:"form-control" }}
-                                        </div>
+                                    <div class="">
+                                        <label for="primary_position" class="label label-primary">Primary Position</label>
+                                        {{ create_player_form.primary_position|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="secondary_position" class="label label-primary">Secondary Position</label>
+                                        {{ create_player_form.secondary_position|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="jersey_number" class="label label-primary">Jersey Number</label>
+                                        {{ create_player_form.jersey_number|addclass:"form-control form-control-sm mb-2" }}
                                     </div> 
-
                             <!-- Secondary Attributes & Badges -->
                             <div class="row">
                                 <div class="col">
