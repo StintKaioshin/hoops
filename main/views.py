@@ -351,11 +351,11 @@ def create_player(request):
     if request.method == "POST":
         form = PlayerForm(request.POST)
         if form.is_valid():
-            response = validatePlayerCreation(form.cleaned_data)
+            response = validatePlayerCreation(user, form.cleaned_data)
             success = response[0]
             status = response[1]
             if success:
-                referral_code = form.cleaned_data["referral_code"]
+                referral_code = form.cleaned_data.get("referral_code")
                 playerObject = createPlayer(user, form.cleaned_data)
                 discord_webhooks.send_webhook(
                     url="creation",
@@ -375,7 +375,7 @@ def create_player(request):
         "create_player_form": form,
         "attribute_categories": attribute_categories,
         "badge_categories": badge_categories,
-        "user": request.user
+        "user": user,
     }
 
     return render(request, "main/players/create.html", context)
