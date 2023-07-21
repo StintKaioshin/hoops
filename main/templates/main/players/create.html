@@ -62,17 +62,103 @@
                                             {{ create_player_form.jersey_number|addclass:"form-control" }}
                                         </div>
                                     </div> 
-                                    <!-- Archetypes & Traits -->
+                                    <!-- Primary Attributes -->
+                                    <h4 class="text-uppercase fw-bold mb-2">PRIMARY ATTRIBUTES</h4>
                                     <div class="row mb-3">
                                         <div class="col">
-                                            <label for="primary_archetype" class="form-label">Primary Archetype</label>
-                                            {{ create_player_form.primary_archetype|addclass:"form-control" }}
+                                            <label for="primary_attr1" class="form-label">Attribute 1</label>
+                                            {{ create_player_form.primary_attr1|addclass:"form-control" }}
                                         </div>
                                         <div class="col">
-                                            <label for="secondary_archetype" class="form-label">Secondary Archetype</label>
-                                            {{ create_player_form.secondary_archetype|addclass:"form-control" }}
+                                            <label for="primary_attr2" class="form-label">Attribute 2</label>
+                                            {{ create_player_form.primary_attr2|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="primary_attr3" class="form-label">Attribute 3</label>
+                                            {{ create_player_form.primary_attr3|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="primary_attr4" class="form-label">Attribute 4</label>
+                                            {{ create_player_form.primary_attr4|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="primary_attr5" class="form-label">Attribute 5</label>
+                                            {{ create_player_form.primary_attr5|addclass:"form-control" }}
                                         </div>
                                     </div>
+                                    <!-- Primary Badges -->
+                                    <h4 class="text-uppercase fw-bold mb-2">PRIMARY BADGES</h4>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="primary_badge1" class="form-label">Badge 1</label>
+                                            {{ create_player_form.primary_badge1|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="primary_badge2" class="form-label">Badge 2</label>
+                                            {{ create_player_form.primary_badge2|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="primary_badge3" class="form-label">Badge 3</label>
+                                            {{ create_player_form.primary_badge3|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="primary_badge4" class="form-label">Badge 4</label>
+                                            {{ create_player_form.primary_badge4|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="primary_badge5" class="form-label">Badge 5</label>
+                                            {{ create_player_form.primary_badge5|addclass:"form-control" }}
+                                        </div>
+                                    </div>
+                                    <!-- Secondary Attributes -->
+                                    <h4 class="text-uppercase fw-bold mb-2">SECONDARY ATTRIBUTES</h4>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="secondary_attr1" class="form-label">Attribute 1</label>
+                                            {{ create_player_form.secondary_attr1|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="secondary_attr2" class="form-label">Attribute 2</label>
+                                            {{ create_player_form.secondary_attr2|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="secondary_attr3" class="form-label">Attribute 3</label>
+                                            {{ create_player_form.secondary_attr3|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="secondary_attr4" class="form-label">Attribute 4</label>
+                                            {{ create_player_form.secondary_attr4|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="secondary_attr5" class="form-label">Attribute 5</label>
+                                            {{ create_player_form.secondary_attr5|addclass:"form-control" }}
+                                        </div>
+                                    </div>
+                                    <!-- Secondary Badges -->
+                                    <h4 class="text-uppercase fw-bold mb-2">SECONDARY BADGES</h4>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="secondary_badge1" class="form-label">Badge 1</label>
+                                            {{ create_player_form.secondary_badge1|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="secondary_badge2" class="form-label">Badge 2</label>
+                                            {{ create_player_form.secondary_badge2|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="secondary_badge3" class="form-label">Badge 3</label>
+                                            {{ create_player_form.secondary_badge3|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="secondary_badge4" class="form-label">Badge 4</label>
+                                            {{ create_player_form.secondary_badge4|addclass:"form-control" }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="secondary_badge5" class="form-label">Badge 5</label>
+                                            {{ create_player_form.secondary_badge5|addclass:"form-control" }}
+                                        </div>
+                                    </div>
+                                    <!-- Trait & Referral Code -->
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label for="trait_one" class="form-label">Trait One</label>
@@ -83,7 +169,6 @@
                                             {{ create_player_form.trait_two|addclass:"form-control" }}
                                         </div>
                                     </div>
-                                    <!-- Referral Code -->
                                     <div class="mb-3">
                                         <label for="referral_code" class="form-label">Referral Code</label>
                                         {{ create_player_form.referral_code|addclass:"form-control" }}
