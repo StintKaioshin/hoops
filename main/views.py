@@ -355,13 +355,9 @@ def create_player(request):
             'attribute_categories': attribute_categories,
             'badge_categories': badge_categories,
             'user': request.user
-                }
+            context = {"create_player_form": PlayerForm}
 
-            
-    
-def players(request):
-        return render(request, "main/players/create.html", context)
-    
+                }    
 def players(request):
         context = {
             "title": "Players",
