@@ -301,6 +301,33 @@ logger = logging.getLogger(__name__)
 
 
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.core import validators
+
+from .forms import PlayerForm
+from .models import Player
+from .league import config as league_config
+
+import json
+
+# Helper function to validate player creation
+def validatePlayerCreation(data):
+    # Add your validation logic here
+    # You can check if the data is valid and return a tuple with success and status
+    # Example:
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    if not first_name or not last_name:
+        return (False, "First name and last name are required.")
+    
+    # Perform other validations as needed
+
+    # If everything is valid, return success as True
+    return (True, "Player creation validation successful.")
+
 @login_required(login_url="/login/discord/")
 def create_player(request):
     attribute_categories = { 
