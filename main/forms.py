@@ -21,6 +21,7 @@ class PlayerForm(forms.Form):
     jersey_number = forms.IntegerField(
         label="Jersey Number", min_value=0, max_value=league_config.max_attribute
     )
+    referral_code = forms.CharField(label="Referral Code", required=False, max_length=16)
 
     def __init__(self, *args, **kwargs):
         attribute_categories = kwargs.pop('attribute_categories', None)
@@ -39,6 +40,7 @@ class PlayerForm(forms.Form):
 
 
 class UpgradeForm(forms.Form):
+    # Your UpgradeForm fields here...
     def __init__(self, *args, **kwargs):
         super(UpgradeForm, self).__init__(*args, **kwargs)
         # For each key in attributes, create integerfield
