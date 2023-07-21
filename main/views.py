@@ -350,43 +350,7 @@ def create_player(request):
     }
 
     return render(request, "main/players/create.html", context)
-
-@login_required(login_url="/login/discord/")
-def player(request, id):
-    player = get_object_or_404(Player, id=id, discord_user=request.user)
-
-    playstyle_indices = player.statics.get("playstyles", {})
-    primary_playstyle_key = playstyle_indices.get("playstyle1", "slasher")
-    secondary_playstyle_key = playstyle_indices.get("playstyle2", "sharpshooter")
-
-    primary_playstyle = playstyles.get(primary_playstyle_key, {}).get("name", "Unknown Playstyle")
-    secondary_playstyle = playstyles.get(secondary_playstyle_key, {}).get("name", "Unknown Playstyle")
-
-    context = {
-        "player": player,
-        "primary_playstyle": primary_playstyle,
-        "secondary_playstyle": secondary_playstyle,
-    }
-
-    return render(request, "main/players/player.html", context)
-
-@login_required(login_url="/login/discord/")
-def player(request, id):
-    player = get_object_or_404(Player, id=id, discord_user=request.user)
-
-    playstyle_indices = player.statics.get("playstyles", {})
-    primary_playstyle = league_config.playstyles[playstyle_indices.get("playstyle1", 0)]["name"]
-    secondary_playstyle = league_config.playstyles[playstyle_indices.get("playstyle2", 0)]["name"]
-
-    context = {
-        "player": player,
-        "primary_playstyle": primary_playstyle,
-        "secondary_playstyle": secondary_playstyle,
-    }
-
-
-    return render(request, "main/players/player.html", context)
-def free_agents(request):
+    def free_agents(request):
     context = {
         "title": "Free Agents",
     }
