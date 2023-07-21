@@ -13,7 +13,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form action="/player/create/" method="post">
+                <form action="{% url 'create_player_attributes_badges' %}" method="post">
                     {% csrf_token %}
 
                     <!-- Primary Attributes & Badges -->
