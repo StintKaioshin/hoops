@@ -329,21 +329,6 @@ def validatePlayerCreation(data):
     # If everything is valid, return success as True
     return (True, "Player creation validation successful.")
 
-Apologies for the oversight. It seems there's an issue with the way playstyles is being accessed in the main/views.py file. Let's correct that and make sure it works as expected.
-
-Here's the updated main/views.py with the necessary changes:
-
-python
-Copy code
-# main/views.py
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from .forms import PlayerForm
-from .models import Player
-from .league import config as league_config
-from .league.player.create import validatePlayerCreation, createPlayer
 
 @login_required(login_url="/login/discord/")
 def create_player(request):
