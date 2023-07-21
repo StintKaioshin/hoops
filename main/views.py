@@ -336,16 +336,6 @@ def create_player(request):
             success = response[0]
             status = response[1]
             # If the form is valid, and the player creation succeeded, redirect to the player page
-            if success == True:
-                # Get referral code & player object
-                referral_code = form.cleaned_data["referral_code"]
-                playerObject = hoops_player_create.createPlayer(user, form.cleaned_data)
-                # Create a discord webhook
-                discord_webhooks.send_webhook(
-                    url="creation",
-                    title="Player Creation",
-                    message=f"**{playerObject.first_name} {playerObject.last_name}** has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
-                )
                 # Check referral code validity, reward player
                 if referral_code:
                     refPlayer = Player.objects.get(pk=int(referral_code))
@@ -551,13 +541,6 @@ def decline_trade(request, id):
         return redirect(trade)
     # Delete the trade & redirect to the trade page
     trade_object.delete()
-    # Send a webhook
-    decline_type = "Declined" if receiver.manager == user else "Withdrawn"
-    discord_webhooks.send_webhook(
-        url="trade",
-        title=f"❌ Trade {decline_type}",
-        message=f"**{sender.name}** received\n```{' + '.join([p[1] for p in trade_object.offer['other_players']])}```\n**{receiver.name}** receives\n```{' + '.join([p[1] for p in trade_object.offer['user_players']])}```\n{trade_object.notes}",
-    )
     # Return the trade page
     messages.success(request, "✅ You have declined this trade!")
     return redirect(trade)
@@ -729,12 +712,6 @@ def player_styles(request, id):
             if success:
                 # Send success message
                 messages.success(request, status)
-                # Send discord webhook
-                discord_webhooks.send_webhook(
-                    url="style",
-                    title="Player Styles Updated",
-                    message=f"**{player.first_name} {player.last_name}**'s styles have been updated by **{request.user.discord_tag}**.\n```{status}```",
-                )
             else:
                 # Send error message
                 messages.error(request, status)
@@ -801,11 +778,6 @@ def add_player_cash(request):
                 # Save the player & transaction
                 player.save()
                 # Send a webhook message
-                discord_webhooks.send_webhook(
-                    url="cash",
-                    title="Cash Added" if not bypass else "Cash Added (Bypassed)",
-                    message=f"**{user.discord_tag}** added **${amount}** to {player.first_name} {player.last_name}'s account.\n```{reason}```",
-                )
                 # Return the updated cash
                 messages.success(request, f"Cash added, player now has ${player.cash}!")
                 return redirect("player", id=id)
@@ -839,11 +811,6 @@ def take_player_cash(request):
             player.save()
             transaction.save()
             # Send a webhook message
-            discord_webhooks.send_webhook(
-                url="cash",
-                title="Cash Taken",
-                message=f"**{user.discord_tag}** took **${amount}** from {player.first_name} {player.last_name}'s account.\n```{reason}```",
-            )
             # Return the updated cash
             messages.success(request, f"Cash taken, player now has ${player.cash}!")
             return redirect("player", id=id)
@@ -928,11 +895,6 @@ def update_player_vitals(request, id):
             player.statics["playstyles"]["playstyle4"] = playstyle4
         player.save()
         # Send a webhook message
-        discord_webhooks.send_webhook(
-            url="upgrade",
-            title="Vital Update",
-            message=f"**{user.discord_tag}** updated {player.first_name} {player.last_name}'s vitals.",
-        )
         # Return the updated vitals
         messages.success(request, "Player vitals updated!")
         return redirect("player", id=id)
@@ -1039,11 +1001,6 @@ def check_coupon_code(request):
         player.save()
         player.history_list.save()
         # Send a success webhook
-        discord_webhooks.send_webhook(
-            url="coupon",
-            title="Coupon",
-            message=f"{player.first_name} {player.last_name} successfully redeemed a coupon code worth ${coupon.amount}!\n```✅ Coupon: {coupon.name}```",
-        )
         # Return the success message
         return HttpResponse(
             "<p id='coupon-result' class='mt-2 text-success' style='font-size:12px;'>Coupon code successfully redeemed!</p>"
@@ -1097,11 +1054,6 @@ def check_license_key(request):
             user.player_slots += 1
             user.save()
             # Send success messages
-            discord_webhooks.send_webhook(
-                url="coupon",
-                title="License Key Redeemed",
-                message=f"**{user.discord_tag}** added a player slot.\n```License Key: {code}```",
-            )
             hoops_user_notify.notify(
                 user=user,
                 message="You have successfully added a player slot.",
@@ -1114,11 +1066,6 @@ def check_license_key(request):
         user.auto_collect_rewards = True
         user.save()
         # Send success messages
-        discord_webhooks.send_webhook(
-            url="coupon",
-            title="License Key Redeemed",
-            message=f"**{user.discord_tag}** added auto collect rewards.\n```License Key: {code}```",
-        )
         hoops_user_notify.notify(
             user=user,
             message="You have successfully added auto collect rewards.",
@@ -1131,11 +1078,6 @@ def check_license_key(request):
         user.can_change_styles = True
         user.save()
         # Send success messages
-        discord_webhooks.send_webhook(
-            url="coupon",
-            title="License Key Redeemed",
-            message=f"**{user.discord_tag}** added style editor.\n```License Key: {code}```",
-        )
         hoops_user_notify.notify(
             user=user,
             message="You have successfully added style editor.",
@@ -1288,11 +1230,6 @@ def check_upgrade_validation(request):
             # Attempt to upgrade the player
             response = hoops_player_upgrade.createUpgrade(player, changed_data)
             # Send a webhook to Discord
-            discord_webhooks.send_webhook(
-                url="upgrade",
-                title="Player Upgrade",
-                message=f"**{player.first_name} {player.last_name}** has attempted an upgrade. [View logs?](https://hoopsim.com/logs/upgrades/{player.id})\n```{response}```",
-            )
             # Return to the player page
             return HttpResponse(response)
         else:
@@ -1544,29 +1481,14 @@ def check_finalize_trade(request):
                     player_object.current_team = sender
                     player_object.save()
                 # Send discord webhook
-                discord_webhooks.send_webhook(
-                    url="trade",
-                    title="✅ Trade Finalized",
-                    message=f"**{sender.name}** received\n```{' + '.join([p[1] for p in trade_object.offer['other_players']])}```\n**{receiver.name}** receives\n```{' + '.join([p[1] for p in trade_object.offer['user_players']])}```\n{trade_object.notes}",
-                )
             else:
                 # Delete the trade & redirect to the trade_panel page
                 trade_object.delete()
                 # Send discord webhook
-                discord_webhooks.send_webhook(
-                    url="trade",
-                    title="❌ Trade Vetoed",
-                    message=f"**{sender.name}** received\n```{' + '.join([p[1] for p in trade_object.offer['other_players']])}```\n**{receiver.name}** receives\n```{' + '.join([p[1] for p in trade_object.offer['user_players']])}```\n{trade_object.notes}",
-                )
         elif decision == "decline":
             # Delete the trade & redirect to the trade_panel page
             trade_object.delete()
             # Send discord webhook
-            discord_webhooks.send_webhook(
-                url="trade",
-                title="❌ Trade Vetoed",
-                message=f"**{sender.name}** received\n```{' + '.join([p[1] for p in trade_object.offer['other_players']])}```\n**{receiver.name}** receives\n```{' + '.join([p[1] for p in trade_object.offer['user_players']])}```\n{trade_object.notes}",
-            )
         # Reload trade list fragment
         context = {
             "title": "Trade Panel",
@@ -1623,11 +1545,6 @@ def check_daily_reward(request):
         user.last_reward = timezone.now()
         user.save()
         # Return a discord webhook
-        discord_webhooks.send_webhook(
-            url="cash",
-            title="✅ Daily Rewards",
-            message=f"{user.discord_tag} has collected their daily rewards!",
-        )
         # Return http response
         return HttpResponse(rewards_given)
     else:
@@ -1662,11 +1579,6 @@ def check_weight_change(request):
         # Save the player
         player.save()
         # Send a webhook message
-        discord_webhooks.send_webhook(
-            url="upgrade",
-            title="Weight Update",
-            message=f"**{user.discord_tag}** updated {player.first_name} {player.last_name}'s weight to **{weight}lbs.**\n```📊 Acceleration: {player.attributes['Acceleration']}\n📊 Strength: {player.attributes['Strength']}```",
-        )
     # Return the response
     return HttpResponse(status)
 
