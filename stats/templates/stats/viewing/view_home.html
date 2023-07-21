@@ -6,17 +6,15 @@
     <div class="row">
         <div class="col-lg-6">
             <h1 class="stats-heading">Stats</h1>
-            <p class="current-season-info">Season {{ current_season.id }}</p>
+            <p class="current-season-info">Season 1</p>
             <hr class="divider">
             <div class="season-viewer">
                 <h2 class="season-viewer-heading">Season Viewer</h2>
                 <ul class="season-list">
-                    {% for season in active_seasons %}
-                        <li class="season-item">
-                            <a href="{% url 'stats:view_season' season %}" class="season-link">Season {{ season }}</a>
-                            <a href="{% url 'stats:view_season_stats' season|int %}" class="season-stats-link">View Statistics</a>
-                        </li>
-                    {% endfor %}
+                    <li class="season-item">
+                        <a href="{% url 'stats:view_season' 1 %}" class="season-link">Season 1</a>
+                        <a href="{% url 'stats:view_season_stats' 1 %}" class="season-stats-link">View Statistics</a>
+                    </li>
                 </ul>
             </div>
         </div>
