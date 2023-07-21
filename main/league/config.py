@@ -851,7 +851,6 @@ attribute_categories = {
     "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
 }
 
-}
 
 badge_categories = {
     "finishing": [
