@@ -28,33 +28,41 @@
         }
         </style>
     </head>
-    <body class="d-flex flex-column min-vh-100">
-        <nav class="navbar navbar-dark navbar-expand-md py-3">
-            <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
-                    <img class="rounded-circle" src="https://i.imgur.com/hUXLGz9.png" style="height:20px; width:30px; margin-right: 5px;"></i></span><span style="color: white !important;">VIRTUAL BASKETBALL </span></a>
-                <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navcol-5">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/players">Players</a></li>
-                        <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/teams">Teams</a></li>
-                        <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/stats">Stats</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" style="color: white !important;" href="#" id="permissionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+   <body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-dark navbar-expand-md py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                <img class="rounded-circle" src="https://i.imgur.com/hUXLGz9.png" style="height:20px; width:30px; margin-right: 5px;">
+                <span style="color: white !important;">VIRTUAL BASKETBALL</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/players">Players</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/teams">Teams</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/stats">Stats</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="permissionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Permissions
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="permissionsDropdown">
-                                {% if current_user.can_update_players %}
-                                    <li><a class="dropdown-item" href="{% url 'upgrades_pending' %}">Export Pending Upgrades</a></li>
-                                {% endif %}
-                                {% if current_user.can_approve_trades %}
-                                    <li><a class="dropdown-item" href="{% url 'trade_panel' %}">Trade Panel</a></li>
-                                {% endif %}
-                                <li><a class="dropdown-item" href="{% url 'trade' %}">Trade Machine</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="permissionsDropdown">
+                            {% if current_user.can_update_players %}
+                                <li><a class="dropdown-item" href="{% url 'upgrades_pending' %}">Export Pending Upgrades</a></li>
+                            {% endif %}
+                            {% if current_user.can_approve_trades %}
+                                <li><a class="dropdown-item" href="{% url 'trade_panel' %}">Trade Panel</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'trade' %}">Trade Machine</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
 
                     {% if current_user.is_authenticated != False %}
                         <a style="color: white !important;" class="btn btn-primary btn-sm ms-md-2" role="button" href="/logout">Logout</a>
