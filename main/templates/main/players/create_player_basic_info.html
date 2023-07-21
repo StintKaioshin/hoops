@@ -13,7 +13,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form action="/player/create/" method="post">
+                <form action="{% url 'create_player_basic_info' %}" method="post">
                     {% csrf_token %}
                     <!-- First & Last names -->
                     <div class="row mb-3">
