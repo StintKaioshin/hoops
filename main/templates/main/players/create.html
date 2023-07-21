@@ -73,12 +73,10 @@
                                             <label for="primary_attr{{ i }}" class="form-label">Primary Attribute {{ i }}</label>
                                             <select name="primary_attr{{ i }}" class="form-select">
                                                 <option value="">Select Attribute</option>
-                                                {% for attribute in trait_badge_unlocks %}
-                                                    {% if forloop.parentloop.index0 == 0 %}
-                                                        {% for primary_attr in attribute %}
-                                                            <option value="{{ primary_attr }}">{{ primary_attr }}</option>
-                                                        {% endfor %}
-                                                    {% endif %}
+                                                {% for category, attributes in attribute_categories.items %}
+                                                    {% for attribute in attributes %}
+                                                        <option value="{{ attribute }}">{{ attribute }}</option>
+                                                    {% endfor %}
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -86,12 +84,10 @@
                                             <label for="primary_badge{{ i }}" class="form-label">Primary Badge {{ i }}</label>
                                             <select name="primary_badge{{ i }}" class="form-select">
                                                 <option value="">Select Badge</option>
-                                                {% for attribute in trait_badge_unlocks %}
-                                                    {% if forloop.parentloop.index0 == 0 %}
-                                                        {% for primary_badge in attribute %}
-                                                            <option value="{{ primary_badge }}">{{ primary_badge }}</option>
-                                                        {% endfor %}
-                                                    {% endif %}
+                                                {% for category, badges in badge_categories.items %}
+                                                    {% for badge in badges %}
+                                                        <option value="{{ badge }}">{{ badge }}</option>
+                                                    {% endfor %}
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -109,12 +105,10 @@
                                             <label for="secondary_attr{{ i }}" class="form-label">Secondary Attribute {{ i }}</label>
                                             <select name="secondary_attr{{ i }}" class="form-select">
                                                 <option value="">Select Attribute</option>
-                                                {% for attribute in trait_badge_unlocks %}
-                                                    {% if forloop.parentloop.index0 == 1 %}
-                                                        {% for secondary_attr in attribute %}
-                                                            <option value="{{ secondary_attr }}">{{ secondary_attr }}</option>
-                                                        {% endfor %}
-                                                    {% endif %}
+                                                {% for category, attributes in attribute_categories.items %}
+                                                    {% for attribute in attributes %}
+                                                        <option value="{{ attribute }}">{{ attribute }}</option>
+                                                    {% endfor %}
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -122,12 +116,10 @@
                                             <label for="secondary_badge{{ i }}" class="form-label">Secondary Badge {{ i }}</label>
                                             <select name="secondary_badge{{ i }}" class="form-select">
                                                 <option value="">Select Badge</option>
-                                                {% for attribute in trait_badge_unlocks %}
-                                                    {% if forloop.parentloop.index0 == 1 %}
-                                                        {% for secondary_badge in attribute %}
-                                                            <option value="{{ secondary_badge }}">{{ secondary_badge }}</option>
-                                                        {% endfor %}
-                                                    {% endif %}
+                                                {% for category, badges in badge_categories.items %}
+                                                    {% for badge in badges %}
+                                                        <option value="{{ badge }}">{{ badge }}</option>
+                                                    {% endfor %}
                                                 {% endfor %}
                                             </select>
                                         </div>
