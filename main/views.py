@@ -30,7 +30,7 @@ from .forms import StylesForm
 from .discord import auth as discord_auth
 from .discord import webhooks as discord_webhooks
 from .league import config as league_config
-from .main import attribute_categories, badge_categories
+from .league.config import attribute_categories, badge_categories
 # Stats imports
 from stats.league.stats import compile as stats_compile
 from stats.league.stats import calculate as stats_calculate
