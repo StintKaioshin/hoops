@@ -323,7 +323,7 @@ def create_player(request):
     referral_code = request.GET.get("referral_code")
 
     if request.method == "POST":
-        form = PlayerForm(request.POST)
+        form = PlayerForm(request.POST, attribute_categories=attribute_categories, badge_categories=badge_categories)
         if form.is_valid():
             response = hoops_player_create.validatePlayerCreation(
                 user, form.cleaned_data
@@ -357,7 +357,7 @@ def create_player(request):
 
     else:
         context = {
-            "create_player_form": PlayerForm(),
+            "create_player_form": PlayerForm(attribute_categories=attribute_categories, badge_categories=badge_categories),
             'attribute_categories': attribute_categories,
             'badge_categories': badge_categories,
             'user': request.user
@@ -368,6 +368,14 @@ def create_player(request):
         context = {
             "title": "Players",
     }
+    # Get the league players
+    league_players = Player.objects.order_by("id")
+    # Paginate the league players
+    paginator = Paginator(league_players, 10)
+    page_number = request.GET.get("page")
+    context["page"] = paginator.get_page(page_number)
+    # Return the players page
+    return render(request, "main/players/players.html", context)
     # Get the league players
     league_players = Player.objects.order_by("id")
     # Paginate the league players
