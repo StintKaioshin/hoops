@@ -358,12 +358,7 @@ def create_player(request):
 def players(request):
         }
         return render(request, "main/players/create.html", context)
-    
-def players(request):
-        context = {
-            "title": "Players",
-    }   
-        # Get the league players
+# Get the league players
     league_players = Player.objects.order_by("id")
     # Paginate the league players
     paginator = Paginator(league_players, 10)
