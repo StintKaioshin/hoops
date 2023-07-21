@@ -428,17 +428,6 @@ def teams(request):
     # Get the league teams
     league_teams = Team.objects.order_by("id")
     # Paginate the league teams
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
     paginator = Paginator(league_teams, 8)
     page_number = request.GET.get("page")
     context["page"] = paginator.get_page(page_number)
