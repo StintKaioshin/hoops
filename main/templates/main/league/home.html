@@ -45,100 +45,31 @@
         </div>
         <div class="col-md-6 col-xl-6">
             <!-- Documents -->
-    <!-- Documents -->
-    <div class="card text-center" style="height: 400px; background-color: #877b53; color: #fff;">
-        <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
-            <div class="row align-items-center no-gutters">
-                <div class="col me-2">
-                    <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                        <span style="font-size: 12px; color: white;">CAREERS</span>
-                    </div><hr>
-                    <div class="h5 mb-0" style="margin-top: -6px;">
-                        {% if players %}
-                            {% for player in players %}
-                                <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                                    <!-- svg path -->
-                                </svg>
-                                <div class="text-center">
-                                    <a class="fw-bold ml-0 mb-0" href="{% url 'player' player.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
-                                        <span style="font-size: 15px;">({{ player.id }}) </span>
-                                        <span style="font-size: 15px;">{{ player.first_name }} {{ player.last_name }}</span>
-                                    </a>
-                                </div>
-                                <!-- Player headshot -->
-                                <div class="text-center">
-                                    {% if player.headshot %}
-                                        <img src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 200px; height: 200px; display: block; margin-left: auto; margin-right: auto;">
-                                    {% else %}
-                                        <img src="/static/default_headshot.jpg" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;">
-                                    {% endif %}
-                                </div>
-                                <!-- Player details -->
-                                <p style="font-size: 15px;">Position: {{ player.primary_position }}</p>
-                                <p style="font-size: 15px;">Salary: {{ player.salary }}</p>
-                            {% endfor %}
-                            <hr style="margin-bottom: 2px;">
-                        {% else %}
-                            <p style="font-size: 12px;">No players available.</p>
-                            <hr style="margin-bottom: 2px;">
-                            <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Start new career</a><br>
-                            <svg class="bi bi-ticket-detailed" width="0.67em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                                <!-- svg path -->
-                            </svg>
-                        {% endif %}
+            <div class="card text-center" style="height: 400px; background-color: #877b53; color: #fff;">
+                <!-- Rest of the card content -->
+            </div>
+            <!-- Widget buttons -->
+            <div class="row">
+                <div class="col-4">
+                    <div class="d-flex align-items-center justify-content-center bg-white p-3 mb-3 rounded">
+                        <!-- Widget 1 content -->
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex align-items-center justify-content-center bg-white p-3 mb-3 rounded">
+                        <!-- Widget 2 content -->
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex align-items-center justify-content-center bg-white p-3 mb-3 rounded">
+                        <!-- Widget 3 content -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Home dashbaord -->
-<div class="container">
-    <hr>
-    <div class="mt-2 row">
-        <!-- Discord IFrame -->
-        <!-- <div class="col-md-6 col-xl-3 mb-4">
-            <iframe src="https://discord.com/widget?id=1090416489766588499&theme=dark" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-        </div> -->
-<!-- Documents -->
-<div class="container">
-    <div class="row justify-content-center">
-        <!-- Widget 1 -->
-       <div class="col-md-6 col-xl-6">
-            <div class="d-flex align-items-center justify-content-center bg-white p-3 mb-3 rounded">
-                <svg class="bi bi-book" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                    <!-- svg path -->
-                </svg>
-                <a class="fw-bold ml-2" href="https://docs.google.com/document/d/1QjDQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 15px; text-decoration: none; text-transform: capitalize; color: #000;">
-                    League Rules
-                </a>
-            </div>
-        </div>
-        <!-- Widget 2 -->
-        <div class="col-md-4">
-            <div class="d-flex align-items-center justify-content-center bg-white p-3 mb-3 rounded">
-                <svg class="bi bi-diagram-3" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                    <!-- svg path -->
-                </svg>
-                <a class="fw-bold ml-2" href="https://docs.google.com/spreadsheets/d/1RjDQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 15px; text-decoration: none; text-transform: capitalize; color: #000;">
-                    Player Rankings
-                </a>
-            </div>
-        </div>
-        <!-- Widget 3 -->
-        <div class="col-md-4">
-            <div class="d-flex align-items-center justify-content-center bg-white p-3 mb-3 rounded">
-                <svg class="bi bi-pie-chart" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                    <!-- svg path -->
-                </svg>
-                <a class="fw-bold ml-2" href="https://docs.google.com/spreadsheets/d/1FjDQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 15px; text-decoration: none; text-transform: capitalize; color: #000;">
-                    Player Statistics
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+{% endblock %}
 
         <!-- League Pages -->
         <div class="col-md-6 col-xl-3 mb-4">
