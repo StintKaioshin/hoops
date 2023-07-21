@@ -1,5 +1,5 @@
 {% extends 'main/base.html' %}
-{% load extra_filters %}
+{% load custom_filters %}
 {% block content %}
 
 <section class="py-4 py-xl-5">
@@ -35,8 +35,10 @@
                                             <label for="secondary_attr{{ i }}" class="form-label">Secondary Attribute {{ i }}</label>
                                             <select name="secondary_attr{{ i }}" class="form-select">
                                                 <option value="">Select Attribute</option>
-                                                {% for attribute in attribute_categories.values|join:", "|split:", " %}
-                                                    <option value="{{ attribute }}">{{ attribute }}</option>
+                                                {% for category, attributes in attribute_categories.items %}
+                                                    {% for attribute in attributes|split:", " %}
+                                                        <option value="{{ attribute }}">{{ attribute }}</option>
+                                                    {% endfor %}
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -44,8 +46,10 @@
                                             <label for="secondary_badge{{ i }}" class="form-label">Secondary Badge {{ i }}</label>
                                             <select name="secondary_badge{{ i }}" class="form-select">
                                                 <option value="">Select Badge</option>
-                                                {% for badge in badge_categories.values|join:", "|split:", " %}
-                                                    <option value="{{ badge }}">{{ badge }}</option>
+                                                {% for badge_category, badges in badge_categories.items %}
+                                                    {% for badge in badges|split:", " %}
+                                                        <option value="{{ badge }}">{{ badge }}</option>
+                                                    {% endfor %}
                                                 {% endfor %}
                                             </select>
                                         </div>
