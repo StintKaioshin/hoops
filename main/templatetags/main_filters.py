@@ -7,17 +7,27 @@ register = template.Library()
 
 @register.filter(name="addclass")
 def addclass(value, arg):
-    return value.as_widget(attrs={"class": arg})
+    if hasattr(value, 'as_widget'):
+        return value.as_widget(attrs={"class": arg})
+    else:
+        return value
 
 
-@register.filter(name="addid")
-def addid(value, arg):
-    return value.as_widget(attrs={"id": arg})
+@register.filter(name="addclass")
+def addclass(value, arg):
+    if hasattr(value, 'as_widget'):
+        return value.as_widget(attrs={"class": arg})
+    else:
+        return value
 
 
 @register.filter(name="addplaceholder")
-def addplaceholder(value, arg):
-    return value.as_widget(attrs={"placeholder": arg})
+def addclass(value, arg):
+    if hasattr(value, 'as_widget'):
+        return value.as_widget(attrs={"placeholder": arg})
+    else:
+        return value
+
 
 
 @register.filter(name="getattr")
