@@ -45,6 +45,9 @@ class PlayerForm(forms.Form):
                 for badge in badge_categories[category]:
                     self.fields[f'{category}_{badge}'] = forms.ChoiceField(choices=[(x, x) for x in ["Bronze", "Silver", "Gold", "Hall of Fame"]], required=False)
 
+        # Add the cyberface field to the OrderedDict
+        self.fields['cyberface'] = self.fields['cyberface']
+
 
 class UpgradeForm(forms.Form):
     def __init__(self, *args, **kwargs):
