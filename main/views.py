@@ -355,8 +355,12 @@ def create_player(request):
 def player(request, id):
     player = get_object_or_404(Player, id=id, discord_user=request.user)
 
-    primary_playstyle = league_config.playstyles[player.statics["playstyles"]["playstyle1"]]["name"]
-    secondary_playstyle = league_config.playstyles[player.statics["playstyles"]["playstyle2"]]["name"]
+    playstyle_indices = player.statics.get("playstyles", {})
+    primary_playstyle_key = playstyle_indices.get("playstyle1", "slasher")
+    secondary_playstyle_key = playstyle_indices.get("playstyle2", "sharpshooter")
+
+    primary_playstyle = playstyles.get(primary_playstyle_key, {}).get("name", "Unknown Playstyle")
+    secondary_playstyle = playstyles.get(secondary_playstyle_key, {}).get("name", "Unknown Playstyle")
 
     context = {
         "player": player,
