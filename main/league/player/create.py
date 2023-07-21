@@ -110,7 +110,7 @@ def createPlayer(user, formData):
         "primary_badge5": formData.get("primary_badge5", None),
         "secondary_badge1": formData.get("secondary_badge1", None),
         "secondary_badge2": formData.get("secondary_badge2", None),
-        "secondary_badge3": formData.get("secondary_badge3", None),.
+        "secondary_badge3": formData.get("secondary_badge3", None),
         "secondary_badge4": formData.get("secondary_badge4", None),
         "secondary_badge5": formData.get("secondary_badge5", None),
 
