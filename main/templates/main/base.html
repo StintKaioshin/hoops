@@ -28,87 +28,41 @@
         }
         </style>
     </head>
-<nav role="navigation" class="navbar navbar-dark navbar-expand-md sticky">
-    <div class="container">
-        <a class="navbar-brand" href="/">
-            <img class="logo" src="https://digitalshift-assets.sfo2.cdn.digitaloceanspaces.com/pw/5458cf0b-64c6-4450-8ddd-36af89d4f8d0/responsive-logo-1680065547812541341.png" alt="Simulation Football">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="menu collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/home">Home</a>
-                </li>
-                <li class="nav-item has-submenu">
-                    <div class="name">Create A Player</div>
-                    <div class="menu">
-                        <div class="item">
-                            <div class="name">
-                                <a href="/create-a-player">Create A Player</a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="name">
-                                <a href="/stats#/2311/players?season_id=5567">Current Players</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item has-submenu">
-                    <div class="name">About</div>
-                    <div class="menu">
-                        <div class="item">
-                            <div class="name">
-                                <a href="/about-the-sfl">The League</a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="name">
-                                <a href="/faq">FAQ</a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="name">
-                                <a href="/staff">Staff</a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="name">
-                                <a href="/broadcasting">Broadcasting</a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="name">
-                                <a href="/partners">Partners</a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="name">
-                                <a href="/contact">Contact</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item has-submenu">
-                    <div class="name">News</div>
-                    <div class="menu">
-                        <div class="item">
-                            <div class="name">
-                                <a href="/news">News</a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="name">
-                                <a href="/stats#/2311/transactions?season_id=5567">Transactions</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <!-- Add more menu items as needed -->
-            </ul>
-                 {% if current_user.is_authenticated != False %}
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-dark navbar-expand-md py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                <img class="rounded-circle" src="YOUR_LOGO_IMAGE_URL" style="height:20px; width:30px; margin-right: 5px;">
+                <span style="color: white !important;">VIRTUAL BASKETBALL</span>
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-5">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/players">Players</a></li>
+                    <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/teams">Teams</a></li>
+                    <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/stats">Stats</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white !important;" href="#" id="permissionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Permissions
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="permissionsDropdown">
+                            {% if current_user.can_update_players %}
+                                <li><a class="dropdown-item" href="{% url 'upgrades_pending' %}">Export Pending Upgrades</a></li>
+                            {% endif %}
+                            {% if current_user.can_approve_trades %}
+                                <li><a class="dropdown-item" href="{% url 'trade_panel' %}">Trade Panel</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'trade' %}">Trade Machine</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>                 {% if current_user.is_authenticated != False %}
                         <a style="color: white !important;" class="btn btn-primary btn-sm ms-md-2" role="button" href="/logout">Logout</a>
                     {% else %}
                         <a style="color: white !important;" class="btn btn-primary btn-sm ms-md-2" role="button" href="/login/discord">Login</a>
