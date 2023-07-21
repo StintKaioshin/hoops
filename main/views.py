@@ -362,7 +362,7 @@ def create_player(request):
 def players(request):
         return render(request, "main/players/create.html", context)
     
-    def players(request):
+def players(request):
         context = {
             "title": "Players",
     }
