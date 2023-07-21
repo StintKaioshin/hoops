@@ -62,74 +62,87 @@
         </div> -->
         <!-- Save Files -->
 <!-- Save Files -->
-<div class="card bg-primary text-white col-md-6 col-xl-3 mb-4">
+<!DOCTYPE html>
+<html>
 <head>
     <style>
-        .card-bg {
-            fill: #877b53;
-        }
-        .card-text {
-            fill: #fff;
+        .widget-box {
+            background-color: #877b53;
+            color: #fff;
             font-family: Arial, sans-serif;
-            text-anchor: middle;
+            text-align: center;
+            width: 500px;
+            margin: auto;
+        }
+        .widget-header h5 {
+            font-size: 2em;
+        }
+        .widget-body {
+            padding: 1em;
+        }
+        .player-list-item, .no-players, .actions, .notification-link {
+            margin: 1em 0;
+        }
+        .player-link, .style-editor-link, .career-link, .action-link, .notification-link {
+            color: #fff;
+            text-decoration: none;
+        }
+        .player-link:hover, .style-editor-link:hover, .career-link:hover, .action-link:hover, .notification-link:hover {
+            color: #ddd;
         }
     </style>
 </head>
-    <div class="card-body" style="height: 400px;">
-        <h5 class="card-title text-uppercase text-white text-center">Careers</h5>
-        <hr class="my-3 bg-white">
-        {% if players %}
-            {% for player in players %}
-                <div class="d-flex align-items-center mb-2">
-                    <svg class="bi bi-person mr-2" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                        <!-- SVG content -->
-                    </svg>
-                    <div>
-                        <a class="text-white text-decoration-none" href="{% url 'player' player.id %}">
-                            <small class="d-block">({{ player.id }})</small>
-                            <strong>{{ player.first_name }} {{ player.last_name }}</strong>
+<body>
+    <div class="widget-box">
+        <div class="widget-header">
+            <h5>CAREERS</h5>
+            <hr>
+        </div>
+        <div class="widget-body">
+            {% if players %}
+                {% for player in players %}
+                    <div class="player-list-item">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            <!-- Your SVG path here -->
+                        </svg>
+                        <a class="player-link" href="{% url 'player' player.id %}">
+                            <span class="player-id">({{ player.id }}) </span>
+                            {{ player.first_name }} {{ player.last_name }}
                         </a>
-                        <a class="text-white text-decoration-none d-block" href="{% url 'player_styles' player.id %}">
-                            <small>Style Editor</small>
-                        </a>
+                        <a class="style-editor-link" href="{% url 'player_styles' player.id %}">Style Editor</a>
                     </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-players">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                        <!-- Your SVG path here -->
+                    </svg>
+                    <span>No players found</span>
+                    <a class="career-link" href="{% url 'create_player' %}">Start new career</a>
                 </div>
-            {% endfor %}
-            <hr class="my-2 bg-white">
-        {% else %}
-            <div class="text-center">
-                <svg class="bi bi-person-x mb-2" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                    <!-- SVG content -->
+            {% endif %}
+            <div class="actions">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <!-- Your SVG path here -->
                 </svg>
-                <p>No players found</p>
-                <a class="btn btn-light" href="{% url 'create_player' %}">Start new career</a>
-            </div>
-        {% endif %}
-
-        <div class="d-flex align-items-center justify-content-between my-2">
-            <svg class="bi bi-person-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                <!-- SVG content -->
-            </svg>
-            <a class="text-white text-decoration-none" href="{% url 'coupons' %}">Redeem Coupons</a>
-        </div>
-
-        <div class="d-flex align-items-center justify-content-between my-2">
-            <svg class="bi bi-coin" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                <!-- SVG content -->
-            </svg>
-            <a class="text-white text-decoration-none" href="{% url 'daily_rewards' %}">Collect Contracts</a>
-        </div>
-
-        {% if notifications %}
-            <div class="d-flex align-items-center justify-content-between my-2">
-                <svg class="bi bi-mailbox" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                    <!-- SVG content -->
+                <a class="action-link" href="{% url 'coupons' %}">Redeem Coupons</a>
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <!-- Your SVG path here -->
                 </svg>
-                <a class="text-white text-decoration-none" href="{% url 'notifications' current_user.id %}">Notifications</a>
+                <a class="action-link" href="{% url 'daily_rewards' %}">Collect Contracts</a>
             </div>
-        {% endif %}
+            {% if notifications %}
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <!-- Your SVG path here -->
+                </svg>
+                <a class="notification-link" href="{% url 'notifications' current_user.id %}">Notifications</a>
+            {% else %}
+                <p>No new notifications</p>
+            {% endif %}
+        </div>
     </div>
-</div>
+</body>
+</html>
 
         <!-- League Pages -->
         <div class="col-md-6 col-xl-3 mb-4">
