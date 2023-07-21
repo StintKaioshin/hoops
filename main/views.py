@@ -301,66 +301,23 @@ logger = logging.getLogger(__name__)
 
 
 @login_required(login_url="/login/discord/")
-@login_required(login_url="/login/discord/")
-def create_player(request):
-    # Collect user & player information
-    user = request.user
-    referral_code = request.GET.get("referral_code")
-    # Process the request (if it's a POST request)
+def create_player_basic_info(request):
     if request.method == "POST":
         form = PlayerForm(request.POST)
         if form.is_valid():
-            response = hoops_player_create.validatePlayerCreation(
-                user, form.cleaned_data
-            )
-            success = response[0]
-            status = response[1]
-            # If the form is valid, and the player creation succeeded, redirect to the player page
-            if success == True:
-                # Get referral code & player object
-                referral_code = form.cleaned_data["referral_code"]
-                playerObject = hoops_player_create.createPlayer(user, form.cleaned_data)
-                # Create a discord webhook
-                discord_webhooks.send_webhook(
-                    url="creation",
-                    title="Player Creation",
-                    message=f"**{playerObject.first_name} {playerObject.last_name}** has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
-                )
-                # Check referral code validity, reward player
-                if referral_code:
-                    refPlayer = Player.objects.get(pk=int(referral_code))
-                    if refPlayer:
-                        # Add cash to the player
-                        refPlayer.cash += league_config.referral_bonus
-                        playerObject.cash += league_config.referral_bonus
-                        refPlayer.save()
-                        playerObject.save()
-                        # Send & save the notification
-                        hoops_user_notify.notify(
-                            user=refPlayer.discord_user,
-                            message=f"{refPlayer.first_name} {refPlayer.last_name} received ${league_config.referral_bonus} for referring {playerObject.first_name} {playerObject.last_name} to the league!",
-                        )
-                # Redirect to the player page
-                messages.success(request, "Player created successfully!")
-                return redirect(player, id=playerObject.id)
-            else:
-                messages.error(request, status)
-                return redirect(create_player)
-        # If the form is invalid, or the player creation failed, redirect to the create player page
-        return redirect(create_player)
+            # Save the basic information to the session
+            request.session['basic_info'] = form.cleaned_data
+            return redirect('create_player_attributes_badges')
     else:
-        context = {"create_player_form": PlayerForm}
-        return render(request, "main/players/create.html", context)
-
-
-def players(request):
+        form = PlayerForm()
+    
     context = {
-        "title": "Players",
-        "current_season": league_config.current_season,
+        "create_player_form": form,
     }
+    return render(request, "main/players/create_player_basic_info.html", context)
 
 @login_required(login_url="/login/discord/")
-def create_player(request):
+def create_player_attributes_badges(request):
     attribute_categories = { 
         "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
         "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
@@ -374,43 +331,38 @@ def create_player(request):
         "defense": ["Brick Wall", "Chase Down Artist", "Clamps", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck", "Off-Ball Pest", "Pick Dodger", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper"],
         "playmaking": ["Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Handles For Days", "Needle Threader", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop & Go", "Tight Handles", "Unpluckable"],
     }
-    user = request.user
-    referral_code = request.GET.get("referral_code")
 
     if request.method == "POST":
         form = PlayerForm(request.POST, attribute_categories=attribute_categories, badge_categories=badge_categories)
         if form.is_valid():
-            response = validatePlayerCreation(form.cleaned_data)
-            success = response[0]
-            status = response[1]
-            if success == True:
-                referral_code = form.cleaned_data["referral_code"]
-                playerObject = createPlayer(user, form.cleaned_data)
-                discord_webhooks.send_webhook(
-                    url="creation",
-                    title="Player Creation",
-                    message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
-                )
-                messages.success(request, "Player created successfully!")
-                return redirect('player', id=playerObject.id) 
-            else:
-                messages.error(request, status)
-                return redirect('create_player')
-        context = {
-            "create_player_form": form,
-            'attribute_categories': attribute_categories,
-            'badge_categories': badge_categories,
-            'user': request.user
-        }
-        return render(request, "main/players/create.html", context)
+            basic_info = request.session.get('basic_info')
+            if basic_info is not None:
+                # Merge basic info and attributes/badges info
+                basic_info.update(form.cleaned_data)
+                response = validatePlayerCreation(basic_info)
+                success = response[0]
+                status = response[1]
+                if success:
+                    referral_code = basic_info.get("referral_code")
+                    playerObject = createPlayer(request.user, basic_info)
+                    # ... your other logic ...
+                    messages.success(request, "Player created successfully!")
+                    return redirect('player', id=playerObject.id)
+                else:
+                    messages.error(request, status)
+                    return redirect('create_player_attributes_badges')
+
     else:
-        context = {
-            "create_player_form": PlayerForm(attribute_categories=attribute_categories, badge_categories=badge_categories),
-            'attribute_categories': attribute_categories,
-            'badge_categories': badge_categories,
-            'user': request.user
-        }    
-    return render(request, "main/players/create.html", context)
+        form = PlayerForm(attribute_categories=attribute_categories, badge_categories=badge_categories)
+
+    context = {
+        "create_player_form": form,
+        "attribute_categories": attribute_categories,
+        "badge_categories": badge_categories,
+        "user": request.user,
+    }
+    return render(request, "main/players/create_player_attributes_badges.html", context)
+
 
 def players(request):
     context = {
