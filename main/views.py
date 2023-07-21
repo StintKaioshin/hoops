@@ -350,7 +350,7 @@ def create_player(request):
     }
 
     return render(request, "main/players/create.html", context)
-    def free_agents(request):
+def free_agents(request):
     context = {
         "title": "Free Agents",
     }
