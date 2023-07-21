@@ -78,15 +78,17 @@
                                 <a class="fw-bold ml-0 mb-0" href="{% url 'player' player.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize;">
                                     <span style="font-size: 8px;">({{ player.id }}) </span>
                                     {{ player.first_name }} {{ player.last_name }}
-                                    <!-- other code -->
+                                </a>
+                                <!-- Player headshot -->
+                                <div class="text-center">
                                     {% if player.headshot %}
-                                      <img src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 100px; height: 100px;">
+                                        <img src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;">
                                     {% else %}
-                                      <img src="/static/default_headshot.jpg" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 100px; height: 100px;">
+                                        <img src="/static/default_headshot.jpg" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;">
                                     {% endif %}
-                                    <p style="font-size: 10px;">Position: {{ player.position }}</p>
-                                </a><br>
-                                <!-- remaining code -->
+                                </div>
+                                <!-- Player details -->
+                                <p style="font-size: 10px;">Position: {{ player.primary_position }}</p>
                                 <p style="font-size: 10px;">Salary: {{ player.salary }}</p>
                             {% endfor %}
                             <hr style="margin-bottom: 2px;">
@@ -104,6 +106,7 @@
         </div>
     </div>
 </div>
+
 
 
         <!-- League Pages -->
