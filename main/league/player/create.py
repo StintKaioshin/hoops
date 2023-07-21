@@ -93,20 +93,35 @@ def createPlayer(user, formData):
         discord_user=user,
         history_list=historyList,
     )
-    # Update the player's archetypes & traits
-    newPlayer.primary_archetype = formData["primary_archetype"]
-    newPlayer.secondary_archetype = formData["secondary_archetype"]
+    # Update the player's attributes
+    newPlayer.attributes = {
+        "primary_attr1": formData["primary_attr1"],
+        "primary_attr2": formData["primary_attr2"],
+        "primary_attr3": formData["primary_attr3"],
+        "primary_attr4": formData["primary_attr4"],
+        "primary_attr5": formData["primary_attr5"],
+        "secondary_attr1": formData["secondary_attr1"],
+        "secondary_attr2": formData["secondary_attr2"],
+        "secondary_attr3": formData["secondary_attr3"],
+        "secondary_attr4": formData["secondary_attr4"],
+        "secondary_attr5": formData["secondary_attr5"],
+    }
+    # Update the player's badges
+    newPlayer.badges = {
+        "primary_badge1": formData["primary_badge1"],
+        "primary_badge2": formData["primary_badge2"],
+        "primary_badge3": formData["primary_badge3"],
+        "primary_badge4": formData["primary_badge4"],
+        "primary_badge5": formData["primary_badge5"],
+        "secondary_badge1": formData["secondary_badge1"],
+        "secondary_badge2": formData["secondary_badge2"],
+        "secondary_badge3": formData["secondary_badge3"],
+        "secondary_badge4": formData["secondary_badge4"],
+        "secondary_badge5": formData["secondary_badge5"],
+    }
+    # Update the player's traits
     newPlayer.trait_one = formData["trait_one"]
     newPlayer.trait_two = formData["trait_two"]
-    # Update the player's starting attributes
-    for attribute in newPlayer.attributes:
-        new_attributes = position_attributes[newPlayer.primary_position]
-        newPlayer.attributes[attribute] = new_attributes[attribute]
-    # Update the player's bonus attributes
-    for attribute in archetype_bonuses[newPlayer.primary_archetype]:
-        newPlayer.attributes[attribute] += primary_bonus
-    for attribute in archetype_bonuses[newPlayer.secondary_archetype]:
-        newPlayer.attributes[attribute] += secondary_bonus
     # Update the player's starting physicals
     updatedPlayer = league_physicals.setStartingPhysicals(newPlayer)
     # Save the player
