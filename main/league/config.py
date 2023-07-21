@@ -832,43 +832,10 @@ hotzone_choices = [
 # Description: Categories for .html pages
 
 attribute_categories = {
-    "finishing": [
-        "Driving Layup",
-        "Post Hook",
-        "Close Shot",
-        "Driving Dunk",
-        "Standing Dunk",
-        "Post Control",
-    ],
-    "shooting": [
-        "Mid-Range Shot",
-        "Three-Point Shot",
-        "Free Throw",
-        "Shot IQ",
-        "Offensive Consistency",
-        "Shot Under Basket",
-    ],
-    "defense": [
-        "Interior Defense",
-        "Perimeter Defense",
-        "Lateral Quickness",
-        "Steal",
-        "Block",
-        "Defensive Rebound",
-        "Offensive Rebound",
-        "Defensive Consistency",
-    ],
-    "playmaking": [
-        "Passing Accuracy",
-        "Ball Handle",
-        "Post Moves",
-        "Pass IQ",
-        "Pass Vision",
-        "Speed With Ball",
-        "Speed",
-        "Acceleration",
-    ],
-    "athleticism": [
+# main/league/config.py
+
+attribute_categories = {
+    "physical": [
         "Vertical",
         "Strength",
         "Stamina",
@@ -879,6 +846,13 @@ attribute_categories = {
         "Acceleration",
         "Durability",
     ],
+    "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
+    "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
+    "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
+    "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
+    "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
+}
+
 }
 
 badge_categories = {
