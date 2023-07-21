@@ -21,15 +21,17 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <h2 class="recent-games-heading">Recent Games</h2>
+            <h2 class="leaders-heading">Leaders - PPG</h2>
             <hr class="divider">
-            <div class="recent-games">
-                {% for game in recent_games %} 
-                    <div class="game-card">
-                        <a href="{% url 'stats:view_game' game.id %}" class="game-link">{{ game }}</a>
-                        <p class="game-outcome"><b>{{ game.winner.name }}</b> beat <b>{{ game.loser.name }}</b></p>
-                    </div>
-                {% endfor %}
+            <div class="leaders">
+                <ul class="leader-list">
+                    {% for player in leading_scorers %}
+                        <li class="leader-item">
+                            <span class="leader-name">{{ player.name }}</span>
+                            <span class="leader-stat">{{ player.ppg }} PPG</span>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
