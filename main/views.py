@@ -337,7 +337,7 @@ def create_player(request):
             status = response[1]
             # If the form is valid, and the player creation succeeded, redirect to the player page
                 # Check referral code validity, reward player
-                if referral_code:
+            if referral_code:
                     refPlayer = Player.objects.get(pk=int(referral_code))
                     if refPlayer:
                         # Add cash to the player
