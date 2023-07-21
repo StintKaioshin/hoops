@@ -12,17 +12,15 @@ def addclass(value, arg):
     else:
         return value
 
-
-@register.filter(name="addclass")
-def addclass(value, arg):
+@register.filter(name="addid")
+def addid(value, arg):
     if hasattr(value, 'as_widget'):
-        return value.as_widget(attrs={"class": arg})
+        return value.as_widget(attrs={"id": arg})
     else:
         return value
 
-
 @register.filter(name="addplaceholder")
-def addclass(value, arg):
+def addplaceholder(value, arg):
     if hasattr(value, 'as_widget'):
         return value.as_widget(attrs={"placeholder": arg})
     else:
