@@ -321,74 +321,57 @@ def create_player(request):
     if request.method == "POST":
         form = PlayerForm(request.POST, attribute_categories=attribute_categories, badge_categories=badge_categories)
         if form.is_valid():
-            response = hoops_player_create.validatePlayerCreation(
-                user, form.cleaned_data
-            )
+            response = validatePlayerCreation(form.cleaned_data)
             success = response[0]
             status = response[1]
             if success == True:
                 referral_code = form.cleaned_data["referral_code"]
-                playerObject = hoops_player_create.createPlayer(user, form.cleaned_data)
-                # Create a discord webhook
+                playerObject = createPlayer(user, form.cleaned_data)
                 discord_webhooks.send_webhook(
                     url="creation",
                     title="Player Creation",
-                    message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/%7BplayerObject.id%7D)",
+                    message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
                 )
                 messages.success(request, "Player created successfully!")
-                return redirect('player', id=playerObject.id)
-        
+                return redirect('player', id=playerObject.id) 
             else:
                 messages.error(request, status)
                 return redirect('create_player')
         context = {
-            "create_player_form": form,  # This is the form instance with errors
+            "create_player_form": form,
             'attribute_categories': attribute_categories,
             'badge_categories': badge_categories,
             'user': request.user
         }
         return render(request, "main/players/create.html", context)
-
     else:
         context = {
             "create_player_form": PlayerForm(attribute_categories=attribute_categories, badge_categories=badge_categories),
             'attribute_categories': attribute_categories,
             'badge_categories': badge_categories,
             'user': request.user
-                }    
+        }    
+    return render(request, "main/players/create.html", context)
+
 def players(request):
-        context = {
-            "title": "Players",
+    context = {
+        "title": "Players",
     }
-# Get the league players
     league_players = Player.objects.order_by("id")
-    # Paginate the league players
     paginator = Paginator(league_players, 10)
     page_number = request.GET.get("page")
     context["page"] = paginator.get_page(page_number)
-    # Return the players page
     return render(request, "main/players/players.html", context)
-    # Get the league players
-    league_players = Player.objects.order_by("id")
-    # Paginate the league players
-    paginator = Paginator(league_players, 10)
-    page_number = request.GET.get("page")
-    context["page"] = paginator.get_page(page_number)
-    # Return the players page
-    return render(request, "main/players/players.html", context)
+
 def free_agents(request):
-    # Create the context
     context = {
         "title": "Free Agents",
     }
-    # Get all league players that contracts_end_after
     free_agent_players = Player.objects.all().order_by("-spent")
-    # Paginate the league players
     paginator = Paginator(free_agent_players, 10)
     page_number = request.GET.get("page")
     context["page"] = paginator.get_page(page_number)
-    # Return the players page
-    return render(request, "main/players/free-agents.html", context)
+    return render(request, "main/players/players.html", context)
 def upgrade_logs(request, id):
     # Check if the player exists
     player = Player.objects.get(pk=id)
