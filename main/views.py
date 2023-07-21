@@ -339,10 +339,10 @@ def create_player(request):
                     url="creation",
                     title="Player Creation",
                     message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/%7BplayerObject.id%7D)",
-
+                )
                 messages.success(request, "Player created successfully!")
                 return redirect('player', id=playerObject.id)
-
+        
             else:
                 messages.error(request, status)
                 return redirect('create_player')
