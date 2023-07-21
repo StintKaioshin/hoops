@@ -23,7 +23,58 @@
                         <h3 class="text-uppercase fw-bold mb-2">PLAYER DETAILS</h3>
                         <form action="/player/create/" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <!-- your form fields code here -->
+                            
+                            <!-- Name -->
+                            <div class="mb-3">
+                                <label for="player_name" class="form-label">Name</label>
+                                <input type="text" name="player_name" class="form-control">
+                            </div>
+
+                            <!-- Jersey -->
+                            <div class="mb-3">
+                                <label for="jersey" class="form-label">Jersey</label>
+                                <input type="text" name="jersey" class="form-control">
+                            </div>
+
+                            <!-- Facescan -->
+                            <div class="mb-3">
+                                <label for="facescan" class="form-label">Facescan</label>
+                                <input type="file" name="facescan" class="form-control">
+                            </div>
+
+                            <!-- Primary Attributes & Badges -->
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="fw-bold mb-3">Primary Attributes & Badges</h5>
+                                    {% for i in '12345'|make_list %}
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="primary_attr{{ i }}" class="form-label">Primary Attribute {{ i }}</label>
+                                            <select name="primary_attr{{ i }}" class="form-select">
+                                                <option value="">Select Attribute</option>
+                                                {% for category, attributes in primary_attribute_categories.items %}
+                                                    {% for attribute in attributes %}
+                                                        <option value="{{ attribute }}">{{ attribute }}</option>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label for="primary_badge{{ i }}" class="form-label">Primary Badge {{ i }}</label>
+                                            <select name="primary_badge{{ i }}" class="form-select">
+                                                <option value="">Select Badge</option>
+                                                {% for badge_category, badges in primary_badge_categories.items %}
+                                                    {% for badge in badges %}
+                                                        <option value="{{ badge }}">{{ badge }}</option>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
                             <!-- Secondary Attributes & Badges -->
                             <div class="row">
                                 <div class="col">
@@ -56,11 +107,13 @@
                                     {% endfor %}
                                 </div>
                             </div>
+
                             <!-- Referral Code -->
                             <div class="mb-3">
                                 <label for="referral_code" class="form-label">Referral Code</label>
                                 <input type="text" name="referral_code" class="form-control">
                             </div>
+
                             <!-- Submission -->
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success btn-lg mt-3">Create Player</button>
