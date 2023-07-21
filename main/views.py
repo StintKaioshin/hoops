@@ -302,15 +302,16 @@ logger = logging.getLogger(__name__)
 
 @login_required(login_url="/login/discord/")
 def create_player(request):
-    attribute_categories = {
+    attribute_categories = { 
         "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
         "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
         "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
         "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
         "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
+
     }
 
-    badge_categories = {
+    badge_categories = { 
         "finishing": ["Acrobat", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross-Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork", "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick & Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Slithery Finisher"],
         "shooting": ["Catch & Shoot", "Clutch Shooter", "Corner Specialist", "Deadeye", "Difficult Shots", "Flexible Release", "Green Machine", "Hot Zone Hunter", "Quick Draw", "Range Extender", "Slippery Off-Ball", "Steady Shooter", "Tireless Shooter", "Volume Shooter"],
         "defense": ["Brick Wall", "Chase Down Artist", "Clamps", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck", "Off-Ball Pest", "Pick Dodger", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper"],
@@ -321,7 +322,6 @@ def create_player(request):
     user = request.user
     referral_code = request.GET.get("referral_code")
 
-    # Process the request (if it's a POST request)
     if request.method == "POST":
         form = PlayerForm(request.POST)
         if form.is_valid():
@@ -330,9 +330,7 @@ def create_player(request):
             )
             success = response[0]
             status = response[1]
-            # If the form is valid, and the player creation succeeded, redirect to the player page
             if success == True:
-                # Get referral code & player object
                 referral_code = form.cleaned_data["referral_code"]
                 playerObject = hoops_player_create.createPlayer(user, form.cleaned_data)
 
@@ -340,35 +338,22 @@ def create_player(request):
                 discord_webhooks.send_webhook(
                     url="creation",
                     title="Player Creation",
-                    message=f"**{playerObject.first_name} {playerObject.last_name}** has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
-                )
+                    message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/%7BplayerObject.id%7D)",
 
-                # Check referral code validity, reward player
-                if referral_code:
-                    refPlayer = Player.objects.get(pk=int(referral_code))
-                    if refPlayer:
-                        # Add cash to the player
-                        refPlayer.cash += league_config.referral_bonus
-                        playerObject.cash += league_config.referral_bonus
-                        refPlayer.save()
-                        playerObject.save()
-
-                        # Send & save the notification
-                        hoops_user_notify.notify(
-                            user=refPlayer.discord_user,
-                            message=f"{refPlayer.first_name} {refPlayer.last_name} received ${league_config.referral_bonus} for referring {playerObject.first_name} {playerObject.last_name} to the league!",
-                        )
-
-                # Redirect to the player page
                 messages.success(request, "Player created successfully!")
-                return redirect(player, id=playerObject.id)
+                return redirect('player', id=playerObject.id)
 
             else:
                 messages.error(request, status)
-                return redirect(create_player)
+                return redirect('create_player')
 
-        # If the form is invalid, or the player creation failed, redirect to the create player page
-        return redirect(create_player)
+        context = {
+            "create_player_form": form,  # This is the form instance with errors
+            'attribute_categories': attribute_categories,
+            'badge_categories': badge_categories,
+            'user': request.user
+        }
+        return render(request, "main/players/create.html", context)
 
     else:
         context = {
@@ -378,31 +363,6 @@ def create_player(request):
             'user': request.user
         }
         return render(request, "main/players/create.html", context)
-def players(request):
-    context = {
-        "title": "Players",
-    }
-    # Get the league players
-    league_players = Player.objects.order_by("id")
-    # Paginate the league players
-    paginator = Paginator(league_players, 10)
-    page_number = request.GET.get("page")
-    context["page"] = paginator.get_page(page_number)
-    # Return the players page
-    return render(request, "main/players/players.html", context)
-def free_agents(request):
-    # Create the context
-    context = {
-        "title": "Free Agents",
-    }
-    # Get all league players that contracts_end_after
-    free_agent_players = Player.objects.all().order_by("-spent")
-    # Paginate the league players
-    paginator = Paginator(free_agent_players, 10)
-    page_number = request.GET.get("page")
-    context["page"] = paginator.get_page(page_number)
-    # Return the players page
-    return render(request, "main/players/free-agents.html", context)
 def upgrade_logs(request, id):
     # Check if the player exists
     player = Player.objects.get(pk=id)
