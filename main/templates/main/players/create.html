@@ -1,9 +1,6 @@
 {% extends 'main/base.html' %}
 {% load extra_filters %}
 {% block content %}
-{% for category, attributes in attribute_categories %}
-{% for badge_category, badges in badge_categories %}
-
 
 <section class="py-4 py-xl-5">
     <div class="container h-100">
@@ -27,77 +24,7 @@
                         <h3 class="text-uppercase fw-bold mb-2">PLAYER DETAILS</h3>
                         <form action="/player/create/" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <!-- First & Last names -->
-                            <div class="mb-3">
-                                <label for="first_name" class="form-label">First Name</label>
-                                <input type="text" name="first_name" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="last_name" class="form-label">Last Name</label>
-                                <input type="text" name="last_name" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="cyberface" class="form-label">Cyberface</label>
-                                <input type="text" name="cyberface" class="form-control">
-                            </div>
-                            <!-- Height & Weight -->
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label for="height" class="form-label">Height (in ft)</label>
-                                    <input type="number" name="height" class="form-control">
-                                </div>
-                                <div class="col">
-                                    <label for="weight" class="form-label">Weight (in lb)</label>
-                                    <input type="number" name="weight" class="form-control">
-                                </div>
-                            </div>
-                            <!-- Positions & Jersey Number -->
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label for="primary_position" class="form-label">Primary Position</label>
-                                    <input type="text" name="primary_position" class="form-control">
-                                </div>
-                                <div class="col">
-                                    <label for="secondary_position" class="form-label">Secondary Position</label>
-                                    <input type="text" name="secondary_position" class="form-control">
-                                </div>
-                                <div class="col">
-                                    <label for="jersey_number" class="form-label">Jersey Number</label>
-                                    <input type="text" name="jersey_number" class="form-control">
-                                </div>
-                            </div>
-                            <!-- Primary Attributes & Badges -->
-                            <div class="row">
-                                <div class="col">
-                                    <h5 class="fw-bold mb-3">Primary Attributes & Badges</h5>
-                                    {% for i in 5|times %}
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <label for="primary_attr{{ i }}" class="form-label">Primary Attribute {{ i }}</label>
-                                            <select name="primary_attr{{ i }}" class="form-select">
-                                                <option value="">Select Attribute</option>
-                                                {% for category, attributes in attribute_categories %}
-                                                    {% for attribute in attributes %}
-                                                        <option value="{{ attribute }}">{{ attribute }}</option>
-                                                    {% endfor %}
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                        <div class="col">
-                                            <label for="primary_badge{{ i }}" class="form-label">Primary Badge {{ i }}</label>
-                                            <select name="primary_badge{{ i }}" class="form-select">
-                                                <option value="">Select Badge</option>
-                                                {% for badge_category, badges in badge_categories %}
-                                                    {% for badge in badges %}
-                                                        <option value="{{ badge }}">{{ badge }}</option>
-                                                    {% endfor %}
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
+                            <!-- your form fields code here -->
                             <!-- Secondary Attributes & Badges -->
                             <div class="row">
                                 <div class="col">
@@ -119,7 +46,7 @@
                                             <label for="secondary_badge{{ i }}" class="form-label">Secondary Badge {{ i }}</label>
                                             <select name="secondary_badge{{ i }}" class="form-select">
                                                 <option value="">Select Badge</option>
-                                                    {% for category, badges in badges_categories %}
+                                                {% for badge_category, badges in badge_categories %}
                                                     {% for badge in badges %}
                                                         <option value="{{ badge }}">{{ badge }}</option>
                                                     {% endfor %}
