@@ -354,6 +354,7 @@ def create_player(request):
             success = response[0]
             status = response[1]
             if success:
+                referral_code = form.cleaned_data["referral_code"]
                 playerObject = createPlayer(user, form.cleaned_data)
                 discord_webhooks.send_webhook(
                     url="creation",
