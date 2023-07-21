@@ -1,28 +1,18 @@
 {% extends 'main/base.html' %}
 {% block content %}
 
+
 <section class="py-4 py-xl-5">
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
-                <div>
-                     <h2 class="text-uppercase fw-bold mb-3">CREATE A PLAYER</h2>
-                        <p class="mb-4">Customize your virtual player by filling out the form below.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <section class="py-4 py-xl-5">
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-                        <div class="card mb-5">
-                            <div class="card-body p-sm-5">
-                                <h3 class="text-uppercase fw-bold mb-2">PLAYER DETAILS</h3>
-                                <form action="/player/create/" method="post" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    <!-- First & Last names -->
-                                    <div class="mb-3">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                <div class="card mb-5">
+                    <div class="card-body p-sm-5">
+                        <h3 class="text-uppercase fw-bold mb-2">PLAYER DETAILS</h3>
+                        <form action="/player/create/" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <!-- your form fields code here -->
+                                                                <div class="mb-3">
                                         <label for="first_name" class="form-label">First Name</label>
                                         {{ create_player_form.first_name|addclass:"form-control" }}
                                     </div>
@@ -61,16 +51,6 @@
                                         </div>
                                     </div> 
 
-<section class="py-4 py-xl-5">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-                <div class="card mb-5">
-                    <div class="card-body p-sm-5">
-                        <h3 class="text-uppercase fw-bold mb-2">PLAYER DETAILS</h3>
-                        <form action="/player/create/" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <!-- your form fields code here -->
                             <!-- Secondary Attributes & Badges -->
                             <div class="row">
                                 <div class="col">
