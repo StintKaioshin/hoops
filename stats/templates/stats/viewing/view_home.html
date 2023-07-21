@@ -5,54 +5,54 @@
 <!-- Add game page -->
 <div class="container mt-5">
     <!-- Stats index -->
-    <h1>Stats</h1>
-    <p>We are currently in Season {{ current_season.id }}.</p>
-    <hr>
-    <p>Welcome to the stats hub. Explore the latest statistics, game results, and standings.</p>
-    <hr>
+    <h1 class="stats-heading">Stats</h1>
+    <p class="current-season-info">We are currently in Season {{ current_season.id }}.</p>
+    <hr class="divider">
+    <p class="welcome-message">Welcome to the stats hub. Explore the latest statistics, game results, and standings.</p>
+    <hr class="divider">
     <!-- Season viewer -->
-    <div class="container">
-        <h2>Season Viewer</h2>
+    <div class="season-viewer">
+        <h2 class="season-viewer-heading">Season Viewer</h2>
         {% for season in active_seasons %}
-            <div class="card mt-3 mb-3 p-3">
+            <div class="season-card">
                 <a href="{% url 'stats:view_season' season %}" class="season-link">Season {{ season }}</a>
                 <ul class="season-links">
-                    <li class="mt-1 mb-1"><a href="{% url 'stats:view_season_stats' season|int %}" class="season-stats-link">View statistics</a></li>
+                    <li><a href="{% url 'stats:view_season_stats' season|int %}" class="season-stats-link">View statistics</a></li>
                 </ul>
             </div>
         {% endfor %}
     </div>
-    <hr>
+    <hr class="divider">
     <!-- Recent games -->
-    <div class="container">
-        <h2>Recent Games</h2>
+    <div class="recent-games">
+        <h2 class="recent-games-heading">Recent Games</h2>
         {% for game in recent_games %} 
             <!-- Make a card for each game -->
-            <div class="card mt-3 mb-3 p-3">
+            <div class="game-card">
                 <a href="{% url 'stats:view_game' game.id %}" class="game-link">{{ game }}</a>
-                <p class="mb-0"><b>{{ game.winner.name }}</b> beat <b>{{ game.loser.name }}</b></p>
+                <p class="game-outcome"><b>{{ game.winner.name }}</b> beat <b>{{ game.loser.name }}</b></p>
             </div>
         {% endfor %}
     </div>
-    <hr>
+    <hr class="divider">
     <!-- Current standings -->
-    <div class="container mb-5">
-        <h2>Standings</h2>
-        <p>Season {{ current_season.id }}</p>
-        <table class="table table-striped table-hover table-responsive">
+    <div class="current-standings">
+        <h2 class="standings-heading">Standings</h2>
+        <p class="current-season-info">Season {{ current_season.id }}</p>
+        <table class="standings-table">
             <thead>
                 <tr>
-                    <th scope="col">RANK</th>
-                    <th scope="col">STATUS</th>
-                    <th scope="col">TEAM</th>
-                    <th scope="col">G</th>
-                    <th scope="col">W</th>
-                    <th scope="col">L</th>
-                    <th scope="col">GB</th>
-                    <th scope="col">PCT</th>
-                    <th scope="col">PF</th>
-                    <th scope="col">PA</th>
-                    <th scope="col">DIFF</th>
+                    <th>RANK</th>
+                    <th>STATUS</th>
+                    <th>TEAM</th>
+                    <th>G</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>GB</th>
+                    <th>PCT</th>
+                    <th>PF</th>
+                    <th>PA</th>
+                    <th>DIFF</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,14 +61,14 @@
                         <td>{{ forloop.counter }}</td>
                         <!-- Create badge for playoffs, fill background -->
                         {% if forloop.counter <= 6 %}
-                            <td><span class="badge bg-success text-dark">PLAYOFFS</span></td>
+                            <td><span class="playoffs-badge">PLAYOFFS</span></td>
                         {% elif forloop.counter <= 10 %}
-                            <td><span class="badge bg-primary">PLAY-IN</span></td>
+                            <td><span class="play-in-badge">PLAY-IN</span></td>
                         {% else %}
-                            <td><span class="badge bg-danger">OUT</span></td>
+                            <td><span class="out-badge">OUT</span></td>
                         {% endif %}
                         <td>
-                            <img src="{{ team_data.logo }}" alt="{{ team_data.name }}" height="25" width="25">
+                            <img src="{{ team_data.logo }}" alt="{{ team_data.name }}" class="team-logo">
                             {{ team }}
                         </td>
                         <td>{{ team_data.total_games }}</td>
@@ -84,6 +84,6 @@
             </tbody>
         </table>
     </div>
-    <hr>
+    <hr class="divider">
 </div>
 {% endblock %}
