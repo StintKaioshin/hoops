@@ -355,11 +355,17 @@ def create_player(request):
             'attribute_categories': attribute_categories,
             'badge_categories': badge_categories,
             'user': request.user
+                }
 
-
+            
+    
 def players(request):
-        }
         return render(request, "main/players/create.html", context)
+    
+    def players(request):
+        context = {
+            "title": "Players",
+    }
 # Get the league players
     league_players = Player.objects.order_by("id")
     # Paginate the league players
