@@ -318,9 +318,10 @@ def create_player(request):
     }
 
     context = {
-        'attribute_categories': attribute_categories,
-        'badge_categories': badge_categories
-    }
+    'attribute_categories': attribute_categories,
+    'badge_categories': badge_categories,
+    'user': request.user
+}
     return render(request, 'main/players/create.html', context)
     user = request.user
     referral_code = request.GET.get("referral_code")
