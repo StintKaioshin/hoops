@@ -4,27 +4,46 @@
     <h1 class="text-uppercase fw-bold">DASHBOARD</h1><span style="font-size: 14px;">{{ current_user.discord_tag }}</span>
     <p><span class="fw-bold text-warning">MOTD </span> <i style="font-size: 12px;">"{{ motd }}"</i></p>
     <style>
-        .carousel, .carousel-item, .carousel-item img {
-            height: 200px; /* adjust this value as needed */
-            width: 200px; /* adjust this value as needed */
+        .carousel-item img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: cover;
+        }
+
+        /* media query for devices with max-width of 600px */
+        @media (max-width: 600px) {
+            .carousel, .carousel-item, .carousel-item img {
+                height: 100px; 
+                width: 100%;
+            }
+        }
+
+        /* media query for devices with min-width of 600px */
+        @media (min-width: 601px) {
+            .carousel, .carousel-item, .carousel-item img {
+                height: 200px;
+                width: 100%;
+            }
         }
     </style>
-<div class="row">
-  <div class="col-md-6 col-xl-6">
-   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://i.imgur.com/hUXLGz9.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="https://i.imgur.com/eIaq9yv.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://i.imgur.com/hUXLGz9.png" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://i.imgur.com/eIaq9yv.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="..." class="d-block w-100" alt="...">
+                    </div>
+                </div>
             </div>
         </div>
-   </div>
-</div>       
+    </div>
+</div>    
        <div class="col-md-6 col-xl-6">
         <!-- Documents -->
     <div class="card text-center" style="height: 400px; background-color: #877b53; color: #fff;">
