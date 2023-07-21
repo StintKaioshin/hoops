@@ -67,13 +67,13 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="fw-bold mb-3">Primary Attributes & Badges</h5>
-                                    {% for i in '12345' %}
+                                    {% for i in range(5) %}
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label for="primary_attr{{ i }}" class="form-label">Primary Attribute {{ i }}</label>
                                             <select name="primary_attr{{ i }}" class="form-select">
                                                 <option value="">Select Attribute</option>
-                                                {% for category, attributes in attribute_categories.items %}
+                                                {% for category, attributes in attribute_categories.items() %}
                                                     {% for attribute in attributes %}
                                                         <option value="{{ attribute }}">{{ attribute }}</option>
                                                     {% endfor %}
@@ -84,7 +84,7 @@
                                             <label for="primary_badge{{ i }}" class="form-label">Primary Badge {{ i }}</label>
                                             <select name="primary_badge{{ i }}" class="form-select">
                                                 <option value="">Select Badge</option>
-                                                {% for category, badges in badge_categories.items %}
+                                                {% for category, badges in badge_categories.items() %}
                                                     {% for badge in badges %}
                                                         <option value="{{ badge }}">{{ badge }}</option>
                                                     {% endfor %}
@@ -99,13 +99,13 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="fw-bold mb-3">Secondary Attributes & Badges</h5>
-                                    {% for i in '12345' %}
+                                    {% for i in range(5) %}
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label for="secondary_attr{{ i }}" class="form-label">Secondary Attribute {{ i }}</label>
                                             <select name="secondary_attr{{ i }}" class="form-select">
                                                 <option value="">Select Attribute</option>
-                                                {% for category, attributes in attribute_categories.items %}
+                                                {% for category, attributes in attribute_categories.items() %}
                                                     {% for attribute in attributes %}
                                                         <option value="{{ attribute }}">{{ attribute }}</option>
                                                     {% endfor %}
@@ -116,7 +116,7 @@
                                             <label for="secondary_badge{{ i }}" class="form-label">Secondary Badge {{ i }}</label>
                                             <select name="secondary_badge{{ i }}" class="form-select">
                                                 <option value="">Select Badge</option>
-                                                {% for category, badges in badge_categories.items %}
+                                                {% for category, badges in badge_categories.items() %}
                                                     {% for badge in badges %}
                                                         <option value="{{ badge }}">{{ badge }}</option>
                                                     {% endfor %}
