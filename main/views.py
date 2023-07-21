@@ -300,7 +300,11 @@ logger = logging.getLogger(__name__)
 @login_required(login_url="/login/discord/")
 def create_player(request):
     # Collect user & player information
-    return render_template('create.html', attribute_categories=attribute_categories, badge_categories=badge_categories)
+    context = {
+        'attribute_categories': attribute_categories,
+        'badge_categories': badge_categories
+    }
+    return render(request, 'create.html', context)
     user = request.user
     referral_code = request.GET.get("referral_code")
     # Process the request (if it's a POST request)
