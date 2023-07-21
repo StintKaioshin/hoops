@@ -35,10 +35,8 @@
                                             <label for="secondary_attr{{ i }}" class="form-label">Secondary Attribute {{ i }}</label>
                                             <select name="secondary_attr{{ i }}" class="form-select">
                                                 <option value="">Select Attribute</option>
-                                                {% for category, attributes in attribute_categories %}
-                                                    {% for attribute in attributes %}
-                                                        <option value="{{ attribute }}">{{ attribute }}</option>
-                                                    {% endfor %}
+                                                {% for attribute in attribute_categories.values|join:", "|split:", " %}
+                                                    <option value="{{ attribute }}">{{ attribute }}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -46,10 +44,8 @@
                                             <label for="secondary_badge{{ i }}" class="form-label">Secondary Badge {{ i }}</label>
                                             <select name="secondary_badge{{ i }}" class="form-select">
                                                 <option value="">Select Badge</option>
-                                                {% for badge_category, badges in badge_categories %}
-                                                    {% for badge in badges %}
-                                                        <option value="{{ badge }}">{{ badge }}</option>
-                                                    {% endfor %}
+                                                {% for badge in badge_categories.values|join:", "|split:", " %}
+                                                    <option value="{{ badge }}">{{ badge }}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
