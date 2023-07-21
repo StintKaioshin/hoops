@@ -35,7 +35,40 @@
                                         <label for="jersey_number" class="label label-primary">Jersey Number</label>
                                         {{ create_player_form.jersey_number|addclass:"form-control form-control-sm mb-2" }}
                                     </div> 
-                            <!-- Secondary Attributes & Badges -->
+                           
+                         <!-- Primary Attributes & Badges -->
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="fw-bold mb-3">Primary Attributes & Badges</h5>
+                                    {% for i in '12345'|make_list %}
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="primary_attr{{ i }}" class="form-label">Primary Attribute {{ i }}</label>
+                                            <select name="primary_attr{{ i }}" class="form-select">
+                                                <option value="">Select Attribute</option>
+                                                {% for category, attributes in attribute_categories.items %}
+                                                    {% for attribute in attributes %}
+                                                        <option value="{{ attribute }}">{{ attribute }}</option>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label for="primary_badge{{ i }}" class="form-label">Primary Badge {{ i }}</label>
+                                            <select name="primary_badge{{ i }}" class="form-select">
+                                                <option value="">Select Badge</option>
+                                                {% for badge_category, badges in badge_categories.items %}
+                                                    {% for badge in badges %}
+                                                        <option value="{{ badge }}">{{ badge }}</option>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>                
+                        <!-- Secondary Attributes & Badges -->
                             <div class="row">
                                 <div class="col">
                                     <h5 class="fw-bold mb-3">Secondary Attributes & Badges</h5>
