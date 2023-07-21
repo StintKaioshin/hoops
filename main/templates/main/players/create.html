@@ -90,11 +90,11 @@
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <label for="primary_attr{{ i }}" class="form-label">Primary Attribute {{ i }}</label>
-                                                    {{ create_player_form.primary_attr{{ i }}|addclass:"form-control" }}
+                                                    {{ create_player_form.primary_attr|add: i |addclass:"form-control" }}
                                                 </div>
                                                 <div class="col">
                                                     <label for="primary_badge{{ i }}" class="form-label">Primary Badge {{ i }}</label>
-                                                    {{ create_player_form.primary_badge{{ i }}|addclass:"form-control" }}
+                                                    {{ create_player_form.primary_badge|add: i |addclass:"form-control" }}
                                                 </div>
                                             </div>
                                             {% endfor %}
@@ -109,11 +109,11 @@
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <label for="secondary_attr{{ i }}" class="form-label">Secondary Attribute {{ i }}</label>
-                                                    {{ create_player_form.secondary_attr{{ i }}|addclass:"form-control" }}
+                                                    {{ create_player_form.secondary_attr|add: i |addclass:"form-control" }}
                                                 </div>
                                                 <div class="col">
                                                     <label for="secondary_badge{{ i }}" class="form-label">Secondary Badge {{ i }}</label>
-                                                    {{ create_player_form.secondary_badge{{ i }}|addclass:"form-control" }}
+                                                    {{ create_player_form.secondary_badge|add: i |addclass:"form-control" }}
                                                 </div>
                                             </div>
                                             {% endfor %}
