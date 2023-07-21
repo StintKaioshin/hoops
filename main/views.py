@@ -363,6 +363,31 @@ def create_player(request):
             'user': request.user
         }
         return render(request, "main/players/create.html", context)
+    def players(request):
+    context = {
+        "title": "Players",
+    }
+    # Get the league players
+    league_players = Player.objects.order_by("id")
+    # Paginate the league players
+    paginator = Paginator(league_players, 10)
+    page_number = request.GET.get("page")
+    context["page"] = paginator.get_page(page_number)
+    # Return the players page
+    return render(request, "main/players/players.html", context)
+def free_agents(request):
+    # Create the context
+    context = {
+        "title": "Free Agents",
+    }
+    # Get all league players that contracts_end_after
+    free_agent_players = Player.objects.all().order_by("-spent")
+    # Paginate the league players
+    paginator = Paginator(free_agent_players, 10)
+    page_number = request.GET.get("page")
+    context["page"] = paginator.get_page(page_number)
+    # Return the players page
+    return render(request, "main/players/free-agents.html", context)
 def upgrade_logs(request, id):
     # Check if the player exists
     player = Player.objects.get(pk=id)
