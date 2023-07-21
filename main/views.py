@@ -45,7 +45,7 @@ from requests.structures import CaseInsensitiveDict
 from datetime import timedelta
 from .league.player import upgrade as hoops_player_upgrade
 from .league.player import create as hoops_player_create
-from .create import createPlayer
+from .league.player.create import createPlayer
 from .league.player import physicals as hoops_player_physicals
 from .league.player import export as hoops_player_export
 from .league.player import style as hoops_player_style
