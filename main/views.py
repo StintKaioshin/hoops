@@ -363,9 +363,10 @@ def create_player(request):
             'user': request.user
         }
         return render(request, "main/players/create.html", context)
+    
     def players(request):
-    context = {
-        "title": "Players",
+        context = {
+            "title": "Players",
     }
     # Get the league players
     league_players = Player.objects.order_by("id")
