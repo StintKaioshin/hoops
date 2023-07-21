@@ -319,7 +319,7 @@ def create_player(request):
     referral_code = request.GET.get("referral_code")
 
     if request.method == "POST":
-        form = PlayerForm(request.POST, attribute_categories=attribute_categories, badge_categories=badge_categories)
+        form = PlayerForm(request.POST)
         if form.is_valid():
             response = validatePlayerCreation(form.cleaned_data)
             success = response[0]
