@@ -6,9 +6,17 @@ from django.core import validators
 player_styles = open("main/league/looyh/styles.json")
 player_styles = json.load(player_styles)
 
+
 class PlayerForm(forms.Form):
+    # Basic details
     first_name = forms.CharField(max_length=100, required=True)
     last_name = forms.CharField(max_length=100, required=True)
+    height = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
+    weight = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(300)])
+    cyberface = forms.ImageField(required=True)
+    primary_position = forms.ChoiceField(choices=[(x, x) for x in ["PG", "SG", "SF", "PF", "C"]], required=True)
+    secondary_position = forms.ChoiceField(choices=[(x, x) for x in ["PG", "SG", "SF", "PF", "C"]], required=True)
+    jersey_number = forms.IntegerField(required=True, validators=[validators.MinValueValidator(0), validators.MaxValueValidator(99)])
     referral_code = forms.CharField(max_length=100, required=False)
 
     attribute_categories = {
@@ -17,6 +25,7 @@ class PlayerForm(forms.Form):
         "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
         "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
         "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
+
     }
 
     badge_categories = {
@@ -24,6 +33,7 @@ class PlayerForm(forms.Form):
         "shooting": ["Catch & Shoot", "Clutch Shooter", "Corner Specialist", "Deadeye", "Difficult Shots", "Flexible Release", "Green Machine", "Hot Zone Hunter", "Quick Draw", "Range Extender", "Slippery Off-Ball", "Steady Shooter", "Tireless Shooter", "Volume Shooter"],
         "defense": ["Brick Wall", "Chase Down Artist", "Clamps", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck", "Off-Ball Pest", "Pick Dodger", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper"],
         "playmaking": ["Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Handles For Days", "Needle Threader", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop & Go", "Tight Handles", "Unpluckable"],
+
     }
 
     for category, attributes in attribute_categories.items():
@@ -37,6 +47,7 @@ class PlayerForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(PlayerForm, self).__init__(*args, **kwargs)
         self.fields = sorted(self.fields, key=lambda x: x[0])
+
 
 
 
