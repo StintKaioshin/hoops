@@ -25,17 +25,6 @@
             min-height: 60px;
         }
     </style>
-    <!-- Script for toggling the hamburger menu -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navbarLinks = document.getElementById('navcol-5');
-            const hamburgerMenu = document.getElementById('navcol-5');
-
-            hamburgerMenu.addEventListener('click', function() {
-                navbarLinks.classList.toggle('show');
-            });
-        });
-    </script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -73,6 +62,7 @@
         </div>
     </nav>
 
+    
     <!-- Rest of your HTML code -->
      <!-- Messages -->
         {% if messages%}
@@ -101,5 +91,16 @@
 
     <!-- Bootstrap JS Bundle (Popper.js included) -->
     <script src="{% static 'main/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- Add the script for toggling the hamburger menu -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbarLinks = document.getElementById('navcol-5');
+            const hamburgerMenu = document.querySelector('.navbar-toggler');
+
+            hamburgerMenu.addEventListener('click', function() {
+                navbarLinks.classList.toggle('show');
+            });
+        });
+    </script>
 </body>
 </html>
