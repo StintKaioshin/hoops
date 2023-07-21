@@ -7,16 +7,25 @@ player_styles = open("main/league/looyh/styles.json")
 player_styles = json.load(player_styles)
 
 
-class PlayerForm(forms.ModelForm):
-    first_name = forms.CharField(max_length=100, required=True)
-    last_name = forms.CharField(max_length=100, required=True)
-    height = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
-    weight = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(300)])
-    cyberface = forms.ImageField(required=True)
-    primary_position = forms.ChoiceField(choices=[(x, x) for x in ["PG", "SG", "SF", "PF", "C"]], required=True)
-    secondary_position = forms.ChoiceField(choices=[(x, x) for x in ["PG", "SG", "SF", "PF", "C"]], required=True)
-    jersey_number = forms.IntegerField(required=True, validators=[validators.MinValueValidator(0), validators.MaxValueValidator(99)])
-    referral_code = forms.CharField(max_length=100, required=False)
+class PlayerForm(forms.Form):
+    first_name = forms.CharField(label="First Name", max_length=16)
+    last_name = forms.CharField(label="Last Name", max_length=16)
+    cyberface = forms.IntegerField(label="Cyberface", min_value=0, max_value=40000)
+    height = forms.ChoiceField(label="Height", choices=league_config.height_choices)
+    weight = forms.IntegerField(
+        label="Weight",
+        min_value=league_config.player_weight_min,
+        max_value=league_config.player_weight_max,
+    )
+    primary_position = forms.ChoiceField(
+        label="Primary Position", choices=league_config.position_choices
+    )
+    secondary_position = forms.ChoiceField(
+        label="Secondary Position", choices=league_config.position_choices
+    )
+    jersey_number = forms.IntegerField(
+        label="Jersey Number", min_value=0, max_value=league_config.max_attribute
+    )
 
     def __init__(self, *args, **kwargs):
         attribute_categories = kwargs.pop('attribute_categories', None)
