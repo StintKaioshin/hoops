@@ -354,13 +354,26 @@ def create_player(request):
             success = response[0]
             status = response[1]
             if success:
-                referral_code = form.cleaned_data["referral_code"]
                 playerObject = createPlayer(user, form.cleaned_data)
                 discord_webhooks.send_webhook(
                     url="creation",
                     title="Player Creation",
                     message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
                 )
+                    if referral_code:
+                    refPlayer = Player.objects.get(pk=int(referral_code))
+                    if refPlayer:
+                        # Add cash to the player
+                        refPlayer.cash += league_config.referral_bonus
+                        playerObject.cash += league_config.referral_bonus
+                        refPlayer.save()
+                        playerObject.save()
+                        # Send & save the notification
+                        hoops_user_notify.notify(
+                            user=refPlayer.discord_user,
+                            message=f"{refPlayer.first_name} {refPlayer.last_name} received ${league_config.referral_bonus} for referring {playerObject.first_name} {playerObject.last_name} to the league!",
+                        )
+
                 messages.success(request, "Player created successfully!")
                 return redirect('player', id=playerObject.id)
             else:
