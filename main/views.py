@@ -319,7 +319,7 @@ def create_player(request):
     referral_code = request.GET.get("referral_code")
 
     if request.method == "POST":
-        form = PlayerForm(request.POST)
+        form = PlayerForm(request.POST, attribute_categories=attribute_categories, badge_categories=badge_categories)
         if form.is_valid():
             response = validatePlayerCreation(form.cleaned_data)
             success = response[0]
@@ -334,19 +334,14 @@ def create_player(request):
                 )
                 messages.success(request, "Player created successfully!")
                 return redirect('player', id=playerObject.id) 
-            else:
-                messages.error(request, status)
-                return redirect('create_player')
-        context = {
-            "create_player_form": form,
+        else:
+            context = {
+            "create_player_form": PlayerForm(attribute_categories=attribute_categories, badge_categories=badge_categories),
             'attribute_categories': attribute_categories,
             'badge_categories': badge_categories,
             'user': request.user
-        }
-        return render(request, "main/players/create.html", context)
-    else:
-        context = {"create_player_form": PlayerForm}
-        return render(request, "main/players/create.html", context)
+            }    
+    return render(request, "main/players/create.html", context)
     
 def players(request):
     context = {
