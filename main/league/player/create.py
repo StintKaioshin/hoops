@@ -89,22 +89,33 @@ def createPlayer(user, formData):
     )
     # Update the player's attributes
     newPlayer.attributes = {
-        "primary_attr1": formData["primary_attr1"],
-        "primary_attr2": formData["primary_attr2"],
-        "primary_attr3": formData["primary_attr3"],
-        "secondary_attr1": formData["secondary_attr1"],
-        "secondary_attr2": formData["secondary_attr2"],
-        "secondary_attr3": formData["secondary_attr3"],
+        "primary_attr1": formData.get("primary_attr1", None),
+        "primary_attr2": formData.get("primary_attr2", None),
+        "primary_attr3": formData.get("primary_attr3", None),
+        "primary_attr4": formData.get("primary_attr4", None),
+        "primary_attr5": formData.get("primary_attr5", None),
+        "secondary_attr1": formData.get("secondary_attr1", None),
+        "secondary_attr2": formData.get("secondary_attr2", None),
+        "secondary_attr3": formData.get("secondary_attr3", None),
+        "secondary_attr4": formData.get("secondary_attr4", None),
+       "secondary_attr5": formData.get("secondary_attr5", None),
+
     }
     # Update the player's badges
     newPlayer.badges = {
-        "primary_badge1": formData["primary_badge1"],
-        "primary_badge2": formData["primary_badge2"],
-        "primary_badge3": formData["primary_badge3"],
-        "secondary_badge1": formData["secondary_badge1"],
-        "secondary_badge2": formData["secondary_badge2"],
-        "secondary_badge3": formData["secondary_badge3"],
+        "primary_badge1": formData.get("primary_badge1", None),
+        "primary_badge2": formData.get("primary_badge2", None),
+        "primary_badge3": formData.get("primary_badge3", None),
+        "primary_badge4": formData.get("primary_badge4", None),
+        "primary_badge5": formData.get("primary_badge5", None),
+        "secondary_badge1": formData.get("secondary_badge1", None),
+        "secondary_badge2": formData.get("secondary_badge2", None),
+        "secondary_badge3": formData.get("secondary_badge3", None),.
+        "secondary_badge4": formData.get("secondary_badge4", None),
+        "secondary_badge5": formData.get("secondary_badge5", None),
+
     }
+
     # Save the player
     historyList.save()
     newPlayer.save()
