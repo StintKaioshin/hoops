@@ -370,14 +370,16 @@ def player(request, id):
 def player(request, id):
     player = get_object_or_404(Player, id=id, discord_user=request.user)
 
-    primary_playstyle = league_config.playstyles[player.statics["playstyles"]["playstyle1"]]["name"]
-    secondary_playstyle = league_config.playstyles[player.statics["playstyles"]["playstyle2"]]["name"]
+    playstyle_indices = player.statics.get("playstyles", {})
+    primary_playstyle = league_config.playstyles[playstyle_indices.get("playstyle1", 0)]["name"]
+    secondary_playstyle = league_config.playstyles[playstyle_indices.get("playstyle2", 0)]["name"]
 
     context = {
         "player": player,
         "primary_playstyle": primary_playstyle,
         "secondary_playstyle": secondary_playstyle,
     }
+
 
     return render(request, "main/players/player.html", context)
 def free_agents(request):
