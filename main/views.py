@@ -321,7 +321,7 @@ def create_player(request):
         'attribute_categories': attribute_categories,
         'badge_categories': badge_categories
     }
-    return render(request, 'create.html', context)
+    return render(request, 'main/players/create.html', context)
     user = request.user
     referral_code = request.GET.get("referral_code")
     # Process the request (if it's a POST request)
