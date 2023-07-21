@@ -1,0 +1,74 @@
+{% extends 'main/base.html' %}
+{% load main_filters %}
+
+{% block content %}
+
+<section class="py-4 py-xl-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2 class="text-uppercase fw-bold mb-3 text-center">CREATE A PLAYER</h2>
+                <p class="mb-4 text-center">Create a player by filling out the form below.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="/player/create/" method="post">
+                    {% csrf_token %}
+                    <!-- First & Last names -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="first_name" class="form-label">First Name</label>
+                            {{ create_player_form.first_name|addclass:"form-control" }}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="last_name" class="form-label">Last Name</label>
+                            {{ create_player_form.last_name|addclass:"form-control" }}
+                        </div>
+                    </div>
+
+                    <!-- Height & Weight -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="height" class="form-label">Height</label>
+                            {{ create_player_form.height|addclass:"form-select form-select-sm" }}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="weight" class="form-label">Weight</label>
+                            {{ create_player_form.weight|addclass:"form-select form-select-sm" }}
+                        </div>
+                    </div>
+
+                    <!-- Positions & Jersey Number -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="primary_position" class="form-label">Primary Position</label>
+                            {{ create_player_form.primary_position|addclass:"form-select form-select-sm" }}
+                        </div>
+                        <div class="col-md-4">
+                            <label for="secondary_position" class="form-label">Secondary Position</label>
+                            {{ create_player_form.secondary_position|addclass:"form-select form-select-sm" }}
+                        </div>
+                        <div class="col-md-4">
+                            <label for="jersey_number" class="form-label">Jersey Number</label>
+                            {{ create_player_form.jersey_number|addclass:"form-control form-control-sm" }}
+                        </div>
+                    </div>
+
+                    <!-- Referral Code -->
+                    <div class="mb-3">
+                        <label for="referral_code" class="form-label">Referral Code (Optional)</label>
+                        <input type="text" name="referral_code" class="form-control">
+                    </div>
+
+                    <!-- Submission -->
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-primary" value="Next: Choose Attributes & Badges">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
