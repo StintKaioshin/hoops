@@ -756,6 +756,8 @@ height_choices = [
     (82, "6'10"),
     (83, "6'11"),
     (84, "7'0"),
+    (85, "7'1"),
+    (86, "7'2"),
 ]
 position_choices = [
     ("PG", "Point Guard"),
