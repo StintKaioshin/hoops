@@ -354,7 +354,7 @@ def create_player(request):
             "create_player_form": PlayerForm(attribute_categories=attribute_categories, badge_categories=badge_categories),
             'attribute_categories': attribute_categories,
             'badge_categories': badge_categories,
-            'user': request.user
+            'user': request.user,
             context = {"create_player_form": PlayerForm}
 
                 }    
