@@ -56,7 +56,7 @@
                     <div class="h5 mb-0" style="margin-top: -6px;">
                         {% if players %}
                             {% for player in players %}
-                                <svg class="bi bi-person mr-0" xmlns="http://www.w3.org/2000/svg" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                                <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
                                     <!-- svg path -->
                                 </svg>
                                 <div class="text-center">
@@ -82,7 +82,7 @@
                             <p style="font-size: 12px;">No players available.</p>
                             <hr style="margin-bottom: 2px;">
                             <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Start new career</a><br>
-                            <svg class="bi bi-ticket-detailed" xmlns="http://www.w3.org/2000/svg" width="0.67em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                            <svg class="bi bi-ticket-detailed" width="0.67em" height="1em" fill="currentColor" viewBox="0 0 16 16">
                                 <!-- svg path -->
                             </svg>
                         {% endif %}
@@ -110,28 +110,31 @@
                                 <span class="text-white" style="font-size: 12px;">DOCS</span>
                             </div><hr>
                             <div class="text-white h5 mb-0" style="margin-top: -6px;">
-                                <svg class="bi bi-activity" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
-                                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"></path>
+                                <svg class="bi bi-activity" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
+                                    <!-- svg path -->
                                 </svg>
-                                <a class="fw-bold"href="https://docs.google.com/spreadsheets/d/1X5jjdQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 10px; text-decoration: none;">VBL Trackers</a><br>
-                                <a class="fw-bold"href="https://docs.google.com/spreadsheets/d/1X5jjdQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 10px; text-decoration: none;"> Trackers</a><br>
-                                <svg class="bi bi-activity" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
-                                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"></path>
+                                <a class="fw-bold"href="https://docs.google.com/spreadsheets/d/1X5jjdQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
+                                    <span style="font-size: 15px;">League Rules</span>
+                                </a><br>
+                                <svg class="bi bi-diagram-3" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
+                                    <!-- svg path -->
                                 </svg>
-                                <a class="fw-bold"href="https://docs.google.com/document/d/19gvgpuWeMTpr4km_AMftrPfzhGqsjaq2C6QcRPkElDM/edit" style="font-size: 10px; text-decoration: none;">VBL Rulebook</a><br>
-                                <a class="fw-bold"href="https://docs.google.com/document/d/19gvgpuWeMTpr4km_AMftrPfzhGqsjaq2C6QcRPkElDM/edit" style="font-size: 10px; text-decoration: none;"> Rulebook</a><br>
-                                <svg class="bi bi-activity" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
-                                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"></path>
+                                <a class="fw-bold" href="https://docs.google.com/spreadsheets/d/1RjDQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
+                                    <span style="font-size: 15px;">Player Rankings</span>
+                                </a><br>
+                                <svg class="bi bi-pie-chart" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="font-size: 15px;">
+                                    <!-- svg path -->
                                 </svg>
-                                <a class="fw-bold"href="{% url 'mock_builder' %}" style="font-size: 10px; text-decoration: none;">VBL Builder</a><br>
+                                <a class="fw-bold" href="https://docs.google.com/spreadsheets/d/1FjDQI3xFdaIh7lZItrOvjA2Xf957a1MyiElKKpiGk/edit?usp=sharing" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
+                                    <span style="font-size: 15px;">Player Statistics</span>
+                                </a><br>
                             </div>
-                                <a class="fw-bold"href="{% url 'mock_builder' %}" style="font-size: 10px; text-decoration: none;"> Builder</a><br>
-                            </div
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
         <!-- League Pages -->
         <div class="col-md-6 col-xl-3 mb-4">
