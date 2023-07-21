@@ -13,9 +13,7 @@ urlpatterns = [
     # Player URL patterns
     path("player/<int:id>/", views.player, name="player"),
     path("player/upgrade/<int:id>/", views.upgrade_player, name="upgrade_player"),
-    path("player/create/basic-info/", views.create_player_basic_info, name="create_player_basic_info"),
-    path("player/create/attributes-badges/", views.create_player_attributes_badges, name="create_player_attributes_badges"),
-    path("players/", views.free_agents, name="players"),
+    path("player/create/", views.create_player, name="create_player"),    path("players/", views.free_agents, name="players"),
     path("logs/upgrades/<int:id>/", views.upgrade_logs, name="upgrade_logs"),
     path("logs/cash/<int:id>/", views.cash_logs, name="cash_logs"),
     path("players/builder/", views.mock_builder, name="mock_builder"),
