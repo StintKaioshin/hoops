@@ -831,8 +831,6 @@ hotzone_choices = [
 
 # Description: Categories for .html pages
 
-attribute_categories = {
-# main/league/config.py
 
 attribute_categories = {
     "physical": [
