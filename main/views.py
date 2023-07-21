@@ -368,7 +368,7 @@ def create_player(request):
         # If the form is invalid, or the player creation failed, redirect to the create player page
         return redirect(create_player)
     else:
-        context = {"create_player_form": PlayerForm}
+        context = {"create_player_form": PlayerForm()}
         return render(request, "main/players/create.html", context)
 def players(request):
     context = {
