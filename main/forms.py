@@ -8,60 +8,32 @@ player_styles = json.load(player_styles)
 
 
 class PlayerForm(forms.Form):
-    # Basic details
-    first_name = forms.CharField(label="First Name", max_length=16)
-    last_name = forms.CharField(label="Last Name", max_length=16)
-    cyberface = forms.IntegerField(label="Cyberface", min_value=0, max_value=40000)
-    height = forms.ChoiceField(label="Height", choices=league_config.height_choices)
-    weight = forms.IntegerField(
-        label="Weight",
-        min_value=league_config.player_weight_min,
-        max_value=league_config.player_weight_max,
-    )
-    primary_position = forms.ChoiceField(
-        label="Primary Position", choices=league_config.position_choices
-    )
-    secondary_position = forms.ChoiceField(
-        label="Secondary Position", choices=league_config.position_choices
-    )
-    jersey_number = forms.IntegerField(
-        label="Jersey Number", min_value=0, max_value=league_config.max_attribute
-    )
+    first_name = forms.CharField(max_length=100, required=True)
+    last_name = forms.CharField(max_length=100, required=True)
+    height = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
+    weight = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(300)])
+    cyberface = forms.ImageField(required=True)
     primary_position = forms.ChoiceField(choices=[(x, x) for x in ["PG", "SG", "SF", "PF", "C"]], required=True)
     secondary_position = forms.ChoiceField(choices=[(x, x) for x in ["PG", "SG", "SF", "PF", "C"]], required=True)
     jersey_number = forms.IntegerField(required=True, validators=[validators.MinValueValidator(0), validators.MaxValueValidator(99)])
     referral_code = forms.CharField(max_length=100, required=False)
 
-    attribute_categories = {
-        "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
-        "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
-        "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
-        "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
-        "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
-
-    }
-
-    badge_categories = {
-        "finishing": ["Acrobat", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross-Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork", "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick & Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Slithery Finisher"],
-        "shooting": ["Catch & Shoot", "Clutch Shooter", "Corner Specialist", "Deadeye", "Difficult Shots", "Flexible Release", "Green Machine", "Hot Zone Hunter", "Quick Draw", "Range Extender", "Slippery Off-Ball", "Steady Shooter", "Tireless Shooter", "Volume Shooter"],
-        "defense": ["Brick Wall", "Chase Down Artist", "Clamps", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck", "Off-Ball Pest", "Pick Dodger", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper"],
-        "playmaking": ["Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Handles For Days", "Needle Threader", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop & Go", "Tight Handles", "Unpluckable"],
-
-    }
-
-    for category, attributes in attribute_categories.items():
-        for attribute in attributes:
-            locals()[f'{category}_{attribute}'] = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
-
-    for category, badges in badge_categories.items():
-        for badge in badges:
-            locals()[f'{category}_{badge}'] = forms.ChoiceField(choices=[(x, x) for x in ["Bronze", "Silver", "Gold", "Hall of Fame"]], required=False)
-
     def __init__(self, *args, **kwargs):
+        attribute_categories = kwargs.pop('attribute_categories', None)
+        badge_categories = kwargs.pop('badge_categories', None)
         super(PlayerForm, self).__init__(*args, **kwargs)
+
+        if attribute_categories:
+            for category in attribute_categories:
+                for attribute in attribute_categories[category]:
+                    self.fields[f'{category}_{attribute}'] = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
+
+        if badge_categories:
+            for category in badge_categories:
+                for badge in badge_categories[category]:
+                    self.fields[f'{category}_{badge}'] = forms.ChoiceField(choices=[(x, x) for x in ["Bronze", "Silver", "Gold", "Hall of Fame"]], required=False)
+
         self.fields = sorted(self.fields, key=lambda x: x[0])
-
-
 
 
 class UpgradeForm(forms.Form):
