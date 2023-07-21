@@ -75,10 +75,12 @@
                                 <svg class="bi bi-person mr-0" xmlns="http://www.w3.org/2000/svg" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
                                     <!-- svg path -->
                                 </svg>
-                                <a class="fw-bold ml-0 mb-0" href="{% url 'player' player.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize;">
-                                    <span style="font-size: 8px;">({{ player.id }}) </span>
-                                    {{ player.first_name }} {{ player.last_name }}
-                                </a>
+                                <div class="text-center">
+                                    <a class="fw-bold ml-0 mb-0" href="{% url 'player' player.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
+                                        <span style="font-size: 8px;">({{ player.id }}) </span>
+                                        {{ player.first_name }} {{ player.last_name }}
+                                    </a>
+                                </div>
                                 <!-- Player headshot -->
                                 <div class="text-center">
                                     {% if player.headshot %}
@@ -95,7 +97,7 @@
                         {% else %}
                             <p style="font-size: 12px;">No players available.</p>
                             <hr style="margin-bottom: 2px;">
-                            <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize;">Start new career</a><br>
+                            <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Start new career</a><br>
                             <svg class="bi bi-ticket-detailed" xmlns="http://www.w3.org/2000/svg" width="0.67em" height="1em" fill="currentColor" viewBox="0 0 16 16">
                                 <!-- svg path -->
                             </svg>
