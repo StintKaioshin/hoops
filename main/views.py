@@ -30,7 +30,6 @@ from .forms import StylesForm
 from .discord import auth as discord_auth
 from .discord import webhooks as discord_webhooks
 from .league import config as league_config
-from .league.config import attribute_categories, badge_categories
 # Stats imports
 from stats.league.stats import compile as stats_compile
 from stats.league.stats import calculate as stats_calculate
@@ -301,6 +300,26 @@ logger = logging.getLogger(__name__)
 @login_required(login_url="/login/discord/")
 def create_player(request):
     # Collect user & player information
+   from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def create_player(request):
+    attribute_categories = {
+        "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
+        "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
+        "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
+        "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
+        "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
+    }
+
+    badge_categories = {
+        "finishing": ["Acrobat", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross-Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork", "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick & Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Slithery Finisher"],
+        "shooting": ["Catch & Shoot", "Clutch Shooter", "Corner Specialist", "Deadeye", "Difficult Shots", "Flexible Release", "Green Machine", "Hot Zone Hunter", "Quick Draw", "Range Extender", "Slippery Off-Ball", "Steady Shooter", "Tireless Shooter", "Volume Shooter"],
+        "defense": ["Brick Wall", "Chase Down Artist", "Clamps", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck", "Off-Ball Pest", "Pick Dodger", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper"],
+        "playmaking": ["Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Handles For Days", "Needle Threader", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop & Go", "Tight Handles", "Unpluckable"],
+    }
+
     context = {
         'attribute_categories': attribute_categories,
         'badge_categories': badge_categories
