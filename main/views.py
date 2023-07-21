@@ -308,21 +308,17 @@ def create_player(request):
         "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
         "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
         "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
-
     }
-
     badge_categories = { 
         "finishing": ["Acrobat", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross-Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork", "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick & Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Slithery Finisher"],
         "shooting": ["Catch & Shoot", "Clutch Shooter", "Corner Specialist", "Deadeye", "Difficult Shots", "Flexible Release", "Green Machine", "Hot Zone Hunter", "Quick Draw", "Range Extender", "Slippery Off-Ball", "Steady Shooter", "Tireless Shooter", "Volume Shooter"],
         "defense": ["Brick Wall", "Chase Down Artist", "Clamps", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck", "Off-Ball Pest", "Pick Dodger", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper"],
         "playmaking": ["Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Handles For Days", "Needle Threader", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop & Go", "Tight Handles", "Unpluckable"],
-
     }
-
     user = request.user
     referral_code = request.GET.get("referral_code")
 
-     if request.method == "POST":
+    if request.method == "POST":
         form = PlayerForm(request.POST, attribute_categories=attribute_categories, badge_categories=badge_categories)
         if form.is_valid():
             response = hoops_player_create.validatePlayerCreation(
@@ -333,7 +329,6 @@ def create_player(request):
             if success == True:
                 referral_code = form.cleaned_data["referral_code"]
                 playerObject = hoops_player_create.createPlayer(user, form.cleaned_data)
-
                 # Create a discord webhook
                 discord_webhooks.send_webhook(
                     url="creation",
@@ -342,11 +337,10 @@ def create_player(request):
                 )
                 messages.success(request, "Player created successfully!")
                 return redirect('player', id=playerObject.id)
-
+        
             else:
                 messages.error(request, status)
                 return redirect('create_player')
-
         context = {
             "create_player_form": form,  # This is the form instance with errors
             'attribute_categories': attribute_categories,
@@ -361,14 +355,15 @@ def create_player(request):
             'attribute_categories': attribute_categories,
             'badge_categories': badge_categories,
             'user': request.user
+    def players(request):
         }
         return render(request, "main/players/create.html", context)
-
+    
     def players(request):
         context = {
             "title": "Players",
-    }
-    # Get the league players
+    }   
+        # Get the league players
     league_players = Player.objects.order_by("id")
     # Paginate the league players
     paginator = Paginator(league_players, 10)
