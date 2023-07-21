@@ -60,7 +60,7 @@
                                         </svg>
                                         <div class="text-center">
                                             <a class="fw-bold ml-0 mb-0" href="{% url 'player' player.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
-                                                <span style="font-size: 8px;">({{ player.id }}) </span>
+                                                <span style="font-size: 15px;">({{ player.id }}) </span>
                                                 {{ player.first_name }} {{ player.last_name }}
                                             </a>
                                         </div>
@@ -73,8 +73,8 @@
                                             {% endif %}
                                         </div>
                                         <!-- Player details -->
-                                        <p style="font-size: 10px;">Position: {{ player.primary_position }}</p>
-                                        <p style="font-size: 10px;">Salary: {{ player.salary }}</p>
+                                        <p style="font-size: 15px;">Position: {{ player.primary_position }}</p>
+                                        <p style="font-size: 15px;">Salary: {{ player.salary }}</p>
                                     {% endfor %}
                                     <hr style="margin-bottom: 2px;">
                                 {% else %}
