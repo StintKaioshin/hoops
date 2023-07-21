@@ -1,12 +1,6 @@
-import json
-from collections import OrderedDict
 from django import forms
 from .league import config as league_config
 from django.core import validators
-
-player_styles = open("main/league/looyh/styles.json")
-player_styles = json.load(player_styles)
-
 
 class PlayerForm(forms.Form):
     first_name = forms.CharField(label="First Name", max_length=16)
@@ -33,8 +27,6 @@ class PlayerForm(forms.Form):
         badge_categories = kwargs.pop('badge_categories', None)
         super(PlayerForm, self).__init__(*args, **kwargs)
 
-        self.fields = OrderedDict(self.fields)
-
         if attribute_categories:
             for category in attribute_categories:
                 for attribute in attribute_categories[category]:
@@ -44,9 +36,6 @@ class PlayerForm(forms.Form):
             for category in badge_categories:
                 for badge in badge_categories[category]:
                     self.fields[f'{category}_{badge}'] = forms.ChoiceField(choices=[(x, x) for x in ["Bronze", "Silver", "Gold", "Hall of Fame"]], required=False)
-
-        # Add the cyberface field to the OrderedDict
-        self.fields['cyberface'] = self.fields['cyberface']
 
 
 class UpgradeForm(forms.Form):
