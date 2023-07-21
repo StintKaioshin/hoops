@@ -345,14 +345,9 @@ def create_player(request):
         }
         return render(request, "main/players/create.html", context)
     else:
-        context = {
-            "create_player_form": PlayerForm(attribute_categories=attribute_categories, badge_categories=badge_categories),
-            'attribute_categories': attribute_categories,
-            'badge_categories': badge_categories,
-            'user': request.user
-        }    
-    return render(request, "main/players/create.html", context)
-
+        context = {"create_player_form": PlayerForm}
+        return render(request, "main/players/create.html", context)
+    
 def players(request):
     context = {
         "title": "Players",
