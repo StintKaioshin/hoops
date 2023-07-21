@@ -2,88 +2,64 @@
 {% load main_filters %}
 
 {% block content %}
-<!-- Add game page -->
 <div class="container mt-5">
-    <!-- Stats index -->
-    <h1 class="stats-heading">Stats</h1>
-    <p class="current-season-info">We are currently in Season {{ current_season.id }}.</p>
-    <hr class="divider">
-    <p class="welcome-message">Welcome to the stats hub. Explore the latest statistics, game results, and standings.</p>
-    <hr class="divider">
-    <!-- Season viewer -->
-    <div class="season-viewer">
-        <h2 class="season-viewer-heading">Season Viewer</h2>
-        {% for season in active_seasons %}
-            <div class="season-card">
-                <a href="{% url 'stats:view_season' season %}" class="season-link">Season {{ season }}</a>
-                <ul class="season-links">
-                    <li><a href="{% url 'stats:view_season_stats' season|int %}" class="season-stats-link">View statistics</a></li>
+    <div class="row">
+        <div class="col-lg-6">
+            <h1 class="stats-heading">Stats</h1>
+            <p class="current-season-info">Season {{ current_season.id }}</p>
+            <hr class="divider">
+            <div class="season-viewer">
+                <h2 class="season-viewer-heading">Season Viewer</h2>
+                <ul class="season-list">
+                    {% for season in active_seasons %}
+                        <li class="season-item">
+                            <a href="{% url 'stats:view_season' season %}" class="season-link">Season {{ season }}</a>
+                            <a href="{% url 'stats:view_season_stats' season|int %}" class="season-stats-link">View Statistics</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
-        {% endfor %}
-    </div>
-    <hr class="divider">
-    <!-- Recent games -->
-    <div class="recent-games">
-        <h2 class="recent-games-heading">Recent Games</h2>
-        {% for game in recent_games %} 
-            <!-- Make a card for each game -->
-            <div class="game-card">
-                <a href="{% url 'stats:view_game' game.id %}" class="game-link">{{ game }}</a>
-                <p class="game-outcome"><b>{{ game.winner.name }}</b> beat <b>{{ game.loser.name }}</b></p>
-            </div>
-        {% endfor %}
-    </div>
-    <hr class="divider">
-    <!-- Current standings -->
-    <div class="current-standings">
-        <h2 class="standings-heading">Standings</h2>
-        <p class="current-season-info">Season {{ current_season.id }}</p>
-        <table class="standings-table">
-            <thead>
-                <tr>
-                    <th>RANK</th>
-                    <th>STATUS</th>
-                    <th>TEAM</th>
-                    <th>G</th>
-                    <th>W</th>
-                    <th>L</th>
-                    <th>GB</th>
-                    <th>PCT</th>
-                    <th>PF</th>
-                    <th>PA</th>
-                    <th>DIFF</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for team, team_data in current_season.standings.items %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <!-- Create badge for playoffs, fill background -->
-                        {% if forloop.counter <= 6 %}
-                            <td><span class="playoffs-badge">PLAYOFFS</span></td>
-                        {% elif forloop.counter <= 10 %}
-                            <td><span class="play-in-badge">PLAY-IN</span></td>
-                        {% else %}
-                            <td><span class="out-badge">OUT</span></td>
-                        {% endif %}
-                        <td>
-                            <img src="{{ team_data.logo }}" alt="{{ team_data.name }}" class="team-logo">
-                            {{ team }}
-                        </td>
-                        <td>{{ team_data.total_games }}</td>
-                        <td>{{ team_data.wins }}</td>
-                        <td>{{ team_data.losses }}</td>
-                        <td>{{ team_data.games_behind }}</td>
-                        <td>{{ team_data.percentage }}</td>
-                        <td>{{ team_data.avg_points_for }}</td>
-                        <td>{{ team_data.avg_points_against }}</td>
-                        <td>{{ team_data.avg_points_diff }}</td>
-                    </tr>
+        </div>
+        <div class="col-lg-6">
+            <h2 class="recent-games-heading">Recent Games</h2>
+            <hr class="divider">
+            <div class="recent-games">
+                {% for game in recent_games %} 
+                    <div class="game-card">
+                        <a href="{% url 'stats:view_game' game.id %}" class="game-link">{{ game }}</a>
+                        <p class="game-outcome"><b>{{ game.winner.name }}</b> beat <b>{{ game.loser.name }}</b></p>
+                    </div>
                 {% endfor %}
-            </tbody>
-        </table>
+            </div>
+        </div>
     </div>
-    <hr class="divider">
+    <div class="standings-section">
+        <h2 class="standings-heading">Standings</h2>
+        <hr class="divider">
+        <div class="table-responsive">
+            <table class="standings-table table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">TEAM</th>
+                        <th scope="col">W</th>
+                        <th scope="col">L</th>
+                        <th scope="col">PCT</th>
+                        <th scope="col">GB</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team, team_data in current_season.standings.items %}
+                        <tr>
+                            <td>{{ team }}</td>
+                            <td>{{ team_data.wins }}</td>
+                            <td>{{ team_data.losses }}</td>
+                            <td>{{ team_data.percentage }}</td>
+                            <td>{{ team_data.games_behind }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}
