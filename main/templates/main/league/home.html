@@ -61,7 +61,7 @@
             <iframe src="https://discord.com/widget?id=1090416489766588499&theme=dark" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
         </div> -->
         <!-- Save Files -->
-        <div class="col-md-6 col-xl-3 mb-4">
+<div class="col-md-6 col-xl-3 mb-4">
     <div class="card text-center" style="height: 400px; background-color: #877b53; color: #fff;">
         <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
             <div class="row align-items-center no-gutters">
@@ -82,22 +82,22 @@
                                     <img src="{{ player.image }}" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 100px; height: 100px;">
                                     <p style="font-size: 10px;">Position: {{ player.position }}</p>
                                 </a><br>
+                                <!-- remaining code -->
+                                <p style="font-size: 10px;">Salary: {{ player.salary }}</p>
+                                <a href="{% url 'edit_player' player.id %}" class="btn btn-light" style="font-size: 10px;">Edit Player</a>
                             {% endfor %}
                             <hr style="margin-bottom: 2px;">
                         {% else %}
                             <p style="font-size: 12px;">No players available.</p>
+                            <a href="{% url 'new_career' %}" class="btn btn-light" style="font-size: 10px;">Start New Career</a>
                         {% endif %}
-                        <!-- remaining code -->
-                        {% for player in players %}
-                            <p style="font-size: 10px;">Salary: {{ player.salary }}</p>
-                            <a href="{% url 'edit_player' player.id %}" class="btn btn-light" style="font-size: 10px;">Edit Player</a>
-                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
         <!-- League Pages -->
         <div class="col-md-6 col-xl-3 mb-4">
