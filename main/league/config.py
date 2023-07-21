@@ -1,11 +1,3 @@
-# League Configuration
-# ------------------------------------------------
-# By: doublesync
-# ------------------------------------------------
-# This file contains the configuration for the
-# main league application.
-# ------------------------------------------------
-
 current_season = 1
 
 max_players = 1
