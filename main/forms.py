@@ -1,7 +1,6 @@
 from django import forms
 from .league import config as league_config
 from django.core import validators
-which defeats the purpose of me making it 
 class UpgradeForm(forms.Form):
     # Your UpgradeForm fields here...
     def __init__(self, *args, **kwargs):
