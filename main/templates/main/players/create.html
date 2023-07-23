@@ -3,138 +3,75 @@
 
 {% block content %}
 
-<section class="py-4 py-xl-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mx-auto">
-                <h2 class="text-uppercase fw-bold mb-3 text-center">CREATE A PLAYER</h2>
-                <p class="mb-4 text-center">Create a player by filling out the form below.</p>
+    <section class="py-4 py-xl-5">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
+                    <div>
+                        <h2 class="text-uppercase fw-bold mb-3">CREATE A PLAYER</h2>
+                        <p class="mb-4">Create a player by filling out the form below.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <form action="/player/create/" method="post">
-                    {% csrf_token %}
-                    <!-- First & Last names -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="first_name" class="form-label">First Name</label>
-                            {{ create_player_form.first_name|addclass:"form-control" }}
-                        </div>
-                        <div class="col-md-6">
-                            <label for="last_name" class="form-label">Last Name</label>
-                            {{ create_player_form.last_name|addclass:"form-control" }}
-                        </div>
-                        <div class="col-md-6">
-                                 <label for="cyberface" class="label label-primary">Cyberface</label>
-                                 {{ create_player_form.cyberface|addclass:"form-control form-control-sm mb-2" }}
-
-                    </div>
-
-                    <!-- Height & Weight -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="height" class="form-label">Height</label>
-                            {{ create_player_form.height|addclass:"form-select form-select-sm" }}
-                        </div>
-                        <div class="col-md-6">
-                            <label for="weight" class="form-label">Weight</label>
-                            {{ create_player_form.weight|addclass:"form-select form-select-sm" }}
-                        </div>
-                    </div>
-
-                    <!-- Positions & Jersey Number -->
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-                            <label for="primary_position" class="form-label">Primary Position</label>
-                            {{ create_player_form.primary_position|addclass:"form-select form-select-sm" }}
-                        </div>
-                        <div class="col-md-4">
-                            <label for="secondary_position" class="form-label">Secondary Position</label>
-                            {{ create_player_form.secondary_position|addclass:"form-select form-select-sm" }}
-                        </div>
-                        <div class="col-md-4">
-                            <label for="jersey_number" class="form-label">Jersey Number</label>
-                            {{ create_player_form.jersey_number|addclass:"form-control form-control-sm" }}
-                        </div>
-                    </div>
-
-                    <!-- Primary Attributes & Badges -->
-                    <div class="mb-4">
-                        <h3 class="fw-bold mb-3">Primary Attributes & Badges</h3>
-                        {% for i in '12345'|make_list %}
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="primary_attr{{ i }}" class="form-label">Primary Attribute {{ i }}</label>
-                                <select name="primary_attr{{ i }}" class="form-select">
-                                    <option value="">Select Attribute</option>
-                                    {% for category, attributes in attribute_categories.items %}
-                                        {% for attribute in attributes %}
-                                            <option value="{{ attribute }}">{{ attribute }}</option>
-                                        {% endfor %}
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="primary_badge{{ i }}" class="form-label">Primary Badge {{ i }}</label>
-                                <select name="primary_badge{{ i }}" class="form-select">
-                                    <option value="">Select Badge</option>
-                                    {% for badge_category, badges in badge_categories.items %}
-                                        {% for badge in badges %}
-                                            <option value="{{ badge }}">{{ badge }}</option>
-                                        {% endfor %}
-                                    {% endfor %}
-                                </select>
+        <section class="py-4 py-xl-5">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                        <div class="card mb-5">
+                            <div class="card-body p-sm-5">
+                                <h3 class="text-uppercase fw-bold mb-2">REGISTER</h3>
+                                <form action="/player/create/" method="post">
+                                    {% csrf_token %}
+                                    <!-- First & Last names -->
+                                    <div class="">
+                                        <label for="first_name" class="label label-primary">First Name</label>
+                                        {{ create_player_form.first_name|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="last_name" class="label label-primary">Last Name</label>
+                                        {{ create_player_form.last_name|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="cyberface" class="label label-primary">Cyberface</label>
+                                        {{ create_player_form.cyberface|addclass:"form-control form-control-sm mb-2" }}
+                                    </div>
+                                    <!-- Height & Weight -->
+                                    <div class="">
+                                        <label for="height" class="label label-primary">Height</label>
+                                        {{ create_player_form.height|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="weight" class="label label-primary">Weight</label>
+                                        {{ create_player_form.weight|addclass:"form-control form-control-sm mb-2" }}
+                                    </div>
+                                    <!-- Positions & Jersey Number -->
+                                    <div class="">
+                                        <label for="primary_position" class="label label-primary">Primary Position</label>
+                                        {{ create_player_form.primary_position|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="secondary_position" class="label label-primary">Secondary Position</label>
+                                        {{ create_player_form.secondary_position|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="jersey_number" class="label label-primary">Jersey Number</label>
+                                        {{ create_player_form.jersey_number|addclass:"form-control form-control-sm mb-2" }}
+                                    </div> 
+                                    <!-- Archetypes & Traits -->
+                                    <div class="">
+                                        <label for="primary_archetype" class="label label-primary">Primary Archetype</label>
+                                        {{ create_player_form.primary_archetype|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="secondary_archetype" class="label label-primary">Secondary Archetype</label>
+                                        {{ create_player_form.secondary_archetype|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="trait_one" class="label label-primary">Trait One</label>
+                                        {{ create_player_form.trait_one|addclass:"form-control form-control-sm mb-2" }}
+                                        <label for="trait_two" class="label label-primary">Trait Two</label>
+                                        {{ create_player_form.trait_two|addclass:"form-control form-control-sm mb-2" }}
+                                    </div>
+                                    <!-- Referral Code -->
+                                    <div>
+                                        <label for="referral_code" class="label label-primary">Referral Code</label>
+                                        {{ create_player_form.referral_code|addclass:"form-control form-control-sm mb-2" }}
+                                    </div>
+                                    <!-- Submission -->
+                                    <input type="submit" class="btn btn-success mt-1" value="Create Player">
+                                </form>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
-
-                    <!-- Secondary Attributes & Badges -->
-                    <div class="mb-4">
-                        <h3 class="fw-bold mb-3">Secondary Attributes & Badges</h3>
-                        {% for i in '12345'|make_list %}
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="secondary_attr{{ i }}" class="form-label">Secondary Attribute {{ i }}</label>
-                                <select name="secondary_attr{{ i }}" class="form-select">
-                                    <option value="">Select Attribute</option>
-                                    {% for category, attributes in attribute_categories.items %}
-                                        {% for attribute in attributes %}
-                                            <option value="{{ attribute }}">{{ attribute }}</option>
-                                        {% endfor %}
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="secondary_badge{{ i }}" class="form-label">Secondary Badge {{ i }}</label>
-                                <select name="secondary_badge{{ i }}" class="form-select">
-                                    <option value="">Select Badge</option>
-                                    {% for badge_category, badges in badge_categories.items %}
-                                        {% for badge in badges %}
-                                            <option value="{{ badge }}">{{ badge }}</option>
-                                        {% endfor %}
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    <!-- Referral Code -->
-                    <div class="mb-3">
-                        <label for="referral_code" class="form-label">Referral Code (Optional)</label>
-                        <input type="text" name="referral_code" class="form-control">
-                    </div>
-
-                    <!-- Submission -->
-                    <div class="text-center">
-                        <input type="submit" class="btn btn-primary" value="Create Player">
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
-
+        </section>
+    </section>
 {% endblock %}
