@@ -62,10 +62,6 @@ def validatePlayerCreation(user, formData):
     # If everything is good, create the player
     return [True, None]
 
-
-def createPlayer(user, formData):
-    # Create the player's relationship objects
-    historyList = HistoryList.objects.create()
 def createPlayer(user, formData):
     historyList = HistoryList.objects.create()
     # Create the player
@@ -116,9 +112,8 @@ def createPlayer(user, formData):
     # Save the player
     for attribute in newPlayer.primary_attributes, newPlayer.secondary_attributes:
         new_attributes = position_attributes[newPlayer.primary_position]
-        newPlayer.attributes[attribute] = new_attributes[attribute]
-    # Update the player's starting physicals
-        updatedPlayer = league_physicals.setStartingPhysicals(newPlayer)
+        newPlayer.attributes[(attribute,)] = value  
+    updatedPlayer = league_physicals.setStartingPhysicals(newPlayer)
     # Save the player
     historyList.save()
     newPlayer.save()
