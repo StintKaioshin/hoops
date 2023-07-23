@@ -682,7 +682,7 @@ badge_weights = {
     "Masher",
     "Post Spin Technician",
     "Posterizer",
-    "Pro Touch,
+    "Pro Touch",
     "Rise Up",
     "Slithery",
     "Agent Threes",
