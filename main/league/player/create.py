@@ -100,7 +100,7 @@ def createPlayer(user, formData):
     # Update the player's badges
     newPlayer.badges = {
 def createPlayer(user, formData):
-         "primary_badge1": formData.get("primary_badge1", None),
+        "primary_badge1": formData.get("primary_badge1", None),
         "primary_badge2": formData.get("primary_badge2", None),
         "primary_badge3": formData.get("primary_badge3", None),
         "primary_badge4": formData.get("primary_badge4", None),
