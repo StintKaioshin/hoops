@@ -23,7 +23,6 @@ from .models import DiscordUser
 from .models import Notification
 from .models import Award
 # Form imports
-from .forms import PlayerForm
 from .forms import UpgradeForm
 from .forms import StylesForm
 from django.shortcuts import render
