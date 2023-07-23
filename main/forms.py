@@ -24,16 +24,7 @@ class PlayerForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         attribute_categories = kwargs.pop('attribute_categories', None)
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -39,6 +40,7 @@ def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
   
         badge_categories = kwargs.pop('badge_categories', None)
         super(PlayerForm, self).__init__(*args, **kwargs)
@@ -52,17 +43,6 @@ class UpgradeForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(UpgradeForm, self).__init__(*args, **kwargs)
         # For each key in attributes, create integerfield
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
         for key in league_config.initial_attributes:
             if key in league_config.attribute_categories["physical"]:
                 continue
