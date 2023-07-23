@@ -1,12 +1,12 @@
 # Django imports
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-
 # Custom imports
 from .managers import DiscordAuthorizationManager
 from .league import config as league_config
 
 
+# DiscordUser Models
 # DiscordUser Models
 class DiscordUser(models.Model):
     # Custom Manager
@@ -25,27 +25,31 @@ class DiscordUser(models.Model):
     can_update_players = models.BooleanField(default=False)
     can_approve_trades = models.BooleanField(default=False)
     can_update_styles = models.BooleanField(default=False)
-    can_edit_events = models.BooleanField(default=False)
-    can_edit_scores = models.BooleanField(default=False)
     # Player Slots
     player_slots = models.SmallIntegerField(default=league_config.max_players)
     auto_collect_rewards = models.BooleanField(default=False)
     can_change_styles = models.BooleanField(default=False)
-
     # Discord User Methods
     def is_authenticated(self, request):
         return True
-
     def __str__(self):
         return f"{self.discord_tag}"
 
-
 # Player Models
 class Player(models.Model):
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
     # Player Model
     first_name = models.CharField(default="Unknown", max_length=16)
-class HistoryList(models.Model):
-  
     last_name = models.CharField(default="Player", max_length=16)
     cyberface = models.SmallIntegerField(default=0)
     height = models.SmallIntegerField(
@@ -126,8 +130,6 @@ class HistoryList(models.Model):
 # List Models (for players)
 class HistoryList(models.Model):
     history = models.JSONField(default=league_config.get_default_history, blank=True)
-
-
 # Team & Statistic Models
 class Team(models.Model):
     # Team Model
@@ -144,12 +146,9 @@ class Team(models.Model):
         "DiscordUser", blank=True, null=True, on_delete=models.CASCADE
     )
     history_list = models.ForeignKey("HistoryList", on_delete=models.CASCADE)
-
     # Team Methods
     def __str__(self):
         return f"{self.name}"
-
-
 # Currency Transaction Models
 class Transaction(models.Model):
     # Transaction Model
@@ -164,12 +163,9 @@ class Transaction(models.Model):
     giver = models.ForeignKey("DiscordUser", on_delete=models.CASCADE)
     player = models.ForeignKey("Player", on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=False)
-
     # Transaction Methods
     def __str__(self):
         return f"{self.transaction_type}: {self.amount}"
-
-
 # Trade Models
 class TradeOffer(models.Model):
     # Trade Offer Model
@@ -183,12 +179,9 @@ class TradeOffer(models.Model):
     receiver = models.ForeignKey(
         "Team", on_delete=models.CASCADE, related_name="receiver"
     )
-
     # Trade Offer Methods
     def __str__(self):
         return f"{self.sender} -> {self.receiver}"
-
-
 # Offer Models
 class ContractOffer(models.Model):
     # Contract Offer Model
@@ -210,12 +203,9 @@ class ContractOffer(models.Model):
     player = models.ForeignKey("Player", on_delete=models.CASCADE)
     # Boolean Fields
     accepted = models.BooleanField(default=False)
-
     # Contract Offer Methods
     def __str__(self):
         return f"{self.team.abbrev} -> {self.player.first_name} {self.player.last_name}"
-
-
 # Coupon Models
 class Coupon(models.Model):
     code = models.CharField(max_length=16, unique=True)
@@ -223,12 +213,9 @@ class Coupon(models.Model):
     amount = models.PositiveBigIntegerField()
     one_use = models.BooleanField(default=False)
     used = models.BooleanField(default=False)
-
     # Coupon Methods
     def __str__(self):
         return f"{self.code}"
-
-
 # Notification Models
 class Notification(models.Model):
     # Notifcation Model
@@ -238,8 +225,6 @@ class Notification(models.Model):
     date = models.DateTimeField(auto_now_add=False)
     # Relationships
     discord_user = models.ForeignKey("DiscordUser", on_delete=models.CASCADE)
-
-
 # Award Models
 class Award(models.Model):
     # Award Model
@@ -252,7 +237,6 @@ class Award(models.Model):
     # Relationships
     player = models.ForeignKey("Player", on_delete=models.CASCADE)
     season = models.PositiveSmallIntegerField(default=1)
-
     # Award Methods
     def __str__(self):
         return f"S{self.season} - {self.name} - {self.player}"
