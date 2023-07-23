@@ -33,7 +33,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .discord import auth as discord_auth
 from .discord import webhooks as discord_webhooks
 from .league import config as league_config
-from .models import Player, HistoryList, league_config, league_physicals
+from .models import Player, HistoryList, league_config
 from .league.player.physicals import playerCount, validatePlayerCreation, createPlayer
 # Stats imports
 from stats.league.stats import compile as stats_compile
