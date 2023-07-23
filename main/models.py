@@ -37,17 +37,6 @@ class DiscordUser(models.Model):
 
 # Player Models
 class Player(models.Model):
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
     # Player Model
     first_name = models.CharField(default="Unknown", max_length=16)
     last_name = models.CharField(default="Player", max_length=16)
