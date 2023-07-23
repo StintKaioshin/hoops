@@ -26,14 +26,23 @@ class PlayerForm(forms.Form):
         attribute_categories = kwargs.pop('attribute_categories', None)
         badge_categories = kwargs.pop('badge_categories', None)
         super(PlayerForm, self).__init__(*args, **kwargs)
+        # Combine all attributes and badges into single choices lists
+        attribute_choices = []
+        badge_choices = []
         if attribute_categories:
             for category in attribute_categories:
                 for attribute in attribute_categories[category]:
-                    self.fields[f'{category}_{attribute}'] = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
+                    attribute_choices.append((attribute, attribute))
         if badge_categories:
             for category in badge_categories:
                 for badge in badge_categories[category]:
-                    self.fields[f'{category}_{badge}'] = forms.ChoiceField(choices=[(x, x) for x in ["Bronze", "Silver", "Gold", "Hall of Fame"]], required=False)
+                    badge_choices.append((badge, badge))
+        # Add the static fields
+        for i in range(1, 6):
+            self.fields[f'primary_attr{i}'] = forms.ChoiceField(choices=attribute_choices, required=True)
+            self.fields[f'primary_badge{i}'] = forms.ChoiceField(choices=badge_choices, required=False)
+            self.fields[f'secondary_attr{i}'] = forms.ChoiceField(choices=attribute_choices, required=True)
+            self.fields[f'secondary_badge{i}'] = forms.ChoiceField(choices=badge_choices, required=False)
 class UpgradeForm(forms.Form):
     # Your UpgradeForm fields here...
     def __init__(self, *args, **kwargs):
