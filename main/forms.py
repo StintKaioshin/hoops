@@ -2,6 +2,13 @@ from django import forms
 from .league import config as league_config
 from django.core import validators
 class PlayerForm(forms.Form):
+    # Get attribute_choices
+    attribute_choices_config = league_config.attribute_choices
+    attribute_choices = []
+    for tuple in attribute_choices_config:
+        if not tuple[0] in league_config.attribute_categories["physical"]:
+            attribute_choices.append(tuple)
+    # Create fields
     first_name = forms.CharField(label="First Name", max_length=16)
     last_name = forms.CharField(label="Last Name", max_length=16)
     cyberface = forms.IntegerField(label="Cyberface", min_value=0, max_value=40000)
@@ -20,31 +27,27 @@ class PlayerForm(forms.Form):
     jersey_number = forms.IntegerField(
         label="Jersey Number", min_value=0, max_value=league_config.max_attribute
     )
-    referral_code = forms.CharField(label="Referral Code", required=False, max_length=16)
-
-    def __init__(self, *args, **kwargs):
-        attribute_categories = kwargs.pop('attribute_categories', None)
-        badge_categories = kwargs.pop('badge_categories', None)
-        super(PlayerForm, self).__init__(*args, **kwargs)
-
-        # Combine all attributes and badges into single choices lists
-        attribute_choices = []
-        badge_choices = []
-        if attribute_categories:
-            for category in attribute_categories:
-                for attribute in attribute_categories[category]:
-                    attribute_choices.append((attribute, attribute))
-        if badge_categories:
-            for category in badge_categories:
-                for badge in badge_categories[category]:
-                    badge_choices.append((badge, badge))
-
-        # Add the static fields
-        for i in range(1, 6):
-            self.fields[f'primary_attr{i}'] = forms.ChoiceField(choices=attribute_choices, required=True)
-            self.fields[f'primary_badge{i}'] = forms.ChoiceField(choices=badge_choices, required=False)
-            self.fields[f'secondary_attr{i}'] = forms.ChoiceField(choices=attribute_choices, required=True)
-            self.fields[f'secondary_badge{i}'] = forms.ChoiceField(choices=badge_choices, required=False)
+    primary_attributes = forms.MultipleChoiceField(
+        label="Primary Attributes",
+        choices=attribute_choices,
+        widget=forms.SelectMultiple(),
+    )
+    secondary_attributes = forms.MultipleChoiceField(
+        label="Primary Attributes",
+        choices=attribute_choices,
+        widget=forms.SelectMultiple(),
+    )
+    primary_badges = forms.MultipleChoiceField(
+        label="Primary Badges",
+        choices=league_config.badge_choices,
+        widget=forms.SelectMultiple(),
+    )
+    secondary_badges = forms.MultipleChoiceField(
+        label="Secondary Badges",
+        choices=league_config.badge_choices,
+        widget=forms.SelectMultiple(),
+    )
+    referral_code = forms.IntegerField(label="Referral Code", required=False)
 
 class UpgradeForm(forms.Form):
     # Your UpgradeForm fields here...
