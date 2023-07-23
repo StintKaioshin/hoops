@@ -11,14 +11,6 @@
             <div class="card-header">
                 <h5 class="mb-0">2KMT Tendencies</h5>
             </div>
-            <div class="card-body">
-                <form action="{% url 'scrape_tendencies' player.id %}" method="post">
-                    {% csrf_token %}
-                    <p class="card-text mb-0">2KMT Tendencies</p>
-                    <input type="text" name="tendency_url" class="form-control form-control-sm mt-2" placeholder="Enter 2KMT URL">
-                    <button type="submit" class="btn btn-primary btn-sm mt-2">Add tendencies</button>
-                </form>
-            </div>
         </div>
         <form action="/player/upgrade/{{ player.id }}/" method="post">
             {% csrf_token %}
