@@ -7,7 +7,6 @@ max_players = league_config.max_players
 min_max_heights = league_config.min_max_heights
 min_max_weights = league_config.min_max_weights
 position_attributes = league_config.position_starting_attributes
-trait_unlocks = league_config.trait_badge_unlocks
 primary_attribute_bonus = league_config.primary_attribute_bonus
 secondary_attribute_bonus = league_config.secondary_attribute_bonus
 primary_badge_bonus = league_config.primary_badge_bonus
