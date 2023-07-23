@@ -12,12 +12,9 @@ def attributeCost(player, attribute, currentValue, futureValue):
     # Define some league config variables
     total_price = 0
     attribute_prices = league_config.attribute_prices
-    attribute_bonuses = league_config.archetype_attribute_bonuses
     # Define some player variables
-    primary_archetype = player.primary_archetype
-    secondary_archetype = player.secondary_archetype
-    primary_attributes = attribute_bonuses[primary_archetype]
-    secondary_attributes = attribute_bonuses[secondary_archetype]
+    primary_attributes = player.primary_attributes
+    secondary_attributes = player.secondary_attributes
     # Check the attribute tier (60-70, 71-80)
     for i in range((currentValue + 1), (futureValue + 1)):
         for _, tier in attribute_prices.items():
