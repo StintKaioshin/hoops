@@ -67,7 +67,7 @@ def createPlayer(user, formData):
     # Create the player's relationship objects
     historyList = HistoryList.objects.create()
 def createPlayer(user, formData):
-
+    historyList = HistoryList.objects.create()
     # Create the player
     newPlayer = Player.objects.create(
         # Customs
