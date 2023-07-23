@@ -329,7 +329,7 @@ def create_player(request):
     user = request.user
     referral_code = request.GET.get("referral_code")
     if request.method == "POST":
-        form = PlayerForm(request.POST)
+        form = PlayerForm(request.POST, attribute_categories=attribute_categories, badge_categories=badge_categories)
         if form.is_valid():
             response = validatePlayerCreation(user, form.cleaned_data)
             success = response[0]
@@ -350,7 +350,7 @@ def create_player(request):
             error_messages = ', '.join(['{}: {}'.format(field, ', '.join(errors)) for field, errors in form.errors.items()])
             messages.error(request, f"Form is not valid. Please fill in all required fields. Errors: {error_messages}")
     else:
-        form = PlayerForm()
+        form = PlayerForm(attribute_categories=attribute_categories, badge_categories=badge_categories)
     context = {
         "create_player_form": form,
         "attribute_categories": attribute_categories,
@@ -358,7 +358,7 @@ def create_player(request):
         "user": user,
     }
     return render(request, "main/players/create.html", context)
-def free_agents(request):
+    def free_agents(request):
     context = {
         "title": "Free Agents",
     }
