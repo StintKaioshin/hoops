@@ -243,13 +243,26 @@ position_starting_attributes = {
 # Work in progress!
 # This is the cost to unlock hot zones
 hotzone_price = 250
+
 # This is the cost per pound to increase or decrease weight
 price_per_pound = 15
+
 # The cost to increase attributes is divided into ranges.
 # For each range, there's a different cost for base, primary, and secondary attributes.
 attribute_prices = {
     "0-70": {"range": range(0, 71), "base": 40, "primary": 10, "secondary": 20},
     "71-80": {"range": range(71, 81), "base": 100, "primary": 25, "secondary": 50},
+
+    
+        
+          
+    
+
+        
+        Expand All
+    
+    @@ -251,219 +257,54 @@
+  
     "81-86": {"range": range(81, 87), "base": 200, "primary": 50, "secondary": 100},
     "87-93": {"range": range(87, 94), "base": 400, "primary": 100, "secondary": 200},
     "94-96": {"range": range(94, 97), "base": 800, "primary": 200, "secondary": 400},
@@ -279,6 +292,7 @@ badge_prices = {
         "secondary": 125,
     },
 }
+
 # Tendencies that players are not allowed to have
 banned_tendencies = ["TOUCHES_TENDENCY", "BLOCK_SHOT_TENDENCY", "ON-BALL_STEAL_TENDENCY"]
 
@@ -294,23 +308,40 @@ max_tendencies = {
 # The bonus values added to primary and secondary attributes
 primary_attribute_bonus = 10
 secondary_attribute_bonus = 5
+
 # The bonus values added to primary and secondary badges
 primary_badge_bonus = 10
 secondary_badge_bonus = 5
+
 # We no longer have a fixed set of attributes linked to specific archetypes.
 # If you have a predefined set of attribute bonuses for specific primary and secondary attributes/badges,
 # we would need to adjust the data structure to reflect that.
 
 initial_statics = {
     "playstyles": {
+
+    
+          
+            
+    
+
+          
+          Expand Down
+          
+            
+    
+
+          
+          Expand Up
+    
+    @@ -750,30 +591,6 @@
+  
         "playstyle1": "0",
         "playstyle2": "0",
         "playstyle3": "0",
         "playstyle4": "0",
     }
 }
-
-
 initial_attributes = {
     "Driving Layup": start_attribute,
     "Standing Dunk": start_attribute,
@@ -589,6 +620,23 @@ badge_upgrade_choices = [
 transaction_type_choices = [
     ("cash_taken", "Cash Taken"),
     ("cash_given", "Cash Given"),
+
+    
+          
+            
+    
+
+          
+          Expand Down
+          
+            
+    
+
+          
+          Expand Up
+    
+    @@ -813,6 +630,13 @@
+  
     ("paycheck", "Paycheck"),
 ]
 contract_option_choices = [
@@ -626,124 +674,26 @@ hotzone_choices = [
     ("1", "Equipped"),
 ]
 
-attribute_list = list(initial_attributes.keys())
-badge_list = list(initial_badges.keys())
-
 attribute_choices = [
-    (attr, f"({attr}") for attr in attribute_list
+    (attr, f"({attribute_weights[attr]}) {attr}") for attr in attribute_list
 ]
 badge_choices = [
-    (badge, f"({badge}") for badge in badge_list
+    (badge, f"({badge_weights[badge]}) {badge}") for badge in badge_list
 ]
-attribute_weights = {
-    "Driving Layup",
-    "Standing Dunk",
-    "Driving Dunk",
-    "Close Shot",
-    "Mid Range Shot",
-    "Three Point Shot",
-    "Free Throw",
-    "Post Hook",
-    "Post Fadeaway",
-    "Post Moves",
-    "Draw Foul",
-    "Shot Iq",
-    "Passing Accuracy",
-    "Ball Control",
-    "Hands",
-    "Passing Iq",
-    "Passing Vision",
-    "Offensive Consistency",
-    "Interior Defense",
-    "Perimeter Defense",
-    "Steal",
-    "Block",
-    "Offensive Rebound",
-    "Defensive Rebound",
-    "Help Defense Iq",
-    "Pass Perception",
-    "Defensive Consistency",
-    "Pick Roll Defensive Iq",
-    "Shot Contest",
-    "Hustle",
-    "Intangibles",
-    "Lateral Quickness", # Physical
-    "Speed With Ball", # Physical
-    "Speed", # Physical
-    "Acceleration", # Physical
-    "Strength", # Physical
-    "Vertical", # Physical
-}
-badge_weights = {
-    "Acrobat",
-    "Aerial Wizard",
-    "Backdown Punisher",
-    "Bully",
-    "Dream Shake",
-    "Drop Stepper",
-    "Fast Twitch",
-    "Fearless Finisher",
-    "Giant Slayer",
-    "Limitless Takeoff",
-    "Masher",
-    "Post Spin Technician",
-    "Posterizer",
-    "Pro Touch",
-    "Rise Up",
-    "Slithery",
-    "Agent Threes",
-    "Amped",
-    "Blinders",
-    "Catch And Shoot",
-    "Claymore",
-    "Corner Specialist",
-    "Deadeye",
-    "Green Machine",
-    "Guard Up",
-    "Limitless Range",
-    "Middy Magician",
-    "Slippery Off Ball",
-    "Space Creator",
-    "Volume Shooter",
-    "Clutch Shooter",
-    "Comeback Kid",
-    "Ankle Breaker",
-    "Bail Out",
-    "Break Starter",
-    "Clamp Breaker",
-    "Killer Combos",
-    "Dimer",
-    "Floor General",
-    "Handles For Days",
-    "Hyperdrive",
-    "Mismatch Expert",
-    "Needle Threader",
-    "Post Playmaker",
-    "Quick First Step",
-    "Special Delivery",
-    "Unpluckable",
-    "Vice Grip",
-    "Anchor",
-    "Ankle Braces",
-    "Challenger",
-    "Chase Down Artist",
-    "Clamps",
-    "Glove",
-    "Interceptor",
-    "Menace",
-    "Off Ball Pest",
-    "Pick Dodger",
-    "Post Lockdown",
-    "Pogo Stick",
-    "Work Horse",
-    "Brick Wall",
-    "Boxout Beast",
-    "Rebound Chaser",
-}
-
 # Description: Categories for .html pages
 attribute_categories = {
     "finishing": [
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
         "Driving Layup",
         "Post Moves",
         "Draw Foul",
@@ -861,7 +811,6 @@ badge_categories = {
         "Unpluckable",
     ],
 }
-
 # Description: Initials methods for models
 playstyles = {
     "0": "None",
@@ -880,7 +829,6 @@ playstyles = {
     "13": "Midrange",
     "14": "3PT",
 }
-
 def get_default_statics():
     return initial_statics
 def get_default_attributes():
