@@ -309,7 +309,9 @@ def upgrade_player(request, id):
         # Tendency categories
         "initial_tendencies": league_config.initial_tendencies,
     }
-    return render(request, "main/players/upgrade.html", context)import logging
+    return render(request, "main/players/upgrade.html", context)
+
+import logging
 logger = logging.getLogger(__name__)
 @login_required(login_url="/login/discord/")
 def create_player(request):
