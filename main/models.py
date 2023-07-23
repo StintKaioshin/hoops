@@ -8,7 +8,33 @@ from .league import config as league_config
 
 
 # DiscordUser Models
-
+# DiscordUser Models
+class DiscordUser(models.Model):
+    # Custom Manager
+    objects = DiscordAuthorizationManager()
+    # Discord User Model
+    id = models.BigIntegerField(primary_key=True, serialize=False)
+    discord_tag = models.CharField(max_length=100)
+    avatar = models.CharField(max_length=100)
+    public_flags = models.IntegerField()
+    flags = models.IntegerField()
+    locale = models.CharField(max_length=100)
+    mfa_enabled = models.BooleanField()
+    last_login = models.DateTimeField(null=True)
+    last_reward = models.DateTimeField(null=True)
+    # Permissions
+    can_update_players = models.BooleanField(default=False)
+    can_approve_trades = models.BooleanField(default=False)
+    can_update_styles = models.BooleanField(default=False)
+    # Player Slots
+    player_slots = models.SmallIntegerField(default=league_config.max_players)
+    auto_collect_rewards = models.BooleanField(default=False)
+    can_change_styles = models.BooleanField(default=False)
+    # Discord User Methods
+    def is_authenticated(self, request):
+        return True
+    def __str__(self):
+        return f"{self.discord_tag}"
 
 # Player Models
 class Player(models.Model):
