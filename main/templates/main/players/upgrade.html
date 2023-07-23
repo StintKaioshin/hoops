@@ -1,23 +1,30 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% load main_filters %}
-
 {% block title %}
     <!-- <link rel="stylesheet" href="{% static 'main/css/players/upgrade.css' %}"> -->
 {% endblock %}
-
 {% block content %}
-
     <!-- upgrades -->
     <div class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+                <h5 class="mb-0">2KMT Tendencies</h5>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'scrape_tendencies' player.id %}" method="post">
+                    {% csrf_token %}
+                    <p class="card-text mb-0">2KMT Tendencies</p>
+                    <input type="text" name="tendency_url" class="form-control form-control-sm mt-2" placeholder="Enter 2KMT URL">
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Add tendencies</button>
+                </form>
+            </div>
+        </div>
         <form action="/player/upgrade/{{ player.id }}/" method="post">
-
             {% csrf_token %}
-
             <input name="id" type="hidden" value="{{ player.id }}">
-
             <!-- cart/price details -->
-            <div class="card mt-5">
+            <div class="card mt-2">
                 <div class="card-header">
                     <h5 class="mb-0">My Cart</h5>
                     <p id="status" class="mb-0"></p>
@@ -209,15 +216,14 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in finishing_badges %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in trait_one_badges %}
+                                                    {% if field.name in primary_badges %}
                                                         <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in trait_two_badges %}
+                                                    {% elif field.name in secondary_badges %}
                                                         <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
-                                                    {% elif field.name in trait_three_badges %}
-                                                        <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT THREE</span>
                                                     {% else %}
                                                         <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
                                                     {% endif %}
+                    <h4 class="modal-title">Confirm Purchase</h4>
                                                     {{ field.label }}
                                                 </span>                                         
                                                 {{ field.errors }}
@@ -243,15 +249,15 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in shooting_badges %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in trait_one_badges %}
+                                                    {% if field.name in primary_badges %}
                                                         <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in trait_two_badges %}
+                                                    {% elif field.name in secondary_badges %}
                                                         <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
-                                                    {% elif field.name in trait_three_badges %}
-                                                        <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT THREE</span>
                                                     {% else %}
                                                         <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
                                                     {% endif %}
+        <h4 class="modal-title">Confirm Purchase</h4>
+  
                                                     {{ field.label }}
                                                 </span>                                         
                                                 {{ field.errors }}
@@ -277,15 +283,14 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in playmaking_badges %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in trait_one_badges %}
+                                                    {% if field.name in primary_badges %}
                                                         <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in trait_two_badges %}
+                                                    {% elif field.name in secondary_badges %}
                                                         <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
-                                                    {% elif field.name in trait_three_badges %}
-                                                        <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT THREE</span>
                                                     {% else %}
                                                         <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
                                                     {% endif %}
+                    <h4 class="modal-title">Confirm Purchase</h4>
                                                     {{ field.label }}
                                                 </span>                                         
                                                 {{ field.errors }}
@@ -311,15 +316,15 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in defense_badges %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in trait_one_badges %}
+                                                    {% if field.name in primary_badges %}
                                                         <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in trait_two_badges %}
+                                                    {% elif field.name in secondary_badges %}
                                                         <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
-                                                    {% elif field.name in trait_three_badges %}
-                                                        <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT THREE</span>
                                                     {% else %}
                                                         <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
                                                     {% endif %}
+                <h4 class="modal-title">Confirm Purchase</h4>
+
                                                     {{ field.label }}
                                                 </span>                                         
                                                 {{ field.errors }}
@@ -332,7 +337,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- tendencies -->
                 <div class="col-md-12 col-xl-12 mb-4">
                     <div style="height: 1420px;">
@@ -362,25 +366,19 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </form>
     </div>
-
     <!-- scripts -->
     <script>
         const attributePrices = {{ attribute_prices|safe }};
-        const attributeBonuses = {{ attribute_bonuses|safe }};
         const badgePrices = {{ badge_prices|safe }};
-        const badgeAttributes = {{ badge_attributes|safe }}; // a dictionary that holds all of the attributes & badges
+        const badgeAttributes = {{ badge_attributes|safe }};
         const cash = {{ player.cash }};
         const primaryAttributes = {{ primary_attributes|safe }};
         const secondaryAttributes = {{ secondary_attributes|safe }};
-        const traitOneBadges = {{ trait_one_badges|safe }};
-        const traitTwoBadges = {{ trait_two_badges|safe }};
-        const traitThreeBadges = {{ trait_three_badges|safe }};
+        const primaryBadges = {{ primary_badges|safe }};
+        const secondaryBadges = {{ secondary_badges|safe }};
     </script>
     <script src="{% static 'main/js/players/updatePrice.js' %}"></script>
-
 {% endblock %}
