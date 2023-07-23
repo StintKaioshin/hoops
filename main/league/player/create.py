@@ -112,10 +112,10 @@ def createPlayer(user, formData):
     # Save the player
     for attribute in newPlayer.primary_attributes, newPlayer.secondary_attributes:
         new_attributes = position_attributes[newPlayer.primary_position]
-        newPlayer.attributes[(attribute,)] = attribute  
+        newPlayer.attributes[attribute] = new_attributes[attribute]
     updatedPlayer = league_physicals.setStartingPhysicals(newPlayer)
     # Save the player
     historyList.save()
-    newPlayer.save()
+    updatedPlayer.save()
     # Return the player
-    return newPlayer
+    return updatedPlayer
