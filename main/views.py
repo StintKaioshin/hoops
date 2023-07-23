@@ -303,53 +303,52 @@ import logging
 logger = logging.getLogger(__name__)
 @login_required(login_url="/login/discord/")
 def create_player(request):
-    attribute_categories = { 
-        "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
-        "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
-        "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
-        "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
-        "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
-    }
-    badge_categories = { 
-        "finishing": ["Acrobat", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross-Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork", "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick & Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Slithery Finisher"],
-        "shooting": ["Catch & Shoot", "Clutch Shooter", "Corner Specialist", "Deadeye", "Difficult Shots", "Flexible Release", "Green Machine", "Hot Zone Hunter", "Quick Draw", "Range Extender", "Slippery Off-Ball", "Steady Shooter", "Tireless Shooter", "Volume Shooter"],
-        "defense": ["Brick Wall", "Chase Down Artist", "Clamps", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck", "Off-Ball Pest", "Pick Dodger", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper"],
-        "playmaking": ["Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Handles For Days", "Needle Threader", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop & Go", "Tight Handles", "Unpluckable"],
-    }
-    
-    user = request.user
-    referral_code = request.GET.get("referral_code")
     if request.method == "POST":
-        form = PlayerForm(request.POST)
-        if form.is_valid():
-            response = validatePlayerCreation(user, form.cleaned_data)
-            success = response[0]
-            status = response[1]
-            if success:
-                referral_code = form.cleaned_data.get("referral_code")
-                playerObject = createPlayer(user, form.cleaned_data)
-                discord_webhooks.send_webhook(
-                    url="creation",
-                    title="Player Creation",
-                    message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
-                )
-                messages.success(request, "Player created successfully!")
-                return redirect('player', id=playerObject.id)
-            else:
-                messages.error(request, status)
-        else:
-            error_messages = ', '.join(['{}: {}'.format(field, ', '.join(errors)) for field, errors in form.errors.items()])
-            messages.error(request, f"Form is not valid. Please fill in all required fields. Errors: {error_messages}")
-    else:
-        form = PlayerForm()
-    context = {
-        "create_player_form": form,
-        "attribute_categories": attribute_categories,
-        "badge_categories": badge_categories,
-        "user": user,
-    }
+    form = PlayerCreate(request.POST)
+    if form.is_valid():
+        response = validatePlayerCreation(user, form.cleaned_data)
+        success = response[0]
+        status = response[1]
+        if success:
+            playerObject = createPlayer(user, form.cleaned_data)
+            
+            # manually handle additional fields
+            for i in range(1, 6):
+                primary_attr = request.POST.get(f'primary_attr{i}')
+                secondary_attr = request.POST.get(f'secondary_attr{i}')
+                primary_badge = request.POST.get(f'primary_badge{i}')
+                secondary_badge = request.POST.get(f'secondary_badge{i}')
+                
+                # assuming attributes and badges are JSONFields in your Player model
+                if primary_attr: playerObject.attributes[f'primary_attr{i}'] = primary_attr
+                if secondary_attr: playerObject.attributes[f'secondary_attr{i}'] = secondary_attr
+                if primary_badge: playerObject.badges[f'primary_badge{i}'] = primary_badge
+                if secondary_badge: playerObject.badges[f'secondary_badge{i}'] = secondary_badge
 
-    return render(request, "main/players/create.html", context)
+            playerObject.save()
+
+            # Send a webhook notification
+            discord_webhooks.send_webhook(
+                url="your_webhook_url_here",
+                title="Player Creation",
+                message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
+            )
+
+            # Display a success message
+            messages.success(request, "Player created successfully!")
+
+            # Redirect to the player's profile page
+            return redirect('player', id=playerObject.id)
+            
+        else:
+            # If there was an error, handle it here...
+            messages.error(request, status)
+            # You may want to redirect to a different page or display the error differently
+            
+    else:
+        error_messages = ', '.join(['{}: {}'.format(field, ', '.join(errors)) for field, errors in form.errors.items()])
+        messages.error(request, f"Form is not valid. Please fill in all required fields. Errors: {error_messages}")
+
 def free_agents(request):
     context = {
         "title": "Free Agents",
