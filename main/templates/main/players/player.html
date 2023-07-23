@@ -1,9 +1,12 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% load main_filters %}
+
 {% block content %}
+
     <div class="container mt-5">
         <div class="main-body">
+
             <!-- Player information -->
             <div class="row gutters-sm">
                 <div class="col-md-4 mb-3">
@@ -215,17 +218,6 @@
                                     </div>
                                 </div>
                                 <hr />
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Rookie</h6>
@@ -300,7 +292,30 @@
                             </div>
                         </div>
                         <!-- attribute viewer -->
-  <div class="tab-pane fade show active mt-2" id="finishing-attributes">
+                        <div class="col-sm-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="d-flex align-items-center mb-2"><i class="material-icons text-light mr-2">attributes</i></h6>
+                                    <div class="tab-content">
+                                        <ul class="nav nav-tabs" id="myTabs">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#finishing-attributes">Finishing</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#shooting-attributes">Shooting</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#playmaking-attributes">Playmaking</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#defense-attributes">Defense</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#physical-attributes">Physical</a>
+                                            </li>
+                                        </ul>
+                                        <!-- finishing attributes -->
+                                        <div class="tab-pane fade show active mt-2" id="finishing-attributes">
                                             <div class="d-flex justify-content-start" style="gap: 20px;">
                                                 <div>
                                                     <table>
@@ -375,6 +390,29 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- physical attributes -->
+                                        <div class="tab-pane fade show mt-2" id="physical-attributes">
+                                            <div class="d-flex justify-content-start" style="gap: 20px;">
+                                                <div>
+                                                    <table>
+                                                        <tbody>
+                                                            {% for k, v in player.attributes.items %}
+                                                                <tr>
+                                                                    {% if k in physical_attributes %}
+                                                                        <td>{{ k }}:</td>
+                                                                        <td style="padding-left: 10px;">{{ v }}</td>
+                                                                    {% endif %}
+                                                                </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- badge viewer -->
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
@@ -730,6 +768,7 @@
                     </div>
                 </div>
             </div>
+
             {% if player.discord_user == user %}
                 <div class="modal" id="myModal">
                     <div class="modal-dialog">
@@ -823,7 +862,10 @@
                     </div>
                 </div>
             {% endif %}
+
         </div>
     </div>
+
     <script src="{% static 'main/js/players/copyJSON.js' %}"></script>
+
 {% endblock %}
