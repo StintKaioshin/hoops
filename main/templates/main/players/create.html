@@ -64,7 +64,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
-                                        {{ create_player_form|fetch_form_field:category~'_'~attribute|addclass:"form-control" }}
+                                        {{ create_player_form|get_field:category|add:"_"|add:attribute|addclass:"form-control" }}
                                     </div>
                                 </div>
                             {% endfor %}
@@ -75,7 +75,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
-                                        {{ create_player_form|fetch_form_field:category~'_'~badge|addclass:"form-control" }}
+                                        {{ create_player_form|get_field:category|add:"_"|add:badge|addclass:"form-control" }}
                                     </div>
                                 </div>
                             {% endfor %}
@@ -90,7 +90,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
-                                        {{ create_player_form|fetch_form_field:category~'_'~attribute|addclass:"form-control" }}
+                                        {{ create_player_form|get_field:category|add:"_"|add:attribute|addclass:"form-control" }}
                                     </div>
                                 </div>
                             {% endfor %}
@@ -101,7 +101,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
-                                        {{ create_player_form|fetch_form_field:category~'_'~badge|addclass:"form-control" }}
+                                        {{ create_player_form|get_field:category|add:"_"|add:badge|addclass:"form-control" }}
                                     </div>
                                 </div>
                             {% endfor %}
