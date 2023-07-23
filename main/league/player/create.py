@@ -51,14 +51,15 @@ def validatePlayerCreation(user, formData):
     if (int(formData["weight"])) > (
         min_max_weights[formData["secondary_position"]]["max"]
     ):
-       return [False, "❌ You are trying to make a player over the maximum weight."]
+        return [False, "❌ You are trying to make a player over the maximum weight."]
+    # Check if the attributes and badges the user selected are validated
+    validation_response = validateAttributesBadges(formData)
+    if validation_response[0] == False:
+        return validation_response
     # Check if the user is trying to make a player with an existing cyberface
     if Player.objects.filter(cyberface=formData["cyberface"]).exists():
         if int(formData["cyberface"]) != 1:
-            return [
-                False,
-                "❌ You are trying to make a player with an existing cyberface.",
-            ]
+            return [False, "❌ You are trying to make a player with an existing cyberface."]
     # If everything is good, create the player
     return [True, None]
 def createPlayer(user, formData):
