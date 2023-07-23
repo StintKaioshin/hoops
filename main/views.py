@@ -331,6 +331,33 @@ def create_player(request):
     if request.method == "POST":
         form = PlayerForm(request.POST, attribute_categories=attribute_categories, badge_categories=badge_categories)
         if form.is_valid():
+            player = Player(
+          
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                cyberface=data['cyberface'],
+                height=data['height'],
+                weight=data['weight'],
+                primary_position=data['primary_position'],
+                secondary_position=data['secondary_position'],
+                jersey_number=data['jersey_number'],
+                referral_code=data['referral_code'],
+                )
+    
+
+            for attr in data['primary_attributes']:
+                player.primary_attributes.add(Attribute.objects.get(name=attr))
+
+            for attr in data['secondary_attributes']:
+                player.secondary_attributes.add(Attribute.objects.get(name=attr))
+
+            for badge in data['primary_badges']:
+                player.primary_badges.add(Badge.objects.get(name=badge))
+
+            for badge in data['secondary_badges']:
+                player.secondary_badges.add(Badge.objects.get(name=badge))
+
+                player.save()
             response = validatePlayerCreation(user, form.cleaned_data)
             success = response[0]
             status = response[1]
