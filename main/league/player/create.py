@@ -10,6 +10,8 @@ trait_unlocks = league_config.trait_badge_unlocks
 archetype_bonuses = league_config.archetype_attribute_bonuses
 primary_bonus = league_config.archetype_primary_bonus
 secondary_bonus = league_config.archetype_secondary_bonus
+
+
 def playerCount(user):
     return Player.objects.filter(discord_user=user).count()
 def validatePlayerCreation(user, formData):
