@@ -2,21 +2,16 @@ from ...models import Player
 from ...models import HistoryList
 from ...league import config as league_config
 from ...league.player import physicals as league_physicals
-
 max_players = league_config.max_players
 min_max_heights = league_config.min_max_heights
 min_max_weights = league_config.min_max_weights
 position_attributes = league_config.position_starting_attributes
-primary_attribute_bonus = league_config.primary_attribute_bonus
-secondary_attribute_bonus = league_config.secondary_attribute_bonus
-primary_badge_bonus = league_config.primary_badge_bonus
-secondary_badge_bonus = league_config.secondary_badge_bonus
-
-
+trait_unlocks = league_config.trait_badge_unlocks
+archetype_bonuses = league_config.archetype_attribute_bonuses
+primary_bonus = league_config.archetype_primary_bonus
+secondary_bonus = league_config.archetype_secondary_bonus
 def playerCount(user):
     return Player.objects.filter(discord_user=user).count()
-
-
 def validatePlayerCreation(user, formData):
     # Check if the user has reached the max number of players
     if playerCount(user) >= user.player_slots:
@@ -59,10 +54,19 @@ def validatePlayerCreation(user, formData):
     if Player.objects.filter(cyberface=formData["cyberface"]).exists():
         if int(formData["cyberface"]) != 1:
             return [False, "❌ You are trying to make a player with an existing cyberface."]
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
     # If everything is good, create the player
     return [True, None]
-
-
 def createPlayer(user, formData):
     # Create the player's relationship objects
     historyList = HistoryList.objects.create()
@@ -92,7 +96,7 @@ def createPlayer(user, formData):
         "secondary_attr2": formData.get("secondary_attr2", None),
         "secondary_attr3": formData.get("secondary_attr3", None),
         "secondary_attr4": formData.get("secondary_attr4", None),
-        "secondary_attr5": formData.get("secondary_attr5", None),
+       "secondary_attr5": formData.get("secondary_attr5", None),
     }
     # Update the player's badges
     newPlayer.badges = {
