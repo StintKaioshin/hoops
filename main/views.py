@@ -18,7 +18,6 @@ from .models import Team
 from .models import Coupon
 from .models import Transaction
 from .models import TradeOffer
-from .league.config import attribute_categories
 from .models import ContractOffer
 from .models import DiscordUser
 from .models import Notification
@@ -146,7 +145,6 @@ def logout(request):
 def player(request, id):
     # Check if the player exists
     plr = Player.objects.get(pk=id)
-    player_attributes = plr.statics
     if not plr:
         return HttpResponse("Sorry, this player doesn't exist!")
     # Get transaction history & total earnings in past week (cash_taken, cash_given, paycheck)
@@ -192,7 +190,6 @@ def player(request, id):
     possible_relatives = Player.objects.filter(last_name=plr.last_name).values_list("id", "first_name")
     # Initialize the context
     context = {
-        "player_attributes": player_attributes,
         # Page information
         "title": f"{plr.first_name} {plr.last_name}",
         "player": plr,
@@ -310,29 +307,24 @@ def create_player(request):
         "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
         "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
     }
-
     badge_categories = { 
         "finishing": ["Acrobat", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross-Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork", "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick & Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Slithery Finisher"],
         "shooting": ["Catch & Shoot", "Clutch Shooter", "Corner Specialist", "Deadeye", "Difficult Shots", "Flexible Release", "Green Machine", "Hot Zone Hunter", "Quick Draw", "Range Extender", "Slippery Off-Ball", "Steady Shooter", "Tireless Shooter", "Volume Shooter"],
         "defense": ["Brick Wall", "Chase Down Artist", "Clamps", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck", "Off-Ball Pest", "Pick Dodger", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper"],
         "playmaking": ["Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Handles For Days", "Needle Threader", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop & Go", "Tight Handles", "Unpluckable"],
     }
-
+    
     user = request.user
     referral_code = request.GET.get("referral_code")
     if request.method == "POST":
-        form = PlayerForm(request.POST, attribute_categories=attribute_categories, badge_categories=badge_categories)
+        form = PlayerForm(request.POST)
         if form.is_valid():
-            form_data = form.cleaned_data
-            response = validatePlayerCreation(user, form_data)
+            response = validatePlayerCreation(user, form.cleaned_data)
             success = response[0]
             status = response[1]
             if success:
-                newPlayer = response[2]
-                newPlayer.attributes = {f"{category}_{attribute}": form_data.get(f"{category}_{attribute}") for category in attribute_categories for attribute in attribute_categories[category]}
-                newPlayer.badges = {f"{category}_{badge}": form_data.get(f"{category}_{badge}") for category in badge_categories for badge in badge_categories[category]}
-                referral_code = form_data.get("referral_code")
-                playerObject = createPlayer(user, form_data)
+                referral_code = form.cleaned_data.get("referral_code")
+                playerObject = createPlayer(user, form.cleaned_data)
                 discord_webhooks.send_webhook(
                     url="creation",
                     title="Player Creation",
@@ -346,16 +338,14 @@ def create_player(request):
             error_messages = ', '.join(['{}: {}'.format(field, ', '.join(errors)) for field, errors in form.errors.items()])
             messages.error(request, f"Form is not valid. Please fill in all required fields. Errors: {error_messages}")
     else:
-        form = PlayerForm(attribute_categories=attribute_categories, badge_categories=badge_categories)
+        form = PlayerForm()
     context = {
         "create_player_form": form,
         "attribute_categories": attribute_categories,
         "badge_categories": badge_categories,
         "user": user,
     }
-
     return render(request, "main/players/create.html", context)
-
 def free_agents(request):
     context = {
         "title": "Free Agents",
