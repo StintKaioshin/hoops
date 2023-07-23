@@ -117,7 +117,7 @@ for attribute in combined_attributes:
         newPlayer.attributes[attribute] = new_attributes[attribute]
     updatedPlayer = league_physicals.setStartingPhysicals(newPlayer)
     # Save the player
-    historyList.save()
-    updatedPlayer.save()
-    # Return the player
-    return updatedPlayer
+historyList.save()
+updatedPlayer.save()
+# Return the player
+return updatedPlayer
