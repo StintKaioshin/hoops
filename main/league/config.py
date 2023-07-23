@@ -669,7 +669,6 @@ attribute_categories = {
         "Passing Vision",
         "Passing Accuracy",
         "Offensive Consistency",
-        "Hustle",
         "Intangibles",
     ],
     "physical": [
@@ -678,7 +677,9 @@ attribute_categories = {
         "Vertical",
         "Strength",
         "Speed With Ball",
-        "Lateral Quickness",
+        "Lateral Quickness",      
+        "Hustle",
+
     ],
 }
 badge_categories = {
