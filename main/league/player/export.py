@@ -289,7 +289,7 @@ def export_player(player):
             three_point = database_attributes["Three Point Shot"]
         else:
             three_point = 60        
-       if "Mid Range Shot" in database_attributes:
+        if "Mid Range Shot" in database_attributes:
             mid_range = database_attributes["Mid Range Shot"]
         else:
             mid_range = 60     
