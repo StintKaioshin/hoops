@@ -582,13 +582,15 @@ position_choices = [
     ("PF", "Power Forward"),
     ("C", "Center"),
 ]
-badge_grade_choices = [
+
+badge_upgrade_choices = [
     (0, "Current"),
     (1, "Bronze"),
     (2, "Silver"),
     (3, "Gold"),
     (4, "Hall of Fame"),
 ]
+
 transaction_type_choices = [
     ("cash_taken", "Cash Taken"),
     ("cash_given", "Cash Given"),
