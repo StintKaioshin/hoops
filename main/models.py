@@ -72,11 +72,26 @@ class Player(models.Model):
         blank=True,
     )
     # Archetypes & Traits
-    primary_attributes = models.JSONField(null=True, blank=True)
-    secondary_attributes = models.JSONField(null=True, blank=True)
-    primary_badges = models.JSONField(null=True, blank=True)
-    secondary_badges = models.JSONField(null=True, blank=True)    
-    # Player Currencies
+   primary_attributes = forms.MultipleChoiceField(
+        label="Primary Attributes",
+        choices=attribute_choices,
+        widget=forms.SelectMultiple(),
+    )
+    secondary_attributes = forms.MultipleChoiceField(
+        label="Primary Attributes",
+        choices=attribute_choices,
+        widget=forms.SelectMultiple(),
+    )
+    primary_badges = forms.MultipleChoiceField(
+        label="Primary Badges",
+        choices=league_config.badge_choices,
+        widget=forms.SelectMultiple(),
+    )
+    secondary_badges = forms.MultipleChoiceField(
+        label="Secondary Badges",
+        choices=league_config.badge_choices,
+        widget=forms.SelectMultiple(),
+    )    # Player Currencies
     primary_currency = models.BigIntegerField(
         name="cash", default=league_config.primary_currency_start
     )
