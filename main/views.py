@@ -304,13 +304,13 @@ logger = logging.getLogger(__name__)
 @login_required(login_url="/login/discord/")
 def create_player(request):
     if request.method == "POST":
-    form = PlayerCreate(request.POST)
-    if form.is_valid():
-        response = validatePlayerCreation(user, form.cleaned_data)
-        success = response[0]
-        status = response[1]
-        if success:
-            playerObject = createPlayer(user, form.cleaned_data)
+        form = PlayerCreate(request.POST)
+        if form.is_valid():
+            response = validatePlayerCreation(user, form.cleaned_data)
+            success = response[0]
+            status = response[1]
+            if success:
+                playerObject = createPlayer(user, form.cleaned_data)
             
             # manually handle additional fields
             for i in range(1, 6):
