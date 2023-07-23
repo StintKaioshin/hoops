@@ -632,7 +632,7 @@ hotzone_choices = [
 ]
 
 # Description: Categories for .html pages
-attribute_choices = {
+attribute_categories = {
     "finishing": [
         "Driving Layup",
         "Post Moves",
@@ -681,7 +681,7 @@ attribute_choices = {
         "Lateral Quickness",
     ],
 }
-badge_choices = {
+badge_categories = {
     "finishing": [
         "Acrobat",
         "Backdown Punisher",
