@@ -351,14 +351,14 @@ def create_player(request):
                         "secondary_badge3": form_data.get("secondary_badge3", None),
                         "secondary_badge4": form_data.get("secondary_badge4", None),
                         "secondary_badge5": form_data.get("secondary_badge5", None),
-
+                    }
                     referral_code = form.cleaned_data.get("referral_code")
                     playerObject = createPlayer(user, form.cleaned_data)
                     discord_webhooks.send_webhook(
                         url="creation",
                         title="Player Creation",
                         message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
-                    )
+                        }
                     messages.success(request, "Player created successfully!")
                     return redirect('player', id=playerObject.id)
             else:
