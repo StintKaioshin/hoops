@@ -309,6 +309,7 @@ def create_player(request):
         "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
         "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
         "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
+
     }
     badge_categories = { 
         "finishing": ["Acrobat", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross-Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork", "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick & Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Slithery Finisher"],
@@ -320,54 +321,32 @@ def create_player(request):
     user = request.user
     referral_code = request.GET.get("referral_code")
     if request.method == "POST":
-        form = PlayerForm(request.POST)
+        form = PlayerForm(request.POST, attribute_categories=attribute_categories, badge_categories=badge_categories)
         if form.is_valid():
-            response = validatePlayerCreation(user, form.cleaned_data)
+            form_data = form.cleaned_data
+            response = validatePlayerCreation(user, form_data)
             success = response[0]
             status = response[1]
             if success:
-                    newPlayer.attributes = {
-                        "primary_attr1": form_data.get("primary_attr1", None),
-                        "primary_attr2": form_data.get("primary_attr2", None),
-                        "primary_attr3": form_data.get("primary_attr3", None),
-                        "primary_attr4": form_data.get("primary_attr4", None),
-                        "primary_attr5": form_data.get("primary_attr5", None),
-                        "secondary_attr1": form_data.get("secondary_attr1", None),
-                        "secondary_attr2": form_data.get("secondary_attr2", None),
-                        "secondary_attr3": form_data.get("secondary_attr3", None),
-                        "secondary_attr4": form_data.get("secondary_attr4", None),
-                        "secondary_attr5": form_data.get("secondary_attr5", None),
-
-                        }
-    # Update the player's badges
-                    newPlayer.badges = {
-                        "primary_badge1": form_data.get("primary_badge1", None),
-                        "primary_badge2": form_data.get("primary_badge2", None),
-                        "primary_badge3": form_data.get("primary_badge3", None),
-                        "primary_badge4": form_data.get("primary_badge4", None),
-                        "primary_badge5": form_data.get("primary_badge5", None),
-                        "secondary_badge1": form_data.get("secondary_badge1", None),
-                        "secondary_badge2": form_data.get("secondary_badge2", None),
-                        "secondary_badge3": form_data.get("secondary_badge3", None),
-                        "secondary_badge4": form_data.get("secondary_badge4", None),
-                        "secondary_badge5": form_data.get("secondary_badge5", None),
-                    }
-                    referral_code = form.cleaned_data.get("referral_code")
-                    playerObject = createPlayer(user, form.cleaned_data)
-                    discord_webhooks.send_webhook(
-                        url="creation",
-                        title="Player Creation",
-                        message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
-                    )
-                    messages.success(request, "Player created successfully!")
-                    return redirect('player', id=playerObject.id)
+                newPlayer = response[2]
+                newPlayer.attributes = {f"{category}_{attribute}": form_data.get(f"{category}_{attribute}") for category in attribute_categories for attribute in attribute_categories[category]}
+                newPlayer.badges = {f"{category}_{badge}": form_data.get(f"{category}_{badge}") for category in badge_categories for badge in badge_categories[category]}
+                referral_code = form_data.get("referral_code")
+                playerObject = createPlayer(user, form_data)
+                discord_webhooks.send_webhook(
+                    url="creation",
+                    title="Player Creation",
+                    message=f"{playerObject.first_name} {playerObject.last_name} has been created. [View profile?](https://hoopsim.com/player/{playerObject.id})",
+                )
+                messages.success(request, "Player created successfully!")
+                return redirect('player', id=playerObject.id)
             else:
                 messages.error(request, status)
         else:
             error_messages = ', '.join(['{}: {}'.format(field, ', '.join(errors)) for field, errors in form.errors.items()])
             messages.error(request, f"Form is not valid. Please fill in all required fields. Errors: {error_messages}")
     else:
-        form = PlayerForm()
+        form = PlayerForm(attribute_categories=attribute_categories, badge_categories=badge_categories)
     context = {
         "create_player_form": form,
         "attribute_categories": attribute_categories,
