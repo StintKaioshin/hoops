@@ -815,22 +815,53 @@ hotzone_choices = [
 ]
 # Description: Categories for .html pages
 attribute_categories = {
-    "physical": [
-        "Vertical",
-        "Strength",
-        "Stamina",
+    "finishing": [
+        "Driving Layup",
+        "Post Moves",
+        "Draw Foul",
+        "Close Shot",
+        "Standing Dunk",
+        "Driving Dunk",
+    ],
+    "shooting": [
+        "Post Fadeaway",
+        "Post Hook",
+        "Mid Range Shot",
+        "Three Point Shot",
+        "Free Throw",
+        "Shot Iq",
+    ],
+    "defense": [
+        "Defensive Rebound",
+        "Offensive Rebound",
+        "Interior Defense",
+        "Perimeter Defense",
+        "Block",
+        "Steal",
+        "Defensive Consistency",
+        "Help Defense Iq",
+        "Pass Perception",
+        "Pick Roll Defensive Iq",
+        "Shot Contest",
+    ],
+    "playmaking": [
+        "Hands",
+        "Ball Control",
+        "Passing Iq",
+        "Passing Vision",
+        "Passing Accuracy",
+        "Offensive Consistency",
         "Hustle",
-        "Layup",
-        "Dunk",
+        "Intangibles",
+    ],
+    "physical": [
         "Speed",
         "Acceleration",
-        "Durability",
+        "Vertical",
+        "Strength",
+        "Speed With Ball",
+        "Lateral Quickness",
     ],
-    "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
-    "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
-    "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
-    "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
-    "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
 }
 badge_categories = {
     "finishing": [
