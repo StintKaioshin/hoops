@@ -284,21 +284,6 @@ def export_player(player):
         game_file[0]["data"]["PLAY_TYPE_2"] = playstyles["playstyle2"]
         game_file[0]["data"]["PLAY_TYPE_3"] = playstyles["playstyle3"]
         game_file[0]["data"]["PLAY_TYPE_4"] = playstyles["playstyle4"]
-        # Signature statics
-        if "Three Point Shot" in database_attributes:
-            three_point = database_attributes["Three Point Shot"]
-        else:
-            three_point = default_value       
-        mid_range = database_attributes["Mid Range Shot"]
-        threshold = three_point if three_point > mid_range else mid_range
-        if threshold >= 99:
-            game_file[7]["data"]["RELEASE_TIMING"] = "4"
-        elif threshold >= 90:
-            game_file[7]["data"]["RELEASE_TIMING"] = "3"
-        elif threshold >= 75:
-            game_file[7]["data"]["RELEASE_TIMING"] = "2"
-        elif threshold < 75:
-            game_file[7]["data"]["RELEASE_TIMING"] = "1"
 
     # Set the player's ignores
     def set_ignores():
