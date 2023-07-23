@@ -2,8 +2,15 @@ import copy
 
 from ..player import export as hoops_player_export
 
-game_friendly = lambda a: (a - 25) * 3
-user_friendly = lambda a: (a / 3) + 25
+def game_friendly(a):
+    if a is None:
+        return None
+    return (a - 25) * 3
+
+def user_friendly(a):
+    if a is None:
+        return None
+    return (a - 25) * 3
 
 convert_to_height = lambda x: str(int(x // 12)) + "'" + str(int(x % 12))
 convert_to_age = lambda x: str(2023 - x)
