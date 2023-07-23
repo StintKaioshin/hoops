@@ -24,8 +24,6 @@ class PlayerForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         attribute_categories = kwargs.pop('attribute_categories', None)
-    def __init__(self, *args, **kwargs):
-  
         badge_categories = kwargs.pop('badge_categories', None)
         super(PlayerForm, self).__init__(*args, **kwargs)
         if attribute_categories:
