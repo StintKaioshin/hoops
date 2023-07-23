@@ -12,8 +12,8 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <form action="/player/create/" method="post">       
-            {% csrf_token %}
- <!-- First & Last names -->
+                    {% csrf_token %}
+                    <!-- First & Last names -->
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="first_name" class="form-label">First Name</label>
@@ -24,9 +24,9 @@
                             {{ create_player_form.last_name|addclass:"form-control" }}
                         </div>
                         <div class="col-md-6">
-                                 <label for="cyberface" class="label label-primary">Cyberface</label>
-                                 {{ create_player_form.cyberface|addclass:"form-control form-control-sm mb-2" }}
-
+                             <label for="cyberface" class="label label-primary">Cyberface</label>
+                             {{ create_player_form.cyberface|addclass:"form-control form-control-sm mb-2" }}
+                        </div>
                     </div>
 
                     <!-- Height & Weight -->
@@ -40,6 +40,7 @@
                             {{ create_player_form.weight|addclass:"form-select form-select-sm" }}
                         </div>
                     </div>
+
                     <!-- Positions & Jersey Number -->
                     <div class="row mb-3">
                         <div class="col-md-4">
@@ -55,84 +56,67 @@
                             {{ create_player_form.jersey_number|addclass:"form-control form-control-sm" }}
                         </div>
                     </div>            
-            <!-- Primary Attributes & Badges -->
-            <div class="mb-4">
-                <h3 class="fw-bold mb-3">Primary Attributes & Badges</h3>
-                {% for category, attributes in primary_attribute_categories.items %}
-                    <h3 class="fw-bold mb-3">{{ category|capfirst }}</h3>
-                    {% for attribute in attributes %}
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
-                                <input type="number" class="form-control" id="{{ category }}_{{ attribute }}" name="{{ category }}_{{ attribute }}" min="1" max="100" required>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-                {% for category, badges in primary_badge_categories.items %}
-                    <h3 class="fw-bold mb-3">{{ category|capfirst }} Badges</h3>
-                    {% for badge in badges %}
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
-                                <select class="form-control" id="{{ category }}_{{ badge }}" name="{{ category }}_{{ badge }}">
-                                    <option value="">None</option>
-                                    <option value="Bronze">Bronze</option>
-                                    <option value="Silver">Silver</option>
-                                    <option value="Gold">Gold</option>
-                                    <option value="Hall of Fame">Hall of Fame</option>
-                                </select>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-            
-            <!-- Secondary Attributes & Badges -->
-            <div class="mb-4">
-                <h3 class="fw-bold mb-3">Secondary Attributes & Badges</h3>
-                {% for category, attributes in secondary_attribute_categories.items %}
-                    <h3 class="fw-bold mb-3">{{ category|capfirst }}</h3>
-                    {% for attribute in attributes %}
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
-                                <input type="number" class="form-control" id="{{ category }}_{{ attribute }}" name="{{ category }}_{{ attribute }}" min="1" max="100" required>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-                {% for category, badges in secondary_badge_categories.items %}
-                    <h3 class="fw-bold mb-3">{{ category|capfirst }} Badges</h3>
-                    {% for badge in badges %}
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
-                                <select class="form-control" id="{{ category }}_{{ badge }}" name="{{ category }}_{{ badge }}">
-                                    <option value="">None</option>
-                                    <option value="Bronze">Bronze</option>
-                                    <option value="Silver">Silver</option>
-                                    <option value="Gold">Gold</option>
-                                    <option value="Hall of Fame">Hall of Fame</option>
-                                </select>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-        </form>
-<!-- Referral Code -->
-                    <div class="mb-3">
-                        <label for="referral_code" class="form-label">Referral Code (Optional)</label>
-                        <input type="text" name="referral_code" class="form-control">
+
+                    <!-- Primary Attributes & Badges -->
+                    <div class="mb-4">
+                        <h3 class="fw-bold mb-3">Primary Attributes & Badges</h3>
+                        {% for category, attributes in primary_attribute_categories.items %}
+                            <h3 class="fw-bold mb-3">{{ category|capfirst }}</h3>
+                            {% for attribute in attributes %}
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
+                                        {{ create_player_form|get_item:category~'_'~attribute|addclass:"form-control" }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for category, badges in primary_badge_categories.items %}
+                            <h3 class="fw-bold mb-3">{{ category|capfirst }} Badges</h3>
+                            {% for badge in badges %}
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
+                                        {{ create_player_form|get_item:category~'_'~badge|addclass:"form-control" }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
                     </div>
-                    <!-- Submission -->
-                    <div class="text-center">
-                        <input type="submit" class="btn btn-primary" value="Create Player">
+                    
+                    <!-- Secondary Attributes & Badges -->
+                    <div class="mb-4">
+                        <h3 class="fw-bold mb-3">Secondary Attributes & Badges</h3>
+                        {% for category, attributes in secondary_attribute_categories.items %}
+                            <h3 class="fw-bold mb-3">{{ category|capfirst }}</h3>
+                            {% for attribute in attributes %}
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
+                                        {{ create_player_form|get_item:category~'_'~attribute|addclass:"form-control" }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for category, badges in secondary_badge_categories.items %}
+                            <h3 class="fw-bold mb-3">{{ category|capfirst }} Badges</h3>
+                            {% for badge in badges %}
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
+                                        {{ create_player_form|get_item:category~'_'~badge|addclass:"form-control" }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-4">
+                        <input type="submit" class="btn btn-primary" value="Create Player" />
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
-{% endblock %}   
+{% endblock %}
