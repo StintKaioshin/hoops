@@ -27,17 +27,6 @@ class PlayerForm(forms.Form):
         badge_categories = kwargs.pop('badge_categories', None)
         super(PlayerForm, self).__init__(*args, **kwargs)
         if attribute_categories:
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
             for category in attribute_categories:
                 for attribute in attribute_categories[category]:
                     self.fields[f'{category}_{attribute}'] = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
