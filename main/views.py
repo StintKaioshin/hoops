@@ -191,6 +191,7 @@ def player(request, id):
     possible_relatives = Player.objects.filter(last_name=plr.last_name).values_list("id", "first_name")
     # Initialize the context
     context = {
+        "player_attributes": player_attributes,
         # Page information
         "title": f"{plr.first_name} {plr.last_name}",
         "player": plr,
