@@ -241,8 +241,14 @@ position_starting_attributes = {
 }
 # Description: For attributes & badge prices
 # Work in progress!
+# This is the cost to unlock hot zones
 hotzone_price = 250
+
+# This is the cost per pound to increase or decrease weight
 price_per_pound = 15
+
+# The cost to increase attributes is divided into ranges.
+# For each range, there's a different cost for base, primary, and secondary attributes.
 attribute_prices = {
     "0-70": {"range": range(0, 71), "base": 40, "primary": 10, "secondary": 20},
     "71-80": {"range": range(71, 81), "base": 100, "primary": 25, "secondary": 50},
@@ -251,219 +257,54 @@ attribute_prices = {
     "94-96": {"range": range(94, 97), "base": 800, "primary": 200, "secondary": 400},
     "97-99": {"range": range(97, 100), "base": 1200, "primary": 400, "secondary": 800},
 }
+
+# The cost to unlock badges at different levels
 badge_prices = {
     1: {
         "base": 100,
-        "trait_one": 25,
-        "trait_two": 50,
+        "primary": 25,
+        "secondary": 50,
     },
     2: {
         "base": 200,
-        "trait_one": 50,
-        "trait_two": 75,
+        "primary": 50,
+        "secondary": 75,
     },
     3: {
         "base": 300,
-        "trait_one": 75,
-        "trait_two": 100,
+        "primary": 75,
+        "secondary": 100,
     },
     4: {
         "base": 400,
-        "trait_one": 100,
-        "trait_two": 125,
+        "primary": 100,
+        "secondary": 125,
     },
 }
+
+# Tendencies that players are not allowed to have
 banned_tendencies = ["TOUCHES_TENDENCY", "BLOCK_SHOT_TENDENCY", "ON-BALL_STEAL_TENDENCY"]
+
+# The maximum values for certain tendencies
 max_tendencies = {
     "ON-BALL_STEAL_TENDENCY": 75,
     "BLOCK_SHOT_TENDENCY": 75,
 }
-# Description: For player traits (traits unlock badges)
-# Description: Players not have duplicate traits, they can have duplicate archetypes though.
-trait_one_max = 4
-trait_two_max = 3
-trait_none_max = 2
-trait_badge_unlocks = {
-    "Movement Shooter": [
-        "Agent Threes",
-        "Blinders",
-        "Clutch Shooter",
-        "Comeback Kid",
-        "Deadeye",
-        "Green Machine",
-        # "Guard Up",
-        "Middy Magician",
-        "Slippery Off Ball",
-        "Space Creator",
-        "Volume Shooter",
-        # "Ankle Breaker",
-        # "Killer Combos",
-        # "Mismatch Expert",
-    ],
-    "3PT Shooter": [
-        "Blinders",
-        "Catch And Shoot",
-        "Claymore",
-        "Clutch Shooter",
-        "Comeback Kid",
-        "Corner Specialist",
-        "Deadeye",
-        "Green Machine",
-        "Guard Up",
-        "Limitless Range",
-        "Slippery Off Ball",
-        "Volume Shooter",
-    ],
-    "Midrange Menace": [
-        "Blinders",
-        "Clutch Shooter",
-        "Comeback Kid",
-        "Deadeye",
-        "Green Machine",
-        "Guard Up",
-        "Middy Magician",
-        "Slippery Off Ball",
-        "Space Creator",
-        "Volume Shooter",
-        # "Ankle Breaker",
-    ],
-    "Finesse Finisher": [
-        "Acrobat",
-        "Fearless Finisher",
-        "Giant Slayer",
-        "Limitless Takeoff",
-        "Pro Touch",
-        "Slithery",
-        "Mismatch Expert",
-    ],
-    "Fierce Finisher": [
-        "Aerial Wizard",
-        "Bully",
-        "Fearless Finisher",
-        "Limitless Takeoff",
-        "Masher",
-        "Posterizer",
-        "Rise Up",
-        "Mismatch Expert",
-    ],
-    "Ankle Snatcher": [
-        "Clamp Breaker",
-        "Handles For Days",
-        "Hyperdrive",
-        "Killer Combos",
-        "Mismatch Expert",
-        "Quick First Step",
-        "Unpluckable",
-        "Ankle Breaker",
-    ],
-    "Passing Maestro": [
-        "Bail Out",
-        "Break Starter",
-        "Dimer",
-        "Floor General",
-        "Needle Threader",
-        "Special Delivery",
-        "Unpluckable",
-    ],
-    "Rebound Hound": [
-        "Vice Grip",
-        "Boxout Beast",
-        "Pick Dodger",
-        "Rebound Chaser",
-        "Work Horse",
-    ],
-    "Interior Anchor": [
-        "Vice Grip",
-        "Anchor",
-        "Brick Wall",
-        "Chase Down Artist",
-        "Menace",
-        "Pogo Stick",
-        "Post Lockdown",
-    ],
-    "Perimeter Lockdown": [
-        "Ankle Braces",
-        "Challenger",
-        "Clamps",
-        "Glove",
-        "Interceptor",
-        "Menace",
-        "Off Ball Pest",
-        "Pick Dodger",
-    ],
-    "Post-Up Powerhouse": [
-        "Backdown Punisher",
-        "Drop Stepper",
-        "Fast Twitch",
-        "Fearless Finisher",
-        "Masher",
-        "Rise Up",
-        "Bully",
-    ],
-    "Dribble Driver": [
-        "Clamp Breaker",
-        "Hyperdrive",
-        "Killer Combos",
-        "Quick First Step",
-        "Unpluckable",
-        "Mismatch Expert",
-    ],
-    "Post-Up Conductor": [
-        "Dream Shake",
-        "Fast Twitch",
-        "Post Spin Technician",
-        "Post Playmaker",
-    ],
-}
+
 # Description: For player archetypes
 # Description: The player is first given starting attributes of zero, thenthey are set to the starting attributes depending on position.
 # Description: Then, depending on the player's chosen archetype, archetype additions are added to the starting attributes.
-archetype_primary_bonus = 10  # Primary archetypes add (+10) to the chosen attributes
-archetype_secondary_bonus = 5  # Secondary archetypes add (+5) to the chosen attributes
-archetype_attribute_bonuses = {
-    "Shooter": ["Mid Range Shot", "Three Point Shot", "Free Throw", "Shot Iq"],
-    "Slasher": [
-        "Driving Layup",
-        "Draw Foul",
-        "Standing Dunk",
-        "Driving Dunk",
-        "Close Shot",
-    ],
-    "Playmaker": [
-        "Draw Foul",
-        "Ball Control",
-        "Passing Iq",
-        "Passing Accuracy",
-        "Passing Vision",
-    ],
-    "Post Scorer": [
-        "Post Fadeaway",
-        "Post Hook",
-        "Post Moves",
-        "Close Shot",
-        "Mid Range Shot",
-        "Standing Dunk",
-    ],
-    "Rebounder": ["Offensive Rebound", "Defensive Rebound"],
-    "Perimeter Defender": [
-        "Perimeter Defense",
-        "Steal",
-        "Pass Perception",
-        "Help Defense Iq",
-        "Shot Contest",
-        "Defensive Consistency",
-    ],
-    "Interior Defender": [
-        "Interior Defense",
-        "Block",
-        "Help Defense Iq",
-        "Shot Contest",
-        "Defensive Consistency",
-    ],
-}
+# The bonus values added to primary and secondary attributes
+primary_attribute_bonus = 10
+secondary_attribute_bonus = 5
 
+# The bonus values added to primary and secondary badges
+primary_badge_bonus = 10
+secondary_badge_bonus = 5
 
-
+# We no longer have a fixed set of attributes linked to specific archetypes.
+# If you have a predefined set of attribute bonuses for specific primary and secondary attributes/badges,
+# we would need to adjust the data structure to reflect that.
 
 initial_statics = {
     "playstyles": {
@@ -750,30 +591,6 @@ badge_upgrade_choices = [
     (3, "Gold"),
     (4, "Hall of Fame"),
 ]
-archetype_choices = [
-    ("Shooter", "Shooter"),
-    ("Slasher", "Slasher"),
-    ("Playmaker", "Playmaker"),
-    ("Post Scorer", "Post Scorer"),
-    ("Rebounder", "Rebounder"),
-    ("Perimeter Defender", "Perimeter Defender"),
-    ("Interior Defender", "Interior Defender"),
-]
-trait_choices = [
-    ("Movement Shooter", "Movement Shooter"),
-    ("3PT Shooter", "3PT Shooter"),
-    ("Midrange Menace", "Midrange Menace"),
-    ("Finesse Finisher", "Finesse Finisher"),
-    ("Fierce Finisher", "Fierce Finisher"),
-    ("Ankle Snatcher", "Ankle Snatcher"),
-    ("Passing Maestro", "Passing Maestro"),
-    ("Rebound Hound", "Rebound Hound"),
-    ("Interior Anchor", "Interior Anchor"),
-    ("Perimeter Lockdown", "Perimeter Lockdown"),
-    ("Post-Up Powerhouse", "Post-Up Powerhouse"),
-    ("Dribble Driver", "Dribble Driver"),
-    ("Post-Up Conductor", "Post-Up Conductor"),
-]
 transaction_type_choices = [
     ("cash_taken", "Cash Taken"),
     ("cash_given", "Cash Given"),
@@ -812,6 +629,13 @@ award_name_choices = [
 hotzone_choices = [
     ("0", "None"),
     ("1", "Equipped"),
+]
+
+attribute_choices = [
+    (attr, f"({attribute_weights[attr]}) {attr}") for attr in attribute_list
+]
+badge_choices = [
+    (badge, f"({badge_weights[badge]}) {badge}") for badge in badge_list
 ]
 # Description: Categories for .html pages
 attribute_categories = {
