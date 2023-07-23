@@ -348,17 +348,6 @@ def free_agents(request):
     context = {
         "title": "Free Agents",
     }
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
     free_agent_players = Player.objects.all().order_by("-spent")
     paginator = Paginator(free_agent_players, 10)
     page_number = request.GET.get("page")
