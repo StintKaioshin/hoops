@@ -260,126 +260,127 @@
                         </div>
                         <!-- attribute viewer -->
                         <div class="col-sm-6 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-2"><i class="material-icons text-light mr-2">attributes</i></h6>
-                                    <div class="tab-content">
-                                        <ul class="nav nav-tabs" id="myTabs">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#finishing_attributes">Finishing</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#shooting_attributes">Shooting</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#playmaking_attributes">Playmaking</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#defense_attributes">Defense</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#physical_attributes">Physical</a>
-                                            </li>
-                                        </ul>
-                                        <!-- finishing attributes -->
-                                        <div class="tab-pane fade show active mt-2" id="finishing_attributes">
-                                            <div class="d-flex justify-content-start" style="gap: 20px;">
-                                                <div>
-                                                    <table>
-                                                        <tbody>
-                                                            {% for k, v in attribute_categories.items %}
-                                                                <tr>
-                                                                    {% if k in finishing_attributes %}
-                                                                        <td>{{ k }}:</td>
-                                                                        <td style="padding-left: 10px;">{{ v }}</td>
-                                                                    {% endif %}
-                                                                </tr>
-                                                            {% endfor %}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- shooting attributes -->
-                                        <div class="tab-pane fade show mt-2" id="shooting_attributes">
-                                            <div class="d-flex justify-content-start" style="gap: 20px;">
-                                                <div>
-                                                    <table>
-                                                        <tbody>
-                                                            {% for k, v in player.attributes.items %}
-                                                                <tr>
-                                                                    {% if k in shooting_attributes %}
-                                                                        <td>{{ k }}:</td>
-                                                                        <td style="padding-left: 10px;">{{ v }}</td>
-                                                                    {% endif %}
-                                                                </tr>
-                                                            {% endfor %}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- playmaking attributes -->
-                                        <div class="tab-pane fade show mt-2" id="playmaking_attributes">
-                                            <div class="d-flex justify-content-start" style="gap: 20px;">
-                                                <div>
-                                                    <table>
-                                                        <tbody>
-                                                            {% for k, v in player.attributes.items %}
-                                                                <tr>
-                                                                    {% if k in playmaking_attributes %}
-                                                                        <td>{{ k }}:</td>
-                                                                        <td style="padding-left: 10px;">{{ v }}</td>
-                                                                    {% endif %}
-                                                                </tr>
-                                                            {% endfor %}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- defense attributes -->
-                                        <div class="tab-pane fade show mt-2" id="defense_attributes">
-                                            <div class="d-flex justify-content-start" style="gap: 20px;">
-                                                <div>
-                                                    <table>
-                                                        <tbody>
-                                                            {% for k, v in player.attributes.items %}
-                                                                <tr>
-                                                                    {% if k in defense_attributes %}
-                                                                        <td>{{ k }}:</td>
-                                                                        <td style="padding-left: 10px;">{{ v }}</td>
-                                                                    {% endif %}
-                                                                </tr>
-                                                            {% endfor %}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- physical attributes -->
-                                        <div class="tab-pane fade show mt-2" id="physical_attributes">
-                                            <div class="d-flex justify-content-start" style="gap: 20px;">
-                                                <div>
-                                                    <table>
-                                                        <tbody>
-                                                            {% for k, v in player.attributes.items %}
-                                                                <tr>
-                                                                    {% if k in physical_attributes %}
-                                                                        <td>{{ k }}:</td>
-                                                                        <td style="padding-left: 10px;">{{ v }}</td>
-                                                                    {% endif %}
-                                                                </tr>
-                                                            {% endfor %}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="card h-100">
+        <div class="card-body">
+            <h6 class="d-flex align-items-center mb-2"><i class="material-icons text-light mr-2">attributes</i></h6>
+            <div class="tab-content">
+                <ul class="nav nav-tabs" id="myTabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#finishing_attributes">Finishing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#shooting_attributes">Shooting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#playmaking_attributes">Playmaking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab4" data-bs-toggle="tab" href="#defense_attributes">Defense</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab5" data-bs-toggle="tab" href="#physical_attributes">Physical</a>
+                    </li>
+                </ul>
+                <!-- finishing attributes -->
+                <div class="tab-pane fade show active mt-2" id="finishing_attributes">
+                    <div class="d-flex justify-content-start" style="gap: 20px;">
+                        <div>
+                            <table>
+                                <tbody>
+                                    {% for k, v in player.items %}
+                                        <tr>
+                                            {% if k in finishing_attributes %}
+                                                <td>{{ k }}:</td>
+                                                <td style="padding-left: 10px;">{{ v }}</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
+                </div>
+                <!-- shooting attributes -->
+                <div class="tab-pane fade mt-2" id="shooting_attributes">
+                    <div class="d-flex justify-content-start" style="gap: 20px;">
+                        <div>
+                            <table>
+                                <tbody>
+                                    {% for k, v in player.items %}
+                                        <tr>
+                                            {% if k in shooting_attributes %}
+                                                <td>{{ k }}:</td>
+                                                <td style="padding-left: 10px;">{{ v }}</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- playmaking attributes -->
+                <div class="tab-pane fade mt-2" id="playmaking_attributes">
+                    <div class="d-flex justify-content-start" style="gap: 20px;">
+                        <div>
+                            <table>
+                                <tbody>
+                                    {% for k, v in player.items %}
+                                        <tr>
+                                            {% if k in playmaking_attributes %}
+                                                <td>{{ k }}:</td>
+                                                <td style="padding-left: 10px;">{{ v }}</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- defense attributes -->
+                <div class="tab-pane fade mt-2" id="defense_attributes">
+                    <div class="d-flex justify-content-start" style="gap: 20px;">
+                        <div>
+                            <table>
+                                <tbody>
+                                    {% for k, v in player.items %}
+                                        <tr>
+                                            {% if k in defense_attributes %}
+                                                <td>{{ k }}:</td>
+                                                <td style="padding-left: 10px;">{{ v }}</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- physical attributes -->
+                <div class="tab-pane fade mt-2" id="physical_attributes">
+                    <div class="d-flex justify-content-start" style="gap: 20px;">
+                        <div>
+                            <table>
+                                <tbody>
+                                    {% for k, v in player.items %}
+                                        <tr>
+                                            {% if k in physical_attributes %}
+                                                <td>{{ k }}:</td>
+                                                <td style="padding-left: 10px;">{{ v }}</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
                         <!-- badge viewer -->
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
