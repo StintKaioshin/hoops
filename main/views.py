@@ -142,6 +142,23 @@ def logout(request):
     django_logout(request)
     messages.error(request, "You have successfully logged out!")
     return redirect("/")
+def get_attribute_cost(player, attribute, attribute_value):
+    cost_dict = next((v for k, v in attribute_prices.items() if attribute_value in v["range"]), None)
+    if cost_dict is None:
+        raise ValueError(f"Invalid attribute value: {attribute_value}")
+
+    # base cost of the attribute
+    cost = cost_dict['base']
+
+    if attribute in player.primary_attributes:
+        # this is a primary attribute, adjust the cost
+        cost = cost_dict['primary']
+    elif attribute in player.secondary_attributes:
+        # this is a secondary attribute, adjust the cost
+        cost = cost_dict['secondary']
+    
+    return cost
+
 def player(request, id):
     # Check if the player exists
     plr = Player.objects.get(pk=id)
@@ -1055,32 +1072,42 @@ def check_starting_attributes(request):
         position = request.POST.get("position")
         height = request.POST.get("height")
         weight = request.POST.get("weight")
-        primary_archetype = request.POST.get("archetype1")
-        secondary_archetype = request.POST.get("archetype2")
+        primary_attribute = request.POST.get("primary_attribute")
+        secondary_attribute = request.POST.get("secondary_attribute")
         trait1 = request.POST.get("trait1")
         trait2 = request.POST.get("trait2")
-        # Define some variables
+
+        # Check some validations first
+        # Check if weight is provided
+        if not weight:
+            return HttpResponse("❌ Weight is required!")
+
+        # Check if height is within range
         height_limits = league_config.min_max_heights[position]
         weight_limits = league_config.min_max_weights[position]
         convert_height = hoops_extra_convert.convert_to_height
-        # Check some validations first
-        if not weight:
-            return HttpResponse("❌ Weight is required!")
         if int(height) > height_limits["max"] or int(height) < height_limits["min"]:
             return HttpResponse(
                 f"❌ Height must be between {convert_height(height_limits['min'])} and {convert_height(height_limits['max'])}!",
             )
+            
+        # Check if weight is within range
         if int(weight) > weight_limits["max"] or int(weight) < weight_limits["min"]:
             return HttpResponse(
                 f"❌ Weight must be between {weight_limits['min']} and {weight_limits['max']}!",
             )
+
+        # Check if traits are not the same
         if trait1 == trait2:
             return HttpResponse("❌ Traits cannot be the same!")
+
         # Check what the starting attributes would be
         starting_attributes = {
             "height": int(height),
             "weight": int(weight),
             "primary_position": position,
+            "primary_attribute": primary_attribute,
+            "secondary_attribute": secondary_attribute,
             "attributes": copy.deepcopy(
                 league_config.position_starting_attributes[position]
             ),
@@ -1089,28 +1116,23 @@ def check_starting_attributes(request):
             starting_attributes, mock=True
         )
         player_attributes = mock_player["attributes"]
-        # Add archetype bonuses
-        primary_list = league_config.archetype_attribute_bonuses[primary_archetype]
-        secondary_list = league_config.archetype_attribute_bonuses[secondary_archetype]
-        for attribute in primary_list:
-            player_attributes[attribute] += league_config.archetype_primary_bonus
-        for attribute in secondary_list:
-            player_attributes[attribute] += league_config.archetype_secondary_bonus
+
+        # Add attribute bonuses
+        if primary_attribute in player_attributes:
+            player_attributes[primary_attribute] += league_config.archetype_primary_bonus
+        if secondary_attribute in player_attributes:
+            player_attributes[secondary_attribute] += league_config.archetype_secondary_bonus
+
         # Format the attributes with primary/secondary/base tags
         mock_player_attributes = {"primary": {}, "secondary": {}, "base": {}}
         for attribute in player_attributes:
-            if attribute in primary_list:
-                mock_player_attributes["primary"][attribute] = player_attributes[
-                    attribute
-                ]
-                continue
-            elif attribute in secondary_list:
-                mock_player_attributes["secondary"][attribute] = player_attributes[
-                    attribute
-                ]
-                continue
+            if attribute == primary_attribute:
+                mock_player_attributes["primary"][attribute] = player_attributes[attribute]
+            elif attribute == secondary_attribute:
+                mock_player_attributes["secondary"][attribute] = player_attributes[attribute]
             else:
                 mock_player_attributes["base"][attribute] = player_attributes[attribute]
+
         # Add trait bonuses
         mock_player_badges = {}
         trait1_list = league_config.trait_badge_unlocks[trait1]
@@ -1121,6 +1143,7 @@ def check_starting_attributes(request):
             # We don't want overlapping badges to be marked as secondary if they are also primary
             if not badge in trait1_list:
                 mock_player_badges[badge] = "[S]"
+
         # Return the starting attributes
         context = {
             "title": "Archetypes & Traits",
