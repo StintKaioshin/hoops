@@ -631,12 +631,6 @@ hotzone_choices = [
     ("1", "Equipped"),
 ]
 
-attribute_choices = [
-    (attr, f"({attribute_weights[attr]}) {attr}") for attr in attribute_list
-]
-badge_choices = [
-    (badge, f"({badge_weights[badge]}) {badge}") for badge in badge_list
-]
 # Description: Categories for .html pages
 attribute_categories = {
     "finishing": [
