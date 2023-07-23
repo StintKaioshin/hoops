@@ -44,7 +44,7 @@ position_starting_attributes = {
     "PG": {
         "Pick Roll Defensive Iq": 60,
         "Shot Contest": 60,
-        "Driving Layup": 65,
+        "Driving Lay": 65,
         "Post Fadeaway": 45,
         "Post Hook": 45,
         "Post Moves": 45,
@@ -83,7 +83,7 @@ position_starting_attributes = {
         "Shot Contest": 60,
     },
     "SG": {
-        "Driving Layup": 65,
+        "Driving Lay": 65,
         "Post Fadeaway": 45,
         "Post Hook": 45,
         "Post Moves": 45,
@@ -122,7 +122,7 @@ position_starting_attributes = {
         "Shot Contest": 60,
     },
     "SF": {
-        "Driving Layup": 55,
+        "Driving Lay": 55,
         "Post Fadeaway": 55,
         "Post Hook": 55,
         "Post Moves": 55,
@@ -161,7 +161,7 @@ position_starting_attributes = {
         "Shot Contest": 60,
     },
     "PF": {
-        "Driving Layup": 45,
+        "Driving Lay": 45,
         "Post Fadeaway": 65,
         "Post Hook": 65,
         "Post Moves": 65,
@@ -200,7 +200,7 @@ position_starting_attributes = {
         "Shot Contest": 60,
     },
     "C": {
-        "Driving Layup": 45,
+        "Driving Lay": 45,
         "Post Fadeaway": 65,
         "Post Hook": 65,
         "Post Moves": 65,
@@ -252,17 +252,6 @@ price_per_pound = 15
 attribute_prices = {
     "0-70": {"range": range(0, 71), "base": 40, "primary": 10, "secondary": 20},
     "71-80": {"range": range(71, 81), "base": 100, "primary": 25, "secondary": 50},
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -251,219 +257,54 @@
-  
     "81-86": {"range": range(81, 87), "base": 200, "primary": 50, "secondary": 100},
     "87-93": {"range": range(87, 94), "base": 400, "primary": 100, "secondary": 200},
     "94-96": {"range": range(94, 97), "base": 800, "primary": 200, "secondary": 400},
@@ -319,23 +308,6 @@ secondary_badge_bonus = 5
 
 initial_statics = {
     "playstyles": {
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -750,30 +591,6 @@
-  
         "playstyle1": "0",
         "playstyle2": "0",
         "playstyle3": "0",
@@ -343,7 +315,7 @@ initial_statics = {
     }
 }
 initial_attributes = {
-    "Driving Layup": start_attribute,
+    "Driving Lay": start_attribute,
     "Standing Dunk": start_attribute,
     "Driving Dunk": start_attribute,
     "Close Shot": start_attribute,
@@ -384,7 +356,7 @@ initial_attributes = {
 initial_badges = {
     "Acrobat": start_badge,
     "Aerial Wizard": start_badge,
-    "Backdown Punisher": start_badge,
+    "Back Punisher": start_badge,
     "Bully": start_badge,
     "Dream Shake": start_badge,
     "Drop Stepper": start_badge,
@@ -396,7 +368,7 @@ initial_badges = {
     "Post Spin Technician": start_badge,
     "Posterizer": start_badge,
     "Pro Touch": start_badge,
-    "Rise Up": start_badge,
+    "Rise ": start_badge,
     "Slithery": start_badge,
     "Agent Threes": start_badge,
     "Amped": start_badge,
@@ -406,7 +378,7 @@ initial_badges = {
     "Corner Specialist": start_badge,
     "Deadeye": start_badge,
     "Green Machine": start_badge,
-    "Guard Up": start_badge,
+    "Guard ": start_badge,
     "Limitless Range": start_badge,
     "Middy Magician": start_badge,
     "Slippery Off Ball": start_badge,
@@ -433,14 +405,14 @@ initial_badges = {
     "Anchor": start_badge,
     "Ankle Braces": start_badge,
     "Challenger": start_badge,
-    "Chase Down Artist": start_badge,
+    "Chase  Artist": start_badge,
     "Clamps": start_badge,
     "Glove": start_badge,
     "Interceptor": start_badge,
     "Menace": start_badge,
     "Off Ball Pest": start_badge,
     "Pick Dodger": start_badge,
-    "Post Lockdown": start_badge,
+    "Post Lock": start_badge,
     "Pogo Stick": start_badge,
     "Work Horse": start_badge,
     "Brick Wall": start_badge,
@@ -448,10 +420,10 @@ initial_badges = {
     "Rebound Chaser": start_badge,
 }
 initial_history = {
-    "upgrade_logs": [],
+    "grade_logs": [],
     "contract_logs": [],
     "trade_logs": [],
-    "used_coupons": [],
+    "used_coons": [],
 }
 initial_settings = {
     "test": False,
@@ -487,7 +459,7 @@ initial_tendencies = {
     "SHOT_CLOSE_MIDDLE_TENDENCY": 0,
     "SHOT_CLOSE_RIGHT_TENDENCY": 0,
     "SHOT_MID-RANGE_TENDENCY": 0,
-    "SPOT_UP_SHOT_MID-RANGE_TENDENCY": 0,
+    "SPOT__SHOT_MID-RANGE_TENDENCY": 0,
     "OFF_SCREEN_SHOT_MID-RANGE_TENDENCY": 0,
     "SHOT_MID_LEFT_TENDENCY": 0,
     "SHOT_MID_LEFT-CENTER_TENDENCY": 0,
@@ -495,7 +467,7 @@ initial_tendencies = {
     "SHOT_MID_RIGHT-CENTER_TENDENCY": 0,
     "SHOT_MID_RIGHT_TENDENCY": 0,
     "SHOT_THREE_TENDENCY": 0,
-    "SPOT_UP_SHOT_THREE_TENDENCY": 0,
+    "SPOT__SHOT_THREE_TENDENCY": 0,
     "OFF_SCREEN_SHOT_THREE_TENDENCY": 0,
     "SHOT_THREE_LEFT_TENDENCY": 0,
     "SHOT_THREE_LEFT-CENTER_TENDENCY": 0,
@@ -507,30 +479,30 @@ initial_tendencies = {
     "STEPBACK_JUMPER_THREE_TENDENCY": 0,
     "STEPBACK_JUMPER_MID-RANGE_TENDENCY": 0,
     "SPIN_JUMPER_TENDENCY": 0,
-    "TRANSITION_PULL_UP_THREE_TENDENCY": 0,
-    "DRIVE_PULL_UP_THREE_TENDENCY": 0,
-    "DRIVE_PULL_UP_MID-RANGE_TENDENCY": 0,
+    "TRANSITION_PULL__THREE_TENDENCY": 0,
+    "DRIVE_PULL__THREE_TENDENCY": 0,
+    "DRIVE_PULL__MID-RANGE_TENDENCY": 0,
     "USE_GLASS_TENDENCY": 0,
-    "DRIVING_LAYUP_TENDENCY": 0,
+    "DRIVING_LAY_TENDENCY": 0,
     "STANDING_DUNK_TENDENCY": 0,
     "DRIVING_DUNK_TENDENCY": 0,
     "FLASHY_DUNK_TENDENCY": 0,
     "ALLEY-OOP_TENDENCY": 0,
     "PUTBACK_TENDENCY": 0,
     "CRASH_TENDENCY": 0,
-    "SPIN_LAYUP_TENDENCY": 0,
-    "HOP_STEP_LAYUP_TENDENCY": 0,
-    "EURO_STEP_LAYUP_TENDENCY": 0,
+    "SPIN_LAY_TENDENCY": 0,
+    "HOP_STEP_LAY_TENDENCY": 0,
+    "EURO_STEP_LAY_TENDENCY": 0,
     "FLOATER_TENDENCY": 0,
     "TRIPLE_THREAT_PUMP_FAKE_TENDENCY": 0,
     "TRIPLE_THREAT_JAB_STEP_TENDENCY": 0,
     "TRIPLE_THREAT_IDLE_TENDENCY": 0,
     "TRIPLE_THREAT_SHOOT_TENDENCY": 0,
-    "SETUP_WITH_SIZEUP_TENDENCY": 0,
-    "SETUP_WITH_HESITATION_TENDENCY": 0,
-    "NO_SETUP_DRIBBLE_TENDENCY": 0,
+    "SET_WITH_SIZE_TENDENCY": 0,
+    "SET_WITH_HESITATION_TENDENCY": 0,
+    "NO_SET_DRIBBLE_TENDENCY": 0,
     "DRIVE_TENDENCY": 0,
-    "SPOT_UP_DRIVE_TENDENCY": 0,
+    "SPOT__DRIVE_TENDENCY": 0,
     "OFF_SCREEN_DRIVE_TENDENCY": 0,
     "DRIVE_RIGHT_TENDENCY": 0,
     "DRIVE_CROSSOVER_TENDENCY": 0,
@@ -546,17 +518,17 @@ initial_tendencies = {
     "DISH_TO_OPEN_MAN_TENDENCY": 0,
     "FLASHY_PASS_TENDENCY": 0,
     "ALLEY-OOP_PASS_TENDENCY": 0,
-    "POST_UP_TENDENCY": 0,
+    "POST__TENDENCY": 0,
     "POST_SHIMMY_SHOT_TENDENCY": 0,
-    "POST_FACE_UP_TENDENCY": 0,
-    "POST_BACK_DOWN_TENDENCY": 0,
-    "POST_AGGRESSIVE_BACKDOWN_TENDENCY": 0,
+    "POST_FACE__TENDENCY": 0,
+    "POST_BACK__TENDENCY": 0,
+    "POST_AGGRESSIVE_BACK_TENDENCY": 0,
     "SHOOT_FROM_POST_TENDENCY": 0,
     "POST_HOOK_LEFT_TENDENCY": 0,
     "POST_HOOK_RIGHT_TENDENCY": 0,
     "POST_FADE_LEFT_TENDENCY": 0,
     "POST_FADE_RIGHT_TENDENCY": 0,
-    "POST_UP_AND_UNDER_TENDENCY": 0,
+    "POST__AND_UNDER_TENDENCY": 0,
     "POST_HOP_SHOT_TENDENCY": 0,
     "POST_STEP_BACK_SHOT_TENDENCY": 0,
     "POST_DRIVE_TENDENCY": 0,
@@ -566,7 +538,7 @@ initial_tendencies = {
     "SHOT_TENDENCY": 0,
     "TOUCHES_TENDENCY": 0,
     "ROLL_VS._POP_TENDENCY": 0,
-    "TRANSITION_SPOT_UP_TENDENCY": 0,
+    "TRANSITION_SPOT__TENDENCY": 0,
     "ISO_VS._ELITE_DEFENDER_TENDENCY": 0,
     "ISO_VS._GOOD_DEFENDER_TENDENCY": 0,
     "ISO_VS._AVERAGE_DEFENDER_TENDENCY": 0,
@@ -610,7 +582,7 @@ position_choices = [
     ("PF", "Power Forward"),
     ("C", "Center"),
 ]
-badge_upgrade_choices = [
+badge_grade_choices = [
     (0, "Current"),
     (1, "Bronze"),
     (2, "Silver"),
@@ -620,23 +592,6 @@ badge_upgrade_choices = [
 transaction_type_choices = [
     ("cash_taken", "Cash Taken"),
     ("cash_given", "Cash Given"),
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -813,6 +630,13 @@
-  
     ("paycheck", "Paycheck"),
 ]
 contract_option_choices = [
@@ -690,11 +645,11 @@ attribute_categories = {
     
 
           
-          Expand Down
+           
     
     
   
-        "Driving Layup",
+        "Driving Lay",
         "Post Moves",
         "Draw Foul",
         "Close Shot",
@@ -744,7 +699,7 @@ attribute_categories = {
 badge_categories = {
     "finishing": [
         "Acrobat",
-        "Backdown Punisher",
+        "Back Punisher",
         "Consistent Finisher",
         "Contact Finisher",
         "Cross-Key Scorer",
@@ -778,7 +733,7 @@ badge_categories = {
     ],
     "defense": [
         "Brick Wall",
-        "Chase Down Artist",
+        "Chase  Artist",
         "Clamps",
         "Interceptor",
         "Intimidator",
@@ -787,7 +742,7 @@ badge_categories = {
         "Off-Ball Pest",
         "Pick Dodger",
         "Pogo Stick",
-        "Post Move Lockdown",
+        "Post Move Lock",
         "Rebound Chaser",
         "Rim Protector",
         "Tireless Defender",
@@ -798,7 +753,7 @@ badge_categories = {
         "Bail Out",
         "Break Starter",
         "Dimer",
-        "Downhill",
+        "hill",
         "Dream Shake",
         "Flashy Passer",
         "Handles For Days",
@@ -821,9 +776,9 @@ playstyles = {
     "5": "P&R Point",
     "6": "P&R Wing",
     "7": "P&R Roll Man",
-    "8": "Post Up Low",
-    "9": "Post Up High",
-    "10": "Guard Post Up",
+    "8": "Post  Low",
+    "9": "Post  High",
+    "10": "Guard Post ",
     "11": "Cutter",
     "12": "Handoff",
     "13": "Midrange",
