@@ -29,12 +29,11 @@ class PlayerForm(forms.Form):
         if attribute_categories:
             for category in attribute_categories:
                 for attribute in attribute_categories[category]:
-                    self.fields[f'{category}_{attribute}'] = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
+                    self.fields[f'{category}_{attribute}'] = forms.ChoiceField(choices=[(x, x) for x in range(1, 101)], required=True)
         if badge_categories:
             for category in badge_categories:
                 for badge in badge_categories[category]:
                     self.fields[f'{category}_{badge}'] = forms.ChoiceField(choices=[(x, x) for x in ["Bronze", "Silver", "Gold", "Hall of Fame"]], required=False)
-
 
 class UpgradeForm(forms.Form):
     # Your UpgradeForm fields here...
