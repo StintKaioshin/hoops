@@ -56,57 +56,60 @@
                         </div>
                     </div>            
                     <!-- Primary Attributes & Badges -->
-                    <div class="mb-4">
-                        <h3 class="fw-bold mb-3">Primary Attributes & Badges</h3>
-                        {% for category, attributes in primary_attribute_categories.items %}
-                            <h3 class="fw-bold mb-3">{{ category|capfirst }}</h3>
-                            {% for attribute in attributes %}
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
-                                        {{ create_player_form|get_field:category|add:"_"|add:attribute|addclass:"form-control" }}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-                        {% for category, badges in primary_badge_categories.items %}
-                            <h3 class="fw-bold mb-3">{{ category|capfirst }} Badges</h3>
-                            {% for badge in badges %}
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
-                                        {{ create_player_form|get_field:category|add:"_"|add:badge|addclass:"form-control" }}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-                    </div>
-                    <!-- Secondary Attributes & Badges -->
-                    <div class="mb-4">
-                        <h3 class="fw-bold mb-3">Secondary Attributes & Badges</h3>
-                        {% for category, attributes in secondary_attribute_categories.items %}
-                            <h3 class="fw-bold mb-3">{{ category|capfirst }}</h3>
-                            {% for attribute in attributes %}
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
-                                        {{ create_player_form|get_field:category|add:"_"|add:attribute|addclass:"form-control" }}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-                        {% for category, badges in secondary_badge_categories.items %}
-                            <h3 class="fw-bold mb-3">{{ category|capfirst }} Badges</h3>
-                            {% for badge in badges %}
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
-                                        {{ create_player_form|get_field:category|add:"_"|add:badge|addclass:"form-control" }}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-                    </div>
+<!-- ... -->
+<!-- Primary Attributes & Badges -->
+<div class="mb-4">
+    <h3 class="fw-bold mb-3">Primary Attributes & Badges</h3>
+    {% for category, attributes in primary_attribute_categories.items %}
+        <h3 class="fw-bold mb-3">{{ category|capfirst }}</h3>
+        {% for attribute in attributes %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
+                    {{ create_player_form|get_field:category|add:"_"|add:attribute|addclass:"form-select form-select-sm" }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for category, badges in primary_badge_categories.items %}
+        <h3 class="fw-bold mb-3">{{ category|capfirst }} Badges</h3>
+        {% for badge in badges %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
+                    {{ create_player_form|get_field:category|add:"_"|add:badge|addclass:"form-select form-select-sm" }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+<!-- Secondary Attributes & Badges -->
+<div class="mb-4">
+    <h3 class="fw-bold mb-3">Secondary Attributes & Badges</h3>
+    {% for category, attributes in secondary_attribute_categories.items %}
+        <h3 class="fw-bold mb-3">{{ category|capfirst }}</h3>
+        {% for attribute in attributes %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
+                    {{ create_player_form|get_field:category|add:"_"|add:attribute|addclass:"form-select form-select-sm" }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for category, badges in secondary_badge_categories.items %}
+        <h3 class="fw-bold mb-3">{{ category|capfirst }} Badges</h3>
+        {% for badge in badges %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
+                    {{ create_player_form|get_field:category|add:"_"|add:badge|addclass:"form-select form-select-sm" }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+<!-- ... -->
                     <!-- Form Actions -->
                     <div class="mb-4">
                         <button type="submit" class="btn btn-primary mb-3">Create Player</button>
