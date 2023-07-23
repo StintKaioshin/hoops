@@ -280,7 +280,6 @@ def upgrade_player(request, id):
     # Have to remove the 'range' function from attribute prices or javascript shits the bed
     js_attribute_prices = copy.deepcopy(league_config.attribute_prices)
     for _, v in js_attribute_prices.items():
-def upgrade_player(request, id):
         v["range"] = 0
     # Initialize the context
     context = {
