@@ -12,7 +12,6 @@ from django.db.models import Sum
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.views import View
-
 # Model imports
 from .models import Player
 from .models import Team
@@ -23,21 +22,17 @@ from .models import ContractOffer
 from .models import DiscordUser
 from .models import Notification
 from .models import Award
-
 # Form imports
 from .forms import PlayerForm
 from .forms import UpgradeForm
 from .forms import StylesForm
-
 # Custom imports
 from .discord import auth as discord_auth
 from .discord import webhooks as discord_webhooks
 from .league import config as league_config
-
 # Stats imports
 from stats.league.stats import compile as stats_compile
 from stats.league.stats import calculate as stats_calculate
-
 # Custom packages
 import copy
 import json
@@ -45,7 +40,6 @@ import requests
 import datetime
 from requests.structures import CaseInsensitiveDict
 from datetime import timedelta
-
 from .league.player import upgrade as hoops_player_upgrade
 from .league.player import create as hoops_player_create
 from .league.player import physicals as hoops_player_physicals
@@ -55,28 +49,28 @@ from .league.extra import convert as hoops_extra_convert
 from .league.teams import trade as hoops_team_trade
 from .league.teams import offer as hoops_team_offer
 from .league.user import notify as hoops_user_notify
-
 # .ENV file import
 import os, json
 from dotenv import load_dotenv
-
 load_dotenv()
-
-
 # Create your views here.
 def home(request):
     # Get the current user
     current_user = request.user
     # Find the game of the day for the past three days
     gotd_list = []
-    gotd_list.append(stats_compile.game_of_the_day(season=league_config.current_season))
-    day_index = gotd_list[0]["day"]
-    for _ in range (2):
-        day_index -= 1
-        if day_index > 0:
-            gotd_list.append(stats_compile.game_of_the_day(season=league_config.current_season, specific=day_index))
-        else:
-            break
+    gotd = stats_compile.game_of_the_day(season=league_config.current_season)
+    if gotd:
+        gotd_list.append(gotd)
+        day_index = gotd_list[0]["day"]
+        for _ in range (2):
+            day_index -= 1
+            if day_index > 0:
+                gotd_list.append(stats_compile.game_of_the_day(season=league_config.current_season, specific=day_index))
+                if gotd:
+                    gotd_list.append(gotd)
+            else:
+                break
     # Create the context
     context = {
         "title": "Home",
@@ -115,17 +109,11 @@ def home(request):
             redirect(logout)
     # Return the home page
     return render(request, "main/league/home.html", context)
-
-
 def login(request):
     return HttpResponse("This is the login page.")
-
-
 def login_discord(request):
     discord_auth_url = os.environ.get("DISCORD_AUTH_URL")
     return redirect(discord_auth_url)
-
-
 def login_discord_redirect(request):
     try:
         # Get information from Discord
@@ -144,14 +132,10 @@ def login_discord_redirect(request):
         messages.error(request, "Something went wrong while logging you in, try again!")
     # Redirect the user to the home page
     return redirect(home)
-
-
 def logout(request):
     django_logout(request)
     messages.error(request, "You have successfully logged out!")
     return redirect("/")
-
-
 def player(request, id):
     # Check if the player exists
     plr = Player.objects.get(pk=id)
@@ -247,8 +231,6 @@ def player(request, id):
         "possible_relatives": possible_relatives,
     }
     return render(request, "main/players/player.html", context)
-
-
 @login_required(login_url="/login/discord/")
 def upgrade_player(request, id):
     # Collect user & player information
@@ -308,8 +290,8 @@ def upgrade_player(request, id):
         "initial_tendencies": league_config.initial_tendencies,
     }
     return render(request, "main/players/upgrade.html", context)
-
-
+import logging
+logger = logging.getLogger(__name__)
 @login_required(login_url="/login/discord/")
 def create_player(request):
     # Collect user & player information
@@ -360,8 +342,6 @@ def create_player(request):
     else:
         context = {"create_player_form": PlayerForm}
         return render(request, "main/players/create.html", context)
-
-
 def players(request):
     context = {
         "title": "Players",
@@ -374,8 +354,6 @@ def players(request):
     context["page"] = paginator.get_page(page_number)
     # Return the players page
     return render(request, "main/players/players.html", context)
-
-
 def free_agents(request):
     # Create the context
     context = {
@@ -389,8 +367,6 @@ def free_agents(request):
     context["page"] = paginator.get_page(page_number)
     # Return the players page
     return render(request, "main/players/free-agents.html", context)
-
-
 def upgrade_logs(request, id):
     # Check if the player exists
     player = Player.objects.get(pk=id)
@@ -407,8 +383,6 @@ def upgrade_logs(request, id):
         return render(request, "main/players/history.html", context)
     else:
         return HttpResponse("Sorry, this player doesn't exist!")
-
-
 def cash_logs(request, id):
     # Check if the player exists
     player = Player.objects.get(pk=id)
@@ -427,8 +401,6 @@ def cash_logs(request, id):
         return render(request, "main/players/cash_history.html", context)
     else:
         return HttpResponse("Sorry, this player doesn't exist!")
-
-
 def team(request, id):
     team_object = Team.objects.get(pk=id)
     total_salary = hoops_team_trade.get_total_salary(team_object)
@@ -444,8 +416,6 @@ def team(request, id):
         "hard_cap": league_config.hard_cap,
     }
     return render(request, "main/teams/team.html", context)
-
-
 def teams(request):
     context = {
         "title": "Teams",
@@ -456,10 +426,19 @@ def teams(request):
     paginator = Paginator(league_teams, 8)
     page_number = request.GET.get("page")
     context["page"] = paginator.get_page(page_number)
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
     # Return the players page
     return render(request, "main/teams/teams.html", context)
-
-
 def trade(request):
     # Get the user
     user = request.user
@@ -489,8 +468,6 @@ def trade(request):
         "accepted_trades": accepted_trades,
     }
     return render(request, "main/teams/trade.html", context)
-
-
 def accept_trade(request, id):
     # Get some form data
     user = request.user
@@ -522,8 +499,6 @@ def accept_trade(request, id):
         request, f"✅ Your trade has been accepted - we will finalize it soon!"
     )
     return redirect(trade)
-
-
 def decline_trade(request, id):
     # Get some form data
     user = request.user
@@ -550,8 +525,6 @@ def decline_trade(request, id):
     # Return the trade page
     messages.success(request, "✅ You have declined this trade!")
     return redirect(trade)
-
-
 def trade_panel(request):
     # Get the user
     user = request.user
@@ -567,8 +540,6 @@ def trade_panel(request):
     }
     # Return the trade panel page
     return render(request, "main/teams/trade_panel.html", context)
-
-
 def upgrades_pending(request):
     # Collect user & player information
     user = request.user
@@ -588,8 +559,6 @@ def upgrades_pending(request):
             ]
         # Return the pending upgrades page
         return render(request, "main/players/pending.html", {"files": files})
-
-
 def mock_builder(request):
     # Check if the tag is in the list of position starting attributes
     context = {
@@ -603,8 +572,6 @@ def mock_builder(request):
     }
     # Return the build info page
     return render(request, "main/players/build-info.html", context)
-
-
 def notifications(request, id):
     # Get the user
     user = request.user
@@ -622,8 +589,6 @@ def notifications(request, id):
     }
     # Return the notifications page
     return render(request, "main/users/notifications.html", context)
-
-
 @login_required(login_url="/login/discord/")
 def coupons(request):
     context = {
@@ -639,8 +604,6 @@ def coupons(request):
         return render(request, "main/league/coupons.html", context)
     else:
         return HttpResponse("You don't have any players!")
-
-
 def frivolities(request):
     context = {
         "title": "Frivolities",
@@ -657,8 +620,6 @@ def frivolities(request):
     }
     # Return the frivolities page
     return render(request, "main/league/frivolities.html", context)
-
-
 def daily_rewards(request):
     # Create the context
     context = {
@@ -666,8 +627,6 @@ def daily_rewards(request):
     }
     # Return the daily rewards page
     return render(request, "main/users/daily_rewards.html", context)
-
-
 def edit_physicals(request, id):
     # Get the user
     user = request.user
@@ -686,8 +645,6 @@ def edit_physicals(request, id):
     }
     # Return the edit physicals page
     return render(request, "main/players/edit-physicals.html", context)
-
-
 def player_styles(request, id):
     # Make sure player exists & user is players owner
     user = request.user
@@ -729,11 +686,8 @@ def player_styles(request, id):
                 messages.error(request, status)
             # Redirect to the styles page
             return redirect(player_styles, id=id)
-
     # Return the player styles page
     return render(request, "main/players/player-styles.html", context)
-
-
 # Reloadable form views
 def add_player_cash(request):
     if request.method == "POST":
@@ -801,8 +755,6 @@ def add_player_cash(request):
     else:
         messages.error(request, "Something went wrong!")
         return redirect("player", id=id)
-
-
 def take_player_cash(request):
     if request.method == "POST":
         user = request.user
@@ -839,8 +791,6 @@ def take_player_cash(request):
     else:
         messages.error(request, "Something went wrong!")
         return redirect("player", id=id)
-
-
 def update_player_vitals(request, id):
     if request.method == "POST":
         # Get some form values/data
@@ -925,8 +875,6 @@ def update_player_vitals(request, id):
         # Return the updated vitals
         messages.success(request, "Player vitals updated!")
         return redirect("player", id=id)
-
-
 def update_player_pending_upgrades(request):
     if request.method == "POST":
         user = request.user
@@ -938,8 +886,6 @@ def update_player_pending_upgrades(request):
             return HttpResponse("✅ Success!")
     else:
         return HttpResponse("Invalid request!")
-
-
 # Check views
 def check_player_search(request):
     if request.method == "POST":
@@ -962,8 +908,6 @@ def check_player_search(request):
             return HttpResponse(html)
     else:
         return HttpResponse("Invalid request!")
-
-
 def check_team_search(request):
     if request.method == "POST":
         search = request.POST.get("search")
@@ -981,8 +925,6 @@ def check_team_search(request):
             return HttpResponse(html)
     else:
         return HttpResponse("Invalid request!")
-
-
 def check_coupon_code(request):
     if request.method == "POST":
         # Get ID & coupon code
@@ -1037,8 +979,6 @@ def check_coupon_code(request):
         return HttpResponse(
             "<p id='coupon-result' class='mt-2 text-success' style='font-size:12px;'>Coupon code successfully redeemed!</p>"
         )
-
-
 def check_license_key(request):
     # Get some form data
     user = request.user
@@ -1132,8 +1072,6 @@ def check_license_key(request):
         return HttpResponse(
             "<p id='coupon-result' class='mt-2 text-success' style='font-size:12px;'>License key successfully redeemed!</p>"
         )
-
-
 def check_starting_attributes(request):
     if request.method == "POST":
         # Get the form data
@@ -1224,8 +1162,6 @@ def check_starting_attributes(request):
         return HttpResponse(html)
     else:
         return HttpResponse("Invalid request!")
-
-
 def check_position_count(request):
     if request.method == "POST":
         # Get the form data
@@ -1248,8 +1184,6 @@ def check_position_count(request):
         )
     else:
         return HttpResponse("Invalid request!")
-
-
 def check_upgrade_validation(request):
     if request.method == "POST":
         # Find the player
@@ -1286,8 +1220,6 @@ def check_upgrade_validation(request):
             return HttpResponse(response)
         else:
             return HttpResponse("❌ Invalid form data!")
-
-
 def check_player_leaders(request):
     if request.method == "POST":
         # Get the form data
@@ -1301,13 +1233,10 @@ def check_player_leaders(request):
         }
         html = render_to_string("main/ajax/leaders_fragment.html", context)
         return HttpResponse(html)
-
-
 def check_meta_leaders(request):
     if request.method == "POST":
         # Get the form data
         meta = request.POST.get("meta")
-
         # Calculate player using each meta
         leaders = {}
         players = Player.objects.all()
@@ -1353,8 +1282,6 @@ def check_meta_leaders(request):
         }
         html = render_to_string("main/ajax/meta_fragment.html", context)
         return HttpResponse(html)
-
-
 def check_attribute_leaders(request):
     if request.method == "POST":
         # Get the form data
@@ -1368,8 +1295,6 @@ def check_attribute_leaders(request):
         }
         html = render_to_string("main/ajax/attribute_leaders_fragment.html", context)
         return HttpResponse(html)
-
-
 def check_team_roster(request):
     if request.method == "POST":
         # Get the form data
@@ -1388,8 +1313,6 @@ def check_team_roster(request):
         return HttpResponse(html)
     else:
         return HttpResponse("❌ Invalid request!")
-
-
 def check_trade_validation(request):
     # Get the form data
     user = request.user
@@ -1462,8 +1385,6 @@ def check_trade_validation(request):
         return HttpResponse(f"{message}<br>✅ Trade sent.")
     else:
         return HttpResponse(f"{message}")
-
-
 def check_finalize_trade(request):
     if request.method == "POST":
         # Get some form data
@@ -1565,8 +1486,6 @@ def check_finalize_trade(request):
         }
         html = render_to_string("main/ajax/trade_list_fragment.html", context)
         return HttpResponse(html)
-
-
 def check_read_notification(request):
     # Get some form data
     user = request.user
@@ -1586,8 +1505,6 @@ def check_read_notification(request):
         # Return the fragment
         html = render_to_string("main/ajax/notification_list_fragment.html", context)
         return HttpResponse(html)
-
-
 def check_daily_reward(request):
     # Get the current date
     user = request.user
@@ -1624,8 +1541,6 @@ def check_daily_reward(request):
         # time_left = last_reward + timedelta(days=1) - timezone.now()
         # real_time = f"{time_left.seconds // 3600}:{time_left.seconds % 3600 // 60}:{time_left.seconds % 60}"
         return HttpResponse(f"❌ You can collect again tomorrow!")
-
-
 def check_weight_change(request):
     # Get the current user
     user = request.user
@@ -1658,8 +1573,6 @@ def check_weight_change(request):
         )
     # Return the response
     return HttpResponse(status)
-
-
 def check_free_agent_search(request):
     if request.method == "POST":
         search = request.POST.get("search")
@@ -1683,8 +1596,6 @@ def check_free_agent_search(request):
             return HttpResponse(html)
     else:
         return HttpResponse("Invalid request!")
-
-
 def check_contract_offer(request):
     # Get some form data
     id = request.POST.get("id")
@@ -1715,8 +1626,6 @@ def check_contract_offer(request):
             notes=notes,
         )
         return HttpResponse(response)
-
-
 def check_contract_revoke(request):
     # Get some form data
     id = request.POST.get("id")
@@ -1738,12 +1647,9 @@ def check_contract_revoke(request):
             return HttpResponse("✅ Contract offer revoked!")
         else:
             return HttpResponse("❌ Contract offer not found!")
-
-
 # Ad views
 class ad_view(View):
     def get(self, request, *args, **kwargs):
         line = "google.com, pub-4085265783135188, DIRECT, f08c47fec0942fa0"
         return HttpResponse(line)
-
 # API views
