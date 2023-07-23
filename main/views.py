@@ -326,6 +326,35 @@ def create_player(request):
             success = response[0]
             status = response[1]
             if success:
+                    newPlayer.attributes = {
+                        "primary_attr1": form_data.get("primary_attr1", None),
+                        "primary_attr2": form_data.get("primary_attr2", None),
+                        "primary_attr3": form_data.get("primary_attr3", None),
+                        "primary_attr4": form_data.get("primary_attr4", None),
+                        "primary_attr5": form_data.get("primary_attr5", None),
+                        "secondary_attr1": form_data.get("secondary_attr1", None),
+                        "secondary_attr2": form_data.get("secondary_attr2", None),
+                        "secondary_attr3": form_data.get("secondary_attr3", None),
+                        "secondary_attr4": form_data.get("secondary_attr4", None),
+                        "secondary_attr5": form_data.get("secondary_attr5", None),
+
+                        }
+    # Update the player's badges
+                    newPlayer.badges = {
+                        "primary_badge1": form_data.get("primary_badge1", None),
+                        "primary_badge2": form_data.get("primary_badge2", None),
+                        "primary_badge3": form_data.get("primary_badge3", None),
+                        "primary_badge4": form_data.get("primary_badge4", None),
+                        "primary_badge5": form_data.get("primary_badge5", None),
+                        "secondary_badge1": form_data.get("secondary_badge1", None),
+                        "secondary_badge2": form_data.get("secondary_badge2", None),
+                        "secondary_badge3": form_data.get("secondary_badge3", None),
+                        "secondary_badge4": form_data.get("secondary_badge4", None),
+                        "secondary_badge5": form_data.get("secondary_badge5", None),
+
+        # ... and so on for other primary badges
+                    }
+
                 referral_code = form.cleaned_data.get("referral_code")
                 playerObject = createPlayer(user, form.cleaned_data)
                 discord_webhooks.send_webhook(
