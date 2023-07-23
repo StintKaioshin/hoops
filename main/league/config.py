@@ -630,10 +630,10 @@ attribute_list = list(initial_attributes.keys())
 badge_list = list(initial_badges.keys())
 
 attribute_choices = [
-    (attr, f"({ {attr}") for attr in attribute_list
+    (attr, f"({attr}") for attr in attribute_list
 ]
 badge_choices = [
-    (badge, f"({{badge}") for badge in badge_list
+    (badge, f"({badge}") for badge in badge_list
 ]
 attribute_weights = {
     "Driving Layup",
