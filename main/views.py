@@ -325,6 +325,7 @@ def create_player(request):
         "defense": ["Brick Wall", "Chase Down Artist", "Clamps", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck", "Off-Ball Pest", "Pick Dodger", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper"],
         "playmaking": ["Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Handles For Days", "Needle Threader", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop & Go", "Tight Handles", "Unpluckable"],
     }
+    
     user = request.user
     referral_code = request.GET.get("referral_code")
     if request.method == "POST":
@@ -357,7 +358,15 @@ def create_player(request):
         "user": user,
     }
     return render(request, "main/players/create.html", context)
-
+def free_agents(request):
+    context = {
+        "title": "Free Agents",
+    }
+    free_agent_players = Player.objects.all().order_by("-spent")
+    paginator = Paginator(free_agent_players, 10)
+    page_number = request.GET.get("page")
+    context["page"] = paginator.get_page(page_number)
+    return render(request, "main/players/players.html", context)
 def free_agents(request):
     context = {
         "title": "Free Agents",
