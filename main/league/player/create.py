@@ -91,7 +91,7 @@ def createPlayer(user, formData):
         "primary_attr4": formData.get("primary_attr4", None),
         "primary_attr5": formData.get("primary_attr5", None),
     }
-      newPlayer.secondary_attributes = {
+    newPlayer.secondary_attributes = {
         "secondary_attr1": formData.get("secondary_attr1", None),
         "secondary_attr2": formData.get("secondary_attr2", None),
         "secondary_attr3": formData.get("secondary_attr3", None),
