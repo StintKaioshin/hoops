@@ -8,7 +8,6 @@ from .league import config as league_config
 
 
 # DiscordUser Models
-# DiscordUser Models
 class DiscordUser(models.Model):
     # Custom Manager
     objects = DiscordAuthorizationManager()
@@ -26,64 +25,104 @@ class DiscordUser(models.Model):
     can_update_players = models.BooleanField(default=False)
     can_approve_trades = models.BooleanField(default=False)
     can_update_styles = models.BooleanField(default=False)
+    can_edit_events = models.BooleanField(default=False)
+    can_edit_scores = models.BooleanField(default=False)
     # Player Slots
     player_slots = models.SmallIntegerField(default=league_config.max_players)
     auto_collect_rewards = models.BooleanField(default=False)
     can_change_styles = models.BooleanField(default=False)
+
     # Discord User Methods
     def is_authenticated(self, request):
         return True
+
     def __str__(self):
         return f"{self.discord_tag}"
 
+
 # Player Models
-class PlayerForm(forms.Form):
-    # Get attribute_choices
-    attribute_choices_config = league_config.attribute_choices
-    attribute_choices = []
-    for tuple in attribute_choices_config:
-        if not tuple[0] in league_config.attribute_categories["physical"]:
-            attribute_choices.append(tuple)
-    # Create fields
-    first_name = forms.CharField(label="First Name", max_length=16)
-    last_name = forms.CharField(label="Last Name", max_length=16)
-    cyberface = forms.IntegerField(label="Cyberface", min_value=0, max_value=40000)
-    height = forms.ChoiceField(label="Height", choices=league_config.height_choices)
-    weight = forms.IntegerField(
-        label="Weight",
-        min_value=league_config.player_weight_min,
-        max_value=league_config.player_weight_max,
+class Player(models.Model):
+    # Player Model
+    first_name = models.CharField(default="Unknown", max_length=16)
+class HistoryList(models.Model):
+  
+    last_name = models.CharField(default="Player", max_length=16)
+    cyberface = models.SmallIntegerField(default=0)
+    height = models.SmallIntegerField(
+        choices=league_config.height_choices, default=league_config.height_choices[0][0]
     )
-    primary_position = forms.ChoiceField(
-        label="Primary Position", choices=league_config.position_choices
+    weight = models.IntegerField(
+        validators=[
+            MinValueValidator(league_config.player_weight_min),
+            MaxValueValidator(league_config.player_weight_max),
+        ]
     )
-    secondary_position = forms.ChoiceField(
-        label="Secondary Position", choices=league_config.position_choices
+    primary_position = models.CharField(
+        max_length=2,
+        choices=league_config.position_choices,
+        default=league_config.position_choices[0][0],
     )
-    jersey_number = forms.IntegerField(
-        label="Jersey Number", min_value=0, max_value=league_config.max_attribute
+    secondary_position = models.CharField(
+        max_length=2,
+        choices=league_config.position_choices,
+        default=league_config.position_choices[0][0],
     )
-    primary_attributes = forms.MultipleChoiceField(
-        label="Primary Attributes",
-        choices=attribute_choices,
-        widget=forms.SelectMultiple(),
+    jersey_number = models.IntegerField(
+        default=0, validators=[MinValueValidator(0), MaxValueValidator(99)]
     )
-    secondary_attributes = forms.MultipleChoiceField(
-        label="Primary Attributes",
-        choices=attribute_choices,
-        widget=forms.SelectMultiple(),
+    headshot = models.CharField(
+        max_length=100,
+        default=league_config.initial_headshot,
+        blank=True,
     )
-    primary_badges = forms.MultipleChoiceField(
-        label="Primary Badges",
-        choices=league_config.badge_choices,
-        widget=forms.SelectMultiple(),
+    # Attributes & Badges
+    primary_attributes = models.JSONField(null=True, blank=True)
+    secondary_attributes = models.JSONField(null=True, blank=True)
+    primary_badges = models.JSONField(null=True, blank=True)
+    secondary_badges = models.JSONField(null=True, blank=True)
+    # Player Currencies
+    primary_currency = models.BigIntegerField(
+        name="cash", default=league_config.primary_currency_start
     )
-    secondary_badges = forms.MultipleChoiceField(
-        label="Secondary Badges",
-        choices=league_config.badge_choices,
-        widget=forms.SelectMultiple(),
+    salary = models.PositiveBigIntegerField(name="salary", default=0)
+    cap_hit = models.PositiveBigIntegerField(name="cap_hit", default=0)
+    spent = models.PositiveBigIntegerField(name="spent", default=0)
+    # Player Contract Details
+    contract_ends_after = models.SmallIntegerField(default=1)
+    contract_option = models.CharField(
+        max_length=54,
+        choices=league_config.contract_option_choices,
+        default=league_config.contract_option_choices[0][0],
     )
-    referral_code = forms.IntegerField(label="Referral Code", required=False)
+    contract_benefits = models.CharField(
+        max_length=54,
+        choices=league_config.contract_benefit_choices,
+        default=league_config.contract_benefit_choices[0][0],
+    )
+    contract_notes = models.CharField(max_length=100, blank=True, null=True)
+    # Relationships
+    discord_user = models.ForeignKey(
+        "DiscordUser", blank=True, null=True, on_delete=models.CASCADE
+    )
+    current_team = models.ForeignKey(
+        "Team", blank=True, null=True, on_delete=models.CASCADE
+    )
+    history_list = models.ForeignKey("HistoryList", on_delete=models.CASCADE)
+    years_played = models.SmallIntegerField(default=1)
+    upgrades_pending = models.BooleanField(default=False)
+    free_agent = models.BooleanField(default=True)
+    use_game_tendencies = models.BooleanField(default=True)
+    is_rookie = models.BooleanField(default=False)
+    # Attributes, Badges, & Hotzones
+    styles = models.JSONField(default=league_config.get_default_styles, blank=True)
+    statics = models.JSONField(default=league_config.get_default_statics)
+    attributes = models.JSONField(default=league_config.get_default_attributes)
+    badges = models.JSONField(default=league_config.get_default_badges)
+    hotzones = models.JSONField(default=league_config.get_default_hotzones)
+    tendencies = models.JSONField(default=league_config.get_default_tendencies)
+    # Player Methods
+    def __str__(self):
+        return f"[{self.id}] {self.first_name} {self.last_name}"
 # List Models (for players)
 class HistoryList(models.Model):
     history = models.JSONField(default=league_config.get_default_history, blank=True)
