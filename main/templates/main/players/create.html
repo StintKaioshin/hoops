@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <form action="/player/create/" method="post">       
-                    {% csrf_token %}
+            {% csrf_token %}
                     <!-- First & Last names -->
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -24,10 +24,10 @@
                             {{ create_player_form.last_name|addclass:"form-control" }}
                         </div>
                         <div class="col-md-6">
-                             <label for="cyberface" class="label label-primary">Cyberface</label>
-                             {{ create_player_form.cyberface|addclass:"form-control form-control-sm mb-2" }}
+                                 <label for="cyberface" class="label label-primary">Cyberface</label>
+                                 {{ create_player_form.cyberface|addclass:"form-control form-control-sm mb-2" }}
+
                         </div>
-                    </div>
 
                     <!-- Height & Weight -->
                     <div class="row mb-3">
@@ -40,7 +40,6 @@
                             {{ create_player_form.weight|addclass:"form-select form-select-sm" }}
                         </div>
                     </div>
-
                     <!-- Positions & Jersey Number -->
                     <div class="row mb-3">
                         <div class="col-md-4">
@@ -56,7 +55,6 @@
                             {{ create_player_form.jersey_number|addclass:"form-control form-control-sm" }}
                         </div>
                     </div>            
-
                     <!-- Primary Attributes & Badges -->
                     <div class="mb-4">
                         <h3 class="fw-bold mb-3">Primary Attributes & Badges</h3>
@@ -66,7 +64,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
-                                        {{ create_player_form|get_item:category~'_'~attribute|addclass:"form-control" }}
+                                        {{ create_player_form|fetch_form_field:category~'_'~attribute|addclass:"form-control" }}
                                     </div>
                                 </div>
                             {% endfor %}
@@ -77,13 +75,12 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
-                                        {{ create_player_form|get_item:category~'_'~badge|addclass:"form-control" }}
+                                        {{ create_player_form|fetch_form_field:category~'_'~badge|addclass:"form-control" }}
                                     </div>
                                 </div>
                             {% endfor %}
                         {% endfor %}
                     </div>
-                    
                     <!-- Secondary Attributes & Badges -->
                     <div class="mb-4">
                         <h3 class="fw-bold mb-3">Secondary Attributes & Badges</h3>
@@ -93,7 +90,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="{{ category }}_{{ attribute }}" class="form-label">{{ attribute|capfirst }}</label>
-                                        {{ create_player_form|get_item:category~'_'~attribute|addclass:"form-control" }}
+                                        {{ create_player_form|fetch_form_field:category~'_'~attribute|addclass:"form-control" }}
                                     </div>
                                 </div>
                             {% endfor %}
@@ -104,19 +101,20 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="{{ category }}_{{ badge }}" class="form-label">{{ badge|capfirst }}</label>
-                                        {{ create_player_form|get_item:category~'_'~badge|addclass:"form-control" }}
+                                        {{ create_player_form|fetch_form_field:category~'_'~badge|addclass:"form-control" }}
                                     </div>
                                 </div>
                             {% endfor %}
                         {% endfor %}
                     </div>
-
+                    <!-- Form Actions -->
                     <div class="mb-4">
-                        <input type="submit" class="btn btn-primary" value="Create Player" />
+                        <button type="submit" class="btn btn-primary mb-3">Create Player</button>
+                        <a href="/player/" class="btn btn-secondary mb-3">Cancel</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
-{% endblock %}
+{% endblock content %}
