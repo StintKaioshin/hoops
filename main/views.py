@@ -351,10 +351,10 @@ def create_player(request):
     else:
         form = PlayerForm()
     context = {
-        "create_player_form": form,
-        "attribute_categories": attribute_categories,
-        "badge_categories": badge_categories,
-        "user": user,
+            "create_player_form": PlayerForm,
+            "attribute_weights": league_config.attribute_weights,
+            "badge_weights": league_config.badge_weights,
+
     }
     return render(request, "main/players/create.html", context)
 
