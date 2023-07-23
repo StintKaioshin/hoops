@@ -1,28 +1,21 @@
 current_season = 1
-
 max_players = 1
 primary_currency_start = 1000
 primary_currency_max = 100000
 max_weekly_earnings = 2000  # per/week
-
 start_attribute = 0
 start_badge = 0
-
 min_attribute = 0
 max_attribute = 99
 min_badge = 0
 max_badge = 4
 min_tendency = 0
 max_tendency = 100
-
 player_weight_min = 150
 player_weight_max = 270
-
 referral_bonus = 100
-
 # Description: For league related model fields
 max_contract_season = 3
-
 # Description: For cap space
 hard_cap = 1200
 min_years = 1
@@ -31,9 +24,7 @@ min_salary = 100
 max_salary = 600
 rookie_salary = 100
 free_agent_salary = 60
-
 # Description: For height & weight limits
-
 min_max_heights = {
     "PG": {"min": 72, "max": 79},
     "SG": {"min": 72, "max": 81},
@@ -48,9 +39,7 @@ min_max_weights = {
     "PF": {"min": 165, "max": 265},
     "C": {"min": 170, "max": 300},
 }
-
 # Description: For starting attributes
-
 position_starting_attributes = {
     "PG": {
         "Pick Roll Defensive Iq": 60,
@@ -250,7 +239,6 @@ position_starting_attributes = {
         "Shot Contest": 60,
     },
 }
-
 # Description: For attributes & badge prices
 # Work in progress!
 hotzone_price = 250
@@ -290,10 +278,8 @@ max_tendencies = {
     "ON-BALL_STEAL_TENDENCY": 75,
     "BLOCK_SHOT_TENDENCY": 75,
 }
-
 # Description: For player traits (traits unlock badges)
 # Description: Players not have duplicate traits, they can have duplicate archetypes though.
-
 trait_one_max = 4
 trait_two_max = 3
 trait_none_max = 2
@@ -429,11 +415,9 @@ trait_badge_unlocks = {
         "Post Playmaker",
     ],
 }
-
 # Description: For player archetypes
 # Description: The player is first given starting attributes of zero, thenthey are set to the starting attributes depending on position.
 # Description: Then, depending on the player's chosen archetype, archetype additions are added to the starting attributes.
-
 archetype_primary_bonus = 10  # Primary archetypes add (+10) to the chosen attributes
 archetype_secondary_bonus = 5  # Secondary archetypes add (+5) to the chosen attributes
 archetype_attribute_bonuses = {
@@ -477,10 +461,7 @@ archetype_attribute_bonuses = {
         "Defensive Consistency",
     ],
 }
-
-
-
-
+# Description: Initials for models
 initial_statics = {
     "playstyles": {
         "playstyle1": "0",
@@ -489,8 +470,6 @@ initial_statics = {
         "playstyle4": "0",
     }
 }
-
-
 initial_attributes = {
     "Driving Layup": start_attribute,
     "Standing Dunk": start_attribute,
@@ -734,9 +713,7 @@ initial_styles = {}
 initial_trade_offer = {}
 initial_team_logo = "https://cdn.simplystamps.com/media/catalog/product/5/8/5802-n-a-stock-stamp-hcb.png"
 initial_headshot = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-
 # Description: Choices & labels for player forms
-
 height_choices = [
     (72, "6'0"),
     (73, "6'1"),
@@ -831,15 +808,60 @@ hotzone_choices = [
     ("0", "None"),
     ("1", "Equipped"),
 ]
-
 # Description: Categories for .html pages
 
-
 attribute_categories = {
-    "physical": [
+    "finishing": [
+        "Driving Layup",
+        "Post Hook",
+        "Close Shot",
+        "Driving Dunk",
+        "Standing Dunk",
+        "Post Control",
+    ],
+    "shooting": [
+        "Mid-Range Shot",
+        "Three-Point Shot",
+        "Free Throw",
+        "Shot IQ",
+        "Offensive Consistency",
+        "Shot Under Basket",
+    ],
+    "defense": [
+        "Interior Defense",
+        "Perimeter Defense",
+        "Lateral Quickness",
+        "Steal",
+        "Block",
+        "Defensive Rebound",
+        "Offensive Rebound",
+        "Defensive Consistency",
+    ],
+    "playmaking": [
+        "Passing Accuracy",
+        "Ball Handle",
+        "Post Moves",
+        "Pass IQ",
+        "Pass Vision",
+        "Speed With Ball",
+        "Speed",
+        "Acceleration",
+    ],
+    "athleticism": [
         "Vertical",
         "Strength",
         "Stamina",
+
+    
+        
+          
+    
+
+        
+        Expand All
+    
+    @@ -879,6 +846,13 @@
+  
         "Hustle",
         "Layup",
         "Dunk",
@@ -847,15 +869,20 @@ attribute_categories = {
         "Acceleration",
         "Durability",
     ],
-    "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
-    "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
-    "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
-    "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
-    "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
 }
 
-
 badge_categories = {
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
     "finishing": [
         "Acrobat",
         "Backdown Punisher",
@@ -925,66 +952,26 @@ badge_categories = {
         "Unpluckable",
     ],
 }
-
 # Description: Initials methods for models
-playstyles = {
-    "0": "None",
-    "1": "Isolation",
-    "2": "Isolation Point",
-    "3": "Isolation Wing",
-    "4": "P&R Ball Handler",
-    "5": "P&R Point",
-    "6": "P&R Wing",
-    "7": "P&R Roll Man",
-    "8": "Post Up Low",
-    "9": "Post Up High",
-    "10": "Guard Post Up",
-    "11": "Cutter",
-    "12": "Handoff",
-    "13": "Midrange",
-    "14": "3PT",
-}
-
-
 def get_default_statics():
     return initial_statics
-
-
 def get_default_attributes():
     return initial_attributes
-
-
 def get_default_badges():
     return initial_badges
-
-
 def get_default_history():
     return initial_history
-
-
 def get_default_settings():
     return initial_settings
-
-
 def get_default_limits():
     return initial_limits
-
-
 def get_default_hotzones():
     return initial_hotzones
-
-
 def get_default_tendencies():
     return initial_tendencies
-
-
 def get_default_picks():
     return initial_picks
-
-
 def get_default_trade_offer():
     return initial_trade_offer
-
-
 def get_default_styles():
     return initial_styles
