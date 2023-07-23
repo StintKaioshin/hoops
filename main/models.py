@@ -38,8 +38,6 @@ class DiscordUser(models.Model):
         return f"{self.discord_tag}"
 
 
-from django.contrib.postgres.fields import ArrayField
-
 # Player Models
 class Player(models.Model):
     # Player Model
@@ -73,54 +71,34 @@ class Player(models.Model):
         default=league_config.initial_headshot,
         blank=True,
     )
-    
-    # Primary and Secondary Attributes
-    primary_attributes = ArrayField(
-        models.CharField(
-            max_length=36,
-            choices=league_config.attribute_choices,
-            default=league_config.attribute_choices[0][0],
-        ),
-        size=5,
+    # Archetypes & Traits
+    primary_archetype = models.CharField(
+        max_length=36,
+        choices=league_config.archetype_choices,
+        default=league_config.archetype_choices[0][0],
     )
-    secondary_attributes = ArrayField(
-        models.CharField(
-            max_length=36,
-            choices=league_config.attribute_choices,
-            default=league_config.attribute_choices[0][0],
-        ),
-        size=5,
+    secondary_archetype = models.CharField(
+        max_length=36,
+        choices=league_config.archetype_choices,
+        default=league_config.archetype_choices[0][0],
     )
-    
-    # Primary and Secondary Badges
-    primary_badges = ArrayField(
-        models.CharField(
-            max_length=36,
-            choices=league_config.badge_choices,
-            default=league_config.badge_choices[0][0],
-        ),
-        size=5,
+    trait_one = models.CharField(
+        max_length=36,
+        choices=league_config.trait_choices,
+        default=league_config.trait_choices[0][0],
     )
-    secondary_badges = ArrayField(
-        models.CharField(
-            max_length=36,
-            choices=league_config.badge_choices,
-            default=league_config.badge_choices[0][0],
-        ),
-        size=5,
+    trait_two = models.CharField(
+        max_length=36,
+        choices=league_config.trait_choices,
+        default=league_config.trait_choices[0][0],
     )
-    
-    # Additional Badges
-    additional_badges = models.ManyToManyField(
-        "Badge",
+    trait_three = models.CharField(
+        max_length=36,
+        choices=league_config.trait_choices,
+        default=None,
+        null=True,
         blank=True,
     )
-
-class Badge(models.Model):
-    # Badge Model
-    name = models.CharField(max_length=36)
-    description = models.CharField(max_length=256, blank=True)
-
     # Player Currencies
     primary_currency = models.BigIntegerField(
         name="cash", default=league_config.primary_currency_start
