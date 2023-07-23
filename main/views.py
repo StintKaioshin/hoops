@@ -426,17 +426,6 @@ def teams(request):
     paginator = Paginator(league_teams, 8)
     page_number = request.GET.get("page")
     context["page"] = paginator.get_page(page_number)
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
     # Return the players page
     return render(request, "main/teams/teams.html", context)
 def trade(request):
