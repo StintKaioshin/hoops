@@ -18,7 +18,7 @@ from .models import Team
 from .models import Coupon
 from .models import Transaction
 from .models import TradeOffer
-from .config import attribute_categories
+from .league.config import attribute_categories
 from .models import ContractOffer
 from .models import DiscordUser
 from .models import Notification
