@@ -110,8 +110,10 @@ def createPlayer(user, formData):
         "secondary_badge5": formData.get("secondary_badge5", None),
     }
     # Save the player
-    for attribute in newPlayer.primary_attributes, newPlayer.secondary_attributes:
-        new_attributes = position_attributes[newPlayer.primary_position]
+combined_attributes = newPlayer.primary_attributes + newPlayer.secondary_attributes
+for attribute in combined_attributes:
+    new_attributes = position_attributes[newPlayer.primary_position]
+    if attribute in new_attributes:
         newPlayer.attributes[attribute] = new_attributes[attribute]
     updatedPlayer = league_physicals.setStartingPhysicals(newPlayer)
     # Save the player
