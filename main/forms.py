@@ -2,13 +2,6 @@ from django import forms
 from .league import config as league_config
 from django.core import validators
 class PlayerForm(forms.Form):
-    # Get attribute_choices
-    attribute_choices_config = league_config.attribute_choices
-    attribute_choices = []
-    for tuple in attribute_choices_config:
-        if not tuple[0] in league_config.attribute_categories["physical"]:
-            attribute_choices.append(tuple)
-    # Create fields
     first_name = forms.CharField(label="First Name", max_length=16)
     last_name = forms.CharField(label="Last Name", max_length=16)
     cyberface = forms.IntegerField(label="Cyberface", min_value=0, max_value=40000)
@@ -27,28 +20,20 @@ class PlayerForm(forms.Form):
     jersey_number = forms.IntegerField(
         label="Jersey Number", min_value=0, max_value=league_config.max_attribute
     )
-    primary_attributes = forms.MultipleChoiceField(
-        label="Primary Attributes",
-        choices=attribute_choices,
-        widget=forms.SelectMultiple(),
-    )
-    secondary_attributes = forms.MultipleChoiceField(
-        label="Primary Attributes",
-        choices=attribute_choices,
-        widget=forms.SelectMultiple(),
-    )
-    primary_badges = forms.MultipleChoiceField(
-        label="Primary Badges",
-        choices=league_config.badge_choices,
-        widget=forms.SelectMultiple(),
-    )
-    secondary_badges = forms.MultipleChoiceField(
-        label="Secondary Badges",
-        choices=league_config.badge_choices,
-        widget=forms.SelectMultiple(),
-    )
-    referral_code = forms.IntegerField(label="Referral Code", required=False)
+    referral_code = forms.CharField(label="Referral Code", required=False, max_length=16)
 
+    def __init__(self, *args, **kwargs):
+        attribute_categories = kwargs.pop('attribute_categories', None)
+        badge_categories = kwargs.pop('badge_categories', None)
+        super(PlayerForm, self).__init__(*args, **kwargs)
+        if attribute_categories:
+            for category in attribute_categories:
+                for attribute in attribute_categories[category]:
+                    self.fields[f'{category}_{attribute}'] = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
+        if badge_categories:
+            for category in badge_categories:
+                for badge in badge_categories[category]:
+                    self.fields[f'{category}_{badge}'] = forms.ChoiceField(choices=[(x, x) for x in ["Bronze", "Silver", "Gold", "Hall of Fame"]], required=False)
 class UpgradeForm(forms.Form):
     # Your UpgradeForm fields here...
     def __init__(self, *args, **kwargs):
