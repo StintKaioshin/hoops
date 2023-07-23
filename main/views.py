@@ -24,7 +24,7 @@ from .models import Notification
 from .models import Award
 # Form imports
 from .forms import PlayerForm
-from .forms import def create
+from .forms import UpgradeForm
 from .forms import StylesForm
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
