@@ -4,10 +4,16 @@ from ..league.player import style as player_style
 
 register = template.Library()
 
-@register.filter(name='get_item')
+@register.filter
 def get_item(dictionary, key):
     return dictionary.get(key)
 
+@register.filter
+def fetch_form_field(form, field_pattern):
+    """Fetch form field based on the field pattern."""
+    category, item = field_pattern.split('_')
+    field_name = f'{category}_{item}'
+    return form[field_name]
 
 @register.filter(name="addclass")
 def addclass(value, arg):
