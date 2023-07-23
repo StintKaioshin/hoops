@@ -22,7 +22,7 @@ class PlayerForm(forms.Form):
     )
     referral_code = forms.CharField(label="Referral Code", required=False, max_length=16)
 
-        def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         attribute_categories = kwargs.pop('attribute_categories', None)
         badge_categories = kwargs.pop('badge_categories', None)
         super(PlayerForm, self).__init__(*args, **kwargs)
