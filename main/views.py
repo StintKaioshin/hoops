@@ -303,8 +303,6 @@ import logging
 logger = logging.getLogger(__name__)
 @login_required(login_url="/login/discord/")
 def create_player(request):
-    @login_required(login_url="/login/discord/")
-def create_player(request):
     attribute_categories = { 
         "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
         "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
