@@ -461,7 +461,10 @@ archetype_attribute_bonuses = {
         "Defensive Consistency",
     ],
 }
-# Description: Initials for models
+
+
+
+
 initial_statics = {
     "playstyles": {
         "playstyle1": "0",
@@ -470,6 +473,8 @@ initial_statics = {
         "playstyle4": "0",
     }
 }
+
+
 initial_attributes = {
     "Driving Layup": start_attribute,
     "Standing Dunk": start_attribute,
@@ -809,45 +814,8 @@ hotzone_choices = [
     ("1", "Equipped"),
 ]
 # Description: Categories for .html pages
-
 attribute_categories = {
-    "finishing": [
-        "Driving Layup",
-        "Post Hook",
-        "Close Shot",
-        "Driving Dunk",
-        "Standing Dunk",
-        "Post Control",
-    ],
-    "shooting": [
-        "Mid-Range Shot",
-        "Three-Point Shot",
-        "Free Throw",
-        "Shot IQ",
-        "Offensive Consistency",
-        "Shot Under Basket",
-    ],
-    "defense": [
-        "Interior Defense",
-        "Perimeter Defense",
-        "Lateral Quickness",
-        "Steal",
-        "Block",
-        "Defensive Rebound",
-        "Offensive Rebound",
-        "Defensive Consistency",
-    ],
-    "playmaking": [
-        "Passing Accuracy",
-        "Ball Handle",
-        "Post Moves",
-        "Pass IQ",
-        "Pass Vision",
-        "Speed With Ball",
-        "Speed",
-        "Acceleration",
-    ],
-    "athleticism": [
+    "physical": [
         "Vertical",
         "Strength",
         "Stamina",
@@ -858,8 +826,12 @@ attribute_categories = {
         "Acceleration",
         "Durability",
     ],
+    "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
+    "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
+    "defense": ["Interior Defense", "Perimeter Defense", "Lateral Quickness", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
+    "playmaking": ["Passing Accuracy", "Ball Handle", "Post Moves", "Pass IQ", "Pass Vision", "Speed With Ball", "Speed", "Acceleration"],
+    "athleticism": ["Vertical", "Strength", "Stamina", "Hustle", "Layup", "Dunk", "Speed", "Acceleration", "Durability"],
 }
-
 badge_categories = {
     "finishing": [
         "Acrobat",
@@ -930,7 +902,27 @@ badge_categories = {
         "Unpluckable",
     ],
 }
+
 # Description: Initials methods for models
+playstyles = {
+    "0": "None",
+    "1": "Isolation",
+    "2": "Isolation Point",
+    "3": "Isolation Wing",
+    "4": "P&R Ball Handler",
+    "5": "P&R Point",
+    "6": "P&R Wing",
+    "7": "P&R Roll Man",
+    "8": "Post Up Low",
+    "9": "Post Up High",
+    "10": "Guard Post Up",
+    "11": "Cutter",
+    "12": "Handoff",
+    "13": "Midrange",
+    "14": "3PT",
+}
+
+
 def get_default_statics():
     return initial_statics
 def get_default_attributes():
