@@ -255,7 +255,6 @@ def player(request, id):
     }
     return render(request, "main/players/player.html", context)
 @login_required(login_url="/login/discord/")
-@login_required(login_url="/login/discord/")
 def upgrade_player(request, id):
     # Collect user & player information
     user = request.user
@@ -299,7 +298,6 @@ def upgrade_player(request, id):
         # Attribute categories
         "finishing_attributes": league_config.attribute_categories["finishing"],
         "shooting_attributes": league_config.attribute_categories["shooting"],
-def create_player(request):
         "playmaking_attributes": league_config.attribute_categories["playmaking"],
         "defense_attributes": league_config.attribute_categories["defense"],
         "physical_attributes": league_config.attribute_categories["physical"],
