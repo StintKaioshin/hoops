@@ -626,9 +626,15 @@ hotzone_choices = [
     ("1", "Equipped"),
 ]
 
-attribute_choices = list(initial_attributes.keys())
-badge_choices = list(initial_badges.keys())
+attribute_list = list(initial_attributes.keys())
+badge_list = list(initial_badges.keys())
 
+attribute_choices = [
+    (attr, f"({ {attr}") for attr in attribute_list
+]
+badge_choices = [
+    (badge, f"({{badge}") for badge in badge_list
+]
 attribute_weights = {
     "Driving Layup",
     "Standing Dunk",
