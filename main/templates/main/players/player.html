@@ -180,45 +180,7 @@
                                     </div>
                                 </div>
                                 <hr />
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Attribute Focus</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        {% for attribute in player.primary_attributes %}
-                                            <span class="fw-bold text-success">{{ attribute }}, </span>
-                                        {% endfor %}
-                                        {% for attribute in player.secondary_attributes %}
-                                            {% if forloop.last %}
-                                                <span class="fw-bold text-light">{{ attribute }}</span>
-                                            {% else %}
-                                                <span class="fw-bold text-light">{{ attribute }}, </span>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Badge Focus</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <div class="col-sm-9 text-secondary">
-                                            {% for badge in player.primary_badges %}
-                                                <span class="fw-bold text-success">{{ badge }}, </span>
-                                            {% endfor %}
-                                            {% for badge in player.secondary_badges %}
-                                                {% if forloop.last %}
-                                                    <span class="fw-bold text-light">{{ badge }}</span>
-                                                {% else %}
-                                                    <span class="fw-bold text-light">{{ badge }}, </span>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr />
-                                <div class="row">
+                                    <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Rookie</h6>
                                     </div>
