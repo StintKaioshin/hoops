@@ -358,16 +358,7 @@ def create_player(request):
         "user": user,
     }
     return render(request, "main/players/create.html", context)
-    def free_agents(request):
-    context = {
-        "title": "Free Agents",
-    }
-    free_agent_players = Player.objects.all().order_by("-spent")
-    paginator = Paginator(free_agent_players, 10)
-    page_number = request.GET.get("page")
-    context["page"] = paginator.get_page(page_number)
-    return render(request, "main/players/players.html", context)
-def free_agents(request):
+ def free_agents(request):
     context = {
         "title": "Free Agents",
     }
