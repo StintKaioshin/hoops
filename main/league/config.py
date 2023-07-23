@@ -851,17 +851,6 @@ attribute_categories = {
         "Vertical",
         "Strength",
         "Stamina",
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -879,6 +846,13 @@
-  
         "Hustle",
         "Layup",
         "Dunk",
@@ -872,17 +861,6 @@ attribute_categories = {
 }
 
 badge_categories = {
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
     "finishing": [
         "Acrobat",
         "Backdown Punisher",
