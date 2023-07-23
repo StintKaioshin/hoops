@@ -288,8 +288,10 @@ def export_player(player):
         if "Three Point Shot" in database_attributes:
             three_point = database_attributes["Three Point Shot"]
         else:
-            three_point = default_value        mid_range = database_attributes["Mid Range Shot"]
-        threshold = three_point if three_point > mid_range else mid_range
+            three_point = default_value       
+        mid_range = database_attributes["Mid Range Shot"]
+        threshold = three_point if three_point > mid_range 
+        else mid_range
         if threshold >= 99:
             game_file[7]["data"]["RELEASE_TIMING"] = "4"
         elif threshold >= 90:
