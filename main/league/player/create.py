@@ -56,8 +56,14 @@ def validatePlayerCreation(user, formData):
     if (int(formData["weight"])) > (
         min_max_weights[formData["secondary_position"]]["max"]
     ):
-       return [False, "❌ You are trying to make a player over the maximum weight."]
-
+        return [False, "❌ You are trying to make a player over the maximum weight."]
+    # Check if the user is trying to make a player with duplicate traits
+    selected_traits = [
+        formData["trait_one"],
+        formData["trait_two"],
+    ]
+    if len(selected_traits) != len(set(selected_traits)):
+        return [False, "❌ You are trying to make a player with duplicate traits."]
     # Check if the user is trying to make a player with an existing cyberface
     if Player.objects.filter(cyberface=formData["cyberface"]).exists():
         if int(formData["cyberface"]) != 1:
@@ -87,37 +93,24 @@ def createPlayer(user, formData):
         discord_user=user,
         history_list=historyList,
     )
-    # Update the player's attributes
-    newPlayer.attributes = {
-        "primary_attr1": formData.get("primary_attr1", None),
-        "primary_attr2": formData.get("primary_attr2", None),
-        "primary_attr3": formData.get("primary_attr3", None),
-        "primary_attr4": formData.get("primary_attr4", None),
-        "primary_attr5": formData.get("primary_attr5", None),
-        "secondary_attr1": formData.get("secondary_attr1", None),
-        "secondary_attr2": formData.get("secondary_attr2", None),
-        "secondary_attr3": formData.get("secondary_attr3", None),
-        "secondary_attr4": formData.get("secondary_attr4", None),
-       "secondary_attr5": formData.get("secondary_attr5", None),
-
-    }
-    # Update the player's badges
-    newPlayer.badges = {
-        "primary_badge1": formData.get("primary_badge1", None),
-        "primary_badge2": formData.get("primary_badge2", None),
-        "primary_badge3": formData.get("primary_badge3", None),
-        "primary_badge4": formData.get("primary_badge4", None),
-        "primary_badge5": formData.get("primary_badge5", None),
-        "secondary_badge1": formData.get("secondary_badge1", None),
-        "secondary_badge2": formData.get("secondary_badge2", None),
-        "secondary_badge3": formData.get("secondary_badge3", None),
-        "secondary_badge4": formData.get("secondary_badge4", None),
-        "secondary_badge5": formData.get("secondary_badge5", None),
-
-    }
-
+    # Update the player's archetypes & traits
+    newPlayer.primary_archetype = formData["primary_archetype"]
+    newPlayer.secondary_archetype = formData["secondary_archetype"]
+    newPlayer.trait_one = formData["trait_one"]
+    newPlayer.trait_two = formData["trait_two"]
+    # Update the player's starting attributes
+    for attribute in newPlayer.attributes:
+        new_attributes = position_attributes[newPlayer.primary_position]
+        newPlayer.attributes[attribute] = new_attributes[attribute]
+    # Update the player's bonus attributes
+    for attribute in archetype_bonuses[newPlayer.primary_archetype]:
+        newPlayer.attributes[attribute] += primary_bonus
+    for attribute in archetype_bonuses[newPlayer.secondary_archetype]:
+        newPlayer.attributes[attribute] += secondary_bonus
+    # Update the player's starting physicals
+    updatedPlayer = league_physicals.setStartingPhysicals(newPlayer)
     # Save the player
     historyList.save()
-    newPlayer.save()
+    updatedPlayer.save()
     # Return the player
-    return newPlayer
+    return updatedPlayer
