@@ -255,6 +255,7 @@ def player(request, id):
     }
     return render(request, "main/players/player.html", context)
 @login_required(login_url="/login/discord/")
+@login_required(login_url="/login/discord/")
 def upgrade_player(request, id):
     # Collect user & player information
     user = request.user
@@ -262,24 +263,24 @@ def upgrade_player(request, id):
     player = Player.objects.get(pk=id)
     if not player:
         return HttpResponse("Sorry, this player doesn't exist!")
+    # Check if player has been integrated
+    if not player.primary_attributes or not player.secondary_attributes or not player.primary_badges or not player.secondary_badges:
+        return redirect(integrate_player)
+    return HttpResponse("Upgrading is closed while we integrate the new system.")
     # Check if the user has permission to upgrade this player
     if not player.discord_user == user:
         return HttpResponse("Sorry, you don't have permission to upgrade this player!")
     # Combine attributes & badges + convert to Django form format
     prefill_info = dict(player.attributes, **player.badges, **player.tendencies)
     # Convert primary & secondary attributes to Django form format
-    js_primary_attributes = league_config.archetype_attribute_bonuses[
-        player.primary_archetype
-    ]
-    js_secondary_attributes = league_config.archetype_attribute_bonuses[
-        player.secondary_archetype
-    ]
-    js_trait_one_badges = league_config.trait_badge_unlocks[player.trait_one]
-    js_trait_two_badges = league_config.trait_badge_unlocks[player.trait_two]
-    js_trait_three_badges = league_config.trait_badge_unlocks[player.trait_three] if player.trait_three else []
+    js_primary_attributes = player.primary_attributes
+    js_secondary_attributes = player.secondary_attributes
+    js_primary_badges = player.primary_badges
+    js_secondary_badges = player.secondary_badges
     # Have to remove the 'range' function from attribute prices or javascript shits the bed
     js_attribute_prices = copy.deepcopy(league_config.attribute_prices)
     for _, v in js_attribute_prices.items():
+def upgrade_player(request, id):
         v["range"] = 0
     # Initialize the context
     context = {
@@ -291,16 +292,15 @@ def upgrade_player(request, id):
         "badge_attributes": prefill_info,
         "badge_prices": league_config.badge_prices,
         "attribute_prices": js_attribute_prices,
-        "attribute_bonuses": league_config.archetype_attribute_bonuses,
         "primary_attributes": js_primary_attributes,
         "secondary_attributes": js_secondary_attributes,
         # Traits
-        "trait_one_badges": js_trait_one_badges,
-        "trait_two_badges": js_trait_two_badges,
-        "trait_three_badges": js_trait_three_badges,
+        "primary_badges": js_primary_badges,
+        "secondary_badges": js_secondary_badges,
         # Attribute categories
         "finishing_attributes": league_config.attribute_categories["finishing"],
         "shooting_attributes": league_config.attribute_categories["shooting"],
+def create_player(request):
         "playmaking_attributes": league_config.attribute_categories["playmaking"],
         "defense_attributes": league_config.attribute_categories["defense"],
         "physical_attributes": league_config.attribute_categories["physical"],
@@ -312,8 +312,7 @@ def upgrade_player(request, id):
         # Tendency categories
         "initial_tendencies": league_config.initial_tendencies,
     }
-    return render(request, "main/players/upgrade.html", context)
-import logging
+    return render(request, "main/players/upgrade.html", context)import logging
 logger = logging.getLogger(__name__)
 @login_required(login_url="/login/discord/")
 def create_player(request):
