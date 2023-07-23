@@ -5,12 +5,20 @@ from ..player import export as hoops_player_export
 def game_friendly(a):
     if a is None:
         return None
-    return (a - 25) * 3
+    try:
+        return (int(a) - 25) * 3
+    except ValueError:
+        print(f"Could not convert {a} to an integer")
+        return None
 
 def user_friendly(a):
     if a is None:
         return None
-    return (a - 25) * 3
+    try:
+        return (int(a) - 25) * 3
+    except ValueError:
+        print(f"Could not convert {a} to an integer")
+        return None
 
 convert_to_height = lambda x: str(int(x // 12)) + "'" + str(int(x % 12))
 convert_to_age = lambda x: str(2023 - x)
