@@ -146,6 +146,7 @@ def logout(request):
 def player(request, id):
     # Check if the player exists
     plr = Player.objects.get(pk=id)
+    player_attributes = plr.statics
     if not plr:
         return HttpResponse("Sorry, this player doesn't exist!")
     # Get transaction history & total earnings in past week (cash_taken, cash_given, paycheck)
