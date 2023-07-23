@@ -1,10 +1,6 @@
-import json
 from django import forms
 from .league import config as league_config
-
-player_styles = open("main/league/looyh/styles.json")
-player_styles = json.load(player_styles)
-
+from django.core import validators
 class PlayerForm(forms.Form):
     first_name = forms.CharField(label="First Name", max_length=16)
     last_name = forms.CharField(label="Last Name", max_length=16)
@@ -24,25 +20,49 @@ class PlayerForm(forms.Form):
     jersey_number = forms.IntegerField(
         label="Jersey Number", min_value=0, max_value=league_config.max_attribute
     )
-    primary_archetype = forms.ChoiceField(
-        label="Primary Archetype", choices=league_config.archetype_choices
-    )
-    secondary_archetype = forms.ChoiceField(
-        label="Secondary Archetype", choices=league_config.archetype_choices
-    )
-    trait_one = forms.ChoiceField(
-        label="Trait One", choices=league_config.trait_choices
-    )
-    trait_two = forms.ChoiceField(
-        label="Trait Two", choices=league_config.trait_choices
-    )
-    referral_code = forms.IntegerField(label="Referral Code", required=False)
+    referral_code = forms.CharField(label="Referral Code", required=False, max_length=16)
+
+    def __init__(self, *args, **kwargs):
+        attribute_categories = kwargs.pop('attribute_categories', None)
+
+    
+        
+          
+    
+
+        
+        Expand All
+    
+    @@ -39,6 +40,7 @@ def __init__(self, *args, **kwargs):
+  
+        badge_categories = kwargs.pop('badge_categories', None)
+        super(PlayerForm, self).__init__(*args, **kwargs)
+        if attribute_categories:
+            for category in attribute_categories:
+                for attribute in attribute_categories[category]:
+                    self.fields[f'{category}_{attribute}'] = forms.IntegerField(required=True, validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)])
+        if badge_categories:
+            for category in badge_categories:
+                for badge in badge_categories[category]:
+                    self.fields[f'{category}_{badge}'] = forms.ChoiceField(choices=[(x, x) for x in ["Bronze", "Silver", "Gold", "Hall of Fame"]], required=False)
 
 
 class UpgradeForm(forms.Form):
+    # Your UpgradeForm fields here...
     def __init__(self, *args, **kwargs):
         super(UpgradeForm, self).__init__(*args, **kwargs)
         # For each key in attributes, create integerfield
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
         for key in league_config.initial_attributes:
             if key in league_config.attribute_categories["physical"]:
                 continue
@@ -78,8 +98,6 @@ class UpgradeForm(forms.Form):
         #         choices=league_config.hotzone_choices,
         #         widget=forms.Select(attrs={"onchange": "updatePrice()"}),
         #     )
-
-
 class StylesForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(StylesForm, self).__init__(*args, **kwargs)
@@ -90,7 +108,5 @@ class StylesForm(forms.Form):
                 choices=data["options"],
                 widget=forms.Select(),
             )
-
-
 class TradeForm(forms.Form):
     pass
