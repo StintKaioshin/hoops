@@ -285,7 +285,10 @@ def export_player(player):
         game_file[0]["data"]["PLAY_TYPE_3"] = playstyles["playstyle3"]
         game_file[0]["data"]["PLAY_TYPE_4"] = playstyles["playstyle4"]
         # Signature statics
-        three_point = database_attributes["Three Point Shot"]
+        if "Three Point Shot" in database_attributes:
+            three_point = database_attributes["Three Point Shot"]
+        else:
+            three_point = 60        
         mid_range = database_attributes["Mid Range Shot"]
         threshold = three_point if three_point > mid_range else mid_range
         if threshold >= 99:
