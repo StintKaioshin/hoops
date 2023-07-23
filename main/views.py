@@ -1072,17 +1072,15 @@ def check_starting_attributes(request):
         position = request.POST.get("position")
         height = request.POST.get("height")
         weight = request.POST.get("weight")
-        primary_attribute = request.POST.get("primary_attribute")
-        secondary_attribute = request.POST.get("secondary_attribute")
-        trait1 = request.POST.get("trait1")
-        trait2 = request.POST.get("trait2")
+        primary_attributes = request.POST.getlist("primary_attribute")
+        secondary_attributes = request.POST.getlist("secondary_attribute")
+        primary_badges = request.POST.getlist("primary_badge")
+        secondary_badges = request.POST.getlist("secondary_badge")
 
         # Check some validations first
-        # Check if weight is provided
         if not weight:
             return HttpResponse("❌ Weight is required!")
 
-        # Check if height is within range
         height_limits = league_config.min_max_heights[position]
         weight_limits = league_config.min_max_weights[position]
         convert_height = hoops_extra_convert.convert_to_height
@@ -1090,58 +1088,61 @@ def check_starting_attributes(request):
             return HttpResponse(
                 f"❌ Height must be between {convert_height(height_limits['min'])} and {convert_height(height_limits['max'])}!",
             )
-            
-        # Check if weight is within range
+
         if int(weight) > weight_limits["max"] or int(weight) < weight_limits["min"]:
             return HttpResponse(
                 f"❌ Weight must be between {weight_limits['min']} and {weight_limits['max']}!",
             )
 
-        # Check if traits are not the same
-        if trait1 == trait2:
-            return HttpResponse("❌ Traits cannot be the same!")
+        # Check if there are 5 primary and secondary attributes and badges
+        if len(primary_attributes) != 5 or len(secondary_attributes) != 5 or len(primary_badges) != 5 or len(secondary_badges) != 5:
+            return HttpResponse("❌ You must choose 5 primary and secondary attributes and badges!")
 
-        # Check what the starting attributes would be
+        # Check if there are duplicates in primary and secondary attributes and badges
+        if len(set(primary_attributes)) != 5 or len(set(secondary_attributes)) != 5 or len(set(primary_badges)) != 5 or len(set(secondary_badges)) != 5:
+            return HttpResponse("❌ Primary and secondary attributes and badges must be unique!")
+
         starting_attributes = {
             "height": int(height),
             "weight": int(weight),
             "primary_position": position,
-            "primary_attribute": primary_attribute,
-            "secondary_attribute": secondary_attribute,
             "attributes": copy.deepcopy(
                 league_config.position_starting_attributes[position]
             ),
         }
+
         mock_player = hoops_player_physicals.setStartingPhysicals(
             starting_attributes, mock=True
         )
         player_attributes = mock_player["attributes"]
 
         # Add attribute bonuses
-        if primary_attribute in player_attributes:
-            player_attributes[primary_attribute] += league_config.archetype_primary_bonus
-        if secondary_attribute in player_attributes:
-            player_attributes[secondary_attribute] += league_config.archetype_secondary_bonus
+        for attribute in primary_attributes:
+            if attribute in player_attributes:
+                player_attributes[attribute] += league_config.archetype_primary_bonus
+
+        for attribute in secondary_attributes:
+            if attribute in player_attributes:
+                player_attributes[attribute] += league_config.archetype_secondary_bonus
 
         # Format the attributes with primary/secondary/base tags
         mock_player_attributes = {"primary": {}, "secondary": {}, "base": {}}
         for attribute in player_attributes:
-            if attribute == primary_attribute:
+            if attribute in primary_attributes:
                 mock_player_attributes["primary"][attribute] = player_attributes[attribute]
-            elif attribute == secondary_attribute:
+            elif attribute in secondary_attributes:
                 mock_player_attributes["secondary"][attribute] = player_attributes[attribute]
             else:
                 mock_player_attributes["base"][attribute] = player_attributes[attribute]
 
-        # Add trait bonuses
+        # Prepare badges
         mock_player_badges = {}
-        trait1_list = league_config.trait_badge_unlocks[trait1]
-        trait2_list = league_config.trait_badge_unlocks[trait2]
-        for badge in trait1_list:
+        for badge in primary_badges:
             mock_player_badges[badge] = "[P]"
-        for badge in trait2_list:
+
+        for badge in secondary_badges:
             # We don't want overlapping badges to be marked as secondary if they are also primary
-            if not badge in trait1_list:
+            if not badge in primary_badges:
                 mock_player_badges[badge] = "[S]"
 
         # Return the starting attributes
@@ -1155,13 +1156,13 @@ def check_starting_attributes(request):
             "badges": mock_player_badges,
             "archetype_choices": league_config.archetype_choices,
             "position_choices": league_config.position_choices,
-            "trait_choices": league_config.trait_choices,
             "welcome_message": False,
         }
         html = render_to_string("main/ajax/position_fragment.html", context)
         return HttpResponse(html)
     else:
         return HttpResponse("Invalid request!")
+
 def check_position_count(request):
     if request.method == "POST":
         # Get the form data
