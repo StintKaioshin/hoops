@@ -81,6 +81,7 @@ def createPlayer(user, formData):
         jersey_number=formData["jersey_number"],
         # Relationships
         discord_user=user,
+        history_list=historyList,
     )
     # Update the player's attributes
     newPlayer.attributes = {
