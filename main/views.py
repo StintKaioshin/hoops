@@ -333,7 +333,8 @@ def create_player(request):
             else:
                 messages.error(request, status)
         else:
-            messages.error(request, "Form is not valid. Please fill in all required fields. Errors: {form.errors}")
+            error_messages = ', '.join(['{}: {}'.format(field, ', '.join(errors)) for field, errors in form.errors.items()])
+            messages.error(request, f"Form is not valid. Please fill in all required fields. Errors: {error_messages}")
     else:
         form = PlayerForm()
     context = {
