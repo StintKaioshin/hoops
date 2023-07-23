@@ -54,17 +54,6 @@ def validatePlayerCreation(user, formData):
     if Player.objects.filter(cyberface=formData["cyberface"]).exists():
         if int(formData["cyberface"]) != 1:
             return [False, "❌ You are trying to make a player with an existing cyberface."]
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
     # If everything is good, create the player
     return [True, None]
 def createPlayer(user, formData):
