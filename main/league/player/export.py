@@ -275,32 +275,27 @@ def export_player(player):
                 game_file[4]["data"][tendency] = str(value)
 
     # Set the player's statics
-    def export_player(player):
-    # Gather the player's information
-    database_attributes = player.attributes
-    database_badges = player.badges
-    database_hotzones = player.hotzones
-    database_tendencies = player.tendencies
-    # Create the player's in game attributes
-    game_file = copy.deepcopy(json_template)
-
-    # Set the player's vitals
-    def set_vitals():
-        game_file[0]["data"]["FIRSTNAME"] = str(player.first_name)
-        game_file[0]["data"]["LASTNAME"] = str(player.last_name)
-        game_file[0]["data"]["FACEID"] = str(player.cyberface)
-        game_file[0]["data"]["HEIGHT_CM"] = str(round(player.height * 2.54, 2))
-        game_file[0]["data"]["WEIGHT_LBS"] = str(player.weight)
-        game_file[0]["data"]["POSITION"] = format_position[player.primary_position]
-        game_file[0]["data"]["SECONDARY_POSITION"] = format_position[
-            player.secondary_position
-        ]
-        game_file[0]["data"]["NUMBER"] = str(player.jersey_number)
-        try:
-            game_file[0]["data"]["BIRTHYEAR"] = format_age[0][player.years_played]
-        except Exception:
-            game_file[0]["data"]["BIRTHYEAR"] = "1989"
-
+    def set_statics():
+        # Define some variables
+        statics = player.statics
+        playstyles = statics["playstyles"]
+        # Vital statics -- technically these aren't static, but whatever
+        game_file[0]["data"]["PLAY_TYPE_1"] = playstyles["playstyle1"]
+        game_file[0]["data"]["PLAY_TYPE_2"] = playstyles["playstyle2"]
+        game_file[0]["data"]["PLAY_TYPE_3"] = playstyles["playstyle3"]
+        game_file[0]["data"]["PLAY_TYPE_4"] = playstyles["playstyle4"]
+        # Signature statics
+        three_point = database_attributes["Three Point Shot"]
+        mid_range = database_attributes["Mid Range Shot"]
+        threshold = three_point if three_point > mid_range else mid_range
+        if threshold >= 99:
+            game_file[7]["data"]["RELEASE_TIMING"] = "4"
+        elif threshold >= 90:
+            game_file[7]["data"]["RELEASE_TIMING"] = "3"
+        elif threshold >= 75:
+            game_file[7]["data"]["RELEASE_TIMING"] = "2"
+        elif threshold < 75:
+            game_file[7]["data"]["RELEASE_TIMING"] = "1"
 
     # Set the player's ignores
     def set_ignores():
