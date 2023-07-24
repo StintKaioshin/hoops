@@ -5,6 +5,13 @@
     <!-- <link rel="stylesheet" href="{% static 'main/css/players/upgrade.css' %}"> -->
 {% endblock %}
 {% block content %}
+
+  <form action="/player/upgrade/{{ player.id }}/" method="post">
+
+            {% csrf_token %}
+
+            <input name="id" type="hidden" value="{{ player.id }}">
+
       <div class="card mt-2">
                 <div class="card-header">
                     <h5 class="mb-0">My Cart</h5>
