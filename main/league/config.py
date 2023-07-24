@@ -638,6 +638,12 @@ hotzone_choices = [
     ("1", "Equipped"),
 ]
 
+
+primary_badge_max = 4
+secondary_badge_max = 3
+tertiary_badge_max = 2
+
+
 # Description: Categories for .html pages
 attribute_categories = {
     "finishing": [
