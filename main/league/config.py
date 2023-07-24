@@ -315,7 +315,7 @@ initial_statics = {
     }
 }
 initial_attributes = {
-    "Driving Lay": start_attribute,
+    "Driving Layup": start_attribute,
     "Standing Dunk": start_attribute,
     "Driving Dunk": start_attribute,
     "Close Shot": start_attribute,
