@@ -1,64 +1,21 @@
-{% extends 'main/base.html' %}
-{% load static %}
-{% load main_filters %}
-
-{% block title %}
-    <!-- <link rel="stylesheet" href="{% static 'main/css/players/upgrade.css' %}"> -->
-{% endblock %}
-
-{% block content %}
-
-    <!-- upgrades -->
-    <div class="container">
-           <form action="/player/upgrade/{{ player.id }}/" method="post">
-            {% csrf_token %}
-            <input name="id" type="hidden" value="{{ player.id }}">
-            <!-- cart/price details -->
-            <div class="card mt-2">
-                <div class="card-header">
-                    <h5 class="mb-0">My Cart</h5>
-                    <p id="status" class="mb-0"></p>
-                </div>
-                <div class="card-body">
-                    <p class="card-text mb-0">My Cash<br><b>$<span id="cash">0</b></span></p>
-                    <p class="card-text mb-0">Spending<br><b>$<span id="price">0</b></span></span></p>
-                    <p class="card-text mb-0">Leftover<br><b>$<span id="cashLeft">0</span></b></p>
-                    <hr>
-                    <!-- Continue/False-Submit Button -->
-                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">
-                        Purchase
-                    </button>
-                    <!-- Confirmation Modal -->
-                    <div class="modal" id="myModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            <!-- Modal header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Confirm Purchase</h4>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <p class="mb-4"><b>Are you sure you want to continue with this upgrade?</b></p>
-                                <ul class="container list-group mt-2" id="cartList" style="list-style-type: none; padding: 0px; margin: 0px;">
-                                </ul>
-                                <p class="mt-4"><b>Total Price: </b><span id="confirmationPrice"></span></p>
-                            </div>
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" value="Purchase" id="submitButton" class="btn btn-success btn-sm" hx-post="/upgrades/validate/" data-bs-dismiss="modal" hx-trigger="click" hx-target="#upgrade-result" hx-swap="innerHTML" hx-include="[name='id']">
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancel</button>
-                            </div>
-                            </div>
-                        </div>
-                      </div>
-                    <!-- Errors & Messages -->
-                    <hr>
-                    <div class="container">
-                        <span id="upgrade-result">😊 Welcome to the upgrade page!</span>
-                    </div>
-                </div>
-            </div>
-        
+<div class="container">
+    <form action="/player/upgrade/{{ player.id }}/" method="post">
+        {% csrf_token %}
+        <input name="id" type="hidden" value="{{ player.id }}">
+        <ul class="nav nav-tabs" id="upgradeTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="attributes-tab" data-bs-toggle="tab" data-bs-target="#attributes" type="button" role="tab" aria-controls="attributes" aria-selected="true">Attributes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="badges-tab" data-bs-toggle="tab" data-bs-target="#badges" type="button" role="tab" aria-controls="badges" aria-selected="false">Badges</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tendencies-tab" data-bs-toggle="tab" data-bs-target="#tendencies" type="button" role="tab" aria-controls="tendencies" aria-selected="false">Tendencies</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="upgradeTabsContent">
+            <div class="tab-pane fade show active" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
+                        
             <!-- attributes -->
             <div class="mt-2 row">
                 <!-- finishing attributes -->
@@ -190,7 +147,9 @@
                     </div>
                 </div>
             </div>
-            
+            </div>
+            <div class="tab-pane fade" id="badges" role="tabpanel" aria-labelledby="badges-tab">
+                
             <!-- badges -->
             <div class="mt-2 row">
                 <!-- finishing badges -->
@@ -321,8 +280,9 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- tendencies -->
+            </div>
+            <div class="tab-pane fade" id="tendencies" role="tabpanel" aria-labelledby="tendencies-tab">
+                                <!-- tendencies -->
                 <div class="col-md-12 col-xl-12 mb-4">
                     <div style="height: 1420px;">
                         <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
@@ -354,8 +314,7 @@
             </div>
         </form>
     </div>
-
-    <!-- scripts -->
+ <!-- scripts -->
     <script>
         const attributePrices = {{ attribute_prices|safe }};
         const badgePrices = {{ badge_prices|safe }};
