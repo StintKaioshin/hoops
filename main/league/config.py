@@ -647,7 +647,7 @@ tertiary_badge_max = 2
 # Description: Categories for .html pages
 attribute_categories = {
     "finishing": [
-        "Driving Lay",
+        "Driving Layup",
         "Post Moves",
         "Draw Foul",
         "Close Shot",
