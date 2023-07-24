@@ -1,3 +1,11 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load main_filters %}
+{% block title %}
+    <!-- <link rel="stylesheet" href="{% static 'main/css/players/upgrade.css' %}"> -->
+{% endblock %}
+{% block content %}
+
 <div class="container">
     <form action="/player/upgrade/{{ player.id }}/" method="post">
         {% csrf_token %}
