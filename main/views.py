@@ -1216,9 +1216,9 @@ def check_upgrade_validation(request):
             # Return to the player page
             return HttpResponse(response)
         else:
-        print("Form errors:", form.errors)
-        print("POST data:", request.POST)
-        return HttpResponse("❌ Invalid form_data!")
+            print("Form errors:", form.errors)
+            print("POST data:", request.POST)
+            return HttpResponse("❌ Invalid form_data!")
 
 def check_player_leaders(request):
     if request.method == "POST":
