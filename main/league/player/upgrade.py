@@ -35,20 +35,18 @@ def badgeCost(player, badge, currentValue, futureValue):
     # Define some league config variables
     total_price = 0
     badge_prices = league_config.badge_prices
-    trait_badge_unlocks = league_config.trait_badge_unlocks
     # Define some player variables
-    trait_one_badges = trait_badge_unlocks[player.trait_one]
-    trait_two_badges = trait_badge_unlocks[player.trait_two]
-    trait_three_badges = trait_badge_unlocks[player.trait_three] if player.trait_three else []
+    primary_badges = player.primary_badges
+    secondary_badges = player.secondary_badges
     # Check the badge tier (Bronze, Silver, Gold, Hof)
     for i in range((currentValue + 1), (futureValue + 1)):
         for index, tier in badge_prices.items():
             if i == index:
-                if badge in trait_one_badges:
-                    total_price += tier["trait_one"]
+                if badge in primary_badges:
+                    total_price += tier["primary"]
                     continue
-                elif badge in trait_two_badges or badge in trait_three_badges:
-                    total_price += tier["trait_two"]
+                elif badge in secondary_badges:
+                    total_price += tier["secondary"]
                     continue
                 else:
                     total_price += tier["base"]
@@ -66,10 +64,8 @@ def formatAndValidate(player, cleanedFormData):
     upgradeData = {"attributes": {}, "badges": {}, "tendencies": {}}
     error = ""
     # Define some player variables
-    trait_badge_unlocks = league_config.trait_badge_unlocks
-    trait_one_badges = trait_badge_unlocks[player.trait_one]
-    trait_two_badges = trait_badge_unlocks[player.trait_two]
-    trait_three_badges = trait_badge_unlocks[player.trait_three] if player.trait_three else []
+    primary_badges = player.primary_badges
+    secondary_badges = player.secondary_badges
     # Filter out values that are under minimum, over maximum or equal to current value
     for k, v in formatFormData.items():
         # Type cast the value to an integer
@@ -97,12 +93,12 @@ def formatAndValidate(player, cleanedFormData):
         # If the key is a badge
         if k in player.badges:
             # Finding the maximum value for the badges
-            if k in trait_one_badges:
-                maximumValue = league_config.trait_one_max
-            elif k in trait_two_badges or k in trait_three_badges:
-                maximumValue = league_config.trait_two_max
+            if k in primary_badges:
+                maximumValue = league_config.primary_badge_max
+            elif k in secondary_badges:
+                maximumValue = league_config.secondary_badge_max
             else:
-                maximumValue = league_config.trait_none_max
+                maximumValue = league_config.tertiary_badge_max
             # Initialize the values
             currentValue = player.badges[k]
             minimumValue = league_config.min_badge
@@ -202,3 +198,4 @@ def createUpgrade(player, cleanedFormData):
         player.history_list.save()
         # Return success message
         return f"✅ Congrats, you upgraded your player for ${totalCost}!"
+    
