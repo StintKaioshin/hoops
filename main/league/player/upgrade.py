@@ -98,7 +98,7 @@ def formatAndValidate(player, cleanedFormData):
             elif k in secondary_badges:
                 maximumValue = league_config.secondary_badge_max
             else:
-                maximumValue = league_config.base_badge_max
+                maximumValue = league_config.tertiary_badge_max
             # Initialize the values
             currentValue = player.badges[k]
             minimumValue = league_config.min_badge
