@@ -1,20 +1,37 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% load main_filters %}
+
 {% block title %}
     <!-- <link rel="stylesheet" href="{% static 'main/css/players/upgrade.css' %}"> -->
 {% endblock %}
+
 {% block content %}
+
     <!-- upgrades -->
     <div class="container">
+
+
         <div class="card mt-5">
             <div class="card-header">
                 <h5 class="mb-0">2KMT Tendencies</h5>
             </div>
+            <div class="card-body">
+                <form action="{% url 'scrape_tendencies' player.id %}" method="post">
+                    {% csrf_token %}
+                    <p class="card-text mb-0">2KMT Tendencies</p>
+                    <input type="text" name="tendency_url" class="form-control form-control-sm mt-2" placeholder="Enter 2KMT URL">
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Add tendencies</button>
+                </form>
+            </div>
         </div>
+
         <form action="/player/upgrade/{{ player.id }}/" method="post">
+
             {% csrf_token %}
+
             <input name="id" type="hidden" value="{{ player.id }}">
+
             <!-- cart/price details -->
             <div class="card mt-2">
                 <div class="card-header">
@@ -247,7 +264,6 @@
                                                     {% else %}
                                                         <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
                                                     {% endif %}
-
                                                     {{ field.label }}
                                                 </span>                                         
                                                 {{ field.errors }}
@@ -324,6 +340,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- tendencies -->
                 <div class="col-md-12 col-xl-12 mb-4">
                     <div style="height: 1420px;">
@@ -353,9 +370,12 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </form>
     </div>
+
     <!-- scripts -->
     <script>
         const attributePrices = {{ attribute_prices|safe }};
@@ -368,4 +388,5 @@
         const secondaryBadges = {{ secondary_badges|safe }};
     </script>
     <script src="{% static 'main/js/players/updatePrice.js' %}"></script>
+
 {% endblock %}
