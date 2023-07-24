@@ -10,14 +10,9 @@
 
     <!-- upgrades -->
     <div class="container">
-
-
            <form action="/player/upgrade/{{ player.id }}/" method="post">
-
             {% csrf_token %}
-
             <input name="id" type="hidden" value="{{ player.id }}">
-
             <!-- cart/price details -->
             <div class="card mt-2">
                 <div class="card-header">
@@ -356,9 +351,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </form>
     </div>
 
