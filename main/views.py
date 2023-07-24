@@ -263,6 +263,8 @@ def upgrade_player(request, id):
     if not player:
         return HttpResponse("Sorry, this player doesn't exist!")
     # Check if player has been integrated
+    if not player.primary_attributes or not player.secondary_attributes or not player.primary_badges or not player.secondary_badges:
+        return redirect(integrate_player)
     # Check if the user has permission to upgrade this player
     if not player.discord_user == user:
         return HttpResponse("Sorry, you don't have permission to upgrade this player!")
@@ -307,7 +309,6 @@ def upgrade_player(request, id):
         "initial_tendencies": league_config.initial_tendencies,
     }
     return render(request, "main/players/upgrade.html", context)
-
 import logging
 logger = logging.getLogger(__name__)
 @login_required(login_url="/login/discord/")
