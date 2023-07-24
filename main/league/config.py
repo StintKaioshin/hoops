@@ -44,7 +44,7 @@ position_starting_attributes = {
     "PG": {
         "Pick Roll Defensive Iq": 60,
         "Shot Contest": 60,
-        "Driving Lay": 65,
+        "Driving Layup": 65,
         "Post Fadeaway": 45,
         "Post Hook": 45,
         "Post Moves": 45,
@@ -83,7 +83,7 @@ position_starting_attributes = {
         "Shot Contest": 60,
     },
     "SG": {
-        "Driving Lay": 65,
+        "Driving Layup": 65,
         "Post Fadeaway": 45,
         "Post Hook": 45,
         "Post Moves": 45,
@@ -122,7 +122,7 @@ position_starting_attributes = {
         "Shot Contest": 60,
     },
     "SF": {
-        "Driving Lay": 55,
+        "Driving Layup": 55,
         "Post Fadeaway": 55,
         "Post Hook": 55,
         "Post Moves": 55,
@@ -161,7 +161,7 @@ position_starting_attributes = {
         "Shot Contest": 60,
     },
     "PF": {
-        "Driving Lay": 45,
+        "Driving Layup": 45,
         "Post Fadeaway": 65,
         "Post Hook": 65,
         "Post Moves": 65,
@@ -200,7 +200,7 @@ position_starting_attributes = {
         "Shot Contest": 60,
     },
     "C": {
-        "Driving Lay": 45,
+        "Driving Layup": 45,
         "Post Fadeaway": 65,
         "Post Hook": 65,
         "Post Moves": 65,
