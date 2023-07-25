@@ -240,19 +240,29 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- relatives -->
-                        <div class="col-sm-6 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-1"><i class="material-icons text-light mr-2">possible relatives</i></h6>
-                                    {% for relative in possible_relatives %}
-                                        <div class="mb-3" style="height: 5px;">
-                                            <small><a href="{% url 'player' relative.0 %}">{{ relative.1 }} {{ player.last_name }}</a></small>
-                                        </div>
-                                    {% endfor %}
-                                </div>
+                         {% block content %}
+    <div class="container mt-5">
+        <div class="row .payment-dialog-row">
+            <div class="col-12 col-md-4 offset-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><span class="panel-title-text">Daily Rewards</span></h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            {% csrf_token %}
+                            <div class="row">
+                                <p id="reward-result" class="mt-1 mb-2" style="font-size:14px;">Collect your daily rewards!</p>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-12"><button class="btn btn-success btn-lg d-block w-100" type="submit" hx-post="/player/daily/reward/" hx-trigger="click delay:200ms" hx-target="#reward-result" hx-swap="innerHTML" onkeydown="return event.key != 'Enter';">Collect</button></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
                         <!-- attribute viewer -->
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
