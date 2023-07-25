@@ -185,6 +185,13 @@ def createUpgrade(player, cleanedFormData):
         currentTime = datetime.datetime.now()
         timestamp = currentTime.strftime("%Y-%m-%d | %H:%M:%S")
         player.spent += totalCost
+        player.history_list.history["upgrade_logs"].append(
+            {
+                "cost": totalCost,
+                "data": upgradeData,
+                "timestamp": timestamp,
+            }
+        )
         player.upgrades_pending = True
         # Save the player & history lists
         player.save()
