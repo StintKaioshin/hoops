@@ -81,14 +81,14 @@ def createPlayer(user, formData):
         history_list=historyList,
     )
     # Update the player's attributes
-   newPlayer.primary_attributes = [
+    newPlayer.primary_attributes = [
         formData.get("primary_attr1", None),
         formData.get("primary_attr2", None),
         formData.get("primary_attr3", None),
         formData.get("primary_attr4", None),
         formData.get("primary_attr5", None),
     ]
-    newPlayer.secondary_attributes = [
+     newPlayer.secondary_attributes = [
         formData.get("secondary_attr1", None),
         formData.get("secondary_attr2", None),
         formData.get("secondary_attr3", None),
@@ -97,14 +97,14 @@ def createPlayer(user, formData):
     ]
 
     # Update the player's badges
-    newPlayer.primary_badges = [
+     newPlayer.primary_badges = [
         formData.get("primary_badge1", None),
         formData.get("primary_badge2", None),
         formData.get("primary_badge3", None),
         formData.get("primary_badge4", None),
         formData.get("primary_badge5", None),
     ]
-    newPlayer.secondary_badges = [
+     newPlayer.secondary_badges = [
         formData.get("secondary_badge1", None),
         formData.get("secondary_badge2", None),
         formData.get("secondary_badge3", None),
