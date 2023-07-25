@@ -114,21 +114,16 @@ def createPlayer(user, formData):
 
     # Save the player
     # Get base attributes for the player's primary position
-    new_attributes = position_attributes[newPlayer.primary_position]
 # Add base attributes to newPlayer.attributes
-    for attribute, value in new_attributes.items():
-        newPlayer.attributes[attribute] = value
-
 # Overwrite any base attributes that are also primary or secondary attributes
     combined_attributes = newPlayer.primary_attributes + newPlayer.secondary_attributes
-    for attribute in combined_attributes:
-        if attribute in new_attributes:
-            newPlayer.attributes[attribute] = new_attributes[attribute]
-
+    for attribute in newPlayer.attributes:
+        new_attributes = position_attributes[newPlayer.primary_position]
+        newPlayer.attributes[attribute] = new_attributes[attribute]
+    # Update the player's starting physicals
     updatedPlayer = league_physicals.setStartingPhysicals(newPlayer)
-# Save the player
+    # Save the player
     historyList.save()
     updatedPlayer.save()
-# Return the player
+    # Return the player
     return updatedPlayer
-
