@@ -63,6 +63,7 @@ def validatePlayerCreation(user, formData):
     return [True, None]
 
 def createPlayer(user, formData):
+    print(formData)
     historyList = HistoryList.objects.create()
     # Create the player
     newPlayer = Player.objects.create(
