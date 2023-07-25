@@ -20,7 +20,6 @@
             <div class="card-header">
                 <h5 class="mb-0">2KMT Tendencies</h5>
             </div>
-            <div class="card-body">
                 <form action="{% url 'scrape_tendencies' player.id %}" method="post">
                     {% csrf_token %}
                     <p class="card-text mb-0">2KMT Tendencies</p>
