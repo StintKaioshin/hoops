@@ -173,8 +173,6 @@ def createUpgrade(player, cleanedFormData):
         # Add the totalCost to spent & add history list log
         currentTime = datetime.datetime.now()
         timestamp = currentTime.strftime("%Y-%m-%d | %H:%M:%S")
-createUpgrade(player, cleanedFormData):
- 
         player.spent += totalCost
         player.history_list.history["upgrade_logs"].append(
             {
