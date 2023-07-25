@@ -799,19 +799,6 @@ playstyles = {
 }
 
 
-league_config.min_values = {
-    "attributes": league_config.min_attribute,
-    "badges": league_config.min_badge,
-    "tendencies": league_config.min_tendency,
-}
-
-league_config.max_values = {
-    "attributes": league_config.max_attribute,
-    "badges": league_config.tertiary_badge_max,  # Set this as the base value, we will adjust it for primary and secondary badges later
-    "tendencies": league_config.max_tendency,
-}
-
-
 def get_default_statics():
     return initial_statics
 def get_default_attributes():
