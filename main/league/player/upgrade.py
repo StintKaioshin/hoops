@@ -149,11 +149,14 @@ def createUpgrade(player, cleanedFormData):
     formatResponse = formatAndValidate(player, cleanedFormData)
     upgradeData = formatResponse[0]
     upgradeError = formatResponse[1]
+
     # Check if there were any errors
     if upgradeError != "":
         return upgradeError
+
     # Initialize the total cost
     totalCost = 0
+
     # Calculate the total cost
     for k, v in upgradeData["attributes"].items():
         totalCost += v["cost"]
@@ -161,26 +164,35 @@ def createUpgrade(player, cleanedFormData):
         totalCost += v["cost"]
     for k, v in upgradeData["tendencies"].items():
         totalCost += v["cost"]
+
     # Return if cost is below zero & no tendencies were upgraded, or player doesn't have enough cash
     if totalCost <= 0 and not upgradeData["tendencies"]:
         return "😕 Nothing to upgrade!"
     if player.cash < totalCost:
         return "❌ You don't have enough cash for this upgrade!"
+
     # Check if the player has enough cash
     if player.cash >= totalCost:
         # Subtract the cost from the player's cash
         player.cash -= totalCost
+
         # Add the upgrades to the player
         for k, v in upgradeData["attributes"].items():
+            key = k.split("_")[1]  # Remove prefix from key
             # Check if the attribute is a physical attribute
-            if k in league_config.attribute_categories["physical"]:
-                return f"❌ '{k}' cannot be upgraded because it's a physical."
+            if key in league_config.attribute_categories["physical"]:
+                return f"❌ '{key}' cannot be upgraded because it's a physical."
             else:
-                player.attributes[k] = v["new"]
+                player.attributes[key] = v["new"]
+
         for k, v in upgradeData["badges"].items():
-            player.badges[k] = v["new"]
+            key = k.split("_")[1]  # Remove prefix from key
+            player.badges[key] = v["new"]
+
         for k, v in upgradeData["tendencies"].items():
-            player.tendencies[k] = v["new"]
+            key = k.split("_")[1]  # Remove prefix from key
+            player.tendencies[key] = v["new"]
+
         # Add the totalCost to spent & add history list log
         currentTime = datetime.datetime.now()
         timestamp = currentTime.strftime("%Y-%m-%d | %H:%M:%S")
@@ -193,9 +205,11 @@ def createUpgrade(player, cleanedFormData):
             }
         )
         player.upgrades_pending = True
+
         # Save the player & history lists
         player.save()
         player.history_list.save()
+
         # Return success message
         return f"✅ Congrats, you upgraded your player for ${totalCost}!"
     
