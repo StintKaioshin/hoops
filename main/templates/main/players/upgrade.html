@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-        <input name="id" type="hidden" value="{{ player.id }}">
+        <input name="id" type="hidden" value="{{ id }}">
         <ul class="nav nav-tabs" id="upgradeTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="attributes-tab" data-bs-toggle="tab" data-bs-target="#attributes" type="button" role="tab" aria-controls="attributes" aria-selected="true">Attributes</button>
@@ -90,9 +90,9 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in finishing_attributes %}         
                                                 <span class="ml-0" style="font-size: 10px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in player.primary_attributes %}
+                                                    {% if field.name in primary_attributes %}
                                                     <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">PRIMARY </span>
-                                                    {% elif field.name in player.secondary_attributes %}
+                                                    {% elif field.name in secondary_attributes %}
                                                     <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">SECONDARY </span>
                                                     {% else %}
                                                     <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
@@ -122,9 +122,9 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in shooting_attributes %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in player.primary_attributes %}
+                                                    {% if field.name in primary_attributes %}
                                                     <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">PRIMARY </span>
-                                                    {% elif field.name in player.secondary_attributes %}
+                                                    {% elif field.name in secondary_attributes %}
                                                     <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">SECONDARY </span>
                                                     {% else %}
                                                     <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
@@ -154,9 +154,9 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in playmaking_attributes %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in player.primary_attributes %}
+                                                    {% if field.name in primary_attributes %}
                                                     <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">PRIMARY </span>
-                                                    {% elif field.name in player.secondary_attributes %}
+                                                    {% elif field.name in secondary_attributes %}
                                                     <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">SECONDARY </span>
                                                     {% else %}
                                                     <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
@@ -186,9 +186,9 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in defense_attributes %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in player.primary_attributes %}
+                                                    {% if field.name in primary_attributes %}
                                                     <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">PRIMARY </span>
-                                                    {% elif field.name in player.secondary_attributes %}
+                                                    {% elif field.name in secondary_attributes %}
                                                     <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">SECONDARY </span>
                                                     {% else %}
                                                     <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
@@ -224,9 +224,9 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in finishing_badges %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in player.primary_badges %}
+                                                    {% if field.name in primary_badges %}
                                                         <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in player.secondary_badges %}
+                                                    {% elif field.name in secondary_badges %}
                                                         <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
                                                     {% else %}
                                                         <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
@@ -256,9 +256,9 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in shooting_badges %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in player.primary_badges %}
+                                                    {% if field.name in primary_badges %}
                                                         <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in player.secondary_badges %}
+                                                    {% elif field.name in secondary_badges %}
                                                         <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
                                                     {% else %}
                                                         <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
@@ -288,9 +288,9 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in playmaking_badges %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in player.primary_badges %}
+                                                    {% if field.name in primary_badges %}
                                                         <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in player.secondary_badges %}
+                                                    {% elif field.name in secondary_badges %}
                                                         <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
                                                     {% else %}
                                                         <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
@@ -320,9 +320,9 @@
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in defense_badges %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in player.primary_badges %}
+                                                    {% if field.name in primary_badges %}
                                                         <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in player.secondary_badges %}
+                                                    {% elif field.name in secondary_badges %}
                                                         <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
                                                     {% else %}
                                                         <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
@@ -379,7 +379,7 @@
         const attributePrices = {{ attribute_prices|safe }};
         const badgePrices = {{ badge_prices|safe }};
         const badgeAttributes = {{ badge_attributes|safe }};
-        const cash = {{ player.cash }};
+        const cash = {{ cash }};
         const primaryAttributes = {{ primary_attributes|safe }};
         const secondaryAttributes = {{ secondary_attributes|safe }};
         const primaryBadges = {{ primary_badges|safe }};
