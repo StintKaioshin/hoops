@@ -340,8 +340,14 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="tendencies" role="tabpanel" aria-labelledby="tendencies-tab">
-                                <!-- tendencies -->
-                                   </div><hr>
+                <div class="col-md-12 col-xl-12 mb-4">
+                    <div style="height: 1420px;">
+                        <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
+                            <div class="row align-items-center no-gutters">
+                                <div class="col me-2">
+                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                        <span class="text-white" style="font-size: 12px;">Tendencies</span>
+                                    </div><hr>
                                     <div class="container">
                                         <div class="row">
                                             {% for field in upgrade_player_form %} 
@@ -362,9 +368,12 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </form>
     </div>
+
  <!-- scripts -->
     <script>
         const attributePrices = {{ attribute_prices|safe }};
