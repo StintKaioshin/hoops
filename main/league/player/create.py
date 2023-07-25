@@ -120,7 +120,7 @@ def createPlayer(user, formData):
         newPlayer.attributes[attribute] = value
 
 # Overwrite any base attributes that are also primary or secondary attributes
-    combined_attributes = list(newPlayer.primary_attributes.keys()) + list(newPlayer.secondary_attributes.keys())
+    combined_attributes = newPlayer.primary_attributes + newPlayer.secondary_attributes
     for attribute in combined_attributes:
         if attribute in new_attributes:
             newPlayer.attributes[attribute] = new_attributes[attribute]
