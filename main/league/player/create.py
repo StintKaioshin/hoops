@@ -113,11 +113,6 @@ def createPlayer(user, formData):
     # Save the player
     # Get base attributes for the player's primary position
     new_attributes = position_attributes[newPlayer.primary_position]
-    newPlayer.primary_attributes = formData["primary_attributes"]
-    newPlayer.secondary_attributes = formData["secondary_attributes"]
-    newPlayer.primary_badges = formData["primary_badges"]
-    newPlayer.secondary_badges = formData["secondary_badges"]
-
 # Add base attributes to newPlayer.attributes
     for attribute, value in new_attributes.items():
         newPlayer.attributes[attribute] = value
