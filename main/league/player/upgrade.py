@@ -184,6 +184,5 @@ def createUpgrade(player, cleanedFormData):
         player.upgrades_pending = True
         # Save the player & history lists
         player.save()
-        player.history_list.save()
         # Return success message
         return f"✅ Congrats, you upgraded your player for ${totalCost}!"
