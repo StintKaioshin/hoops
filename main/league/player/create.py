@@ -81,35 +81,37 @@ def createPlayer(user, formData):
         history_list=historyList,
     )
     # Update the player's attributes
-    newPlayer.primary_attributes = {
-        "primary_attr1": formData.get("primary_attr1", None),
-        "primary_attr2": formData.get("primary_attr2", None),
-        "primary_attr3": formData.get("primary_attr3", None),
-        "primary_attr4": formData.get("primary_attr4", None),
-        "primary_attr5": formData.get("primary_attr5", None),
-    }
-    newPlayer.secondary_attributes = {
-        "secondary_attr1": formData.get("secondary_attr1", None),
-        "secondary_attr2": formData.get("secondary_attr2", None),
-        "secondary_attr3": formData.get("secondary_attr3", None),
-        "secondary_attr4": formData.get("secondary_attr4", None),
-        "secondary_attr5": formData.get("secondary_attr5", None),
-    }
+   newPlayer.primary_attributes = [
+        formData.get("primary_attr1", None),
+        formData.get("primary_attr2", None),
+        formData.get("primary_attr3", None),
+        formData.get("primary_attr4", None),
+        formData.get("primary_attr5", None),
+    ]
+    newPlayer.secondary_attributes = [
+        formData.get("secondary_attr1", None),
+        formData.get("secondary_attr2", None),
+        formData.get("secondary_attr3", None),
+        formData.get("secondary_attr4", None),
+        formData.get("secondary_attr5", None),
+    ]
+
     # Update the player's badges
-    newPlayer.primary_badges = {
-        "primary_badge1": formData.get("primary_badge1", None),
-        "primary_badge2": formData.get("primary_badge2", None),
-        "primary_badge3": formData.get("primary_badge3", None),
-        "primary_badge4": formData.get("primary_badge4", None),
-        "primary_badge5": formData.get("primary_badge5", None),
-    }
-    newPlayer.secondary_badges = {
-        "secondary_badge1": formData.get("secondary_badge1", None),
-        "secondary_badge2": formData.get("secondary_badge2", None),
-        "secondary_badge3": formData.get("secondary_badge3", None),
-        "secondary_badge4": formData.get("secondary_badge4", None),
-        "secondary_badge5": formData.get("secondary_badge5", None),
-    }
+    newPlayer.primary_badges = [
+        formData.get("primary_badge1", None),
+        formData.get("primary_badge2", None),
+        formData.get("primary_badge3", None),
+        formData.get("primary_badge4", None),
+        formData.get("primary_badge5", None),
+    ]
+    newPlayer.secondary_badges = [
+        formData.get("secondary_badge1", None),
+        formData.get("secondary_badge2", None),
+        formData.get("secondary_badge3", None),
+        formData.get("secondary_badge4", None),
+        formData.get("secondary_badge5", None),
+    ]
+
     # Save the player
     # Get base attributes for the player's primary position
     new_attributes = position_attributes[newPlayer.primary_position]
