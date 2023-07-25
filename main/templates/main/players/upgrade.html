@@ -86,7 +86,9 @@
                                         <span class="text-white" style="font-size: 12px;">Finishing Attributes</span>
                                     </div><hr>
                                     <div class="text-white h5 mb-0" style="margin-top: -6px;">
-                                        {% for field in upgrade_player_form %} 
+                                        {% for field in upgrade_player_form %}
+                                        {{ field.label }}
+                                                    {% endfor %}
                                             {% if field.label in finishing_attributes %}         
                                                 <span class="ml-0" style="font-size: 10px; text-decoration: none; text-transform: capitalize;">
                                                     {% if field.name in player.primary_attributes %}
