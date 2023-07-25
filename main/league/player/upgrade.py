@@ -57,92 +57,42 @@ def badgeCost(player, badge, currentValue, futureValue):
 def formatAndValidate(player, cleanedFormData):
     # Format the cleaned form data (so it works with the database)
     formatFormData = cleanedFormData.copy()
-    # formatFormData = {k.title(): v for k, v in formatFormData.items()}
-    # formatFormData = {k.replace("_", " "): v for k, v in formatFormData.items()}
-    # Initialize the upgrade data (will be returned to upgrade the player with)
-    # Basically, we'll just be adding the values that were changed and are valid to this dictionary
     upgradeData = {"attributes": {}, "badges": {}, "tendencies": {}}
     error = ""
-    # Define some player variables
     primary_badges = player.primary_badges
     secondary_badges = player.secondary_badges
+
     # Filter out values that are under minimum, over maximum or equal to current value
     for k, v in formatFormData.items():
-        # Type cast the value to an integer
         v = int(v)
-        # If the key is an attribute
-        if k in player.attributes:
-            # Initialize the values
-            currentValue = player.attributes[k]
-            minimumValue = league_config.min_attribute
-            maximumValue = league_config.max_attribute
-            # Cases
-            if v < minimumValue:  # Upgrade value is less than minimum value
-                error = f"❌ {k} ({v}) value is less than the minimum value."
-                break
-            if v > maximumValue:  # Upgrade value is greater than maximum value
-                error = f"❌ {k} ({v}) value is greater than the maximum value."
-                break
-            # Add the value to the upgrade data
-            upgradeCost = attributeCost(player, k, currentValue, v)
-            upgradeData["attributes"][k] = {
-                "cost": upgradeCost,
-                "old": currentValue,
-                "new": v,
-            }
-        # If the key is a badge
-        if k in player.badges:
-            # Finding the maximum value for the badges
-            if k in primary_badges:
+        category, key = k.split("_")  # Split the prefixed key into category and key
+        currentValue = getattr(player, category)[key]  # Access the current value using the category and key
+        minimumValue = league_config.min_values[category]  # Access the minimum value using the category
+        maximumValue = league_config.max_values[category]  # Access the maximum value using the category
+        # Set the maximum value for badges
+        if category == "badges":
+            if key in primary_badges:
                 maximumValue = league_config.primary_badge_max
-            elif k in secondary_badges:
+            elif key in secondary_badges:
                 maximumValue = league_config.secondary_badge_max
             else:
                 maximumValue = league_config.tertiary_badge_max
-            # Initialize the values
-            currentValue = player.badges[k]
-            minimumValue = league_config.min_badge
-            # Cases
-            if v < minimumValue:  # Upgrade value is less than minimum value
-                error = f"❌ {k} ({v}) is less than the minimum value."
-                break
-            if v > maximumValue:  # Upgrade value is greater than maximum value
-                error = f"❌ {k} ({v}) is greater than the maximum value."
-                break
-            # Add the value to the upgrade data
-            upgradeCost = badgeCost(player, k, currentValue, v)
-            upgradeData["badges"][k] = {
-                "cost": upgradeCost,
-                "old": currentValue,
-                "new": v,
-            }
-        # If the key is a tendency
-        if k in player.tendencies:
-            # Initialize the values
-            currentValue = player.tendencies[k]
-            maximumValue = league_config.max_tendency
-            # Cases
-            if k in league_config.banned_tendencies:
-                if v > currentValue:
-                    error = f"❌ {k} cannot be changed."
-                    break
-            if k in league_config.max_tendencies:
-                if v > league_config.max_tendencies[k]:
-                    error = f"❌ {k} is greater than the maximum value. ({league_config.max_tendencies[k]})"
-                    break
-            if v > maximumValue:
-                error = f"❌ {k} is greater than the maximum value. ({maximumValue})"
-                break
-            # Add the value to the ugprade data
-            upgradeData["tendencies"][k] = {
-                "cost": 0,
-                "old": player.tendencies[k],
-                "new": v,
-            }
+        # Cases
+        if v < minimumValue:
+            error = f"❌ {k} ({v}) value is less than the minimum value."
+            break
+        if v > maximumValue:
+            error = f"❌ {k} ({v}) value is greater than the maximum value."
+            break
+        # Add the value to the upgrade data
+        upgradeCost = attributeCost(player, k, currentValue, v) if category == "attributes" else badgeCost(player, k, currentValue, v)
+        upgradeData[category][key] = {
+            "cost": upgradeCost,
+            "old": currentValue,
+            "new": v,
+        }
 
-    # Return the upgrade data
     return [upgradeData, error]
-
 
 def createUpgrade(player, cleanedFormData):
     # Format the form data
