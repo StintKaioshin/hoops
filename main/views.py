@@ -382,6 +382,24 @@ def upgrade_logs(request, id):
         return render(request, "main/players/history.html", context)
     else:
         return HttpResponse("Sorry, this player doesn't exist!")
+def search_players(request):
+    search_query = request.GET.get('search', '')
+    position = request.GET.get('position', '')
+    players = Player.objects.all()
+    
+    if search_query:
+        players = players.filter(name__icontains=search_query)
+    
+    if position:
+        players = players.filter(position=position)
+
+    paginator = Paginator(players, 10) # Show 10 players per page
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+
+    return render(request, 'main/ajax/player_list_fragment.html', {'page': page})
+
+
 def cash_logs(request, id):
     # Check if the player exists
     player = Player.objects.get(pk=id)
