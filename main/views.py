@@ -391,14 +391,13 @@ def search_players(request):
         players = players.filter(name__icontains=search_query)
     
     if position:
-        players = players.filter(position=position)
+        players = players.filter(primary_position=position)
 
     paginator = Paginator(players, 10) # Show 10 players per page
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
 
     return render(request, 'main/ajax/player_list_fragment.html', {'page': page})
-
 
 def cash_logs(request, id):
     # Check if the player exists
