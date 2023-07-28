@@ -48,22 +48,23 @@
         </ul>
     </div>
 
-    <script>
-        function updateSearch() {
-            var form = document.getElementById('search-form');
-            var position = document.getElementById('position-select').value;
-            var search = document.getElementById('search-input').value;
-            var target = document.getElementById('search-results');
+<script>
+    function updateSearch() {
+        var position = document.getElementById('position-select').value;
+        var search = document.getElementById('search-input').value;
+        var target = document.getElementById('search-results');
 
-            // Adding position parameter to the request
-            var params = {
-                position: position,
-                search: search
-            };
+        // Create a URLSearchParams object to hold the parameters
+        var params = new URLSearchParams({
+            position: position,
+            search: search
+        });
 
-            // AJAX call to update the search results
-            hx.fetch('/players/search/', {method: 'POST', body: JSON.stringify(params)}).then(response => response.text()).then(html => hx.swapping.swap(target, html));
-        }
-    </script>
+        // AJAX call to update the search results
+        hx.fetch('/players/search/?' + params.toString(), {method: 'GET'})
+            .then(response => response.text())
+            .then(html => hx.swapping.swap(target, html));
+    }
+</script>
 
 {% endblock %}
