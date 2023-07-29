@@ -1,9 +1,7 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% load main_filters %}
-
 {% block content %}
-
     <div class="container-fluid" style="padding: 25px;">
         <!-- Center image -->
         <img class="img-fluid rounded" src="{{ player.headshot }}" style="height: 250px; width: 250px; display: block; margin-left: auto; margin-right: auto;" alt="Center">
@@ -24,9 +22,7 @@
             {% endif %}
         </p>
     </div>
-
     <hr>
-
     <div class="container-fluid" style="padding: 25px;">
         <!-- Add form to pay player if user.can_update_players -->
         {% if user.can_update_players %}
@@ -86,210 +82,9 @@
             </div>
         {% endif %}
     </div>
-
-                <!-- Trait & archetype details -->
-                <p class="mb-0"><b>Creator:</b> {{ player.discord_user.discord_tag }}</p>
-                <p><b>Week Earnings:</b> ${{ week_earnings }}</p>
-                <!-- Contract details -->
-                <hr>
-                <p class="mb-0"><b>Referral Code:</b> {{ player.id }}</p>
-                <p class="mb-0"><b>Contract Salary:</b> ${{ player.salary }}</p>
-                <p class="mb-0"><b>Contract Expires:</b> <i></i> Season {{ player.contract_ends_after }}</p>
-                <p class="mb-0"><b>Contract Option:</b> {{ player.contract_option }}</p>
-                <p class="mb-0"><b>Contract Benefits:</b> {{ player.contract_benefits }}</p>
-                <!-- Award details -->
-                <hr class="mt-3">
-                <p class="mb-0">
-                    {% if awards.MVP %}
-                        🏆 <b>MVP:</b>
-                        {% for a in awards.MVP %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.DPOY %}
-                        🔏 <b>DPOY:</b>
-                        {% for a in awards.DPOY %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.MIP %}
-                        💹 <b>MIP:</b>
-                        {% for a in awards.MIP %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.ROY %}
-                        👦 <b>ROY:</b>
-                        {% for a in awards.ROY %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.AH1ST %}
-                        🏀 <b>AH1ST:</b>
-                        {% for a in awards.AH1ST %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.AH2ND %}
-                        🏀 <b>AH2ND:</b>
-                        {% for a in awards.AH2ND %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.D1ST %}
-                        🔒 <b>D1ST:</b>
-                        {% for a in awards.D1ST %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.D2ND %}
-                        🔒 <b>D2ND:</b>
-                        {% for a in awards.D2ND %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.KOTS %}
-                        👑 <b>KOTS:</b> x{{ awards.KOTS }}<br>
-                    {% endif %}
-                    {% if awards.RING %}
-                        💍 <b>RING:</b>
-                        {% for a in awards.RING %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.FMVP %}
-                        🌟 <b>FMVP:</b>
-                        {% for a in awards.FMVP %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.ASG %}
-                        ⭐ <b>ASG:</b>
-                        {% for a in awards.ASG %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.ASGMVP %}
-                        💫 <b>ASGMVP:</b>
-                        {% for a in awards.ASGMVP %}
-                            S{{ a }} 
-                        {% endfor %}<br>
-                    {% endif %}
-                    {% if awards.3PTWIN %}
-                        3️⃣ <b>3PTWIN:</b>
-                        {% for a in awards.3PTWIN %}
-                            S{{ a }} 
-                        {% endfor %}<br> 
-                    {% endif %}
-                    {% if awards.DNKWIN %}
-                        💪 <b>DNKWIN:</b>
-                        {% for a in awards.DNKWIN %}
-                            S{{ a }} 
-                        {% endfor %}<br> 
-                    {% endif %}
-                </p>
-                <!-- Redesign attempt -->
-                <ul class="nav nav-tabs" id="myTabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#menu1">Attributes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#menu2">Badges</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#menu3">Tendencies</a>
-                    </li>
-                </ul>
-
-                <div class="tab-content">
-                    <!-- Attribute menu -->
-                    <div class="tab-pane fade show active mt-2" id="menu1">
-                        <div class="d-flex justify-content-start" style="gap: 20px;">
-                            <div id="finishing-attributes">
-                                <table>
-                                    <thead>
-                                        <tr class="border-bottom"><th class="p-0" colspan="2">Finishing</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for k, v in player.attributes.items %}
-                                            <tr>
-                                                {% if k in finishing_attributes %}
-                                                    <td>{{ k }}:</td>
-                                                    <td style="padding-left: 10px;">{{ v }}</td>
-                                                {% endif %}
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div id="shooting-attributes">
-                                <table>
-                                    <thead>
-                                        <tr class="border-bottom"><th class="p-0" colspan="2">Shooting</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for k, v in player.attributes.items %}
-                                            <tr>
-                                                {% if k in shooting_attributes %}
-                                                    <td>{{ k }}:</td>
-                                                    <td style="padding-left: 10px;">{{ v }}</td>
-                                                {% endif %}
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div id="playmaking-attributes">
-                                <table>
-                                    <thead>
-                                        <tr class="border-bottom"><th class="p-0" colspan="2">Playmaking</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for k, v in player.attributes.items %}
-                                            <tr>
-                                                {% if k in playmaking_attributes %}
-                                                    <td>{{ k }}:</td>
-                                                    <td style="padding-left: 10px;">{{ v }}</td>
-                                                {% endif %}
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div id="defense-attributes">
-                                <table>
-                                    <thead>
-                                        <tr class="border-bottom"><th class="p-0" colspan="2">Defense</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for k, v in player.attributes.items %}
-                                            <tr>
-                                                {% if k in defense_attributes %}
-                                                    <td>{{ k }}:</td>
-                                                    <td style="padding-left: 10px;">{{ v }}</td>
-                                                {% endif %}
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div> 
-                        </div>
-                    </div>
-                    <!-- Badge menu -->
-                    <div class="tab-pane fade" id="menu2">
-                        <!-- Content for Menu 2 goes here -->
-                    </div>
-                    <!-- Tendency menu -->
-                    <div class="tab-pane fade" id="menu3">
-                        <!-- Content for Menu 3 goes here -->
-                    </div>
-                </div>
-                <!-- Info Menu -->
-                <div class="tab-content">
-                    <!-- Attribute menu -->
-                    <div class="tab-pane fade show active mt-2" id="menu4">
-                        <div class="d-flex justify-content-start" style="gap: 20px;">
-                            <div id="info">
+    <div class="container-fluid mb-5" style="padding-top: 0px; padding-bottom: 10px;">
+        <hr>
+        <div class="container">
             <div class="row">
                 <!-- Uneditable player details -->
                 <div class="col-md-2">
@@ -429,18 +224,208 @@
                         </div>
                     {% endif %}
                 </div>
-                
-
-
+                <!-- Trait & archetype details -->
+                <p class="mb-0"><b>Creator:</b> {{ player.discord_user.discord_tag }}</p>
+                <p><b>Week Earnings:</b> ${{ week_earnings }}</p>
+                <!-- Contract details -->
+                <hr>
+                <p class="mb-0"><b>Referral Code:</b> {{ player.id }}</p>
+                <p class="mb-0"><b>Contract Salary:</b> ${{ player.salary }}</p>
+                <p class="mb-0"><b>Contract Expires:</b> <i></i> Season {{ player.contract_ends_after }}</p>
+                <p class="mb-0"><b>Contract Option:</b> {{ player.contract_option }}</p>
+                <p class="mb-0"><b>Contract Benefits:</b> {{ player.contract_benefits }}</p>
+                <!-- Award details -->
+                <hr class="mt-3">
+                <p class="mb-0">
+                    {% if awards.MVP %}
+                        🏆 <b>MVP:</b>
+                        {% for a in awards.MVP %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.DPOY %}
+                        🔏 <b>DPOY:</b>
+                        {% for a in awards.DPOY %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.MIP %}
+                        💹 <b>MIP:</b>
+                        {% for a in awards.MIP %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.ROY %}
+                        👦 <b>ROY:</b>
+                        {% for a in awards.ROY %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.AH1ST %}
+                        🏀 <b>AH1ST:</b>
+                        {% for a in awards.AH1ST %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.AH2ND %}
+                        🏀 <b>AH2ND:</b>
+                        {% for a in awards.AH2ND %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.D1ST %}
+                        🔒 <b>D1ST:</b>
+                        {% for a in awards.D1ST %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.D2ND %}
+                        🔒 <b>D2ND:</b>
+                        {% for a in awards.D2ND %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.KOTS %}
+                        👑 <b>KOTS:</b> x{{ awards.KOTS }}<br>
+                    {% endif %}
+                    {% if awards.RING %}
+                        💍 <b>RING:</b>
+                        {% for a in awards.RING %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.FMVP %}
+                        🌟 <b>FMVP:</b>
+                        {% for a in awards.FMVP %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.ASG %}
+                        ⭐ <b>ASG:</b>
+                        {% for a in awards.ASG %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.ASGMVP %}
+                        💫 <b>ASGMVP:</b>
+                        {% for a in awards.ASGMVP %}
+                            S{{ a }} 
+                        {% endfor %}<br>
+                    {% endif %}
+                    {% if awards.3PTWIN %}
+                        3️⃣ <b>3PTWIN:</b>
+                        {% for a in awards.3PTWIN %}
+                            S{{ a }} 
+                        {% endfor %}<br> 
+                    {% endif %}
+                    {% if awards.DNKWIN %}
+                        💪 <b>DNKWIN:</b>
+                        {% for a in awards.DNKWIN %}
+                            S{{ a }} 
+                        {% endfor %}<br> 
+                    {% endif %}
+                </p>
+                <!-- Redesign attempt -->
+                <ul class="nav nav-tabs" id="myTabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#menu1">Attributes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#menu2">Badges</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#menu3">Tendencies</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <!-- Attribute menu -->
+                    <div class="tab-pane fade show active mt-2" id="menu1">
+                        <div class="d-flex justify-content-start" style="gap: 20px;">
+                            <div id="finishing-attributes">
+                                <table>
+                                    <thead>
+                                        <tr class="border-bottom"><th class="p-0" colspan="2">Finishing</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for k, v in player.attributes.items %}
+                                            <tr>
+                                                {% if k in finishing_attributes %}
+                                                    <td>{{ k }}:</td>
+                                                    <td style="padding-left: 10px;">{{ v }}</td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="shooting-attributes">
+                                <table>
+                                    <thead>
+                                        <tr class="border-bottom"><th class="p-0" colspan="2">Shooting</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for k, v in player.attributes.items %}
+                                            <tr>
+                                                {% if k in shooting_attributes %}
+                                                    <td>{{ k }}:</td>
+                                                    <td style="padding-left: 10px;">{{ v }}</td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="playmaking-attributes">
+                                <table>
+                                    <thead>
+                                        <tr class="border-bottom"><th class="p-0" colspan="2">Playmaking</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for k, v in player.attributes.items %}
+                                            <tr>
+                                                {% if k in playmaking_attributes %}
+                                                    <td>{{ k }}:</td>
+                                                    <td style="padding-left: 10px;">{{ v }}</td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="defense-attributes">
+                                <table>
+                                    <thead>
+                                        <tr class="border-bottom"><th class="p-0" colspan="2">Defense</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for k, v in player.attributes.items %}
+                                            <tr>
+                                                {% if k in defense_attributes %}
+                                                    <td>{{ k }}:</td>
+                                                    <td style="padding-left: 10px;">{{ v }}</td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div> 
+                        </div>
+                    </div>
+                    <!-- Badge menu -->
+                    <div class="tab-pane fade" id="menu2">
+                        <!-- Content for Menu 2 goes here -->
+                    </div>
+                    <!-- Tendency menu -->
+                    <div class="tab-pane fade" id="menu3">
+                        <!-- Content for Menu 3 goes here -->
+                    </div>
+                </div>
             </div>
         </div>
-
         <!-- Player statistics -->
         <div class="container-fluid mb-5 p-5">
-
             <h2 class="mb-3">Player Statistics</h2>
             <hr>
-
             <p>Averages</p>
             <table class="table table-striped table-hover table-responsive">
                 <thead>
@@ -518,9 +503,7 @@
                     </tbody>
                 {% endfor %}
             </table>
-
             <hr>
-
             <p>Totals</p>
             <table class="table table-striped table-hover table-responsive">
                 <thead>
@@ -591,11 +574,8 @@
                     </tbody>
                     {% endfor %}
             </table>
-
             <hr>
-
         </div>
-
         <!-- Player game logs -->
         <div class="container-fluid mb-5 p-5">
             <h2 class="mb-3">Game Logs</h2>
@@ -650,7 +630,6 @@
                 </tbody>
             </table>
         </div>
-
         <!-- Bootstrap accordions -->
         <div class="container-fluid mb-5 p-5">
             <h2 class="mb-3">Player Details</h2>
@@ -869,9 +848,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
     <script src="{% static 'main/js/players/copyJSON.js' %}"></script>
 
 {% endblock %}
