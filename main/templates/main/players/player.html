@@ -82,6 +82,11 @@
             </div>
         {% endif %}
     </div>
+<div class="tab-content">
+    <!-- Player details -->
+    <div class="tab-pane fade show active mt-2" id="playerDetails">
+        <div class="container">
+            <div class="row">
     <div class="container-fluid mb-5" style="padding-top: 0px; padding-bottom: 10px;">
         <hr>
         <div class="container">
@@ -233,7 +238,10 @@
                 <p class="mb-0"><b>Contract Salary:</b> ${{ player.salary }}</p>
                 <p class="mb-0"><b>Contract Expires:</b> <i></i> Season {{ player.contract_ends_after }}</p>
                 <p class="mb-0"><b>Contract Option:</b> {{ player.contract_option }}</p>
-                <p class="mb-0"><b>Contract Benefits:</b> {{ player.contract_benefits }}</p>
+                <p class="mb-0"><b>Contract Benefits:</b> {{ player.contract_benefits }}</p>            </div>
+        </div>
+    </div>
+
                 <!-- Award details -->
                 <hr class="mt-3">
                 <p class="mb-0">
