@@ -421,7 +421,110 @@
                     </div>
                     <!-- Badge menu -->
                     <div class="tab-pane fade" id="menu2">
-                        <!-- Content for Menu 2 goes here -->
+                            <div class="container">
+                                <div class="row">
+                                    {% for k, v in player.badges.items %} 
+                                        {% if k in finishing_badges %}
+                                            <div class="col-md-2 mb-2">
+                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
+                                                {% if v == 0 %}
+                                                    {{ badgeEmojis.0 }} Unequipped
+                                                {% elif v == 1 %}
+                                                    {{ badgeEmojis.1 }} Bronze
+                                                {% elif v == 2 %}
+                                                    {{ badgeEmojis.2 }} Silver
+                                                {% elif v == 3 %}
+                                                    {{ badgeEmojis.3 }} Gold
+                                                {% elif v == 4 %}
+                                                    {{ badgeEmojis.4 }} Hall of Fame
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <hr>
+                            </div>
+                
+                
+                            <div class="container">
+                                <div class="row">
+                                    {% for k, v in player.badges.items %} 
+                                        {% if k in shooting_badges %}
+                                            <div class="col-md-2 mb-2">
+                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
+                                                {% if v == 0 %}
+                                                    {{ badgeEmojis.0 }} Unequipped
+                                                {% elif v == 1 %}
+                                                    {{ badgeEmojis.1 }} Bronze
+                                                {% elif v == 2 %}
+                                                    {{ badgeEmojis.2 }} Silver
+                                                {% elif v == 3 %}
+                                                    {{ badgeEmojis.3 }} Gold
+                                                {% elif v == 4 %}
+                                                    {{ badgeEmojis.4 }} Hall of Fame
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                
+                            <hr>
+                
+                            <div class="container">
+                                <div class="row">
+                                    {% for k, v in player.badges.items %} 
+                                        {% if k in playmaking_badges %}
+                                            <div class="col-md-2 mb-2">
+                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
+                                                {% if v == 0 %}
+                                                    {{ badgeEmojis.0 }} Unequipped
+                                                {% elif v == 1 %}
+                                                    {{ badgeEmojis.1 }} Bronze
+                                                {% elif v == 2 %}
+                                                    {{ badgeEmojis.2 }} Silver
+                                                {% elif v == 3 %}
+                                                    {{ badgeEmojis.3 }} Gold
+                                                {% elif v == 4 %}
+                                                    {{ badgeEmojis.4 }} Hall of Fame
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                
+                            <hr>
+                
+                            <div class="container">
+                                <div class="row">
+                                    {% for k, v in player.badges.items %} 
+                                        {% if k in defense_badges %}
+                                            <div class="col-md-2 mb-2">
+                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
+                                                {% if v == 0 %}
+                                                    {{ badgeEmojis.0 }} Unequipped
+                                                {% elif v == 1 %}
+                                                    {{ badgeEmojis.1 }} Bronze
+                                                {% elif v == 2 %}
+                                                    {{ badgeEmojis.2 }} Silver
+                                                {% elif v == 3 %}
+                                                    {{ badgeEmojis.3 }} Gold
+                                                {% elif v == 4 %}
+                                                    {{ badgeEmojis.4 }} Hall of Fame
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                
+                            <hr>
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
                     </div>
                     <!-- Tendency menu -->
                     <div class="tab-pane fade" id="menu3">
@@ -726,110 +829,6 @@
                 <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionOne">
                     <div class="accordion-body">
                         <div class="container-fluid mt-5" style="padding: 100px; padding-top: 0px; padding-bottom: 10px;">
-                            <div class="container">
-                                <div class="row">
-                                    {% for k, v in player.badges.items %} 
-                                        {% if k in finishing_badges %}
-                                            <div class="col-md-2 mb-2">
-                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
-                                                {% if v == 0 %}
-                                                    {{ badgeEmojis.0 }} Unequipped
-                                                {% elif v == 1 %}
-                                                    {{ badgeEmojis.1 }} Bronze
-                                                {% elif v == 2 %}
-                                                    {{ badgeEmojis.2 }} Silver
-                                                {% elif v == 3 %}
-                                                    {{ badgeEmojis.3 }} Gold
-                                                {% elif v == 4 %}
-                                                    {{ badgeEmojis.4 }} Hall of Fame
-                                                {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                <hr>
-                            </div>
-                
-                
-                            <div class="container">
-                                <div class="row">
-                                    {% for k, v in player.badges.items %} 
-                                        {% if k in shooting_badges %}
-                                            <div class="col-md-2 mb-2">
-                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
-                                                {% if v == 0 %}
-                                                    {{ badgeEmojis.0 }} Unequipped
-                                                {% elif v == 1 %}
-                                                    {{ badgeEmojis.1 }} Bronze
-                                                {% elif v == 2 %}
-                                                    {{ badgeEmojis.2 }} Silver
-                                                {% elif v == 3 %}
-                                                    {{ badgeEmojis.3 }} Gold
-                                                {% elif v == 4 %}
-                                                    {{ badgeEmojis.4 }} Hall of Fame
-                                                {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                
-                            <hr>
-                
-                            <div class="container">
-                                <div class="row">
-                                    {% for k, v in player.badges.items %} 
-                                        {% if k in playmaking_badges %}
-                                            <div class="col-md-2 mb-2">
-                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
-                                                {% if v == 0 %}
-                                                    {{ badgeEmojis.0 }} Unequipped
-                                                {% elif v == 1 %}
-                                                    {{ badgeEmojis.1 }} Bronze
-                                                {% elif v == 2 %}
-                                                    {{ badgeEmojis.2 }} Silver
-                                                {% elif v == 3 %}
-                                                    {{ badgeEmojis.3 }} Gold
-                                                {% elif v == 4 %}
-                                                    {{ badgeEmojis.4 }} Hall of Fame
-                                                {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                
-                            <hr>
-                
-                            <div class="container">
-                                <div class="row">
-                                    {% for k, v in player.badges.items %} 
-                                        {% if k in defense_badges %}
-                                            <div class="col-md-2 mb-2">
-                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
-                                                {% if v == 0 %}
-                                                    {{ badgeEmojis.0 }} Unequipped
-                                                {% elif v == 1 %}
-                                                    {{ badgeEmojis.1 }} Bronze
-                                                {% elif v == 2 %}
-                                                    {{ badgeEmojis.2 }} Silver
-                                                {% elif v == 3 %}
-                                                    {{ badgeEmojis.3 }} Gold
-                                                {% elif v == 4 %}
-                                                    {{ badgeEmojis.4 }} Hall of Fame
-                                                {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                
-                            <hr>
-                
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Tendency accordion -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingThree">
