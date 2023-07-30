@@ -13,6 +13,7 @@ class DiscordUser(models.Model):
     # Custom Manager
     objects = DiscordAuthorizationManager()
     # Discord User Model
+    is_active = None
     id = models.BigIntegerField(primary_key=True, serialize=False)
     discord_tag = models.CharField(max_length=100)
     avatar = models.CharField(max_length=100)
