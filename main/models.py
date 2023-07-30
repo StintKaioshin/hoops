@@ -196,6 +196,34 @@ class ContractOffer(models.Model):
     # Contract Offer Methods
     def __str__(self):
         return f"{self.team.abbrev} -> {self.player.first_name} {self.player.last_name}"
+
+from django.db import models
+from .models import Team, Player
+
+class Transactions(models.Model):
+    PLAYER_SIGNED = 'PS'
+    PLAYER_TRADED = 'PT'
+    PLAYER_DROPPED = 'PD'
+
+    TRANSACTION_TYPE_CHOICES = [
+        (PLAYER_SIGNED, 'Player Signed'),
+        (PLAYER_TRADED, 'Player Traded'),
+        (PLAYER_DROPPED, 'Player Dropped'),
+    ]
+
+    transaction_type = models.CharField(
+        max_length=2,
+        choices=TRANSACTION_TYPE_CHOICES,
+        default=PLAYER_SIGNED,
+    )
+    
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.get_transaction_type_display()} - {self.team.name} - {self.player.name} - {self.timestamp}"
+
 # Coupon Models
 class Coupon(models.Model):
     code = models.CharField(max_length=16, unique=True)
