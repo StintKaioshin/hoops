@@ -126,10 +126,10 @@ def transactHome(request):
 
 def login(request):
     return HttpResponse("This is the login page.")
-def login_discord(request):
+def in_discord(request):
     discord_auth_url = os.environ.get("DISCORD_AUTH_URL")
     return redirect(discord_auth_url)
-def login_discord_redirect(request):
+def in_discord_redirect(request):
     try:
         # Get information from Discord
         code = request.GET.get("code")
@@ -265,8 +265,11 @@ def player(request, id):
     return render(request, "main/players/player.html", context)
 
 def gamelog_create(request, team_id):
-    GameLogPlayerSettingFormSet = formset_factory(GameLogPlayerSettingForm, extra=0)
     team = Team.objects.get(pk=team_id)
+    if request.user != team.manager:  # Checking if the current user is the manager of the team
+        return HttpResponseForbidden("You are not allowed to manage this team.")
+
+    GameLogPlayerSettingFormSet = formset_factory(GameLogPlayerSettingForm, extra=0)
     players = Player.objects.filter(team=team)
     if request.method == 'POST':
         form = GameLogForm(request.POST)
@@ -280,7 +283,7 @@ def gamelog_create(request, team_id):
             return redirect('gamelog_detail', gamelog.pk)
     else:
         form = GameLogForm()
-        formset = GameLogPlayerSettingFormSet(initial=[{'player': player} for player in players])
+        formset = GameLogPlayerSettingFormSet(initial=[{'player': player} for player in players})
 
     return render(request, 'main/gamelog_form.html', {'form': form, 'formset': formset})
 
