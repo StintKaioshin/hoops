@@ -217,12 +217,13 @@ class Transactions(models.Model):
         default=PLAYER_SIGNED,
     )
     
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    from_team = models.ForeignKey(Team, related_name='outgoing_transactions', null=True, blank=True, on_delete=models.SET_NULL)
+    to_team = models.ForeignKey(Team, related_name='incoming_transactions', null=True, blank=True, on_delete=models.SET_NULL)
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-def __str__(self):
-    return f"{self.get_transaction_type_display()} - {self.from_team.name} to {self.to_team.name} - {self.player.first_name} {self.player.last_name} - {self.date}"
+    def __str__(self):
+        return f"{self.get_transaction_type_display()} - {self.from_team.name if self.from_team else 'None'} to {self.to_team.name if self.to_team else 'None'} - {self.player.first_name} {self.player.last_name} - {self.timestamp}"
 
 # Coupon Models
 class Coupon(models.Model):
