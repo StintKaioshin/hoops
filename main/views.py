@@ -118,7 +118,7 @@ def home(request):
     return render(request, "main/league/home.html", context)
 
 def transactHome(request):
-    transactions = Transaction.objects.all().order_by('-timestamp')
+    transactions = Transaction.objects.all().order_by('-date')
     context = {'transactions': transactions}
     return render(request, 'main/transactions/transactionshome.html', {'transactions': transactions})
 
