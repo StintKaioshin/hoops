@@ -424,6 +424,11 @@ def upgrade_logs(request, id):
         return render(request, "main/players/history.html", context)
     else:
         return HttpResponse("Sorry, this player doesn't exist!")
+
+def login_discord(request):
+    discord_auth_url = os.environ.get("DISCORD_AUTH_URL")
+    return redirect(discord_auth_url)
+
 def search_players(request):
     search_query = request.GET.get('search', '')
     position = request.GET.get('position', '')
