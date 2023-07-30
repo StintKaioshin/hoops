@@ -42,7 +42,8 @@ urlpatterns = [
     path("ads.txt", views.ad_view.as_view()),
     path('players/search/', views.search_players, name='search_players'),
     path('player/<int:pk>/', views.player_detail, name='player_detail'),
-    path('transactions/', views.transactions, name='transactions'),  # new line
+    path('transactions/', views.transactHome, name='transactions'),
+    
     # Htmx URL patterns
     path("players/search/", views.check_player_search, name="check_player_search"),
     path("teams/search/", views.check_team_search, name="check_team_search"),
