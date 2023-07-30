@@ -898,6 +898,22 @@ def update_player_pending_upgrades(request):
     else:
         return HttpResponse("Invalid request!")
 # Check views
+def search_teams(request):
+    search_query = request.GET.get('search', '')
+    is_college_team = request.GET.get('is_college_team', 'false') == 'true'
+    teams = Team.objects.all()
+    
+    if search_query:
+        teams = teams.filter(name__icontains=search_query)
+    
+    if is_college_team:
+        teams = teams.filter(is_college_team=is_college_team)
+
+    paginator = Paginator(teams, 10) # Show 10 teams per page
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+
+    return render(request, 'main/ajax/team_list_fragment.html', {'page': page})
 def check_player_search(request):
     if request.method == "POST":
         search = request.POST.get("search")
