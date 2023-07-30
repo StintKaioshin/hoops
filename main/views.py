@@ -271,9 +271,10 @@ def gamelog_create(request, team_id):
 
     GameLogPlayerSettingFormSet = formset_factory(GameLogPlayerSettingForm, extra=0)
     players = Player.objects.filter(team=team)
+
     if request.method == 'POST':
         form = GameLogForm(request.POST)
-        formset = GameLogPlayerSettingFormSet(request.POST, form_kwargs={'team': team})
+        formset = GameLogPlayerSettingFormSet(request.POST)
         if form.is_valid() and formset.is_valid():
             gamelog = form.save()
             for player_form in formset:
@@ -283,7 +284,11 @@ def gamelog_create(request, team_id):
             return redirect('gamelog_detail', gamelog.pk)
     else:
         form = GameLogForm()
-        formset = GameLogPlayerSettingFormSet(initial={'player': player} for player in players})
+        formset = GameLogPlayerSettingFormSet()
+
+        # Initialize the formset with players
+        initial_data = [{'player': player.pk} for player in players]
+        formset.initial = initial_data
 
     return render(request, 'main/gamelog_form.html', {'form': form, 'formset': formset})
 
