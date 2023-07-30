@@ -1520,6 +1520,42 @@ def check_read_notification(request):
         # Return the fragment
         html = render_to_string("main/ajax/notification_list_fragment.html", context)
         return HttpResponse(html)
+def check_daily_reward(request):
+    # Get the current date
+    user = request.user
+    # Get the last date the daily rewards were given out
+    last_reward = user.last_reward
+    rewards_given = ""
+    # If the daily rewards haven't been given out today, give them out
+    # Instead of checking if it's been 24 hours, check if the day is different
+    if not last_reward or timezone.now().day != last_reward.day:
+        # Give all of the user's players their daily rewards (salary)
+        for player in user.player_set.all():
+            # Add money to rostered player or free agent
+            if player.salary >= league_config.free_agent_salary:
+                player.cash += player.salary
+                rewards_given += f"✅ {player.first_name} {player.last_name} was given ${player.salary} <b>(${player.cash})</b><br>"
+            else:
+                player.cash += league_config.free_agent_salary
+                rewards_given += f"✅ {player.first_name} {player.last_name} was given ${league_config.free_agent_salary} <b>(${player.cash})</b><br>"
+            # Send a webhook message & save the player
+            player.save()
+        # Update the last_reward date
+        user.last_reward = timezone.now()
+        user.save()
+        # Return a discord webhook
+        discord_webhooks.send_webhook(
+            url="cash",
+            title="✅ Daily Rewards",
+            message=f"{user.discord_tag} has collected their daily rewards!",
+        )
+        # Return http response
+        return HttpResponse(rewards_given)
+    else:
+        # Return http response (tell them how much time is left)
+        # time_left = last_reward + timedelta(days=1) - timezone.now()
+        # real_time = f"{time_left.seconds // 3600}:{time_left.seconds % 3600 // 60}:{time_left.seconds % 60}"
+        return HttpResponse(f"❌ You can collect again tomorrow!")
 def check_weight_change(request):
     # Get the current user
     user = request.user
