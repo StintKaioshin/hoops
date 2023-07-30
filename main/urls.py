@@ -35,6 +35,7 @@ urlpatterns = [
     path("team/trade/decline/<int:id>/", views.decline_trade, name="decline_trade"),
     path("trades/panel/", views.trade_panel, name="trade_panel"),
     path("team/trade/finalize/", views.check_finalize_trade, name="check_finalize_trade"),
+    path('team-select/', views.team_select, name='team_select'),
 
     # Miscellaneous URL patterns
     path("upgrades/pending/", views.upgrades_pending, name="upgrades_pending"),
