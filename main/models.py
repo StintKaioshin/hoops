@@ -1,5 +1,6 @@
 # Django imports
 from django.db import models
+from .models import Team, Player
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Custom imports
 from .managers import DiscordAuthorizationManager
@@ -196,9 +197,6 @@ class ContractOffer(models.Model):
     # Contract Offer Methods
     def __str__(self):
         return f"{self.team.abbrev} -> {self.player.first_name} {self.player.last_name}"
-
-from django.db import models
-from .models import Team, Player
 
 class Transactions(models.Model):
     PLAYER_SIGNED = 'PS'
