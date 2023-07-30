@@ -221,8 +221,8 @@ class Transactions(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"{self.get_transaction_type_display()} - {self.team.name} - {self.player.name} - {self.timestamp}"
+def __str__(self):
+    return f"{self.get_transaction_type_display()} - {self.from_team.name} to {self.to_team.name} - {self.player.first_name} {self.player.last_name} - {self.date}"
 
 # Coupon Models
 class Coupon(models.Model):
