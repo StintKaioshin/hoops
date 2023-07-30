@@ -11,21 +11,23 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Player</th>
-                                    <th scope="col">Team</th>
-                                    <th scope="col">Transaction Type</th>
-                                    <th scope="col">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for transaction in transactions %}
-                                <tr>
-                                    <th scope="row">{{ transaction.id }}</th>
-                                    <td>{{ transaction.player.first_name }} {{ transaction.player.last_name }}</td>
-                                    <td>{{ transaction.team.name }}</td>
-                                    <td>{{ transaction.get_transaction_type_display }}</td>
-                                    <td>{{ transaction.timestamp }}</td>
+                                      <th scope="col">ID</th>
+        <th scope="col">Player</th>
+        <th scope="col">From Team</th>
+        <th scope="col">To Team</th>
+        <th scope="col">Transaction Type</th>
+        <th scope="col">Date</th>
+    </tr>
+</thead>
+<tbody>
+    {% for transaction in transactions %}
+    <tr>
+        <th scope="row">{{ transaction.id }}</th>
+        <td>{{ transaction.player.first_name }} {{ transaction.player.last_name }}</td>
+        <td>{{ transaction.from_team.name }}</td>
+        <td>{{ transaction.to_team.name }}</td>
+        <td>{{ transaction.get_transaction_type_display }}</td>
+        <td>{{ transaction.timestamp }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
