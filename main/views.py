@@ -385,8 +385,8 @@ def upgrade_logs(request, id):
 def search_players(request):
     search_query = request.GET.get('search', '')
     position = request.GET.get('position', '')
-    players = Player.objects.all()
-    
+    players = Player.objects.order_by('name')  # ordered by name
+
     if search_query:
         players = players.filter(name__icontains=search_query)
     
@@ -397,7 +397,7 @@ def search_players(request):
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
 
-    return render(request, 'main/ajax/player_list_fragment.html', {'page': page})
+    return render(request, 'main/ajax/players.html', {'page': page})
 
 def cash_logs(request, id):
     # Check if the player exists
