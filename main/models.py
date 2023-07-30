@@ -197,7 +197,7 @@ class ContractOffer(models.Model):
     def __str__(self):
         return f"{self.team.abbrev} -> {self.player.first_name} {self.player.last_name}"
 
-class Transactions(models.Model):
+class TransactionsEtc(models.Model):
     PLAYER_SIGNED = 'PS'
     PLAYER_TRADED = 'PT'
     PLAYER_DROPPED = 'PD'
