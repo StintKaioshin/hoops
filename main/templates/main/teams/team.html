@@ -29,14 +29,10 @@
         {% endfor %}
         </ul>
 
-        <div class="mt-4">
-            <h5>Total team PPG:</h5>
-            <p class="lead">
-                {% with team.player_set.all as players %}
-                {{ players|sum:"ppg" }}
-                {% endwith %}
-            </p>
-        </div>
+<div class="mt-4">
+    <h5>Total team PPG:</h5>
+    <p class="lead">{{ total_ppg }}</p>
+</div>
     </div>
 </div>
 
