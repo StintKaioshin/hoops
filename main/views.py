@@ -389,22 +389,22 @@ def upgrade_logs(request, id):
 def search_players(request):
     search_query = request.GET.get('search', '')
     position = request.GET.get('position', '')
-    order_by = request.GET.get('order_by', 'primary_position')  # Set default ordering field
-    
-    players = Player.objects.all().order_by(order_by)  # Add sorting
+    players = Player.objects.all()
 
     if search_query:
-        players = players.filter(name__icontains=search_query)
-    
+        # Search both first_name and last_name
+        players = players.filter(Q(first_name__icontains=search_query) | Q(last_name__icontains=search_query))
+
     if position:
         players = players.filter(primary_position=position)
+
+    players = players.order_by('primary_position')
 
     paginator = Paginator(players, 10) # Show 10 players per page
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
 
     return render(request, 'main/ajax/player_list_fragment.html', {'page': page})
-
 def cash_logs(request, id):
     # Check if the player exists
     player = Player.objects.get(pk=id)
