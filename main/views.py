@@ -126,10 +126,14 @@ def transactHome(request):
 
 def login(request):
     return HttpResponse("This is the login page.")
-def in_discord(request):
+
+
+def login_discord(request):
     discord_auth_url = os.environ.get("DISCORD_AUTH_URL")
     return redirect(discord_auth_url)
-def in_discord_redirect(request):
+
+
+def login_discord_redirect(request):
     try:
         # Get information from Discord
         code = request.GET.get("code")
@@ -145,6 +149,8 @@ def in_discord_redirect(request):
     except:
         # Sometimes the user will be redirected to this page without a code
         messages.error(request, "Something went wrong while logging you in, try again!")
+    # Redirect the user to the home page
+    return redirect(home)
     # Redirect the user to the home page
     return redirect(home)
 def logout(request):
