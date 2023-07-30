@@ -283,7 +283,7 @@ def gamelog_create(request, team_id):
             return redirect('gamelog_detail', gamelog.pk)
     else:
         form = GameLogForm()
-        formset = GameLogPlayerSettingFormSet(initial=[{'player': player} for player in players})
+        formset = GameLogPlayerSettingFormSet(initial={'player': player} for player in players})
 
     return render(request, 'main/gamelog_form.html', {'form': form, 'formset': formset})
 
