@@ -389,7 +389,9 @@ def upgrade_logs(request, id):
 def search_players(request):
     search_query = request.GET.get('search', '')
     position = request.GET.get('position', '')
-    players = Player.objects.order_by('name')  # ordered by name
+    order_by = request.GET.get('order_by', 'primary_position')  # Set default ordering field
+    
+    players = Player.objects.all().order_by(order_by)  # Add sorting
 
     if search_query:
         players = players.filter(name__icontains=search_query)
