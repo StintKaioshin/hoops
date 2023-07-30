@@ -364,7 +364,7 @@ def upgrade_player(request, id):
         # Tendency categories
         "initial_tendencies": league_config.initial_tendencies,
     }
-    print(upgrade_player_form)  # print form data
+    print(UpgradeForm)  # print form data
     print(finishing_badges)  # print badge lists
     print(player.primary_badges, player.secondary_badges)  # print player badges
     return render(request, "main/players/upgrade.html", context)
