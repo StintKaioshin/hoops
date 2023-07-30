@@ -254,6 +254,10 @@ def player(request, id):
         "possible_relatives": possible_relatives,
     }
     return render(request, "main/players/player.html", context)
+
+def player_detail(request, pk):
+    player = get_object_or_404(Player, pk=pk)
+    return render(request, 'main/player_detail.html', {'player': player})
 @login_required(login_url="/login/discord/")
 def upgrade_player(request, id):
     # Collect user & player information
