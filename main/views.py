@@ -124,6 +124,12 @@ def transactHome(request):
     context = {'transactions': transactions}
     return render(request, 'main/transactions/transactionshome.html', context)
 
+
+def team_select(request):
+    teams = Team.objects.all()
+    return render(request, 'main/team_select.html', {'teams': teams})
+
+
 def login(request):
     return HttpResponse("This is the login page.")
 
