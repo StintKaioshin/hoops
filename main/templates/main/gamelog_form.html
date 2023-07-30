@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h2>Create Game Log</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <h2>Player Settings</h2>
+        {{ formset.management_form }}
+        {% for player_form in formset %}
+            <hr>
+            {{ player_form.as_p }}
+        {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
