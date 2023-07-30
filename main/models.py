@@ -5,12 +5,14 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from .managers import DiscordAuthorizationManager
 from .league import config as league_config
 
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 # DiscordUser Models
 # DiscordUser Models
-class DiscordUser(models.Model):
+class DiscordUser(AbstractBaseUser, PermissionsMixin):
     # Custom Manager
     objects = DiscordAuthorizationManager()
+
     # Discord User 
     id = models.BigIntegerField(primary_key=True, serialize=False)
     discord_tag = models.CharField(max_length=100)
@@ -21,20 +23,36 @@ class DiscordUser(models.Model):
     mfa_enabled = models.BooleanField()
     last_login = models.DateTimeField(null=True)
     last_reward = models.DateTimeField(null=True)
+
     # Permissions
     can_update_players = models.BooleanField(default=False)
     can_approve_trades = models.BooleanField(default=False)
     can_update_styles = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    
     # Player Slots
-    is_active = None
+    is_active = models.BooleanField(default=True)
     player_slots = models.SmallIntegerField(default=league_config.max_players)
     auto_collect_rewards = models.BooleanField(default=False)
     can_change_styles = models.BooleanField(default=False)
+
+    # Set the field that will be used as username
+    USERNAME_FIELD = 'id'
+    REQUIRED_FIELDS = ['discord_tag']
+
     # Discord User Methods
-    def is_authenticated(self, request):
+    def has_perm(self, perm, obj=None):
         return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    def get_short_name(self):
+        return self.discord_tag
+
     def __str__(self):
-        return f"{self.discord_tag}"
+        return self.discord_tag
+
 
 class Team(models.Model):
     # Team Model
