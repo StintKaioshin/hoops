@@ -282,8 +282,7 @@ def gamelog_create(request, team_id):
         return HttpResponseForbidden("You are not allowed to manage this team.")
 
     GameLogPlayerSettingFormSet = formset_factory(GameLogPlayerSettingForm, extra=0)
-    players = Player.objects.filter(team=team)
-
+    players = Player.objects.filter(current_team=team)
     if request.method == 'POST':
         form = GameLogForm(request.POST)
         formset = GameLogPlayerSettingFormSet(request.POST)
