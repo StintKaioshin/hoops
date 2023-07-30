@@ -1,6 +1,10 @@
 from django import forms
 from .league import config as league_config
 from django.core import validators
+from .models import GameLog, GameLogPlayerSetting, Player
+
+
+
 class PlayerForm(forms.Form):
     first_name = forms.CharField(label="First Name", max_length=16)
     last_name = forms.CharField(label="Last Name", max_length=16)
@@ -82,6 +86,29 @@ class UpgradeForm(forms.Form):
         #         choices=league_config.hotzone_choices,
         #         widget=forms.Select(attrs={"onchange": "updatePrice()"}),
         #     )
+
+class GameLogForm(forms.ModelForm):
+    class Meta:
+        model = GameLog
+        fields = ['team_name', 'playbook', 'offensive_focus', 'offensive_tempo', 'offensive_rebounding', 
+                  'defensive_focus', 'defensive_aggression', 'defensive_rebounding', 'team_sliders', 
+                  'run_plays', 'offense_vs_defense', 'average_temp', 'bench_depth', 'guards_vs_forwards', 
+                  'zone_usage', 'inside_vs_outside']
+
+
+class GameLogPlayerSettingForm(forms.ModelForm):
+    class Meta:
+        model = GameLogPlayerSetting
+        fields = ['player', 'touches', 'player_initiator']
+    
+    def __init__(self, *args, **kwargs):
+        team = kwargs.pop('team', None)
+        super(GameLogPlayerSettingForm, self).__init__(*args, **kwargs)
+        if team:
+            self.fields['player'].queryset = Player.objects.filter(team=team)
+
+
+
 class StylesForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(StylesForm, self).__init__(*args, **kwargs)
