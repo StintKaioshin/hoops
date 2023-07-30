@@ -117,8 +117,8 @@ def home(request):
     return render(request, "main/league/home.html", context)
 
 def transactHome(request):
-    transactions = Transaction.objects.all().order_by('-date')
-    return render(request, 'main/transacthome.html', {'transactions': transactions})
+    transactions = Transaction.objects.all()
+    return render(request, 'main/transactionshome.html', {'transactions': transactions})
 
 def login(request):
     return HttpResponse("This is the login page.")
