@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <section class="py-4 py-xl-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="text-uppercase fw-bold mb-3">Transactions</h2>
+                    <p class="mb-4">Welcome to our transactions page, this is where you can view all the transactions that have been made.</p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Player</th>
+                                    <th scope="col">From Team</th>
+                                    <th scope="col">To Team</th>
+                                    <th scope="col">Transaction Type</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for transaction in transactions %}
+                                <tr>
+                                    <th scope="row">{{ transaction.id }}</th>
+                                    <td>{{ transaction.player.first_name }} {{ transaction.player.last_name }}</td>
+                                    <td>{{ transaction.from_team.name }}</td>
+                                    <td>{{ transaction.to_team.name }}</td>
+                                    <td>{{ transaction.get_transaction_type_display }}</td>
+                                    <td>{{ transaction.date }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
