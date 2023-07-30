@@ -30,7 +30,20 @@
 
     <div class="container">
         <div class="row" id="search-results">
-            {% include 'main/ajax/player_list_fragment.html' with page=page %}
+            {% for player in players %}
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ player.name }} ({{ player.id }})</h5>
+                            <p class="card-text">
+                                Position: {{ player.position }}<br>
+                                Height: {{ player.height }}
+                            </p>
+                            <a href="{% url 'player_detail' player.id %}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
