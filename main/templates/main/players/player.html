@@ -408,31 +408,33 @@
             <div class="container-fluid mt-5" style="padding: 100px; padding-top: 0px; padding-bottom: 10px;">
                 <div class="row">
                 <!-- Uneditable player details -->
+     <div class="col-md-2">
                         <p><b>Full Name</b></p><hr>
                         <p>{{ player.first_name }} {{ player.last_name }}</p>
                 </div>
+                <div class="col-md-2">
                     <p><b>Height</b></p><hr>
                     <p>{{ height_in_feet }}</p>
                 </div>
+                <div class="col-md-2">
                     <p><b>Weight</b></p><hr>
                     <p>{{ player.weight }} <a href="{% url 'edit_physicals' player.id %}">Edit</a></p>
                 </div>
+                <div class="col-md-2">
                     <p><b>Position</b></p><hr>
                     <p>{{ player.primary_position }}/{{ player.secondary_position }}</p>
                 </div>
+                <div class="col-md-2">
                     <p><b>Team</b></p><hr>
                     <p>{{ player.current_team.abbrev }}</p>
                 </div>
+                    <h3><span class="panel-title-text">Take Cash</span></h3>
                 <div class="col-md-2">
                     <p><b>Spent</b></p><hr>
                     <p>${{ player.spent }}</p>
                 </div>
                 <!-- Editable player details -->
-                    <!-- Editable by player owner -->
-                    {% if player.discord_user == user %}
-                        <form action="{% url 'update_player_vitals' player.id %}" method="POST">
-                            {% csrf_token %}
-                            <!-- Put jersey and cyberface horizontall -->
+                <div class="row mb-3">                            <!-- Put jersey and cyberface horizontall -->
                             <div class="row">
                                 <div class="col-md-2">
                                     <p><b>Jersey</b></p><hr>
