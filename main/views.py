@@ -17,6 +17,7 @@ from .models import Player
 from .models import Team
 from .models import Coupon
 from .models import Transaction
+from .models import Transactions
 from .models import TradeOffer
 from .models import ContractOffer
 from .models import DiscordUser
@@ -117,9 +118,9 @@ def home(request):
     return render(request, "main/league/home.html", context)
 
 def transactHome(request):
-    transactions = Transaction.objects.all().order_by('-date')
+    transactions = Transaction.objects.all().order_by('-timestamp')
     context = {'transactions': transactions}
-    return render(request, 'main/transactions/transactionshome.html', context)
+    return render(request, 'main/transactions/transactionshome.html', {'transactions': transactions})
 
 def login(request):
     return HttpResponse("This is the login page.")
