@@ -1,6 +1,5 @@
 # Django imports
 from django.db import models
-from .models import Team, Player
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Custom imports
 from .managers import DiscordAuthorizationManager
