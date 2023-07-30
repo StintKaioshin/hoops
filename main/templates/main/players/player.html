@@ -11,7 +11,19 @@
             <a class="btn btn-primary btn-sm text-white" href="{% url 'upgrade_player' player.id %}">Upgrade player</a>
             <a class="btn btn-primary btn-sm text-white" href="{% url 'upgrade_logs' player.id %}">Upgrade history</a>
             <a class="btn btn-primary btn-sm text-white" href="{% url 'cash_logs' player.id %}">Cash history</a>
-            <div class="row .payment-dialog-row">
+            <!-- Player file -->
+            <button id="file" type="button" class="copyJSON btn btn-primary btn-sm" onClick="clipboard(this.id)">Copy File</button>
+            <p id="json_file" class="file" style="font-size: 6px; display: none;">{{ file }}</p>
+            <!-- Upgrades pending? -->
+            {% if player.upgrades_pending %}
+                <p class="fw-bold text-danger text-center">Pending upgrades</p>
+            {% else %}
+                <p class="fw-bold text-success text-center">No pending upgrades</p>
+            {% endif %}
+        </p>
+    </div>
+    <hr>
+         <div class="row .payment-dialog-row">
                 <div class="col-sm-6 mb-3">
         <h3><span class="panel-title-text">Contract Collect</span></h3>
     </div>
@@ -26,18 +38,6 @@
     </div>
 </form>
     </div>
-            <!-- Player file -->
-            <button id="file" type="button" class="copyJSON btn btn-primary btn-sm" onClick="clipboard(this.id)">Copy File</button>
-            <p id="json_file" class="file" style="font-size: 6px; display: none;">{{ file }}</p>
-            <!-- Upgrades pending? -->
-            {% if player.upgrades_pending %}
-                <p class="fw-bold text-danger text-center">Pending upgrades</p>
-            {% else %}
-                <p class="fw-bold text-success text-center">No pending upgrades</p>
-            {% endif %}
-        </p>
-    </div>
-    <hr>
     <div class="container-fluid" style="padding: 25px;">
         <!-- Add form to pay player if user.can_update_players -->
         {% if user.can_update_players %}
