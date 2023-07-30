@@ -25,11 +25,18 @@ class MyAdmin(admin.ModelAdmin):
     }
 
 
+@admin.register(Team)
+class TeamAdmin(admin.ModelAdmin):
+    list_display = ['name', 'logo', 'abbrev', 'plays_in_main_league', 'show_on_lists', 'is_college_team']
+    list_editable = ['is_college_team']
+    formfield_overrides = {
+        JSONField: {"widget": JSONEditor},
+    }
+
 # Register your models here.
 admin.site.register(DiscordUser, MyAdmin)
 admin.site.register(Player, MyAdmin)
 admin.site.register(HistoryList, MyAdmin)
-admin.site.register(Team, MyAdmin)
 admin.site.register(Coupon, MyAdmin)
 admin.site.register(Transaction, MyAdmin)
 admin.site.register(TradeOffer, MyAdmin)
