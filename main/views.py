@@ -117,7 +117,7 @@ def home(request):
     return render(request, "main/league/home.html", context)
 
 def transactHome(request):
-    transactions = transactHome.objects.all()
+    transactions = Transaction.objects.all()
     return render(request, 'main/transactionshome.html', {'transactions': transactions})
 
 def login(request):
