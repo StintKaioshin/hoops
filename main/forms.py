@@ -91,8 +91,8 @@ class GameLogForm(forms.ModelForm):
     class Meta:
         model = GameLog
         fields = ['team_name', 'playbook', 'offensive_focus', 'offensive_tempo', 'offensive_rebounding', 
-                  'defensive_focus', 'defensive_aggression', 'defensive_rebounding', 'team_sliders', 
-                  'run_plays', 'offense_vs_defense', 'average_temp', 'bench_depth', 'guards_vs_forwards', 
+                  'defensive_focus', 'defensive_aggression', 'defensive_rebounding', 
+                  'run_plays', 'offense_vs_defense', 'bench_depth', 'guards_vs_forwards', 
                   'zone_usage', 'inside_vs_outside']
 
 
