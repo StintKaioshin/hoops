@@ -51,7 +51,7 @@
         {% endif %}
         {% if current_user.can_approve_trades %}
             <li><a class="dropdown-item" href="{% url 'trade_panel' %}">Trade Panel</a></li>
-            <li><a class="dropdown-item" href="{% url 'game_log_form' team_id %}">Game Log</a></li>
+            <li><a class="dropdown-item" href="{% url 'game_log_form' current_user.team_set.first.id %}">Manage Team</a></li>
         {% endif %}
         <li><a class="dropdown-item" href="{% url 'trade' %}">Trade Machine</a></li>
     </ul>
