@@ -179,6 +179,11 @@ def get_attribute_cost(player, attribute, attribute_value):
         cost = cost_dict['secondary']
     
     return cost
+def team_detail(request, team_id):
+    team = Team.objects.get(pk=team_id)
+    players = team.player_set.all()
+    total_ppg = sum(player.ppg for player in players)
+    return render(request, 'main/team_detail.html', {'team': team, 'total_ppg': total_ppg})
 
 def player(request, id):
     # Check if the player exists
