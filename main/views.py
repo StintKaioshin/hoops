@@ -115,6 +115,11 @@ def home(request):
             redirect(logout)
     # Return the home page
     return render(request, "main/league/home.html", context)
+
+def transactHome(request):
+    transactions = Transaction.objects.all().order_by('-date')
+    return render(request, 'main/transacthome.html', {'transactions': transactions})
+
 def login(request):
     return HttpResponse("This is the login page.")
 def login_discord(request):
