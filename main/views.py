@@ -324,6 +324,9 @@ def upgrade_player(request, id):
     # Check if the user has permission to upgrade this player
     if not player.discord_user == user:
         return HttpResponse("Sorry, you don't have permission to upgrade this player!")
+    print(upgrade_player_form)  # print form data
+    print(finishing_badges)  # print badge lists
+    print(player.primary_badges, player.secondary_badges)  # print player badges
     # Combine attributes & badges + convert to Django form format
     prefill_info = dict(player.attributes, **player.badges, **player.tendencies)
     # Convert primary & secondary attributes to Django form format
