@@ -41,21 +41,21 @@
                         <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/teams">Teams</a></li>
                         <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/stats">Stats</a></li>
                         <li class="nav-item"><a style="color: white !important;" class="nav-link" href="/transactions">Transactions</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" style="color: white !important;" href="#" id="permissionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Permissions
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="permissionsDropdown">
-                                {% if current_user.can_update_players %}
-                                    <li><a class="dropdown-item" href="{% url 'upgrades_pending' %}">Export Pending Upgrades</a></li>
-                                {% endif %}
-                                {% if current_user.can_approve_trades %}
-                                    <li><a class="dropdown-item" href="{% url 'trade_panel' %}">Trade Panel</a></li>
-                                {% endif %}
-                                <li><a class="dropdown-item" href="{% url 'trade' %}">Trade Machine</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" style="color: white !important;" href="#" id="permissionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Permissions
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="permissionsDropdown">
+        {% if current_user.can_update_players %}
+            <li><a class="dropdown-item" href="{% url 'upgrades_pending' %}">Export Pending Upgrades</a></li>
+        {% endif %}
+        {% if current_user.can_approve_trades %}
+            <li><a class="dropdown-item" href="{% url 'trade_panel' %}">Trade Panel</a></li>
+            <li><a class="dropdown-item" href="{% url 'game_log_form' %}">Game Log Form</a></li>
+        {% endif %}
+        <li><a class="dropdown-item" href="{% url 'trade' %}">Trade Machine</a></li>
+    </ul>
+</li>
 
                     {% if current_user.is_authenticated != False %}
                         <a style="color: white !important;" class="btn btn-primary btn-sm ms-md-2" role="button" href="/logout">Logout</a>
