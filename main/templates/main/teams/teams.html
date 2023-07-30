@@ -31,7 +31,7 @@
                 <li class="page-item"><a class="page-link" aria-label="Previous" href="?page={{ page.previous_page_number }}"><span aria-hidden="true">Back</span></a></li>
             {% endif %}
             {% for page in page.paginator.page_range %}
-                <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li
             {% endfor %}
             {% if page.has_next %}
                 <li class="page-item"><a class="page-link" aria-label="Next" href="?page={{ page.next_page_number }}"><span aria-hidden="true">Next</span></a></li>
@@ -39,23 +39,24 @@
         </ul>
     </div>
 
-    <script>
-        function updateSearch() {
-            var is_college_team = document.getElementById('college-checkbox').checked;
-            var search = document.getElementById('search-input').value;
-            var target = document.getElementById('search-results');
+<script>
+    function updateSearch() {
+        var isCollegeTeam = document.getElementById('is-college-team-checkbox').checked;
+        var search = document.getElementById('search-input').value;
+        var target = document.getElementById('search-results');
 
-            // Create a URLSearchParams object to hold the parameters
-            var params = new URLSearchParams({
-                is_college_team: is_college_team,
-                search: search
-            });
+        // Create a URLSearchParams object to hold the parameters
+        var params = new URLSearchParams({
+            is_college_team: isCollegeTeam,
+            search: search
+        });
 
-            // AJAX call to update the search results
-            hx.fetch('/teams/search/?' + params.toString(), {method: 'GET'})
-                .then(response => response.text())
-                .then(html => hx.swapping.swap(target, html));
-        }
-    </script>
+        // AJAX call to update the search results
+        hx.fetch('/teams/search/?' + params.toString(), {method: 'GET'})
+            .then(response => response.text())
+            .then(html => hx.swapping.swap(target, html));
+    }
+</script>
+
 
 {% endblock %}
