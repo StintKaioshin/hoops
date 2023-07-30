@@ -11,7 +11,7 @@ from .league import config as league_config
 class DiscordUser(models.Model):
     # Custom Manager
     objects = DiscordAuthorizationManager()
-    # Discord User Model
+    # Discord User 
     id = models.BigIntegerField(primary_key=True, serialize=False)
     discord_tag = models.CharField(max_length=100)
     avatar = models.CharField(max_length=100)
@@ -243,7 +243,7 @@ class TransactionsEtc(models.Model):
         default=PLAYER_SIGNED,
     )
 
-    from_team = models.ForeignKey(Team, related_name='transactions_made', on_delete=models.CASCADE)
+    from_team = models.ForeignKey(Team, on_delete=models.CASCADE)
     to_team = models.ForeignKey(Team, related_name='transactions_received', on_delete=models.CASCADE)
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
