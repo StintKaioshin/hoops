@@ -35,6 +35,26 @@ class DiscordUser(models.Model):
     def __str__(self):
         return f"{self.discord_tag}"
 
+class Team(models.Model):
+    # Team Model
+    name = models.CharField(max_length=32)
+    logo = models.CharField(max_length=100, default=league_config.initial_team_logo)
+    abbrev = models.CharField(max_length=3)
+    picks = models.JSONField(
+        default=league_config.get_default_picks, blank=True, null=True
+    )
+    plays_in_main_league = models.BooleanField(default=True)
+    show_on_lists = models.BooleanField(default=True)
+    is_college_team = models.BooleanField(default=False)  # new field
+    # Relationships
+    manager = models.ForeignKey(
+        "DiscordUser", blank=True, null=True, on_delete=models.CASCADE
+    )
+    history_list = models.ForeignKey("HistoryList", on_delete=models.CASCADE)
+    # Team Methods
+    def __str__(self):
+        return f"{self.name}"
+
 # Player Models
 class Player(models.Model):
     # Player Model
@@ -120,25 +140,6 @@ class Player(models.Model):
 class HistoryList(models.Model):
     history = models.JSONField(default=league_config.get_default_history, blank=True)
 # Team & Statistic Models
-class Team(models.Model):
-    # Team Model
-    name = models.CharField(max_length=32)
-    logo = models.CharField(max_length=100, default=league_config.initial_team_logo)
-    abbrev = models.CharField(max_length=3)
-    picks = models.JSONField(
-        default=league_config.get_default_picks, blank=True, null=True
-    )
-    plays_in_main_league = models.BooleanField(default=True)
-    show_on_lists = models.BooleanField(default=True)
-    is_college_team = models.BooleanField(default=False)  # new field
-    # Relationships
-    manager = models.ForeignKey(
-        "DiscordUser", blank=True, null=True, on_delete=models.CASCADE
-    )
-    history_list = models.ForeignKey("HistoryList", on_delete=models.CASCADE)
-    # Team Methods
-    def __str__(self):
-        return f"{self.name}"
 # Currency Transaction Models
 class Transaction(models.Model):
     # Transaction Model
