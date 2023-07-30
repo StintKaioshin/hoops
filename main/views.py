@@ -397,7 +397,7 @@ def search_players(request):
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
 
-    return render(request, 'main/ajax/players.html', {'page': page})
+    return render(request, 'main/ajax/player_list_fragment.html', {'page': page})
 
 def cash_logs(request, id):
     # Check if the player exists
