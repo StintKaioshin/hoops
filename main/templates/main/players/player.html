@@ -11,6 +11,27 @@
             <a class="btn btn-primary btn-sm text-white" href="{% url 'upgrade_player' player.id %}">Upgrade player</a>
             <a class="btn btn-primary btn-sm text-white" href="{% url 'upgrade_logs' player.id %}">Upgrade history</a>
             <a class="btn btn-primary btn-sm text-white" href="{% url 'cash_logs' player.id %}">Cash history</a>
+            <div class="row .payment-dialog-row">
+                <div class="col-sm-6 mb-3">
+        <h3><span class="panel-title-text">Contract Collect</span></h3>
+    </div>
+</div>
+<form>
+    {% csrf_token %}
+    <div class="row">
+        <p id="reward-result" class="mt-1 mb-2" style="font-size:14px;">Collect Your Contract</p>
+    </div>
+    <div class="col-12">
+        <a href="#" class="btn btn-success btn-lg d-block w-100" hx-post="/player/daily/reward/" hx-trigger="click delay:200ms" hx-target="#reward-result" hx-swap="innerHTML" onkeydown="return event.key != 'Enter';">Collect</a>
+    </div>
+</form>
+
+<div class="row .payment-dialog-row">
+    <div class="col-sm-6 mb-3">
+        <a class="btn btn-primary btn-lg d-block w-100" href="{% url 'cash_logs' player.id %}">Cash history</a>
+    </div>
+</div>
+
             <!-- Player file -->
             <button id="file" type="button" class="copyJSON btn btn-primary btn-sm" onClick="clipboard(this.id)">Copy File</button>
             <p id="json_file" class="file" style="font-size: 6px; display: none;">{{ file }}</p>
