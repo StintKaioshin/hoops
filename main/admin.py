@@ -12,6 +12,7 @@ from .models import HistoryList
 from .models import Team
 from .models import Coupon
 from .models import Transaction
+from .models import Transactions
 from .models import TradeOffer
 from .models import ContractOffer
 from .models import Notification
@@ -39,6 +40,7 @@ admin.site.register(Player, MyAdmin)
 admin.site.register(HistoryList, MyAdmin)
 admin.site.register(Coupon, MyAdmin)
 admin.site.register(Transaction, MyAdmin)
+admin.site.register(Transactions, MyAdmin)
 admin.site.register(TradeOffer, MyAdmin)
 admin.site.register(ContractOffer, MyAdmin)
 admin.site.register(Notification, MyAdmin)
