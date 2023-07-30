@@ -35,31 +35,6 @@ class DiscordUser(models.Model):
     def __str__(self):
         return f"{self.discord_tag}"
 
-class GameLog(models.Model):
-    team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
-    playbook = models.CharField(max_length=100)
-    offensive_focus = models.CharField(max_length=100)
-    offensive_tempo = models.CharField(max_length=100)
-    offensive_rebounding = models.CharField(max_length=100)
-    defensive_focus = models.CharField(max_length=100)
-    defensive_aggression = models.CharField(max_length=100)
-    defensive_rebounding = models.CharField(max_length=100)
-    team_sliders = models.IntegerField()
-    run_plays = models.IntegerField()
-    offense_vs_defense = models.IntegerField()
-    average_temp = models.IntegerField()
-    bench_depth = models.IntegerField()
-    guards_vs_forwards = models.IntegerField()
-    zone_usage = models.IntegerField()
-    inside_vs_outside = models.IntegerField()
-
-class GameLogPlayerSetting(models.Model):
-    game_log = models.ForeignKey(GameLog, on_delete=models.CASCADE)
-    player = models.ForeignKey(Player, on_delete=models.CASCADE)
-    touches = models.IntegerField()
-    player_initiator = models.BooleanField(default=False)
-
-
 # Player Models
 class Player(models.Model):
     # Player Model
@@ -181,6 +156,33 @@ class Transaction(models.Model):
     # Transaction Methods
     def __str__(self):
         return f"{self.transaction_type}: {self.amount}"
+        
+class GameLog(models.Model):
+    team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
+    playbook = models.CharField(max_length=100)
+    offensive_focus = models.CharField(max_length=100)
+    offensive_tempo = models.CharField(max_length=100)
+    offensive_rebounding = models.CharField(max_length=100)
+    defensive_focus = models.CharField(max_length=100)
+    defensive_aggression = models.CharField(max_length=100)
+    defensive_rebounding = models.CharField(max_length=100)
+    team_sliders = models.IntegerField()
+    run_plays = models.IntegerField()
+    offense_vs_defense = models.IntegerField()
+    average_temp = models.IntegerField()
+    bench_depth = models.IntegerField()
+    guards_vs_forwards = models.IntegerField()
+    zone_usage = models.IntegerField()
+    inside_vs_outside = models.IntegerField()
+
+class GameLogPlayerSetting(models.Model):
+    game_log = models.ForeignKey(GameLog, on_delete=models.CASCADE)
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    touches = models.IntegerField()
+    player_initiator = models.BooleanField(default=False)
+
+
+
 # Trade Models
 class TradeOffer(models.Model):
     # Trade Offer Model
