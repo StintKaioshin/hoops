@@ -243,7 +243,8 @@ class TransactionsEtc(models.Model):
         default=PLAYER_SIGNED,
     )
 
-    from_team = models.ForeignKey(Team, related_name='transactions_made', on_delete=models.CASCADE)    to_team = models.ForeignKey(Team, related_name='transactions_received', on_delete=models.CASCADE)
+    from_team = models.ForeignKey(Team, related_name='transactions_made', on_delete=models.CASCADE)    
+    to_team = models.ForeignKey(Team, related_name='transactions_received', on_delete=models.CASCADE)
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
