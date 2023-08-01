@@ -214,97 +214,94 @@
             </div>
         </div>
     </div>
-<div class="tab-content" id="upgradeTabsContent">
-    <div class="tab-pane fade" id="badges" role="tabpanel" aria-labelledby="badges-tab">
-        
-        <!-- badges -->
-        <div class="mt-2 row">
-            <!-- finishing badges -->
-            <div class="col-md-6 col-xl-3 mb-4">
-                <div style="height: 1030px;">
-                    <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
-                        <div class="row align-items-center no-gutters">
-                            <div class="col me-2">
-                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                    <span class="text-white" style="font-size: 12px;">Finishing Badges</span>
-                                </div><hr>
-                                <div class="text-white h5 mb-0" style="margin-top: -6px;">
-                                    {% for badge in player_finishing_badges %} 
-                                        <div class="badge-item">
-                                            <span class="badge-label">{{ badge.name }}</span>
-                                            <input type="text" name="{{ badge.name }}" value="{{ badge.value }}" class="form-control form-control-sm mt-1 badgeUpgrade">
-                                        </div>
-                                    {% endfor %}
-                                </div>
+<div class="tab-pane fade" id="badges" role="tabpanel" aria-labelledby="badges-tab">
+    <!-- badges -->
+    <div class="mt-2 row">
+        <!-- finishing badges -->
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div style="height: 1030px;">
+                <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                <span class="text-white" style="font-size: 12px;">Finishing Badges</span>
+                            </div><hr>
+                            <div class="text-white h5 mb-0" style="margin-top: -6px;">
+                                {% for badge_name, badge_value in finishing_badges.items %} 
+                                    <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
+                                        <span class="text-primary">{{ badge_name }}</span>
+                                    </span>                                         
+                                    <input type="text" name="{{ badge_name }}" value="{{ badge_value }}" class="form-control form-control-sm mt-1 badgeUpgrade">
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- shooting badges -->
-            <div class="col-md-6 col-xl-3 mb-4">
-                <div style="height: 1030px;">
-                    <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
-                        <div class="row align-items-center no-gutters">
-                            <div class="col me-2">
-                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                    <span class="text-white" style="font-size: 12px;">Shooting Badges</span>
-                                </div><hr>
-                                <div class="text-white h5 mb-0" style="margin-top: -6px;">
-                                    {% for badge in player_shooting_badges %} 
-                                        <div class="badge-item">
-                                            <span class="badge-label">{{ badge.name }}</span>
-                                            <input type="text" name="{{ badge.name }}" value="{{ badge.value }}" class="form-control form-control-sm mt-1 badgeUpgrade">
-                                        </div>
-                                    {% endfor %}
-                                </div>
+        <!-- shooting badges -->
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div style="height: 1030px;">
+                <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                <span class="text-white" style="font-size: 12px;">Shooting Badges</span>
+                            </div><hr>
+                            <div class="text-white h5 mb-0" style="margin-top: -6px;">
+                                {% for badge_name, badge_value in shooting_badges.items %} 
+                                    <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
+                                        <span class="text-primary">{{ badge_name }}</span>
+                                    </span>                                         
+                                    <input type="text" name="{{ badge_name }}" value="{{ badge_value }}" class="form-control form-control-sm mt-1 badgeUpgrade">
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- playmaking badges -->
-            <div class="col-md-6 col-xl-3 mb-4">
-                <div style="height: 1030px;">
-                    <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
-                        <div class="row align-items-center no-gutters">
-                            <div class="col me-2">
-                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                    <span class="text-white" style="font-size: 12px;">Playmaking Badges</span>
-                                </div><hr>
-                                <div class="text-white h5 mb-0" style="margin-top: -6px;">
-                                    {% for badge in player_playmaking_badges %} 
-                                        <div class="badge-item">
-                                            <span class="badge-label">{{ badge.name }}</span>
-                                            <input type="text" name="{{ badge.name }}" value="{{ badge.value }}" class="form-control form-control-sm mt-1 badgeUpgrade">
-                                        </div>
-                                    {% endfor %}
-                                </div>
+        <!-- playmaking badges -->
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div style="height: 1030px;">
+                <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                <span class="text-white" style="font-size: 12px;">Playmaking Badges</span>
+                            </div><hr>
+                            <div class="text-white h5 mb-0" style="margin-top: -6px;">
+                                {% for badge_name, badge_value in playmaking_badges.items %} 
+                                    <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
+                                        <span class="text-primary">{{ badge_name }}</span>
+                                    </span>                                         
+                                    <input type="text" name="{{ badge_name }}" value="{{ badge_value }}" class="form-control form-control-sm mt-1 badgeUpgrade">
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- defense badges -->
-            <div class="col-md-6 col-xl-3 mb-4">
-                <div style="height: 1030px;">
-                    <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
-                        <div class="row align-items-center no-gutters">
-                            <div class="col me-2">
-                                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                    <span class="text-white" style="font-size: 12px;">Defensive Badges</span>
-                                </div><hr>
-                                <div class="text-white h5 mb-0" style="margin-top: -6px;">
-                                    {% for badge in player_defense_badges %} 
-                                        <div class="badge-item">
-                                            <span class="badge-label">{{ badge.name }}</span>
-                                            <input type="text" name="{{ badge.name }}" value="{{ badge.value }}" class="form-control form-control-sm mt-1 badgeUpgrade">
-                                        </div>
-                                    {% endfor %}
-                                </div>
+        <!-- defensive badges -->
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div style="height: 1030px;">
+                <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                <span class="text-white" style="font-size: 12px;">Defensive Badges</span>
+                            </div><hr>
+                            <div class="text-white h5 mb-0" style="margin-top: -6px;">
+                                {% for badge_name, badge_value in defensive_badges.items %} 
+                                    <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
+                                        <span class="text-primary">{{ badge_name }}</span>
+                                    </span>                                         
+                                    <input type="text" name="{{ badge_name }}" value="{{ badge_value }}" class="form-control form-control-sm mt-1 badgeUpgrade">
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -312,7 +309,7 @@
             </div>
         </div>
     </div>
-</div
+</div>
             <div class="tab-pane fade" id="tendencies" role="tabpanel" aria-labelledby="tendencies-tab">
                 <div class="col-md-12 col-xl-12 mb-4">
                     <div style="height: 1420px;">
