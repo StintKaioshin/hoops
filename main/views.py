@@ -357,10 +357,10 @@ def upgrade_player(request, id):
         "defense_attributes": league_config.attribute_categories["defense"],
         "physical_attributes": league_config.attribute_categories["physical"],
         # Badge categories
-        "finishing_badges": league_config.badge_categories["finishing"],
-        "shooting_badges": league_config.badge_categories["shooting"],
-        "playmaking_badges": league_config.badge_categories["playmaking"],
-        "defense_badges": league_config.badge_categories["defense"],
+        "player_finishing_badges": player_finishing_badges,
+        "player_shooting_badges": player_shooting_badges,
+        "player_playmaking_badges": player_playmaking_badges,
+        "player_defense_badges": player_defense_badges,
         # Tendency categories
         "initial_tendencies": league_config.initial_tendencies,
     }
