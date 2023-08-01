@@ -313,7 +313,6 @@ def player_detail(request, pk):
     player = get_object_or_404(Player, pk=pk)
     return render(request, 'main/player_detail.html', {'player': player})
 @login_required(login_url="/login/discord/")
-@login_required(login_url="/login/discord/")
 def upgrade_player(request, id):
     # Collect user information
     user = request.user
@@ -325,6 +324,8 @@ def upgrade_player(request, id):
 
     # Combine attributes & badges + convert to Django form format
     player_badges = dict(player.badges)
+    player_badges_items = [{"name": k, "value": v} for k, v in player_badges.items()]  # Convert dict to list of dicts
+
     prefill_info = {**player.attributes, **player_badges, **player.tendencies}
     # Convert primary & secondary attributes to Django form format
     js_primary_attributes = player.primary_attributes
@@ -338,10 +339,10 @@ def upgrade_player(request, id):
     playmaking_badges_list = league_config.badge_categories["playmaking"]
     defense_badges_list = league_config.badge_categories["defense"]
 
-    player_finishing_badges = {k: v for k, v in player_badges.items() if k in finishing_badges_list}
-    player_shooting_badges = {k: v for k, v in player_badges.items() if k in shooting_badges_list}
-    player_playmaking_badges = {k: v for k, v in player_badges.items() if k in playmaking_badges_list}
-    player_defense_badges = {k: v for k, v in player_badges.items() if k in defense_badges_list}
+    player_finishing_badges = [item for item in player_badges_items if item["name"] in finishing_badges_list]
+    player_shooting_badges = [item for item in player_badges_items if item["name"] in shooting_badges_list]
+    player_playmaking_badges = [item for item in player_badges_items if item["name"] in playmaking_badges_list]
+    player_defense_badges = [item for item in player_badges_items if item["name"] in defense_badges_list]
 
     # Check if player has been integrated
     # Check if the user has permission to upgrade this player
@@ -376,6 +377,7 @@ def upgrade_player(request, id):
         "player_defense_badges": player_defense_badges,
         "initial_tendencies": league_config.initial_tendencies,
     }
+
     return render(request, "main/players/upgrade.html", context)
 import logging
 logger = logging.getLogger(__name__)
