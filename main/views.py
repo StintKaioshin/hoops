@@ -314,70 +314,58 @@ def player_detail(request, pk):
     return render(request, 'main/player_detail.html', {'player': player})
 @login_required(login_url="/login/discord/")
 def upgrade_player(request, id):
-    # Collect user information
+    # Collect user & player information
     user = request.user
     # Check if the player exists
-    try:
-        player = Player.objects.get(pk=id)
-    except Player.DoesNotExist:
+    player = Player.objects.get(pk=id)
+    if not player:
         return HttpResponse("Sorry, this player doesn't exist!")
-
+    # Check if player has been integrated
+    if not player.primary_attributes or not player.secondary_attributes or not player.primary_badges or not player.secondary_badges:
+        return redirect(integrate_player)
+    # Check if the user has permission to upgrade this player
+    if not player.discord_user == user:
+        return HttpResponse("Sorry, you don't have permission to upgrade this player!")
     # Combine attributes & badges + convert to Django form format
-    player_badges = dict(player.badges)
-    player_badges_items = [{"name": k, "value": v} for k, v in player_badges.items()]  # Convert dict to list of dicts
-
-    prefill_info = {**player.attributes, **player_badges, **player.tendencies}
+    prefill_info = dict(player.attributes, **player.badges, **player.tendencies)
     # Convert primary & secondary attributes to Django form format
     js_primary_attributes = player.primary_attributes
     js_secondary_attributes = player.secondary_attributes
     js_primary_badges = player.primary_badges
     js_secondary_badges = player.secondary_badges
-
-    # Categorize the badges
-    finishing_badges_list = league_config.badge_categories["finishing"]
-    shooting_badges_list = league_config.badge_categories["shooting"]
-    playmaking_badges_list = league_config.badge_categories["playmaking"]
-    defense_badges_list = league_config.badge_categories["defense"]
-
-    player_finishing_badges = [item for item in player_badges_items if item["name"] in finishing_badges_list]
-    player_shooting_badges = [item for item in player_badges_items if item["name"] in shooting_badges_list]
-    player_playmaking_badges = [item for item in player_badges_items if item["name"] in playmaking_badges_list]
-    player_defense_badges = [item for item in player_badges_items if item["name"] in defense_badges_list]
-
-    # Check if player has been integrated
-    # Check if the user has permission to upgrade this player
-    if not player.discord_user == user:
-        return HttpResponse("Sorry, you don't have permission to upgrade this player!")
-
-    # Remove the 'range' function from attribute prices or javascript shits the bed
+    # Have to remove the 'range' function from attribute prices or javascript shits the bed
     js_attribute_prices = copy.deepcopy(league_config.attribute_prices)
     for _, v in js_attribute_prices.items():
         v["range"] = 0
-
     # Initialize the context
     context = {
+        # Context items
         "title": "Upgrade Player",
         "player": player,
         "upgrade_player_form": UpgradeForm(initial=prefill_info),
+        # Badges & attributes
         "badge_attributes": prefill_info,
         "badge_prices": league_config.badge_prices,
         "attribute_prices": js_attribute_prices,
         "primary_attributes": js_primary_attributes,
         "secondary_attributes": js_secondary_attributes,
+        # Traits
         "primary_badges": js_primary_badges,
         "secondary_badges": js_secondary_badges,
+        # Attribute categories
         "finishing_attributes": league_config.attribute_categories["finishing"],
         "shooting_attributes": league_config.attribute_categories["shooting"],
         "playmaking_attributes": league_config.attribute_categories["playmaking"],
         "defense_attributes": league_config.attribute_categories["defense"],
         "physical_attributes": league_config.attribute_categories["physical"],
-        "player_finishing_badges": player_finishing_badges,
-        "player_shooting_badges": player_shooting_badges,
-        "player_playmaking_badges": player_playmaking_badges,
-        "player_defense_badges": player_defense_badges,
+        # Badge categories
+        "finishing_badges": league_config.badge_categories["finishing"],
+        "shooting_badges": league_config.badge_categories["shooting"],
+        "playmaking_badges": league_config.badge_categories["playmaking"],
+        "defense_badges": league_config.badge_categories["defense"],
+        # Tendency categories
         "initial_tendencies": league_config.initial_tendencies,
     }
-
     return render(request, "main/players/upgrade.html", context)
 import logging
 logger = logging.getLogger(__name__)
