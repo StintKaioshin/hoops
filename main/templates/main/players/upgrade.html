@@ -221,28 +221,28 @@
 <div class="mt-2 row">
                 <!-- finishing badges -->
                 <div class="col-md-6 col-xl-3 mb-4">
-                    <div style="height: 1030px;">
+                    <div style="height: 750px;">
                         <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
                                     <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                        <span class="text-white" style="font-size: 12px;">Finishing Badges</span>
+                                        <span class="text-white" style="font-size: 12px;">Defensive Attributes</span>
                                     </div><hr>
                                     <div class="text-white h5 mb-0" style="margin-top: -6px;">
                                         {% for field in upgrade_player_form %} 
-                                            {% if field.label in finishing_badges %}         
+                                            {% if field.label in defense_attributes %}         
                                                 <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in player.primary_badges %}
-                                                        <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in player.secondary_badges %}
-                                                        <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
+                                                    {% if field.name in primary_attributes %}
+                                                    <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">PRIMARY </span>
+                                                    {% elif field.name in secondary_attributes %}
+                                                    <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">SECONDARY </span>
                                                     {% else %}
-                                                        <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
+                                                    <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
                                                     {% endif %}
                                                     {{ field.label }}
                                                 </span>                                         
+                                                {{ field|addclass:"form-control form-control-sm mt-1 attributeUpgrade" }}
                                                 {{ field.errors }}
-                                                {{ field|addclass:"form-control form-control-sm mt-1 badgeUpgrade" }}
                                             {% endif %}
                                         {% endfor %}
                                     </div>
@@ -251,6 +251,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
                 <!-- shootings badges -->
                 <div class="col-md-6 col-xl-3 mb-4">
                     <div style="height: 1030px;">
