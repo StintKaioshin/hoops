@@ -316,6 +316,7 @@ def player_detail(request, pk):
 def upgrade_player(request, id):
     # Collect user & player information
     user = request.user
+    player_badges = dict(player.badges)
     # Check if the player exists
     player = Player.objects.get(pk=id)
     if not player:
@@ -331,6 +332,14 @@ def upgrade_player(request, id):
     js_secondary_attributes = player.secondary_attributes
     js_primary_badges = player.primary_badges
     js_secondary_badges = player.secondary_badges
+    finishing_badges_list = league_config.badge_categories["finishing"]
+    shooting_badges_list = league_config.badge_categories["shooting"]
+    playmaking_badges_list = league_config.badge_categories["playmaking"]
+    defense_badges_list = league_config.badge_categories["defense"]
+    player_finishing_badges = {k: v for k, v in player_badges.items() if k in finishing_badges_list}
+    player_shooting_badges = {k: v for k, v in player_badges.items() if k in shooting_badges_list}
+    player_playmaking_badges = {k: v for k, v in player_badges.items() if k in playmaking_badges_list}
+    player_defense_badges = {k: v for k, v in player_badges.items() if k in defense_badges_list}
     # Have to remove the 'range' function from attribute prices or javascript shits the bed
     js_attribute_prices = copy.deepcopy(league_config.attribute_prices)
     for _, v in js_attribute_prices.items():
