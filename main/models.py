@@ -248,13 +248,14 @@ class TransactionsEtc(models.Model):
         default=PLAYER_SIGNED,
     )
 
-    from_team = models.ForeignKey(Team, related_name='transactions_made', on_delete=models.CASCADE)    
-    to_team = models.ForeignKey(Team, related_name='transactions_received', on_delete=models.CASCADE)
+    # Null values are now allowed for from_team and to_team
+    from_team = models.ForeignKey(Team, related_name='transactions_made', on_delete=models.CASCADE, null=True)    
+    to_team = models.ForeignKey(Team, related_name='transactions_received', on_delete=models.CASCADE, null=True)
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.get_transaction_type_display()} - {self.from_team.name} to {self.to_team.name} - {self.player.first_name} {self.player.last_name} - {self.timestamp}"
+        return f"{self.get_transaction_type_display()} - {self.from_team.name if self.from_team else 'N/A'} to {self.to_team.name if self.to_team else 'N/A'} - {self.player.first_name} {self.player.last_name} - {self.timestamp}"
 
 # Coupon Models
 class Coupon(models.Model):
