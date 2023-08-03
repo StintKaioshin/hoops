@@ -112,15 +112,6 @@
                     <p><b>Spent</b></p><hr>
                     <p>${{ player.spent }}</p>
                 </div>
-                    <div class="card-body">
-                        <form>
-                            {% csrf_token %}
-                            <div class="row">
-                                <p id="reward-result" class="mt-1 mb-2" style="font-size:14px;">Collect your daily rewards!</p>
-                            </div>
-                            <div class="row">
-                                <div class="col-12"><button class="btn btn-success btn-lg d-block w-100" type="submit" hx-post="/player/daily/reward/" hx-trigger="click delay:200ms" hx-target="#reward-result" hx-swap="innerHTML" onkeydown="return event.key != 'Enter';">Collect</button></div>
-                            </div>
                 <!-- Editable player details -->
                 <div class="row mb-3">
                     <!-- Editable by player owner -->
@@ -233,7 +224,18 @@
                             <p>{{ playstyle4.0 }}</p>
                         </div>
                     {% endif %}
-                </div>
+                </div>                    
+                <div class="card-body">
+                        <form>
+                            {% csrf_token %}
+                            <div class="row">
+                                <p id="reward-result" class="mt-1 mb-2" style="font-size:14px;">Collect your daily rewards!</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-12"><button class="btn btn-success btn-lg d-block w-100" type="submit" hx-post="/player/daily/reward/" hx-trigger="click delay:200ms" hx-target="#reward-result" hx-swap="innerHTML" onkeydown="return event.key != 'Enter';">Collect</button></div>
+                            </div>
+                        </form>
+                    </div>
                 <!-- Trait & archetype details -->
                 <p class="mb-0"><b>Creator:</b> {{ player.discord_user.discord_tag }}</p>
                 <p><b>Week Earnings:</b> ${{ week_earnings }}</p>
