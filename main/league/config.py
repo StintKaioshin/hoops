@@ -250,9 +250,9 @@ price_per_pound = 15
 # The cost to increase attributes is divided into ranges.
 # For each range, there's a different cost for base, primary, and secondary attributes.
 attribute_prices = {
-    "0-70": {"range": range(0, 71), "base": 40, "primary": 10, "secondary": 20},
-    "71-80": {"range": range(71, 81), "base": 100, "primary": 25, "secondary": 50},
-    "81-86": {"range": range(81, 87), "base": 200, "primary": 50, "secondary": 100},
+    "0-70": {"range": range(0, 71), "base": 60, "primary": 30, "secondary": 40},
+    "71-80": {"range": range(71, 81), "base": 150, "primary": 45, "secondary": 70},
+    "81-86": {"range": range(81, 87), "base": 200, "primary": 70, "secondary": 130},
     "87-93": {"range": range(87, 94), "base": 400, "primary": 100, "secondary": 200},
     "94-96": {"range": range(94, 97), "base": 800, "primary": 200, "secondary": 400},
     "97-99": {"range": range(97, 100), "base": 1200, "primary": 400, "secondary": 800},
@@ -261,24 +261,24 @@ attribute_prices = {
 # The cost to unlock badges at different levels
 badge_prices = {
     1: {
-        "base": 100,
-        "primary": 25,
-        "secondary": 50,
+        "base": 250,
+        "primary": 100,
+        "secondary": 150,
     },
     2: {
-        "base": 200,
-        "primary": 50,
-        "secondary": 75,
+        "base": 350,
+        "primary": 150,
+        "secondary": 275,
     },
     3: {
-        "base": 300,
-        "primary": 75,
-        "secondary": 100,
+        "base": 450,
+        "primary": 175,
+        "secondary": 350,
     },
     4: {
-        "base": 400,
-        "primary": 100,
-        "secondary": 125,
+        "base": 550,
+        "primary": 200,
+        "secondary": 425,
     },
 }
 
