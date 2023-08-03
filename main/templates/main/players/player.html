@@ -112,6 +112,9 @@
                     <p><b>Spent</b></p><hr>
                     <p>${{ player.spent }}</p>
                 </div>
+                <div class="row">
+                    <div class="col-12"><button class="btn btn-success btn-lg d-block w-100" type="submit" hx-post="/player/daily/reward/" hx-trigger="click delay:200ms" hx-target="#reward-result" hx-swap="innerHTML" onkeydown="return event.key != 'Enter';">Collect</button></div>
+                </div>
                 <!-- Editable player details -->
                 <div class="row mb-3">
                     <!-- Editable by player owner -->
