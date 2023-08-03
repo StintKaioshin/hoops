@@ -78,6 +78,9 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="tendencies-tab" data-bs-toggle="tab" data-bs-target="#tendencies" type="button" role="tab" aria-controls="tendencies" aria-selected="false">Tendencies</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="hotzone-tab" data-bs-toggle="tab" data-bs-target="#hotzones" type="button" role="tab" aria-controls="hotzones" aria-selected="false">Hotzones</button>
+            </li>
         </ul>
 <div class="tab-content" id="upgradeTabsContent">
             <div class="tab-pane fade show active" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
@@ -369,6 +372,35 @@
                 </div>
         </div>
     </div>
+    <div class="tab-pane fade" id="hotzones" role="tabpanel" aria-labelledby="hotzones-tab">
+    <div class="mt-2 row">
+        <!-- hotzones -->
+        <div class="col-md-12 mb-4">
+            <div class="card-body">
+                <div class="row align-items-center no-gutters">
+                    <div class="col me-2">
+                        <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                            <span class="text-white" style="font-size: 12px;">Hotzones</span>
+                        </div><hr>
+                        <div class="h5 mb-0">
+                            {% for key in hotzones %}
+                                {% for key in league_config.initial_hotzones %}
+                                    <label for="{{ key }}" class="text-white" style="font-size: 11px;">{{ key }}</label>
+                                    <select name="{{ key }}" id="{{ key }}" class="form-control form-control-sm mt-1" onchange="updatePrice()">
+                                        {% for choice in league_config.hotzone_choices %}
+                                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
             <div class="tab-pane fade" id="tendencies" role="tabpanel" aria-labelledby="tendencies-tab">
                 <div class="col-md-12 col-xl-12 mb-4">
                     <div style="height: 1420px;">
