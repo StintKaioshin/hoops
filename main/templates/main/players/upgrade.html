@@ -242,14 +242,16 @@
                                     <div class="text-white h5 mb-0" style="margin-top: -6px;">
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in finishing_badges %}         
-                                                <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in primary_badges %}
-                                                        <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in secondary_badges %}
-                                                        <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
-                                                    {% else %}
-                                                        <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
-                                                    {% endif %}
+                                            <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
+                                            <span class="
+                                                {% if field.name in primary_badges %}
+                                                    text-success
+                                                {% elif field.name in secondary_badges %}
+                                                    text-primary
+                                                {% else %}
+                                                    text-danger
+                                                {% endif %}
+                                            ">
                                                     {{ field.label }}
                                                 </span>                                         
                                                 {{ field.errors }}
@@ -274,14 +276,16 @@
                                     <div class="text-white h5 mb-0" style="margin-top: -6px;">
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in shooting_badges %}         
-                                                <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in primary_badges %}
-                                                        <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in secondary_badges %}
-                                                        <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
-                                                    {% else %}
-                                                        <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
-                                                    {% endif %}
+                                        <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
+                                            <span class="
+                                                {% if field.name in primary_badges %}
+                                                    text-success
+                                                {% elif field.name in secondary_badges %}
+                                                    text-primary
+                                                {% else %}
+                                                    text-danger
+                                                {% endif %}
+                                            ">
                                                     {{ field.label }}
                                                 </span>                                         
                                                 {{ field.errors }}
@@ -306,14 +310,17 @@
                                     <div class="text-white h5 mb-0" style="margin-top: -6px;">
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in playmaking_badges %}         
-                                                <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in primary_badges %}
-                                                        <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in secondary_badges %}
-                                                        <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
-                                                    {% else %}
-                                                        <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
-                                                    {% endif %}
+                                        <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
+                                            <span class="
+                                                {% if field.name in primary_badges %}
+                                                    text-success
+                                                {% elif field.name in secondary_badges %}
+                                                    text-primary
+                                                {% else %}
+                                                    text-danger
+                                                {% endif %}
+                                            ">
+
                                                     {{ field.label }}
                                                 </span>                                         
                                                 {{ field.errors }}
@@ -338,14 +345,16 @@
                                     <div class="text-white h5 mb-0" style="margin-top: -6px;">
                                         {% for field in upgrade_player_form %} 
                                             {% if field.label in defense_badges %}         
-                                                <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
-                                                    {% if field.name in primary_badges %}
-                                                        <span class="fw-bold text-success" style="font-size: 10px; margin-right: 2px;">TRAIT ONE</span>
-                                                    {% elif field.name in secondary_badges %}
-                                                        <span class="fw-bold text-primary" style="font-size: 10px; margin-right: 2px;">TRAIT TWO</span>
-                                                    {% else %}
-                                                        <span class="fw-bold text-danger" style="font-size: 10px; margin-right: 2px;">BASE </span>
-                                                    {% endif %}
+                                        <span class="ml-0" style="font-size: 11px; text-decoration: none; text-transform: capitalize;">
+                                            <span class="
+                                                {% if field.name in primary_badges %}
+                                                    text-success
+                                                {% elif field.name in secondary_badges %}
+                                                    text-primary
+                                                {% else %}
+                                                    text-danger
+                                                {% endif %}
+                                            ">
                                                     {{ field.label }}
                                                 </span>                                         
                                                 {{ field.errors }}
