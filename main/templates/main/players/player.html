@@ -12,8 +12,7 @@
             <a class="btn btn-primary btn-sm text-white" href="{% url 'upgrade_logs' player.id %}">Upgrade history</a>
             <a class="btn btn-primary btn-sm text-white" href="{% url 'cash_logs' player.id %}">Cash history</a>
             <!-- Player file -->
-            <button id="file" type="button" class="copyJSON btn btn-primary btn-sm" onClick="clipboard(this.id)">Copy File</button>
-            <p id="json_file" class="file" style="font-size: 6px; display: none;">{{ file }}</p>
+            <button id="{{ tag }}" type="button" class="copyJSON btn btn-primary btn-sm" onClick="clipboard(this.id)" style="width:300px;">Copy File</button>
             <!-- Upgrades pending? -->
             {% if player.upgrades_pending %}
                 <p class="fw-bold text-danger text-center">Pending upgrades</p>
