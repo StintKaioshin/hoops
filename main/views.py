@@ -149,13 +149,20 @@ def login_discord_redirect(request):
         code = request.GET.get("code")
         info = discord_auth.exchange_code(code)
         user = info[0]
-        # Create the discord user
+        # Attempt to authenticate the user
         discord_user = authenticate(request, user=user)
-        discord_user = list(discord_user).pop()
-        # Finally, log the user in
-        django_login(request, discord_user, backend="main.authorize.DiscordBackend")
-        # Send a success message
-        messages.error(request, "You have successfully logged in!")
+        # Check if the user was successfully authenticated
+        if discord_user is None:
+            # Handle case where user was not found in your system
+            # This could be creating a new user, or returning an error message
+            messages.error(request, "User not found, please register!")
+            # Redirect to registration page (change to your registration route)
+            return redirect('register')
+        else:
+            # User was found and authenticated, proceed with login
+            django_login(request, discord_user, backend="main.authorize.DiscordBackend")
+            # Send a success message
+            messages.success(request, "You have successfully logged in!")
     except Exception as e:
         # Log the error
         logger.exception(e)
