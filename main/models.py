@@ -30,7 +30,7 @@ class DiscordUser(models.Model):
     # Player Slots
     player_slots = models.SmallIntegerField(default=league_config.max_players)
     auto_collect_rewards = models.BooleanField(default=False)
-    #fcan_change_styles = models.BooleanField(default=False)
+    can_change_styles = models.BooleanField(default=False)
 
 
     def is_authenticated(self, request):
