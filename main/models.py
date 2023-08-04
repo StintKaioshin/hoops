@@ -30,6 +30,7 @@ class DiscordUser(models.Model):
     # Player Slots
     player_slots = models.SmallIntegerField(default=league_config.max_players)
     auto_collect_rewards = models.BooleanField(default=False)
+    #fcan_change_styles = models.BooleanField(default=False)
 
 
     def is_authenticated(self, request):
@@ -255,8 +256,8 @@ class TransactionsEtc(models.Model):
     )
 
     # Null values are now allowed for from_team and to_team
-    from_team = models.ForeignKey(Team, related_name='transactions_made', null=True, blank=True, on_delete=models.SET_NULL)
-    to_team = models.ForeignKey(Team, related_name='transactions_received', on_delete=models.CASCADE, null=True)
+    from_team = models.ForeignKey(Team, related_name='transactions_made', on_delete=models.CASCADE)
+    to_team = models.ForeignKey(Team, related_name='transactions_received', on_delete=models.CASCADE)
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
