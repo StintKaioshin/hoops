@@ -139,6 +139,10 @@ def login_discord(request):
     return redirect(discord_auth_url)
 
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 def login_discord_redirect(request):
     try:
         # Get information from Discord
@@ -152,11 +156,11 @@ def login_discord_redirect(request):
         django_login(request, discord_user, backend="main.authorize.DiscordBackend")
         # Send a success message
         messages.error(request, "You have successfully logged in!")
-    except:
+    except Exception as e:
+        # Log the error
+        logger.exception(e)
         # Sometimes the user will be redirected to this page without a code
         messages.error(request, "Something went wrong while logging you in, try again!")
-    # Redirect the user to the home page
-    return redirect(home)
     # Redirect the user to the home page
     return redirect(home)
 def logout(request):
