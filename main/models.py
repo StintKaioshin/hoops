@@ -33,8 +33,11 @@ class DiscordUser(models.Model):
     can_change_styles = models.BooleanField(default=False)
 
     # Discord User Methods
-    def is_authenticated(self, request):
-        return True
+    def has_module_perms(self, app_label):  # Added this method
+        # This is a basic implementation. You'll need to customize this based on your permission logic.
+        if self.is_active:
+            return True
+        return False
 
     def __str__(self):
         return f"{self.discord_tag}"
