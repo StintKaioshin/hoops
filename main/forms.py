@@ -83,6 +83,7 @@ class UpgradeForm(forms.Form):
         for key in league_config.initial_hotzones:
             self.fields[key] = forms.ChoiceField(
                 label=key,
+                required=False,
                 choices=league_config.hotzone_choices,
                 widget=forms.Select(attrs={"onchange": "updatePrice()"}),
             )
