@@ -4,12 +4,13 @@ from .models import DiscordUser
 
 class DiscordBackend(BaseBackend):
     def authenticate(self, request, user):
-        find_user = DiscordUser.objects.filter(id=user["id"])
-        if len(find_user) == 0:
+        try:
+            discord_user = DiscordUser.objects.get(id=user["id"])
+        except DiscordUser.DoesNotExist:
             # Create new user (w/ custom manager)
-            new_user = DiscordUser.objects.create_discord_user(user)
-            return new_user
-        return find_user
+            discord_user = DiscordUser.objects.create_discord_user(user)
+
+        return discord_user
 
     def get_user(self, user_id):
         try:
