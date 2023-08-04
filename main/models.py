@@ -32,6 +32,10 @@ class DiscordUser(models.Model):
     auto_collect_rewards = models.BooleanField(default=False)
     can_change_styles = models.BooleanField(default=False)
 
+
+    def is_authenticated(self, request):
+        return True
+
     # Discord User Methods
     def has_module_perms(self, app_label):  # Added this method
         # This is a basic implementation. You'll need to customize this based on your permission logic.
