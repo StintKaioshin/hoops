@@ -23,7 +23,7 @@ class DiscordUser(models.Model):
     locale = models.CharField(max_length=100)
     mfa_enabled = models.BooleanField()
     last_login = models.DateTimeField(null=True)
-    last_reward = models.DateField(null=True, blank=True)
+    last_reward = models.DateTimeField(null=True, blank=True)
     # Permissions
     can_update_players = models.BooleanField(default=False)
     can_approve_trades = models.BooleanField(default=False)
