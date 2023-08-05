@@ -23,7 +23,7 @@ class DiscordUser(models.Model):
     locale = models.CharField(max_length=100)
     mfa_enabled = models.BooleanField()
     last_login = models.DateTimeField(null=True)
-    last_reward = models.DateTimeField(null=True)
+    last_reward = models.DateField(null=True, blank=True)
     # Permissions
     can_update_players = models.BooleanField(default=False)
     can_approve_trades = models.BooleanField(default=False)
@@ -31,6 +31,9 @@ class DiscordUser(models.Model):
     player_slots = models.SmallIntegerField(default=league_config.max_players)
     auto_collect_rewards = models.BooleanField(default=False)
     can_change_styles = models.BooleanField(default=False)
+
+    def get_username(self):
+        return self.username
 
 
     def is_authenticated(self, request):
