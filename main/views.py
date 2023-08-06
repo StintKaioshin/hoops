@@ -379,7 +379,7 @@ logger = logging.getLogger(__name__)
 def create_player(request):
     attribute_categories = { 
         "finishing": ["Driving Layup", "Post Hook", "Close Shot", "Driving Dunk", "Standing Dunk", "Post Control"],
-        "shooting": ["Mid-Range Shot", "Three-Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
+        "shooting": ["Mid Range Shot", "Three Point Shot", "Free Throw", "Shot IQ", "Offensive Consistency", "Shot Under Basket"],
         "defense": ["Interior Defense", "Perimeter Defense", "Steal", "Block", "Defensive Rebound", "Offensive Rebound", "Defensive Consistency"],
         "playmaking": ["Passing Accuracy", "Ball Control", "Post Moves", "Pass IQ", "Pass Vision"],
     }
