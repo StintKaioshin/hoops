@@ -31,6 +31,8 @@ class DiscordUser(models.Model):
     player_slots = models.SmallIntegerField(default=league_config.max_players)
     auto_collect_rewards = models.BooleanField(default=False)
     can_change_styles = models.BooleanField(default=False)
+    def get_username(self):
+        return self.discord_tag
 
 
     def is_authenticated(self, request):
