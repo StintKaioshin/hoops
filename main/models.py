@@ -33,6 +33,10 @@ class DiscordUser(models.Model):
     can_change_styles = models.BooleanField(default=False)
     USERNAME_FIELD = 'discord_tag'
 
+    def get_username(self):
+        return self.discord_tag
+
+    
     def is_authenticated(self, request):
         return True
 
