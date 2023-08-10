@@ -11,7 +11,7 @@
                 <ul class="leader-list">
                     {% for player in leading_scorers %}
                         <li class="leader-item">
-                            <span class="leader-name">{{ player.name }}</span>
+                            <a href="{% url 'player_gamelog' player.id %}" class="leader-name">{{ player.name }}</a>
                             <span class="leader-stat">{{ player.ppg }} PPG</span>
                         </li>
                     {% endfor %}
