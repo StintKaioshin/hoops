@@ -69,6 +69,11 @@ def view_game(request, id):
     }
     return render(request, "stats/viewing/view_game.html", context)
 
+def player_game_log(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
+    game_logs = player.game_logs.all()  # Assuming you have a related_name set up for game logs in the Player model.
+    return render(request, 'player_gamelog.html', {'player': player, 'game_logs': game_logs})
+
 def view_season(request, id):
     # Attempt to find the season
     try:
