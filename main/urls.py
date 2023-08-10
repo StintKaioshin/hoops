@@ -26,9 +26,7 @@ urlpatterns = [
     path("player/cash/take/", views.take_player_cash, name="take_player_cash"),
     path("player/daily/reward/collect/", views.daily_rewards, name="daily_rewards"),
     path('game-log/<int:team_id>/', views.gamelog_create, name='game_log_form'),
-    path('player/<int:player_id>/gamelog/', PlayerGameLogView.as_view(), name='player_gamelog'),
-
-
+    path('player/<int:player_id>/gamelog/', views.player_game_log, name='player_gamelog'),
     # Team URL patterns
     path("team/<int:id>/", views.team, name="team"),
     path("teams/", views.teams, name="teams"),
