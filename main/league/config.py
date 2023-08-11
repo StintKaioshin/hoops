@@ -17,7 +17,7 @@ referral_bonus = 100
 # Description: For league related model fields
 max_contract_season = 3
 # Description: For cap space
-hard_cap = 1200
+hard_cap = 1600
 min_years = 1
 max_years = 3
 min_salary = 100
