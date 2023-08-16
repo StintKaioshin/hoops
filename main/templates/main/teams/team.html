@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load main_filters %}
+
 {% block content %}
 <div class="container mt-5">
     <div class="text-center">
@@ -21,19 +22,20 @@
     <div class="container mt-5">
         <h2 class="fw-bold">Players' Performance</h2>
         <ul class="list-group">
-        {% for player in team.player_set.all %}
-            <li class="list-group-item">
-                <span class="badge badge-primary badge-pill">{{ player.ppg }}</span>
-                {{ player.first_name }} {{ player.last_name }}
-            </li>
-        {% endfor %}
+            {% for position in ['PG', 'SG', 'SF', 'PF', 'C'] %}
+                <li class="list-group-item">
+                    {% for player in team.player_set.filter(primary_position=position) %}
+                        <span class="badge badge-primary badge-pill">{{ player.ppg }}</span>
+                        {{ player.first_name }} {{ player.last_name }} ({{ player.primary_position }})
+                    {% endfor %}
+                </li>
+            {% endfor %}
         </ul>
 
-<div class="mt-4">
-    <h5>Total team PPG:</h5>
-    <p class="lead">{{ total_ppg }}</p>
-</div>
+        <div class="mt-4">
+            <h5>Total team PPG:</h5>
+            <p class="lead">{{ total_ppg }}</p>
+        </div>
     </div>
 </div>
-
 {% endblock %}
