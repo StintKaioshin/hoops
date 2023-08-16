@@ -120,29 +120,9 @@ def home(request):
     # Return the home page
     return render(request, "main/league/home.html", context)
 def transactHome(request):
-    transactions = TransactionsEtc.objects.all().order_by('-timestamp')
-    recent_transactions = Transaction.objects.all().order_by('-date')[:3]
-    
-    # Create context for transactionshome.html
-    transactions_context = {
-        'transactions': transactions,
-        'recent_transactions': recent_transactions,
-    }
-    
-    # Render transactionshome.html
-    transactions_rendered = render(request, 'main/transactions/transactionshome.html', transactions_context)
-    
-    # Create context for home.html
-    home_context = {
-        'transactions': transactions,  # You might want to adjust this data if needed
-        'recent_transactions': recent_transactions,  # You might want to adjust this data if needed
-    }
-    
-    # Render home.html
-    home_rendered = render(request, 'main/home.html', home_context)
-    
-    return home_rendered  # Only return the home.html rendering
-
+    recent_transactions = Transaction.objects.all().order_by('-timestamp')[:3]
+    context = {'recent_transactions': recent_transactions}
+    return render(request, 'main/transactions/transactionshome.html', context)
 def player_game_log(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
     game_logs = player.game_logs.all()  # Assuming you have a related_name set up for game logs in the Player model.
