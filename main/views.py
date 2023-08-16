@@ -127,10 +127,12 @@ def transactHome(request):
     transactions = TransactionsEtc.objects.all().order_by('-timestamp')
     context = {'transactions': transactions}
     return render(request, 'main/transactions/transactionshome.html', context)
+    
 def transactHomeHome(request):
     transactions = get_recent_transactions(5)  # Change the count as needed
     context = {'transactions': transactions}
     return render(request, 'main/home.html', context)
+    
 def player_game_log(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
     game_logs = player.game_logs.all()  # Assuming you have a related_name set up for game logs in the Player model.
