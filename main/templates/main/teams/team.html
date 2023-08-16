@@ -23,12 +23,14 @@
         <h2 class="fw-bold">Players' Performance</h2>
         <ul class="list-group">
             {% for position in ['PG', 'SG', 'SF', 'PF', 'C'] %}
-                {% for player in team.player_set.filter(primary_position=position) %}
+                {% with full_position=position_map.position %}
+                {% for player in team.player_set.filter(primary_position=full_position) %}
                     <li class="list-group-item">
                         <span class="badge badge-primary badge-pill">{{ player.ppg }}</span>
-                        {{ player.first_name }} {{ player.last_name }} ({{ position }})
+                        {{ player.first_name }} {{ player.last_name }} ({{ full_position }})
                     </li>
                 {% endfor %}
+                {% endwith %}
             {% endfor %}
         </ul>
 
