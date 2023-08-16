@@ -131,7 +131,7 @@ def transactHome(request):
 def transactHomeHome(request):
     transactions = get_recent_transactions(5)  # Change the count as needed
     context = {'transactions': transactions}
-    return render(request, 'main/home.html', context)
+    return render(request, 'main/league/home.html', context)
     
 def player_game_log(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
