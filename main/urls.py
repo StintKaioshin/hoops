@@ -45,8 +45,6 @@ urlpatterns = [
     path('players/search/', views.search_players, name='search_players'),
     path('player/<int:pk>/', views.player_detail, name='player_detail'),
     path('transactions/', views.transactHome, name='transactions'),
-    path('transact-home/', views.transactHome, name='transact-home'),
-    path('transact-home-home/', views.transactHomeHome, name='transact-home-home'),
     # Htmx URL patterns
     path("players/search/", views.check_player_search, name="check_player_search"),
     path("teams/search/", views.check_team_search, name="check_team_search"),
