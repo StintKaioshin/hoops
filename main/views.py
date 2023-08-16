@@ -121,12 +121,12 @@ def home(request):
     return render(request, "main/league/home.html", context)
 
 def transactHome(request):
-    transactions = TransactionsEtc.objects.all().order_by('-timestamp')[:5]
+    transactions = TransactionsEtc.objects.all().order_by('-timestamp')
     context = {'transactions': transactions}
     return render(request, 'main/transactions/transactionshome.html', context)
     
 def transactHomeHome(request):
-    transactions = get_recent_transactions(5)  # Change the count as needed
+    transactions = TransactionsEtc.objects.all().order_by('-timestamp')[:5]
     context = {'transactions': transactions}
     return render(request, 'main/league/home.html', context)
     
