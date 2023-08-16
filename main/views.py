@@ -119,6 +119,10 @@ def home(request):
             redirect(logout)
     # Return the home page
     return render(request, "main/league/home.html", context)
+
+def get_recent_transactions(count):
+    return TransactionsEtc.objects.all().order_by('-timestamp')[:count]
+
 def transactHome(request):
     transactions = TransactionsEtc.objects.all().order_by('-timestamp')
     context = {'transactions': transactions}
