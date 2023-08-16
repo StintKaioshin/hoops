@@ -27,7 +27,13 @@
                 {% if group.grouper %}
                     {% for player in group.list|dictsort:"secondary_position" %}
                         <li class="list-group-item">
-                            {{ player.first_name }} {{ player.last_name }} ({{ player.primary_position }})
+                            {{ player.first_name }} {{ player.last_name }} (
+                            {% if player.secondary_position %}
+                                {{ player.secondary_position }} - {{ player.primary_position }}
+                            {% else %}
+                                {{ player.primary_position }}
+                            {% endif %}
+                            )
                         </li>
                     {% endfor %}
                 {% endif %}
