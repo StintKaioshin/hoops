@@ -126,7 +126,6 @@
         </div>
     </div>
     
-    <!-- Recent Transactions -->
     <div class="row mt-4">
         <div class="col-12">
             <div class="card text-center">
@@ -147,8 +146,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Loop through recent transactions -->
-                                {% for transaction in transactions %}
+                                <!-- Loop through the first 5 transactions -->
+                                {% for transaction in transactions|slice:":5" %}
                                 <tr>
                                     <th scope="row">{{ transaction.id }}</th>
                                     <td>{{ transaction.player.first_name }} {{ transaction.player.last_name }}</td>
@@ -165,5 +164,4 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
