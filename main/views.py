@@ -214,7 +214,7 @@ def team_detail(request, team_id):
     for _, position_value in player_positions:
         players_by_position[position_value] = players.filter(primary_position=position_value)
     
-    return render(request, 'main/team_detail.html', {'team': team, 'total_ppg': total_ppg, 'players_by_position': players_by_position})
+    return render(request, 'main/team.html', {'team': team, 'total_ppg': total_ppg, 'players_by_position': players_by_position})
 def player(request, id):
     # Check if the player exists
     plr = Player.objects.get(pk=id)
