@@ -120,8 +120,8 @@ def home(request):
     # Return the home page
     return render(request, "main/league/home.html", context)
 def transactHome(request):
-    recent_transactions = Transaction.objects.all().order_by('-date')[:3]
-    context = {'recent_transactions': recent_transactions}
+    transactions = TransactionsEtc.objects.all().order_by('-timestamp')
+    context = {'transactions': transactions}
     return render(request, 'main/transactions/transactionshome.html', context)
 def player_game_log(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
