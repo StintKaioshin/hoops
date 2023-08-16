@@ -19,26 +19,35 @@
         </div>
     </div>
 
-   <div class="container mt-5">
+<div class="container mt-5">
     <h2 class="fw-bold">Players</h2>
     <ul class="list-group">
         {% regroup team.player_set.all by primary_position as players_by_position %}
         {% for group in players_by_position reversed %}
             {% if group.grouper %}
-                {% for player in group.list|dictsort:"secondary_position" %}
+                {% if group.list|length > 1 %}
+                    {% for player in group.list|dictsort:"secondary_position" %}
+                        <li class="list-group-item">
+                            {{ player.first_name }} {{ player.last_name }} (
+                            {% if player.secondary_position %}
+                                {{ player.secondary_position }} - {{ player.primary_position }}
+                            {% else %}
+                                {{ player.primary_position }}
+                            {% endif %}
+                            )
+                        </li>
+                    {% endfor %}
+                {% else %}
                     <li class="list-group-item">
-                        {{ player.first_name }} {{ player.last_name }} (
-                        {% if player.secondary_position %}
-                            {{ player.secondary_position }} - {{ player.primary_position }}
-                        {% else %}
-                            {{ player.primary_position }}
+                        {{ group.list.0.first_name }} {{ group.list.0.last_name }} (
+                        {{ group.list.0.primary_position }}
+                        {% if group.list.0.secondary_position %}
+                            - {{ group.list.0.secondary_position }}
                         {% endif %}
                         )
                     </li>
-                {% endfor %}
+                {% endif %}
             {% endif %}
         {% endfor %}
     </ul>
 </div>
-</div>
-{% endblock %}
