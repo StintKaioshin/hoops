@@ -39,6 +39,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
     'https://www.virtualbl.com',
     # add more origins if needed
+    'https://virtualbl.com',
+
 ]
 
 
