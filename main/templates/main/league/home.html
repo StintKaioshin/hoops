@@ -127,17 +127,18 @@
     </div>
     
 <!-- Recent Transactions -->
-    <section class="py-4 py-xl-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="text-uppercase fw-bold mb-3">Transactions</h2>
-                    <p class="mb-4">Welcome to our transactions page, this is where you can view all the transactions that have been made.</p>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                      <th scope="col">ID</th>
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card text-center">
+            <div class="card-header">
+                Recent Transactions
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+        <th scope="col">ID</th>
         <th scope="col">Player</th>
         <th scope="col">From Team</th>
         <th scope="col">To Team</th>
@@ -158,9 +159,11 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</div>
+</div>
+
 {% endblock %}
