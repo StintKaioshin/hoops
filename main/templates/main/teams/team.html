@@ -23,7 +23,7 @@
         <h2 class="fw-bold">Players</h2>
         <ul class="list-group">
             {% regroup team.player_set.all by primary_position as players_by_position %}
-            {% for group in players_by_position %}
+            {% for group in players_by_position reversed %}
                 {% if group.grouper %}
                     {% for player in group.list|dictsort:"secondary_position" %}
                         <li class="list-group-item">
