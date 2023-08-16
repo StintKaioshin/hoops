@@ -119,7 +119,7 @@ def home(request):
             redirect(logout)
     # Return the home page
     return render(request, "main/league/home.html", context)
-def transactHome(request):
+def transactionshome(request):
     transactions = TransactionsEtc.objects.all().order_by('-timestamp')
     recent_transactions = Transaction.objects.all().order_by('-timestamp')[:3]
     
@@ -132,21 +132,18 @@ def transactHome(request):
     # Render transactionshome.html
     transactions_rendered = render(request, 'main/transactions/transactionshome.html', transactions_context)
     
-    # You should replace 'main/home.html' with the actual path to your home template
     # Create context for home.html
     home_context = {
-        'transactions': transactions,
-        'recent_transactions': recent_transactions,
+        'transactions': transactions,  # You might want to adjust this data if needed
+        'recent_transactions': recent_transactions,  # You might want to adjust this data if needed
     }
     
     # Render home.html
     home_rendered = render(request, 'main/home.html', home_context)
     
-    # Combine the rendered templates into a single response
-    combined_response = transactions_rendered.content + home_rendered.content
-    
-    # Return the combined response
-    return HttpResponse(combined_response)
+
+    return home_rendered  # Only return the home.html rendering    
+
 def player_game_log(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
     game_logs = player.game_logs.all()  # Assuming you have a related_name set up for game logs in the Player model.
