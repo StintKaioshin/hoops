@@ -19,28 +19,24 @@
         </div>
     </div>
 
-    <div class="container mt-5">
-        <h2 class="fw-bold">Players</h2>
-        <ul class="list-group">
-            {% regroup team.player_set.all by primary_position as players_by_position %}
-            {% for position in ['PG', 'SG', 'SF', 'PF', 'C'] %}
-                {% for group in players_by_position %}
-                    {% if group.grouper == position %}
-                        {% for player in group.list %}
-                            <li class="list-group-item">
-                                {{ player.first_name }} {{ player.last_name }} (
-                                {% if player.secondary_position %}
-                                    {{ player.secondary_position }} - {{ player.primary_position }}
-                                {% else %}
-                                    {{ player.primary_position }}
-                                {% endif %}
-                                )
-                            </li>
-                        {% endfor %}
-                    {% endif %}
+   <div class="container mt-5">
+    <h2 class="fw-bold">Players</h2>
+    <ul class="list-group">
+        {% regroup team.player_set.all by primary_position as players_by_position %}
+        {% for group in players_by_position reversed %}
+            {% if group.grouper %}
+                {% for player in group.list|dictsort:"secondary_position" %}
+                    <li class="list-group-item">
+                        {{ player.first_name }} {{ player.last_name }} (
+                        {% if player.secondary_position %}
+                            {{ player.secondary_position }} - {{ player.primary_position }}
+                        {% else %}
+                            {{ player.primary_position }}
+                        {% endif %}
+                        )
+                    </li>
                 {% endfor %}
-            {% endfor %}
-        </ul>
-    </div>
+            {% endif %}
+        {% endfor %}
+    </ul>
 </div>
-{% endblock %}
