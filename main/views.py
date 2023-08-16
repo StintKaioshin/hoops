@@ -201,17 +201,20 @@ def team_detail(request, team_id):
     team = Team.objects.get(pk=team_id)
     players = team.player_set.all()
     total_ppg = sum(player.ppg for player in players)
-
-    position_map = {
-        'PG': 'Point Guard',
-        'SG': 'Shooting Guard',
-        'SF': 'Small Forward',
-        'PF': 'Power Forward',
-        'C': 'Center',
-    }
-
-    return render(request, 'main/team.html', {'team': team, 'total_ppg': total_ppg, 'position_map': position_map})
-
+    
+    player_positions = [
+        ('Point Guard', 'PG'),
+        ('Shooting Guard', 'SG'),
+        ('Small Forward', 'SF'),
+        ('Power Forward', 'PF'),
+        ('Center', 'C')
+    ]
+    
+    players_by_position = {}
+    for _, position_value in player_positions:
+        players_by_position[position_value] = players.filter(primary_position=position_value)
+    
+    return render(request, 'main/team_detail.html', {'team': team, 'total_ppg': total_ppg, 'players_by_position': players_by_position})
 def player(request, id):
     # Check if the player exists
     plr = Player.objects.get(pk=id)
