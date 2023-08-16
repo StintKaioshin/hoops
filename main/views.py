@@ -210,7 +210,7 @@ def team_detail(request, team_id):
         'C': 'Center',
     }
 
-    return render(request, 'main/team_detail.html', {'team': team, 'total_ppg': total_ppg, 'position_map': position_map})
+    return render(request, 'main/team.html', {'team': team, 'total_ppg': total_ppg, 'position_map': position_map})
 
 def player(request, id):
     # Check if the player exists
