@@ -19,23 +19,15 @@
         </div>
     </div>
 
-<div class="container mt-5">
-    <h2 class="fw-bold">Players' Performance</h2>
-    <ul class="list-group">
-        {% for position_display, position_value in player_positions %}
-            {% for player in players_by_position[position_value] %}
+    <div class="container mt-5">
+        <h2 class="fw-bold">Players</h2>
+        <ul class="list-group">
+            {% for player in team.player_set.all %}
                 <li class="list-group-item">
-                    <span class="badge badge-primary badge-pill">{{ player.ppg }}</span>
-                    {{ player.first_name }} {{ player.last_name }} ({{ position_display }})
+                    {{ player.first_name }} {{ player.last_name }} ({{ player.primary_position }})
                 </li>
             {% endfor %}
-        {% endfor %}
-    </ul>
-
-    <div class="mt-4">
-        <h5>Total team PPG:</h5>
-        <p class="lead">{{ total_ppg }}</p>
+        </ul>
     </div>
-</div>
 </div>
 {% endblock %}
