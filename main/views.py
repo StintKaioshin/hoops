@@ -201,7 +201,16 @@ def team_detail(request, team_id):
     team = Team.objects.get(pk=team_id)
     players = team.player_set.all()
     total_ppg = sum(player.ppg for player in players)
-    return render(request, 'main/team_detail.html', {'team': team, 'total_ppg': total_ppg})
+
+    position_map = {
+        'PG': 'Point Guard',
+        'SG': 'Shooting Guard',
+        'SF': 'Small Forward',
+        'PF': 'Power Forward',
+        'C': 'Center',
+    }
+
+    return render(request, 'main/team_detail.html', {'team': team, 'total_ppg': total_ppg, 'position_map': position_map})
 
 def player(request, id):
     # Check if the player exists
