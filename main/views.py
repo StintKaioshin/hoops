@@ -82,6 +82,7 @@ def home(request):
             else:
                 break
     # Create the context
+    transactions = TransactionsEtc.objects.all().order_by('-timestamp')[:5]    
     context = {
         "title": "Home",
         "current_user": current_user,
@@ -89,6 +90,7 @@ def home(request):
         "notifications": None,
         "gotd_list": gotd_list,
         "motd": os.environ.get("MOTD"),
+        "transactions": transactions
     }
     # Send players to home page
     if current_user.is_authenticated:
