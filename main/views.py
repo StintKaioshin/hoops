@@ -1007,13 +1007,23 @@ def search_teams(request):
 def check_player_search(request):
     if request.method == "POST":
         search = request.POST.get("search")
+        position = request.POST.get("position")  # Add this line to get the selected position
+
         if search:
-            # Check for players based on first and last name
-            players = Player.objects.filter(
+            # Create a base queryset for players
+            players = Player.objects.all()
+
+            # Filter by position if it's selected
+            if position:
+                players = players.filter(Q(primary_position=position) | Q(secondary_position=position))
+
+            # Filter by search query
+            players = players.filter(
                 Q(first_name__icontains=search)
                 | Q(last_name__icontains=search)
                 | Q(discord_user__discord_tag__icontains=search)
             )
+
             # Check if there were any players found
             if not players:
                 return HttpResponse("<p class='text-danger'>No players found!</p>")
