@@ -28,9 +28,12 @@
         </div>
     </section>
 
-    <div class="container">
-        <div class="row" id="search-results">
-            {% for player in page %}
+<div class="container">
+    <div class="row" id="search-results">
+        {% regroup page by primary_position as players_by_position %}
+
+        {% for group in players_by_position %}
+            {% for player in group.list|dictsort:"id" %}
                 <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
                     <div class="card">
                         <div class="card-body">
@@ -44,8 +47,9 @@
                     </div>
                 </div>
             {% endfor %}
-        </div>
+        {% endfor %}
     </div>
+</div>
 
     <div class="container mt-2">
         <ul class="pagination">
