@@ -23,6 +23,7 @@ from .models import ContractOffer
 from .models import DiscordUser
 from .models import Notification
 from .models import Award
+from stats.models import SeasonAverage
 # Form imports
 from .forms import PlayerForm
 from .forms import UpgradeForm
