@@ -59,6 +59,7 @@ from .league.extra import convert as hoops_extra_convert
 from .league.teams import trade as hoops_team_trade
 from .league.teams import offer as hoops_team_offer
 from .league.user import notify as hoops_user_notify
+from .calculate import get_standings
 # .ENV file import
 import os, json
 from dotenv import load_dotenv
@@ -84,8 +85,9 @@ def home(request):
     # Create the context
     transactions = TransactionsEtc.objects.all().order_by('-timestamp')[:5]    
     current_season = "1"  # Replace with the actual current season ID
-    top_teams = Team.objects.order_by('-wins')[:3]
-    top_players = Player.objects.order_by('-ppg')[:3]
+    tandings = get_standings(current_season)
+    top_teams = sorted(standings.items(), key=lambda x: x[1]['wins'], reverse=True)[:3]
+    top_players = SeasonAverage.objects.order_by('-ppg')[:3]
     context = {
         "title": "Home",
         "current_user": current_user,
