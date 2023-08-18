@@ -59,7 +59,7 @@ from .league.extra import convert as hoops_extra_convert
 from .league.teams import trade as hoops_team_trade
 from .league.teams import offer as hoops_team_offer
 from .league.user import notify as hoops_user_notify
-from .calculate import get_standings
+from .league.stats.calculate import get_standings
 # .ENV file import
 import os, json
 from dotenv import load_dotenv
