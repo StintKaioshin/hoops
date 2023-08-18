@@ -83,6 +83,9 @@ def home(request):
                 break
     # Create the context
     transactions = TransactionsEtc.objects.all().order_by('-timestamp')[:5]    
+    current_season = "your_current_season_id"  # Replace with the actual current season ID
+    top_teams = Team.objects.filter(season=season).order_by('-wins')[:3]
+    top_players = Player.objects.order_by('-ppg')[:3]
     context = {
         "title": "Home",
         "current_user": current_user,
@@ -90,7 +93,10 @@ def home(request):
         "notifications": None,
         "gotd_list": gotd_list,
         "motd": os.environ.get("MOTD"),
-        "transactions": transactions
+        "transactions": transactions,
+        'current_season': current_season,
+        'top_teams': top_teams,
+        'top_players': top_players
     }
     # Send players to home page
     if current_user.is_authenticated:
