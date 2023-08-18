@@ -164,30 +164,33 @@
     </div>
 </div>
 </div>
-<div class="col-lg-6">
-    <h2 class="leaders-heading">Leaders - PPG</h2>
-    <hr class="divider">
-    <div class="leaders">
-        <table class="leaders-table table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">PLAYER</th>
-                    <th scope="col">PPG</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for player in top_players %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ player.player.first_name }} {{ player.player.last_name }}</td>
-                        <td>{{ player.ppg }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-<div class="col-lg-6">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="leaders-heading">Leaders - PPG</h2>
+            <hr class="divider">
+            <div class="leaders">
+                <table class="leaders-table table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">PLAYER</th>
+                            <th scope="col">PPG</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for player in top_players %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ player.player.first_name }} {{ player.player.last_name }}</td>
+                                <td>{{ player.ppg }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
             <h2 class="standings-heading">Top 3 Teams by Record</h2>
             <hr class="divider">
             <div class="table-responsive">
@@ -202,7 +205,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for team, team_data in top_teams %} {# Use top_teams instead of current_season.standings.items #}
+                        {% for team, team_data in top_teams %}
                             <tr>
                                 <td>{{ team }}</td>
                                 <td>{{ team_data.wins }}</td>
@@ -216,6 +219,5 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}
