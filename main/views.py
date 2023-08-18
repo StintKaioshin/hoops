@@ -96,9 +96,10 @@ def home(request):
         "gotd_list": gotd_list,
         "motd": os.environ.get("MOTD"),
         "transactions": transactions,
-        'current_season': current_season,
-        'top_teams': top_teams,
-        'top_players': top_players
+        "current_season": current_season,
+        "top_teams": top_teams,
+        "top_players": top_players,
+        "standings": standings,
     }
     # Send players to home page
     if current_user.is_authenticated:
