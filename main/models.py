@@ -63,9 +63,7 @@ class Team(models.Model):
     plays_in_main_league = models.BooleanField(default=True)
     show_on_lists = models.BooleanField(default=True)
     is_college_team = models.BooleanField(default=False)  # new field
-    # Relationships
-    season = models.ForeignKey("Season", on_delete=models.CASCADE)
-    
+    # Relationships   
     manager = models.ForeignKey(
         "DiscordUser", blank=True, null=True, on_delete=models.CASCADE
     )
