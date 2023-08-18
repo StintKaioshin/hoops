@@ -170,8 +170,8 @@
             <h2 class="leaders-heading">Leaders - PPG</h2>
             <hr class="divider">
             <div class="leaders">
-                <!-- Code for displaying leading scorers here -->
-            </div>
+                <!-- Enter code to display top players by PPG -->
+            </div>        
         </div>
         <div class="col-lg-6">
             <h2 class="standings-heading">Top 3 Teams by Record</h2>
@@ -188,21 +188,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for team, team_data in current_season.standings.items %}
-                            {% if forloop.counter <= 3 %}  {# Display only the top 3 teams #}
-                                <tr>
-                                    <td>{{ team }}</td>
-                                    <td>{{ team_data.wins }}</td>
-                                    <td>{{ team_data.losses }}</td>
-                                    <td>{{ team_data.percentage }}</td>
-                                    <td>{{ team_data.games_behind }}</td>
-                                </tr>
-                            {% endif %}
+                        {% for team, team_data in top_teams %} {# Use top_teams instead of current_season.standings.items #}
+                            <tr>
+                                <td>{{ team }}</td>
+                                <td>{{ team_data.wins }}</td>
+                                <td>{{ team_data.losses }}</td>
+                                <td>{{ team_data.percentage }}</td>
+                                <td>{{ team_data.games_behind }}</td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}
