@@ -170,8 +170,12 @@
             <h2 class="leaders-heading">Leaders - PPG</h2>
             <hr class="divider">
             <div class="leaders">
-                <!-- Code for displaying leading scorers here -->
-            </div>
+    <h2>Top 3 Players by PPG</h2>
+    <ul>
+        {% for player in top_players %}
+            <li>{{ player.name }} - {{ player.ppg }} PPG</li>
+        {% endfor %}
+    </ul>            </div>
         </div>
         <div class="col-lg-6">
             <h2 class="standings-heading">Top 3 Teams by Record</h2>
