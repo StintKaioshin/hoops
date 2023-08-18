@@ -42,7 +42,6 @@ from .models import Team, Player
 # Stats imports
 from stats.league.stats import compile as stats_compile
 from stats.league.stats import calculate as stats_calculate
-from stats.league.calculate import get_standings
 # Custom packages
 import copy
 import json
@@ -85,9 +84,9 @@ def home(request):
     # Create the context
     transactions = TransactionsEtc.objects.all().order_by('-timestamp')[:5]    
     current_season = "1"  # Replace with the actual current season ID
-    tandings = get_standings(current_season)
-    top_teams = sorted(standings.items(), key=lambda x: x[1]['wins'], reverse=True)[:3]
     top_players = SeasonAverage.objects.order_by('-ppg')[:3]
+    standings = stats_calculate.get_standings(current_season)
+    top_teams = sorted(standings.items(), key=lambda x: x[1]['wins'], reverse=True)[:3]
     context = {
         "title": "Home",
         "current_user": current_user,
