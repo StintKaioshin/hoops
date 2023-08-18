@@ -173,36 +173,34 @@
                 <!-- Code for displaying leading scorers here -->
             </div>
         </div>
-        <div class="col-lg-6">
-            <h2 class="standings-heading">Top 3 Teams by Record</h2>
-            <hr class="divider">
-            <div class="table-responsive">
-                <table class="standings-table table table-striped table-hover">
-                    <thead>
+<div class="standings-section">
+    <h2 class="standings-heading">Top 3 Teams</h2>
+    <hr class="divider">
+    <div class="table-responsive">
+        <table class="standings-table table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">TEAM</th>
+                    <th scope="col">W</th>
+                    <th scope="col">L</th>
+                    <th scope="col">PCT</th>
+                    <th scope="col">GB</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team, team_data in current_season.standings.items %}
+                    {% if forloop.counter <= 3 %}
                         <tr>
-                            <th scope="col">TEAM</th>
-                            <th scope="col">W</th>
-                            <th scope="col">L</th>
-                            <th scope="col">PCT</th>
-                            <th scope="col">GB</th>
+                            <td>{{ team }}</td>
+                            <td>{{ team_data.wins }}</td>
+                            <td>{{ team_data.losses }}</td>
+                            <td>{{ team_data.percentage }}</td>
+                            <td>{{ team_data.games_behind }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for team, team_data in current_season.standings.items %}
-                            {% if forloop.counter <= 3 %}  {# Display only the top 3 teams #}
-                                <tr>
-                                    <td>{{ team }}</td>
-                                    <td>{{ team_data.wins }}</td>
-                                    <td>{{ team_data.losses }}</td>
-                                    <td>{{ team_data.percentage }}</td>
-                                    <td>{{ team_data.games_behind }}</td>
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
