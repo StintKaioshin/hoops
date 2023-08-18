@@ -11,7 +11,10 @@
                             {% csrf_token %}
                             <h2 class="text-uppercase fw-bold mb-3">TEAMS</h2>
                             <input type="search" name="search" id="search-input" placeholder="Search teams" class="form-control" hx-post="/teams/search/" hx-trigger="keyup delay:200ms" hx-target="#search-results" hx-swap="innerHTML" onkeydown="return event.key != 'Enter';"></input>
-                            <input type="checkbox" name="is_college_team" id="college-checkbox" onchange="updateSearch()" class="mt-3"> Show only College Teams
+                            <div class="mt-3">
+                                <label for="college-checkbox" class="me-2">Show only College Teams</label>
+                                <input type="checkbox" name="is_college_team" id="college-checkbox" onchange="updateSearch()">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -57,6 +60,5 @@
             .then(html => hx.swapping.swap(target, html));
     }
 </script>
-
 
 {% endblock %}
