@@ -270,6 +270,8 @@ def player(request, id):
     player_game_logs = stats_compile.player_game_logs(player=plr, x=10)
     # Get possible relatives
     possible_relatives = Player.objects.filter(last_name=plr.last_name).values_list("id", "first_name")
+    is_owner = plr.discord_user == request.user
+    context['is_owner'] = is_owner
     # Initialize the context
     context = {
         # Page information
