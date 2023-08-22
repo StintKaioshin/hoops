@@ -271,7 +271,6 @@ def player(request, id):
     # Get possible relatives
     possible_relatives = Player.objects.filter(last_name=plr.last_name).values_list("id", "first_name")
     is_owner = plr.discord_user == request.user
-    context['is_owner'] = is_owner
     # Initialize the context
     context = {
         # Page information
@@ -320,6 +319,7 @@ def player(request, id):
         # Possible relatives
         "possible_relatives": possible_relatives,
     }
+    context['is_owner'] = is_owner
     return render(request, "main/players/player.html", context)
 
 def gamelog_create(request, team_id):
