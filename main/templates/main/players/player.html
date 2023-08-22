@@ -2,6 +2,7 @@
 {% load static %}
 {% load main_filters %}
 {% block content %}
+{% if is_owner %}
     <div class="container-fluid" style="padding: 25px;">
         <!-- Center image -->
         <img class="img-fluid rounded" src="{{ player.headshot }}" style="height: 250px; width: 250px; display: block; margin-left: auto; margin-right: auto;" alt="Center">
@@ -569,6 +570,75 @@
                 </div>
 </div>
             </div>
+
+{% else %}
+<div class="container mt-5">
+    <!-- Player's Main Details -->
+    <div class="row align-items-center">
+        <div class="col-md-2">
+            <img src="{{ player.headshot }}" alt="Player Headshot" class="img-fluid rounded-circle" style="max-width: 100px;">
+        </div>
+        <div class="col-md-8 text-center">
+            <h2>{{ player.first_name }} {{ player.last_name }}</h2>
+            <h4>#{{ player.jersey_number }} | {{ player.primary_position }}/{{ player.secondary_position }} | {{ player.current_team.abbrev }}</h4>
+            <h5>{{ player.discord_user.discord_tag }} | Earnings: ${{ week_earnings }} | Spent: ${{ player.spent }}</h5>
+        </div>
+        <div class="col-md-2 text-end">
+            <h4>${{ player.salary }}</h4>
+            <p>Contract Ends: Season {{ player.contract_ends_after }}</p>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Player's Physical & Play Style Details -->
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <p><b>Height:</b> {{ height_in_feet }}</p>
+            <p><b>Weight:</b> {{ player.weight }}</p>
+            <p><b>Cyberface:</b> {{ player.cyberface }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Play Style #1:</b> {{ playstyle1.0 }}</p>
+            <p><b>Play Style #2:</b> {{ playstyle2.0 }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Play Style #3:</b> {{ playstyle3.0 }}</p>
+            <p><b>Play Style #4:</b> {{ playstyle4.0 }}</p>
+        </div>
+        <div class="col-md-3">
+            <p><b>Use Game Tendencies:</b> {{ player.use_game_tendencies }}</p>
+        </div>
+    </div>
+
+    <!-- Contract Details -->
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <p><b>Referral Code:</b> {{ player.id }}</p>
+        </div>
+        <div class="col-md-4">
+            <p><b>Contract Option:</b> {{ player.contract_option }}</p>
+        </div>
+        <div class="col-md-4">
+            <p><b>Contract Benefits:</b> {{ player.contract_benefits }}</p>
+        </div>
+    </div>
+
+    <!-- Player's Awards -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h3>Awards</h3>
+            <!-- Reuse the existing awards code -->
+            <p class="mb-0">
+                {% if awards.MVP %}
+                    🏆 <b>MVP:</b>
+                    <!-- ... and so on for each award ... -->
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
     <script src="{% static 'main/js/players/copyJSON.js' %}"></script>
 
 {% endblock %}
