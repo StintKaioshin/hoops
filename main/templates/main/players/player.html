@@ -573,300 +573,98 @@
 
 {% else %}
 <div class="container mt-5">
+
     <!-- Player's Main Details -->
-    <div class="row align-items-center">
-        <div class="col-md-2">
-            <img src="{{ player.headshot }}" alt="Player Headshot" class="img-fluid rounded-circle" style="max-width: 100px;">
-        </div>
-        <div class="col-md-8 text-center">
-            <h2>{{ player.first_name }} {{ player.last_name }}</h2>
-            <h4>#{{ player.jersey_number }} | {{ player.primary_position }}/{{ player.secondary_position }} | {{ player.current_team.abbrev }}</h4>
-            <h5>{{ player.discord_user.discord_tag }} | Earnings: ${{ week_earnings }} | Spent: ${{ player.spent }}</h5>
-        </div>
-        <div class="col-md-2 text-end">
-            <h4>${{ player.salary }}</h4>
-            <p>Contract Ends: Season {{ player.contract_ends_after }}</p>
+    <div class="card mb-4">
+        <div class="row align-items-center p-3">
+            <div class="col-md-2">
+                <img src="{{ player.headshot }}" alt="Player Headshot" class="img-fluid rounded-circle">
+            </div>
+            <div class="col-md-8 text-center">
+                <h2>{{ player.first_name }} {{ player.last_name }}</h2>
+                <h4>#{{ player.jersey_number }} | {{ player.primary_position }}/{{ player.secondary_position }} | {{ player.current_team.abbrev }}</h4>
+                <h5>{{ player.discord_user.discord_tag }} | Earnings: ${{ week_earnings }} | Spent: ${{ player.spent }}</h5>
+            </div>
+            <div class="col-md-2 text-end">
+                <h4>${{ player.salary }}</h4>
+                <p>Contract Ends: Season {{ player.contract_ends_after }}</p>
+            </div>
         </div>
     </div>
-    <hr>
 
     <!-- Player's Physical & Play Style Details -->
-    <div class="row mt-4">
-        <div class="col-md-3">
-            <p><b>Height:</b> {{ height_in_feet }}</p>
-            <p><b>Weight:</b> {{ player.weight }}</p>
-            <p><b>Cyberface:</b> {{ player.cyberface }}</p>
-        </div>
-        <div class="col-md-3">
-            <p><b>Play Style #1:</b> {{ playstyle1.0 }}</p>
-            <p><b>Play Style #2:</b> {{ playstyle2.0 }}</p>
-        </div>
-        <div class="col-md-3">
-            <p><b>Play Style #3:</b> {{ playstyle3.0 }}</p>
-            <p><b>Play Style #4:</b> {{ playstyle4.0 }}</p>
-        </div>
-        <div class="col-md-3">
-            <p><b>Use Game Tendencies:</b> {{ player.use_game_tendencies }}</p>
+    <div class="card mb-3">
+        <div class="row p-3">
+            <div class="col-md-3">
+                <p><b>Height:</b> {{ height_in_feet }}</p>
+                <p><b>Weight:</b> {{ player.weight }}</p>
+                <p><b>Cyberface:</b> {{ player.cyberface }}</p>
+            </div>
+            <div class="col-md-3">
+                <p><b>Play Style #1:</b> {{ playstyle1.0 }}</p>
+                <p><b>Play Style #2:</b> {{ playstyle2.0 }}</p>
+            </div>
+            <div class="col-md-3">
+                <p><b>Play Style #3:</b> {{ playstyle3.0 }}</p>
+                <p><b>Play Style #4:</b> {{ playstyle4.0 }}</p>
+            </div>
+            <div class="col-md-3">
+                <p><b>Use Game Tendencies:</b> {{ player.use_game_tendencies }}</p>
+            </div>
         </div>
     </div>
 
     <!-- Contract Details -->
-    <div class="row mt-3">
-        <div class="col-md-4">
-            <p><b>Referral Code:</b> {{ player.id }}</p>
-        </div>
-        <div class="col-md-4">
-            <p><b>Contract Option:</b> {{ player.contract_option }}</p>
-        </div>
-        <div class="col-md-4">
-            <p><b>Contract Benefits:</b> {{ player.contract_benefits }}</p>
+    <div class="card mb-3">
+        <div class="row p-3">
+            <div class="col-md-4"><p><b>Referral Code:</b> {{ player.id }}</p></div>
+            <div class="col-md-4"><p><b>Contract Option:</b> {{ player.contract_option }}</p></div>
+            <div class="col-md-4"><p><b>Contract Benefits:</b> {{ player.contract_benefits }}</p></div>
         </div>
     </div>
-                <ul class="nav nav-tabs" id="myTabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#menu1">Attributes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#menu2">Badges</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#menu3">Tendencies</a>
-                    </li>
-                </ul>
 
-    <style>
-.tab-pane {
-    display: none;  /* Hide all tabs by default */
-}
+    <!-- Attributes, Badges, and Tendencies Tabs -->
+    <div class="card">
+        <ul class="nav nav-tabs" id="myTabs">
+            <li class="nav-item"><a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#menu1">Attributes</a></li>
+            <li class="nav-item"><a class="nav-link" id="tab2" data-bs-toggle="tab" href="#menu2">Badges</a></li>
+            <li class="nav-item"><a class="nav-link" id="tab3" data-bs-toggle="tab" href="#menu3">Tendencies</a></li>
+        </ul>
 
-.tab-pane.show {
-    display: block;  /* Only show the active tab */
-}
-</style>
+        <style>
+            .tab-pane { display: none; }
+            .tab-pane.show { display: block; }
+        </style>
 
-                <div class="tab-content">
-                    <!-- Attribute menu -->
-                    <div class="tab-pane fade show active mt-2" id="menu1">
-                        <div class="d-flex justify-content-start" style="gap: 20px;">
-                            <div id="finishing-attributes">
-                                <table>
-                                    <thead>
-                                        <tr class="border-bottom"><th class="p-0" colspan="2">Finishing</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for k, v in player.attributes.items %}
-                                            <tr>
-                                                {% if k in finishing_attributes %}
-                                                    <td>{{ k }}:</td>
-                                                    <td style="padding-left: 10px;">{{ v }}</td>
-                                                {% endif %}
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div id="shooting-attributes">
-                                <table>
-                                    <thead>
-                                        <tr class="border-bottom"><th class="p-0" colspan="2">Shooting</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for k, v in player.attributes.items %}
-                                            <tr>
-                                                {% if k in shooting_attributes %}
-                                                    <td>{{ k }}:</td>
-                                                    <td style="padding-left: 10px;">{{ v }}</td>
-                                                {% endif %}
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div id="playmaking-attributes">
-                                <table>
-                                    <thead>
-                                        <tr class="border-bottom"><th class="p-0" colspan="2">Playmaking</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for k, v in player.attributes.items %}
-                                            <tr>
-                                                {% if k in playmaking_attributes %}
-                                                    <td>{{ k }}:</td>
-                                                    <td style="padding-left: 10px;">{{ v }}</td>
-                                                {% endif %}
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div id="defense-attributes">
-                                <table>
-                                    <thead>
-                                        <tr class="border-bottom"><th class="p-0" colspan="2">Defense</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for k, v in player.attributes.items %}
-                                            <tr>
-                                                {% if k in defense_attributes %}
-                                                    <td>{{ k }}:</td>
-                                                    <td style="padding-left: 10px;">{{ v }}</td>
-                                                {% endif %}
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div> 
-                        </div>
-                    </div>
-                    <!-- Badge menu -->
-                    <div class="tab-pane fade" id="menu2">
-                            <div class="container">
-                                <div class="row">
-                                    {% for k, v in player.badges.items %} 
-                                        {% if k in finishing_badges %}
-                                            <div class="col-md-2 mb-2">
-                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
-                                                {% if v == 0 %}
-                                                    {{ badgeEmojis.0 }} Unequipped
-                                                {% elif v == 1 %}
-                                                    {{ badgeEmojis.1 }} Bronze
-                                                {% elif v == 2 %}
-                                                    {{ badgeEmojis.2 }} Silver
-                                                {% elif v == 3 %}
-                                                    {{ badgeEmojis.3 }} Gold
-                                                {% elif v == 4 %}
-                                                    {{ badgeEmojis.4 }} Hall of Fame
-                                                {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                <hr>
-                            </div>
-                
-                
-                            <div class="container">
-                                <div class="row">
-                                    {% for k, v in player.badges.items %} 
-                                        {% if k in shooting_badges %}
-                                            <div class="col-md-2 mb-2">
-                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
-                                                {% if v == 0 %}
-                                                    {{ badgeEmojis.0 }} Unequipped
-                                                {% elif v == 1 %}
-                                                    {{ badgeEmojis.1 }} Bronze
-                                                {% elif v == 2 %}
-                                                    {{ badgeEmojis.2 }} Silver
-                                                {% elif v == 3 %}
-                                                    {{ badgeEmojis.3 }} Gold
-                                                {% elif v == 4 %}
-                                                    {{ badgeEmojis.4 }} Hall of Fame
-                                                {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                
-                            <hr>
-                
-                            <div class="container">
-                                <div class="row">
-                                    {% for k, v in player.badges.items %} 
-                                        {% if k in playmaking_badges %}
-                                            <div class="col-md-2 mb-2">
-                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
-                                                {% if v == 0 %}
-                                                    {{ badgeEmojis.0 }} Unequipped
-                                                {% elif v == 1 %}
-                                                    {{ badgeEmojis.1 }} Bronze
-                                                {% elif v == 2 %}
-                                                    {{ badgeEmojis.2 }} Silver
-                                                {% elif v == 3 %}
-                                                    {{ badgeEmojis.3 }} Gold
-                                                {% elif v == 4 %}
-                                                    {{ badgeEmojis.4 }} Hall of Fame
-                                                {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                
-                            <hr>
-                
-                            <div class="container">
-                                <div class="row">
-                                    {% for k, v in player.badges.items %} 
-                                        {% if k in defense_badges %}
-                                            <div class="col-md-2 mb-2">
-                                                <p class="mt-0 mb-1"><b>{{ k }}</b></p>
-                                                {% if v == 0 %}
-                                                    {{ badgeEmojis.0 }} Unequipped
-                                                {% elif v == 1 %}
-                                                    {{ badgeEmojis.1 }} Bronze
-                                                {% elif v == 2 %}
-                                                    {{ badgeEmojis.2 }} Silver
-                                                {% elif v == 3 %}
-                                                    {{ badgeEmojis.3 }} Gold
-                                                {% elif v == 4 %}
-                                                    {{ badgeEmojis.4 }} Hall of Fame
-                                                {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                
-                            <hr>
-                
-                        </div>
-                    </div>
-                </div>
-            </div>
-                    </div>
-                    <!-- Tendency menu -->
-                    <div class="tab-pane fade" id="menu3">
-            <!-- Tendency accordion -->
-                    <div class="accordion-body">
-                        <div class="container-fluid mt-5" style="padding: 100px; padding-top: 0px; padding-bottom: 10px;">
-                            <div class="container">
-                                <div class="row">
-                                    {% for k, v in player.tendencies.items %} 
-                                        <div class="col-md-4 mb-2">
-                                            <p class="mt-0 mb-1"><b>{{ k }}</b></p>
-                                            <p>{{ v }}</p>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <hr>
-                            </div>
-                        </div>
-                    </div>                  
-                </div>
-            </div>
-</div>
-</div>
-</div>
+        <div class="tab-content p-3">
+            <!-- Attributes Content -->
+            {% include "attributes_content.html" %}
+
+            <!-- Badges Content -->
+            {% include "badges_content.html" %}
+
+            <!-- Tendencies Content -->
+            {% include "tendencies_content.html" %}
+        </div>
+    </div>
 
     <!-- Player's Awards -->
-    <div class="row mt-5">
-        <div class="col-md-12">
-            <h3>Awards</h3>
-            <!-- Reuse the existing awards code -->
-            <p class="mb-0">
-                {% if awards.MVP %}
-                    🏆 <b>MVP:</b>
-                    <!-- ... and so on for each award ... -->
-                </p>
+    <div class="card mt-4">
+        <div class="row p-3">
+            <div class="col-md-12">
+                <h3>Awards</h3>
+                <!-- Reuse the existing awards code -->
+                <p class="mb-0">
+                    {% if awards.MVP %}
+                        🏆 <b>MVP:</b>
+                        <!-- ... and so on for each award ... -->
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-</div>
-</div>
 {% endif %}
-{% endif %}
+
 <script src="{% static 'main/js/players/copyJSON.js' %}"></script>
 {% endblock %}
