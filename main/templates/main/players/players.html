@@ -28,28 +28,29 @@
         </div>
     </section>
 
-<div class="container">
-    <div class="row" id="search-results">
-        {% regroup page by primary_position as players_by_position %}
+    <div class="container">
+        <div class="row" id="search-results">
+            {% regroup page by primary_position as players_by_position %}
 
-        {% for group in players_by_position %}
-            {% for player in group.list|dictsort:"id" %}
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ player.first_name }} {{ player.last_name }} ({{ player.id }})</h5>
-                            <p class="card-text">
-                                Position: {{ player.primary_position }}<br>
-                                Height: {{ player.height }}
-                            </p>
-                            <a href="{% url 'player_detail' player.id %}" class="btn btn-primary">View Details</a>
+            {% for group in players_by_position %}
+                {% for player in group.list|dictsort:"id" %}
+                    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ player.first_name }} {{ player.last_name }} ({{ player.id }})</h5>
+                                <p class="card-text">
+                                    Position: {{ player.primary_position }}<br>
+                                    Height: {{ player.height }}
+                                </p>
+                                <a href="{% url 'player_detail' player.id %}" class="btn btn-primary">View Details</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
+        </div>
     </div>
-</div>
 
     <div class="container mt-2">
         <ul class="pagination">
@@ -65,22 +66,22 @@
         </ul>
     </div>
 
-<script>
-    function updateSearch() {
-        var position = document.getElementById('position-select').value;
-        var search = document.getElementById('search-input').value;
-        var target = document.getElementById('search-results');
+    <script>
+        function updateSearch() {
+            var position = document.getElementById('position-select').value;
+            var search = document.getElementById('search-input').value;
+            var target = document.getElementById('search-results');
 
-        // Create a URLSearchParams object to hold the parameters
-        var params = new URLSearchParams({
-            position: position,
-            search: search
-        });
+            // Create a URLSearchParams object to hold the parameters
+            var params = new URLSearchParams({
+                position: position,
+                search: search
+            });
 
-        // AJAX call to update the search results
-        hx.fetch('/players/search/?' + params.toString(), {method: 'GET'})
-            .then(response => response.text())
-            .then(html => hx.swapping.swap(target, html));
-    }
-</script>
+            // AJAX call to update the search results
+            hx.fetch('/players/search/?' + params.toString(), {method: 'GET'})
+                .then(response => response.text())
+                .then(html => hx.swapping.swap(target, html));
+        }
+    </script>
 {% endblock %}
