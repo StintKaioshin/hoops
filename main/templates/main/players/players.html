@@ -1,87 +1,96 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+<style>
+    .card-img-header {
+        height: 80px;
+        width: 100%;
+        object-fit: cover;
+        border-top-left-radius: .25rem;
+        border-top-right-radius: .25rem;
+    }
+</style>
 
-    <section class="py-4 py-xl-5">
-        <div class="container h-100">
-            <div class="row h-100">
-                <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
-                    <div>
-                        <form id="search-form">
-                            {% csrf_token %}
-                            <h2 class="text-uppercase fw-bold mb-3">PLAYERS</h2>
-                            <p class="mb-4">Welcome to our players page, this is where you can view each player individually.</p>
-                            <input type="search" name="search" id="search-input" placeholder="Search players" class="form-control" hx-get="/players/search/" hx-trigger="keyup delay:200ms" hx-target="#search-results" hx-swap="innerHTML" onkeydown="return event.key != 'Enter';"></input>
-                            <select name="position" id="position-select" onchange="updateSearch()" class="form-control mt-3">
-                                <option value="">Select a position</option>
-                                <!-- Add all possible positions here. -->
-                                <option value="PG">Point Guard (PG)</option>
-                                <option value="SG">Shooting Guard (SG)</option>
-                                <option value="SF">Small Forward (SF)</option>
-                                <option value="PF">Power Forward (PF)</option>
-                                <option value="C">Center (C)</option>
-                            </select>
-                        </form>
-                    </div>
+<section class="py-4 py-xl-5">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
+                <div>
+                    <form id="search-form">
+                        {% csrf_token %}
+                        <h2 class="text-uppercase fw-bold mb-3">PLAYERS</h2>
+                        <p class="mb-4">Welcome to our players page, this is where you can view each player individually.</p>
+                        <input type="search" name="search" id="search-input" placeholder="Search players" class="form-control" hx-get="/players/search/" hx-trigger="keyup delay:200ms" hx-target="#search-results" hx-swap="innerHTML" onkeydown="return event.key != 'Enter';"></input>
+                        <select name="position" id="position-select" onchange="updateSearch()" class="form-control mt-3">
+                            <option value="">Select a position</option>
+                            <!-- Add all possible positions here. -->
+                            <option value="PG">Point Guard (PG)</option>
+                            <option value="SG">Shooting Guard (SG)</option>
+                            <option value="SF">Small Forward (SF)</option>
+                            <option value="PF">Power Forward (PF)</option>
+                            <option value="C">Center (C)</option>
+                        </select>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <div class="container">
-        <div class="row" id="search-results">
-            {% regroup page by primary_position as players_by_position %}
+<div class="container">
+    <div class="row" id="search-results">
+        {% regroup page by primary_position as players_by_position %}
 
-            {% for group in players_by_position %}
-                {% for player in group.list|dictsort:"id" %}
-                    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                        <div class="card">
-                            <img class="card-img-top" src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ player.first_name }} {{ player.last_name }} ({{ player.id }})</h5>
-                                <p class="card-text">
-                                    Position: {{ player.primary_position }}<br>
-                                    Height: {{ player.height }}
-                                </p>
-                                <a href="{% url 'player_detail' player.id %}" class="btn btn-primary">View Details</a>
-                            </div>
+        {% for group in players_by_position %}
+            {% for player in group.list|dictsort:"id" %}
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <div class="card">
+                        <img class="card-img-header" src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ player.first_name }} {{ player.last_name }} ({{ player.id }})</h5>
+                            <p class="card-text">
+                                Position: {{ player.primary_position }}<br>
+                                Height: {{ player.height }}
+                            </p>
+                            <a href="{% url 'player_detail' player.id %}" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
-                {% endfor %}
+                </div>
             {% endfor %}
-        </div>
+        {% endfor %}
     </div>
+</div>
 
-    <div class="container mt-2">
-        <ul class="pagination">
-            {% if page.has_previous %} 
-                <li class="page-item"><a class="page-link" aria-label="Previous" href="?page={{ page.previous_page_number }}"><span aria-hidden="true">Back</span></a></li>
-            {% endif %}
-            {% for page_num in page.paginator.page_range %}
-                <li class="page-item"><a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
-            {% endfor %}
-            {% if page.has_next %}
-                <li class="page-item"><a class="page-link" aria-label="Next" href="?page={{ page.next_page_number }}"><span aria-hidden="true">Next</span></a></li>
-            {% endif %}
-        </ul>
-    </div>
+<div class="container mt-2">
+    <ul class="pagination">
+        {% if page.has_previous %} 
+            <li class="page-item"><a class="page-link" aria-label="Previous" href="?page={{ page.previous_page_number }}"><span aria-hidden="true">Back</span></a></li>
+        {% endif %}
+        {% for page_num in page.paginator.page_range %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endfor %}
+        {% if page.has_next %}
+            <li class="page-item"><a class="page-link" aria-label="Next" href="?page={{ page.next_page_number }}"><span aria-hidden="true">Next</span></a></li>
+        {% endif %}
+    </ul>
+</div>
 
-    <script>
-        function updateSearch() {
-            var position = document.getElementById('position-select').value;
-            var search = document.getElementById('search-input').value;
-            var target = document.getElementById('search-results');
+<script>
+    function updateSearch() {
+        var position = document.getElementById('position-select').value;
+        var search = document.getElementById('search-input').value;
+        var target = document.getElementById('search-results');
 
-            // Create a URLSearchParams object to hold the parameters
-            var params = new URLSearchParams({
-                position: position,
-                search: search
-            });
+        // Create a URLSearchParams object to hold the parameters
+        var params = new URLSearchParams({
+            position: position,
+            search: search
+        });
 
-            // AJAX call to update the search results
-            hx.fetch('/players/search/?' + params.toString(), {method: 'GET'})
-                .then(response => response.text())
-                .then(html => hx.swapping.swap(target, html));
-        }
-    </script>
+        // AJAX call to update the search results
+        hx.fetch('/players/search/?' + params.toString(), {method: 'GET'})
+            .then(response => response.text())
+            .then(html => hx.swapping.swap(target, html));
+    }
+</script>
 {% endblock %}
