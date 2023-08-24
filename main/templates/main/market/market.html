@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Market - Virtual Basketball
+{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Virtual Basketball Market!</h1>
+
+<!-- Individual Purchases Section -->
+<h2 class="mt-4">Individual Purchases</h2>
+<div class="row">
+    <!-- Second Player Slot Card -->
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Second Player Slot</h5>
+                <p class="card-text">Get an additional player slot!</p>
+                <p class="card-text"><strong>Price: $2.99</strong></p>
+                <!-- Add a button to purchase or more details if necessary -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Auto Collect Card -->
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Auto Collect</h5>
+                <p class="card-text">Automatically collect rewards and points.</p>
+                <p class="card-text"><strong>Price: $0.99</strong></p>
+                <!-- Add a button to purchase or more details if necessary -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Subscription Section -->
+<h2 class="mt-4">Subscription Benefits</h2>
+<p>Subscribe and get all the above benefits and more:</p>
+<ul>
+    <li>Player will be on the page to the site</li>
+    <li>Access to subscriber-only events such as fun games and exclusive all-star events</li>
+    <li>Player as Discord picture (will rotate every month)</li>
+</ul>
+
+<!-- Payment Methods Section -->
+<h2 class="mt-4">Pay To</h2>
+<div class="row">
+    <div class="col-md-4">
+        <h4>Venmo</h4>
+        <p>@Virtual-Basketball</p>
+    </div>
+    <div class="col-md-4">
+        <h4>Cashapp</h4>
+        <p>$virtualbasketball</p>
+    </div>
+    <div class="col-md-4">
+        <h4>PayPal</h4>
+        <p>virtualbasketball@example.com</p> <!-- Replace with your actual PayPal email -->
+    </div>
+</div>
+{% endblock %}
