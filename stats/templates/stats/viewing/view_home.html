@@ -44,11 +44,13 @@
                 {% for player, player_data in sorted_stats %}
                     <tr>
                         <td><a href="{% url 'player_gamelog' player.id %}">{{ player.name }}</a></td>
+                        <td>{{ player.first_name }}</td>
+                        <td>{{ player.last_name }}</td>
                         <td>{{ player.team }}</td> <!-- Adjust according to your player_data structure -->
-                        <td>{{ player_data.ppg }}</td>
-                        <td>{{ player_data.apg }}</td>
-                        <td>{{ player_data.rpg }}</td>
-                        <td>{{ player_data.fg_percentage }}</td>
+                        <td>{{ player.ppg }}</td>
+                        <td>{{ player.apg }}</td>
+                        <td>{{ player.rpg }}</td>
+                        <td>{{ player.fg_percentage }}</td>
                         <td>{{ player_data.three_point_percentage }}</td>
                         <td>{{ player_data.ft_percentage }}</td>
                         <td>{{ player_data.spg }}</td>
