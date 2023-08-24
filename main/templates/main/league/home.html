@@ -88,7 +88,19 @@
                 <div class="text-uppercase text-primary fw-bold text-xs mb-1">
                     <span style="font-size: 12px; color: white;">PLAYERS</span>
                 </div><hr>
-        <div id="playerDetails">
+                <div class="h5 mb-0" style="margin-top: -6px;">
+                    {% if players %}
+                        <!-- Dropdown to select player -->
+                                {% for player in players %}
+                                    <a class="dropdown-item" href="#">{{ player.first_name }} {{ player.last_name }}</a>
+                                {% endfor %}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'create_player' %}">Create New Player</a>
+                            </div>
+                        </div>
+
+                        <!-- This section will be changed dynamically based on the selected player from the dropdown -->
+                        <div id="playerDetails">
                             <!-- Start of Player details -->
 {% if players %}
     <select id="playerSelector" class="form-select mb-3" onchange="showPlayerDetails()">
@@ -97,7 +109,6 @@
         {% endfor %}
         <option value="new">Create New Player</option>
     </select>
-
     {% for player in players %}
         <div class="playerDetails" id="player_{{ player.id }}" style="display: none;">
             <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
@@ -120,7 +131,6 @@
     <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Create New Player</a>
 {% endif %}
 <!-- End of Player details -->
-
                             <!-- Default to the first player's details -->
                             <!-- You can use JavaScript/jQuery to change this content based on dropdown selection -->
                             <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
@@ -250,18 +260,15 @@
         </div>
     </div>
 </div>
-
 <script>
     function showPlayerDetails() {
         let selector = document.getElementById('playerSelector');
         let selectedValue = selector.value;
-
         // Hide all player details
         let allDetails = document.querySelectorAll('.playerDetails');
         for(let detail of allDetails) {
             detail.style.display = "none";
         }
-
         // Show the selected player's details or redirect to create new player
         if (selectedValue === 'new') {
             window.location.href = '{% url "create_player" %}';
@@ -269,7 +276,6 @@
             document.getElementById('player_' + selectedValue).style.display = "block";
         }
     }
-
     // Display the first player's details on page load (if there's any player)
     window.onload = function() {
         if (document.getElementById('playerSelector')) {
@@ -278,6 +284,4 @@
         }
     }
 </script>
-
-
 {% endblock %}
