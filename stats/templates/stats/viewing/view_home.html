@@ -1,5 +1,6 @@
 {% extends 'stats/base.html' %}
 {% load main_filters %}
+
 {% block content %}
 <div class="container mt-5">
     <div class="row">
@@ -18,6 +19,47 @@
             </div>
         </div>
     </div>
+
+    <!-- Add new section for displaying every player's stats -->
+<div class="player-stats-section">
+    <h2 class="stats-heading">Player Statistics</h2>
+    <hr class="divider">
+    <div class="table-responsive">
+        <table class="stats-table table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Player Name</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">PPG</th>
+                    <th scope="col">APG</th>
+                    <th scope="col">RPG</th>
+                    <th scope="col">FG%</th>
+                    <th scope="col">3P%</th>
+                    <th scope="col">FT%</th>
+                    <th scope="col">SPG</th>
+                    <th scope="col">BPG</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player, player_data in sorted_stats %}
+                    <tr>
+                        <td><a href="{% url 'player_gamelog' player.id %}">{{ player.name }}</a></td>
+                        <td>{{ player.team }}</td> <!-- Adjust according to your player_data structure -->
+                        <td>{{ player_data.ppg }}</td>
+                        <td>{{ player_data.apg }}</td>
+                        <td>{{ player_data.rpg }}</td>
+                        <td>{{ player_data.fg_percentage }}</td>
+                        <td>{{ player_data.three_point_percentage }}</td>
+                        <td>{{ player_data.ft_percentage }}</td>
+                        <td>{{ player_data.spg }}</td>
+                        <td>{{ player_data.bpg }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
     <div class="standings-section">
         <h2 class="standings-heading">Standings</h2>
         <hr class="divider">
