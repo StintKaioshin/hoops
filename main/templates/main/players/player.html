@@ -573,7 +573,8 @@
 
 {% else %}
 <div class="container mt-5">
-
+    <button id="file" type="button" class="copyJSON btn btn-primary btn-sm" onClick="clipboard(this.id)">Copy File</button>
+    <p id="json_file" class="file" style="font-size: 6px; display: none;">{{ file }}</p>
     <!-- Player's Main Details -->
     <div class="card mb-4">
         <div class="row align-items-center p-3">
