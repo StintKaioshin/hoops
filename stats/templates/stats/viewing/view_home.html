@@ -91,4 +91,12 @@
         </div>
     {% endfor %}
 </div>
+        <div class="mt-2" style="padding: 0px;">
+            <ul class="pagination">
+                {% for page_number in page.paginator.page_range %}
+                    <li class="page-item"><button class="page-link text-white" aria-label="{{ page_number }}" hx-post="{% url 'stats:sort_stats' page_number %}" hx-trigger="click" hx-target="#sorted_stats_table" hx-swap="innerHTML" hx-include="[name='season']">{{ page_number }}</button></li>
+                {% endfor %}
+            </ul>
+        </div>
+
 {% endblock %}
