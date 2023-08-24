@@ -50,79 +50,45 @@
 <!-- Add game page -->
 <div class="container mt-5">
     <!-- Game title -->
-    <h1>Season {{ season }}</h1>
-    <!-- Sort types -->
-    <form>
-        {% csrf_token %}
-        <!-- Sort type chooser -->
-        <select name="sort_type" class="form-control mt-1" hx-post="{% url 'stats:find_options' %}" hx-trigger="click" hx-target="#sort_options" hx-swap="innerHTML">
-            <option value="averages">Averages</option>
-            <option value="totals">Totals</option>
-        </select>
-    </form>
-    <!-- Sort options -->
-    <form>
-        {% csrf_token %}
-        <!-- Current season -->
-        <input type="hidden" name="season" value="{{ season }}">
-        <!-- Season type chooser -->
-        <select name="season_type" class="form-control mt-1">
-            <option value="REG">Season</option>
-            <option value="PLY">Playoffs</option>
-            <option value="FIN">Finals</option>
-        </select>
-        <!-- Position chooser -->
-        <select name="pos_type" class="form-control mt-1">
-            <option value="ALL">All positions</option>
-            <option value="PG">Point Guard</option>
-            <option value="SG">Shooting Guard</option>
-            <option value="SF">Small Forward</option>
-            <option value="PF">Power Forward</option>
-            <option value="C">Center</option>
-        </select>
-        <!-- Trait chooser -->
-        <select name="trait_type" class="form-control mt-1">
-            <option value="ALL">All traits</option>
-            <option value="Movement Shooter">Movement Shooter</option>
-            <option value="3PT Shooter">3PT Shooter</option>
-            <option value="Midrange Menace">Midrange Menace</option>
-            <option value="Finesse Finisher">Finesse Finisher</option>
-            <option value="Fierce Finisher">Fierce Finisher</option>
-            <option value="Ankle Snatcher">Ankle Snatcher</option>
-            <option value="Passing Maestro">Passing Maestro</option>
-            <option value="Rebound Hound">Rebound Hound</option>
-            <option value="Interior Anchor">Interior Anchor</option>
-            <option value="Perimeter Lockdown">Perimeter Lockdown</option>
-            <option value="Post-Up Powerhouse">Post-Up Powerhouse</option>
-            <option value="Dribble Driver">Dribble Driver</option>
-            <option value="Post-Up Conductor">Post-Up Conductor</option>
-        </select>
-        <!-- Status chooser -->
-        <select name="status_type" class="form-control mt-1">
-            <option value="ALL">All types</option>
-            <option value="ACTIVE">Active</option>
-            <option value="ROOKIE">Rookie</option>
-            <option value="FREEAGENT">Free Agent</option>
-        </select>
-        <!-- Sort option chooser -->
-        <div id="sort_options">
-            {% include 'stats/ajax/sort_options_fragment.html' %}
-        </div>
-        <!-- Update button -->
-        <button class="btn btn-primary btn-sm mt-1" type="submit" hx-post="{% url 'stats:sort_stats' 1 %}" hx-trigger="click" hx-target="#sorted_stats_table" hx-swap="innerHTML" hx-include="[name='season']">Update</button>
-        <!-- Sorted table fragment -->
-        <div id="sorted_stats_table" class="mt-2">
-            <p>Choose options to display sorted player statistics.</p>
-        </div>
-        <!-- Table pagination -->
-        <div class="mt-2" style="padding: 0px;">
-            <ul class="pagination">
-                {% for page_number in page.paginator.page_range %}
-                    <li class="page-item"><button class="page-link text-white" aria-label="{{ page_number }}" hx-post="{% url 'stats:sort_stats' page_number %}" hx-trigger="click" hx-target="#sorted_stats_table" hx-swap="innerHTML" hx-include="[name='season']">{{ page_number }}</button></li>
+    <h1>Season {{ season_viewing.id }}</h1>
+    <!-- Day accordions -->
+    {% for day, day_data in season_viewing.days.items %}
+        <!-- Make rows of cards -->
+        <div class="row">
+            <!-- Day card -->
+            <div class="card mt-3 mb-3 p-3">
+                <h2>Day {{ day_data.id }}</h2>
+                <p>Day {{ day_data.id }} of S{{ season_viewing.id }}</p>
+                <!-- Top performers -->
+                <h3>Top Performers</h3>
+                <hr class="mt-1 mb-1">
+                {% for performance_data in top_performers|getvalue:day %}
+                    <p class="mt-1 mb-1" style="text-transform: uppercase;">
+                        <span class="fw-bold text-success">({{ performance_data.gmsc }})</span>
+                        <span class="fw-bold text-white" style="font-size: 12px;">{{ performance_data.name }}</span><br>
+                        <span class="fw-bold text-success">{{ performance_data.pts }}</span><span style="font-size: 11px;">/pts</span>, 
+                        <span class="fw-bold text-success">{{ performance_data.reb }}</span><span style="font-size: 11px;">/reb</span>, 
+                        <span class="fw-bold text-success">{{ performance_data.ast }}</span><span style="font-size: 11px;">/ast</span>, 
+                        <span class="fw-bold text-success">{{ performance_data.stl }}</span><span style="font-size: 11px;">/stl</span>, 
+                        <span class="fw-bold text-success">{{ performance_data.blk }}</span><span style="font-size: 11px;">/blk</span>, 
+                        <span class="fw-bold text-success">{{ performance_data.tov }}</span><span style="font-size: 11px;">/tov</span>
+                        (<span class="fw-bold text-success">{{ performance_data.fgm }}/{{ performance_data.fga}}</span><span style="font-size: 11px;">fg</span>,
+                        <span class="fw-bold text-success">{{ performance_data.3pm }}/{{ performance_data.3pa}}</span><span style="font-size: 11px;">3pt</span>,
+                        <span class="fw-bold text-success">{{ performance_data.ftm }}/{{ performance_data.fta}}</span><span style="font-size: 11px;">ft</span>)
+                    </p>
+                    <hr class="mt-1 mb-1">
                 {% endfor %}
-            </ul>
+                <!-- Game cards -->
+                <div class="card mt-3 mb-3 p-3">
+                    {% for game in day_data.games %}
+                        <p>
+                            <a href="{% url 'stats:view_game' game.id %}">View game</a> |
+                            <b class="text-success">{{ game.winner }}</b> beat <b class="text-danger">{{ game.loser }}</b> {{ game.winning_score }}-{{ game.losing_score}}
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-    </form>
-        
+    {% endfor %}
 </div>
-{% endblock %}
+{% endblock %}{% endblock %}
