@@ -37,13 +37,12 @@ from stats.models import Game
 def index(request):
     # Create the context
     players = SeasonAverage.objects.all().order_by('-ppg')
-    print(all_players)
     context = {
         "active_seasons": stats_config.active_seasons,
         "recent_games": Game.objects.all().order_by("-day")[:8],
         "current_season": stats_compile.one_season(league_config.current_season),
         "season_id": league_config.current_season,
-        "all_players": all_players
+        "players": players
     }
     # Get standing based on current_season
     return render(request, "stats/viewing/view_home.html", context)
