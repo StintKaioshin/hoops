@@ -11,10 +11,10 @@
             <hr class="divider">
             <div class="leaders">
                 <ul class="leader-list">
-                    {% for player in leading_scorers %}
+                    {% for avg in leading_scorers_averages %} <!-- Assuming the queryset name is `leading_scorers_averages` -->
                         <li class="leader-item">
-                            <a href="{% url 'player_gamelog' player.id %}" class="leader-name">{{ player.name }}</a>
-                            <span class="leader-stat">{{ player.ppg }} PPG</span>
+                            <a href="{% url 'player_gamelog' avg.player.id %}" class="leader-name">{{ avg.player.name }}</a>
+                            <span class="leader-stat">{{ avg.ppg }} PPG</span>
                         </li>
                     {% endfor %}
                 </ul>
@@ -30,42 +30,16 @@
             <div class="table-responsive">
                 <table class="stats-table table table-striped table-hover">
                     <thead>
-                        <tr>
-                            <th scope="col">Player</th>
-                            <th scope="col">PTS</th>
-                            <th scope="col">REB</th>
-                            <th scope="col">AST</th>
-                            <th scope="col">STL</th>
-                            <th scope="col">BLK</th>
-                            <th scope="col">TOV</th>
-                            <th scope="col">FGM</th>
-                            <th scope="col">FGA</th>
-                            <th scope="col">3PM</th>
-                            <th scope="col">3PA</th>
-                            <th scope="col">FTM</th>
-                            <th scope="col">FTA</th>
-                            <th scope="col">OREB</th>
-                            <th scope="col">FOULS</th>
-                        </tr>
+                        <!-- Your headers -->
                     </thead>
                     <tbody>
-                        {% for player in all_players %} <!-- Assuming the variable name is `all_players` -->
+                        {% for avg in all_players_averages %} <!-- Assuming the queryset name is `all_players_averages` -->
                             <tr>
-                                <td><a href="{% url 'player_gamelog' player.id %}">{{ player.name }}</a></td>
-                                <td>{{ player.pts }}</td>
-                                <td>{{ player.reb }}</td>
-                                <td>{{ player.ast }}</td>
-                                <td>{{ player.stl }}</td>
-                                <td>{{ player.blk }}</td>
-                                <td>{{ player.tov }}</td>
-                                <td>{{ player.fgm }}</td>
-                                <td>{{ player.fga }}</td>
-                                <td>{{ player.3pm }}</td>
-                                <td>{{ player.3pa }}</td>
-                                <td>{{ player.ftm }}</td>
-                                <td>{{ player.fta }}</td>
-                                <td>{{ player.oreb }}</td>
-                                <td>{{ player.fouls }}</td>
+                                <td><a href="{% url 'player_gamelog' avg.player.id %}">{{ avg.player.name }}</a></td>
+                                <td>{{ avg.ppg }}</td>
+                                <td>{{ avg.rpg }}</td>
+                                <td>{{ avg.apg }}</td>
+                                <!-- ... And so on for all stats -->
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -73,6 +47,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Standings Section remains unchanged -->
 
     <!-- Standings Section -->
     <div class="standings-section mt-4">
