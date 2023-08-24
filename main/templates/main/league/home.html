@@ -112,39 +112,6 @@
     <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Create New Player</a>
 {% endif %}
 <!-- End of Player details -->
-
-                            <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-<h2 class="standings-heading">Top 3 Teams by Record</h2>
-  
-                                <!-- svg path -->
-                            </svg>
-                            <div class="text-center">
-                                <a class="fw-bold ml-0 mb-0" href="{% url 'player' players.0.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
-                                    <span style="font-size: 15px;">({{ players.0.id }}) </span>
-                                    <span style="font-size: 15px;">{{ players.0.first_name }} {{ players.0.last_name }}</span>
-                                </a>
-                            </div>
-                            <div class="text-center">
-                                {% if players.0.headshot %}
-                                    <img src="{{ players.0.headshot }}" alt="{{ players.0.first_name }} {{ players.0.last_name }}" style="width: 200px; height: 200px; display: block; margin-left: auto; margin-right: auto;">
-                                {% else %}
-                                    <img src="/static/default_headshot.jpg" alt="{{ players.0.first_name }} {{ players.0.last_name }}" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;">
-                                {% endif %}
-                            </div>
-                            <p style="font-size: 15px;">Position: {{ players.0.primary_position }}</p>
-                            <p style="font-size: 15px;">Salary: {{ players.0.salary }}</p>
-                        </div>
-                    {% else %}
-                        <p style="font-size: 12px;">No players available.</p>
-                        <hr style="margin-bottom: 2px;">
-                        <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Create New Player</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
 <!-- Recent Transactions -->
 <div class="row mt-4">
     <div class="col-12">
