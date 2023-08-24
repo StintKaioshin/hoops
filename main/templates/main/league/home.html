@@ -81,27 +81,7 @@
         </div>
         <div class="col-12 custom-col-lg-6">
          <!-- Documents -->
-<div class="card text-center" style="height: 400px; background-color: #877b53; color: #fff;">
-    <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
-        <div class="row align-items-center no-gutters">
-            <div class="col me-2">
-                <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                    <span style="font-size: 12px; color: white;">PLAYERS</span>
-                </div><hr>
-                <div class="h5 mb-0" style="margin-top: -6px;">
-                    {% if players %}
-                        <!-- Dropdown to select player -->
-                                {% for player in players %}
-                                    <a class="dropdown-item" href="#">{{ player.first_name }} {{ player.last_name }}</a>
-                                {% endfor %}
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'create_player' %}">Create New Player</a>
-                            </div>
-                        </div>
-
-                        <!-- This section will be changed dynamically based on the selected player from the dropdown -->
-                        <div id="playerDetails">
-                            <!-- Start of Player details -->
+<!-- Start of Player details -->
 {% if players %}
     <select id="playerSelector" class="form-select mb-3" onchange="showPlayerDetails()">
         {% for player in players %}
@@ -109,6 +89,7 @@
         {% endfor %}
         <option value="new">Create New Player</option>
     </select>
+
     {% for player in players %}
         <div class="playerDetails" id="player_{{ player.id }}" style="display: none;">
             <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
@@ -131,8 +112,7 @@
     <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Create New Player</a>
 {% endif %}
 <!-- End of Player details -->
-                            <!-- Default to the first player's details -->
-                            <!-- You can use JavaScript/jQuery to change this content based on dropdown selection -->
+
                             <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
 <h2 class="standings-heading">Top 3 Teams by Record</h2>
   
