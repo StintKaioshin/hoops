@@ -144,8 +144,6 @@
                             <p style="font-size: 15px;">Position: {{ players.0.primary_position }}</p>
                             <p style="font-size: 15px;">Salary: {{ players.0.salary }}</p>
                         </div>
-
-                    {% else %}
                         <p style="font-size: 12px;">No players available.</p>
                         <hr style="margin-bottom: 2px;">
                         <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Create New Player</a>
