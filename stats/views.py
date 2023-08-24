@@ -37,6 +37,7 @@ from stats.models import Game
 def index(request):
     # Create the context
     all_players = Player.objects.all()
+    print(all_players)
     context = {
         "active_seasons": stats_config.active_seasons,
         "recent_games": Game.objects.all().order_by("-day")[:8],
