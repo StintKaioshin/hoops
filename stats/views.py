@@ -106,7 +106,7 @@ def view_season_stats(request, id):
         "sort_options": stats_config.average_sort_options,
         "page": page_obj,
     }
-    return render(request, "stats/viewing/view_stats.html", context)
+    return render(request, "stats/viewing/view_home.html", context)
 
 # HTMX check functions
 def check_stats_roster(request):
