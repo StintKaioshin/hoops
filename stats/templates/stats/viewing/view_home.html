@@ -25,45 +25,33 @@
         <tr>
             <th scope="col" style="text-transform: capitalize;">PLAYER</th>
             <th scope="col" style="text-transform: capitalize;">GP</th>
-            {% for header in sort_options %} 
-                <th scope="col">{{ header }}</th>
-            {% endfor %}
+            <th scope="col" style="text-transform: capitalize;">PPG</th>
+            <th scope="col" style="text-transform: capitalize;">RPG</th>
+            <th scope="col" style="text-transform: capitalize;">APG</th>
+            <th scope="col" style="text-transform: capitalize;">SPG</th>
+            <th scope="col" style="text-transform: capitalize;">BPG</th>
+            <th scope="col" style="text-transform: capitalize;">TPG</th>
+            <th scope="col" style="text-transform: capitalize;">FPG</th>
+            <th scope="col" style="text-transform: capitalize;">FGP</th>
+            <th scope="col" style="text-transform: capitalize;">TPP</th>
+            <th scope="col" style="text-transform: capitalize;">FTP</th>
         </tr>
     </thead>
     <tbody>
-        {% for player_data in sorted_stats %}
-            <tr>
-                <td>{{ player_data.1.name }}</td>
-                <td>{{ player_data.1.yearly_stats.totals.gp }}</td>
-                {% if index_to_use == 'averages' %}
-                    <td>{{ player_data.1.yearly_stats.averages.gmsc }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.ppg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.rpg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.apg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.spg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.bpg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.tpg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.fpg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.fgp }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.tpp }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.ftp }}</td>
-                {% elif index_to_use == 'totals' %}
-                    <td>{{ player_data.1.yearly_stats.totals.pts }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.reb }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.ast }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.stl }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.blk }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.tov }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.fouls }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.fgm }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.fga }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.tpm }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.tpa }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.ftm }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.fta }}</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
+                        {% for player in players %}
+                            <tr>
+                                <td>{{ player.player.first_name }} {{ player.player.last_name }}</td>
+                                <td>{{ player.ppg }}</td>
+                                <td>{{ player.rpg }}</td>
+                                <td>{{ player.apg }}</td>
+                                <td>{{ player.spg }}</td>
+                                <td>{{ player.bpg }}</td>
+                                <td>{{ player.tpg }}</td>
+                                <td>{{ player.fpg }}</td>
+                                <td>{{ player.fgp }}</td>                                
+                                <td>{{ player.tpp }}</td>
+                                <td>{{ player.ftp }}</td>
+                            </tr>
     </tbody>
 </table>
     <div class="standings-section">
