@@ -36,7 +36,7 @@ from stats.models import Game
 # Index function
 def index(request):
     # Create the context
-    players = PlayerStats.objects.all().order_by('-ppg')
+    players = SeasonAverage.objects.all().order_by('-ppg')
     print(all_players)
     context = {
         "active_seasons": stats_config.active_seasons,
