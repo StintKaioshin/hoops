@@ -106,6 +106,38 @@
 
                         <!-- This section will be changed dynamically based on the selected player from the dropdown -->
                         <div id="playerDetails">
+                            <!-- Start of Player details -->
+{% if players %}
+    <select id="playerSelector" class="form-select mb-3" onchange="showPlayerDetails()">
+        {% for player in players %}
+            <option value="{{ player.id }}">{{ player.first_name }} {{ player.last_name }}</option>
+        {% endfor %}
+        <option value="new">Create New Player</option>
+    </select>
+
+    {% for player in players %}
+        <div class="playerDetails" id="player_{{ player.id }}" style="display: none;">
+            <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                <!-- svg path -->
+            </svg>
+            <a class="fw-bold ml-0 mb-0" href="{% url 'player' player.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
+                <span style="font-size: 15px;">({{ player.id }}) </span>
+                <span style="font-size: 15px;">{{ player.first_name }} {{ player.last_name }}</span>
+            </a>
+            <!-- Player headshot -->
+            <img src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 200px; height: 200px; display: block; margin-left: auto; margin-right: auto;">
+            <!-- Player details -->
+            <p style="font-size: 15px;">Position: {{ player.primary_position }}</p>
+            <p style="font-size: 15px;">Salary: {{ player.salary }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p style="font-size: 12px;">No players available.</p>
+    <hr style="margin-bottom: 2px;">
+    <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Create New Player</a>
+{% endif %}
+<!-- End of Player details -->
+
                             <!-- Default to the first player's details -->
                             <!-- You can use JavaScript/jQuery to change this content based on dropdown selection -->
                             <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
@@ -234,4 +266,34 @@
         </div>
     </div>
 </div>
+
+<script>
+    function showPlayerDetails() {
+        let selector = document.getElementById('playerSelector');
+        let selectedValue = selector.value;
+        
+        // Hide all player details
+        let allDetails = document.querySelectorAll('.playerDetails');
+        for(let detail of allDetails) {
+            detail.style.display = "none";
+        }
+
+        // Show the selected player's details or redirect to create new player
+        if (selectedValue === 'new') {
+            window.location.href = '{% url "create_player" %}';
+        } else {
+            document.getElementById('player_' + selectedValue).style.display = "block";
+        }
+    }
+
+    // Display the first player's details on page load (if there's any player)
+    window.onload = function() {
+        if (document.getElementById('playerSelector')) {
+            document.getElementById('playerSelector').selectedIndex = 0; // Select the first option
+            showPlayerDetails(); // Display the corresponding details
+        }
+    }
+</script>
+
+    
 {% endblock %}
