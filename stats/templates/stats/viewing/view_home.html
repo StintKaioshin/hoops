@@ -3,6 +3,8 @@
 
 {% block content %}
 <div class="container mt-5">
+
+    <!-- Leaders Section -->
     <div class="row">
         <div class="col-lg-6">
             <h2 class="leaders-heading">Leaders - PPG</h2>
@@ -20,40 +22,44 @@
         </div>
     </div>
 
-<table class="table table-striped table-hover table-responsive">
-    <thead>
-        <tr>
-            <th scope="col" style="text-transform: capitalize;">PLAYER</th>
-            <th scope="col" style="text-transform: capitalize;">GP</th>
-            <th scope="col" style="text-transform: capitalize;">PPG</th>
-            <th scope="col" style="text-transform: capitalize;">RPG</th>
-            <th scope="col" style="text-transform: capitalize;">APG</th>
-            <th scope="col" style="text-transform: capitalize;">SPG</th>
-            <th scope="col" style="text-transform: capitalize;">BPG</th>
-            <th scope="col" style="text-transform: capitalize;">TPG</th>
-            <th scope="col" style="text-transform: capitalize;">FPG</th>
-            <th scope="col" style="text-transform: capitalize;">FGP</th>
-            <th scope="col" style="text-transform: capitalize;">TPP</th>
-            <th scope="col" style="text-transform: capitalize;">FTP</th>
-        </tr>
-    </thead>
-    <tbody>
-                        {% for player in players %}
-                            <tr>
-                                <td>{{ player.player.first_name }} {{ player.player.last_name }}</td>
-                                <td>{{ player.ppg }}</td>
-                                <td>{{ player.rpg }}</td>
-                                <td>{{ player.apg }}</td>
-                                <td>{{ player.spg }}</td>
-                                <td>{{ player.bpg }}</td>
-                                <td>{{ player.tpg }}</td>
-                                <td>{{ player.fpg }}</td>
-                                <td>{{ player.fgp }}</td>                                
-                                <td>{{ player.tpp }}</td>
-                                <td>{{ player.ftp }}</td>
-                            </tr>
-    </tbody>
-</table>
+    <!-- Player Stats Table -->
+    <table class="table table-striped table-hover table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">PLAYER</th>
+                <th scope="col">GP</th>
+                <th scope="col">PPG</th>
+                <th scope="col">RPG</th>
+                <th scope="col">APG</th>
+                <th scope="col">SPG</th>
+                <th scope="col">BPG</th>
+                <th scope="col">TPG</th>
+                <th scope="col">FPG</th>
+                <th scope="col">FGP</th>
+                <th scope="col">TPP</th>
+                <th scope="col">FTP</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in players %}
+                <tr>
+                    <td>{{ player.player.first_name }} {{ player.player.last_name }}</td>
+                    <td>{{ player.ppg }}</td>
+                    <td>{{ player.rpg }}</td>
+                    <td>{{ player.apg }}</td>
+                    <td>{{ player.spg }}</td>
+                    <td>{{ player.bpg }}</td>
+                    <td>{{ player.tpg }}</td>
+                    <td>{{ player.fpg }}</td>
+                    <td>{{ player.fgp }}</td>
+                    <td>{{ player.tpp }}</td>
+                    <td>{{ player.ftp }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Standings Section -->
     <div class="standings-section">
         <h2 class="standings-heading">Standings</h2>
         <hr class="divider">
@@ -82,5 +88,6 @@
             </table>
         </div>
     </div>
+
 </div>
 {% endblock %}
