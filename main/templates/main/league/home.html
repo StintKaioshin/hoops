@@ -91,11 +91,6 @@
                 <div class="h5 mb-0" style="margin-top: -6px;">
                     {% if players %}
                         <!-- Dropdown to select player -->
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="playerDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Select Player
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="playerDropdown">
                                 {% for player in players %}
                                     <a class="dropdown-item" href="#">{{ player.first_name }} {{ player.last_name }}</a>
                                 {% endfor %}
