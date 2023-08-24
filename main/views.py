@@ -150,6 +150,8 @@ def team_select(request):
     teams = Team.objects.all()
     return render(request, 'main/team_select.html', {'teams': teams})
 
+def market(request):
+    return render(request, 'market.html')
 
 def login(request):
     return HttpResponse("This is the login page.")
