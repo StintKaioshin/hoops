@@ -79,52 +79,35 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 custom-col-lg-6">
-         <!-- Documents -->
-            <div class="card text-center" style="height: 400px; background-color: #877b53; color: #fff;">
-                <div class="card-body" style="padding-bottom: 0px;padding-top: 0px;">
-                    <div class="row align-items-center no-gutters">
-                        <div class="col me-2">
-                            <div class="text-uppercase text-primary fw-bold text-xs mb-1">
-                                <span style="font-size: 12px; color: white;">PLAYERS</span>
-                            </div><hr>
-                            <div class="h5 mb-0" style="margin-top: -6px;">
-                                {% if players %}
-                                    {% for player in players %}
-                                        <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                                            <!-- svg path -->
-                                        </svg>
-                                        <div class="text-center">
-                                            <a class="fw-bold ml-0 mb-0" href="{% url 'player' player.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
-                                                <span style="font-size: 15px;">({{ player.id }}) </span>
-                                                <span style="font-size: 15px;">{{ player.first_name }} {{ player.last_name }}</span>
-                                            </a>
-                                        </div>
-                                        <!-- Player headshot -->
-                                        <div class="text-center">
-                                            {% if player.headshot %}
-                                                <img src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 200px; height: 200px; display: block; margin-left: auto; margin-right: auto;">
-                                            {% else %}
-                                                <img src="/static/default_headshot.jpg" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;">
-                                            {% endif %}
-                                        </div>
-                                        <!-- Player details -->
-                                        <p style="font-size: 15px;">Position: {{ player.primary_position }}</p>
-                                        <p style="font-size: 15px;">Salary: {{ player.salary }}</p>
-                                    {% endfor %}
-                                    <hr style="margin-bottom: 2px;">
-                                {% else %}
-                                    <p style="font-size: 12px;">No players available.</p>
-                                    <hr style="margin-bottom: 2px;">
-                                    <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Create New Player</a>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{% if players %}
+    <select id="playerSelector" class="form-select mb-3" onchange="showPlayerDetails()">
+        {% for player in players %}
+            <option value="{{ player.id }}">{{ player.first_name }} {{ player.last_name }}</option>
+        {% endfor %}
+        <option value="new">Create New Player</option>
+    </select>
+
+    {% for player in players %}
+        <div class="playerDetails" id="player_{{ player.id }}" style="display: none;">
+            <svg class="bi bi-person mr-0" width="0.75em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                <!-- svg path -->
+            </svg>
+            <a class="fw-bold ml-0 mb-0" href="{% url 'player' player.id %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">
+                <span style="font-size: 15px;">({{ player.id }}) </span>
+                <span style="font-size: 15px;">{{ player.first_name }} {{ player.last_name }}</span>
+            </a>
+            <!-- Player headshot -->
+            <img src="{{ player.headshot }}" alt="{{ player.first_name }} {{ player.last_name }}" style="width: 200px; height: 200px; display: block; margin-left: auto; margin-right: auto;">
+            <!-- Player details -->
+            <p style="font-size: 15px;">Position: {{ player.primary_position }}</p>
+            <p style="font-size: 15px;">Salary: {{ player.salary }}</p>
         </div>
-    </div>
+    {% endfor %}
+{% else %}
+    <p style="font-size: 12px;">No players available.</p>
+    <hr style="margin-bottom: 2px;">
+    <a class="fw-bold ml-0" href="{% url 'create_player' %}" style="font-size: 10px; text-decoration: none; text-transform: capitalize; color: #fff;">Create New Player</a>
+{% endif %}
 <!-- Recent Transactions -->
 <div class="row mt-4">
     <div class="col-12">
@@ -220,4 +203,34 @@
         </div>
     </div>
 </div>
+
+<script>
+    function showPlayerDetails() {
+        let selector = document.getElementById('playerSelector');
+        let selectedValue = selector.value;
+        
+        // Hide all player details
+        let allDetails = document.querySelectorAll('.playerDetails');
+        for(let detail of allDetails) {
+            detail.style.display = "none";
+        }
+
+        // Show the selected player's details or redirect to create new player
+        if (selectedValue === 'new') {
+            window.location.href = '{% url "create_player" %}';
+        } else {
+            document.getElementById('player_' + selectedValue).style.display = "block";
+        }
+    }
+
+    // Display the first player's details on page load (if there's any player)
+    window.onload = function() {
+        if (document.getElementById('playerSelector')) {
+            document.getElementById('playerSelector').selectedIndex = 0; // Select the first option
+            showPlayerDetails(); // Display the corresponding details
+        }
+    }
+</script>
+
+
 {% endblock %} 
