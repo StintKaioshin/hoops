@@ -3,6 +3,8 @@
 
 {% block content %}
 <div class="container mt-5">
+
+    <!-- Leaders Section -->
     <div class="row">
         <div class="col-lg-6">
             <h2 class="leaders-heading">Leaders - PPG</h2>
@@ -19,7 +21,61 @@
             </div>
         </div>
     </div>
-    <div class="standings-section">
+
+    <!-- Players Stats Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <h2 class="stats-heading">Player Stats</h2>
+            <hr class="divider">
+            <div class="table-responsive">
+                <table class="stats-table table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Player</th>
+                            <th scope="col">PTS</th>
+                            <th scope="col">REB</th>
+                            <th scope="col">AST</th>
+                            <th scope="col">STL</th>
+                            <th scope="col">BLK</th>
+                            <th scope="col">TOV</th>
+                            <th scope="col">FGM</th>
+                            <th scope="col">FGA</th>
+                            <th scope="col">3PM</th>
+                            <th scope="col">3PA</th>
+                            <th scope="col">FTM</th>
+                            <th scope="col">FTA</th>
+                            <th scope="col">OREB</th>
+                            <th scope="col">FOULS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for player in all_players %} <!-- Assuming the variable name is `all_players` -->
+                            <tr>
+                                <td><a href="{% url 'player_gamelog' player.id %}">{{ player.name }}</a></td>
+                                <td>{{ player.pts }}</td>
+                                <td>{{ player.reb }}</td>
+                                <td>{{ player.ast }}</td>
+                                <td>{{ player.stl }}</td>
+                                <td>{{ player.blk }}</td>
+                                <td>{{ player.tov }}</td>
+                                <td>{{ player.fgm }}</td>
+                                <td>{{ player.fga }}</td>
+                                <td>{{ player.3pm }}</td>
+                                <td>{{ player.3pa }}</td>
+                                <td>{{ player.ftm }}</td>
+                                <td>{{ player.fta }}</td>
+                                <td>{{ player.oreb }}</td>
+                                <td>{{ player.fouls }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Standings Section -->
+    <div class="standings-section mt-4">
         <h2 class="standings-heading">Standings</h2>
         <hr class="divider">
         <div class="table-responsive">
@@ -47,5 +103,6 @@
             </table>
         </div>
     </div>
+
 </div>
 {% endblock %}
