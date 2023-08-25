@@ -37,6 +37,8 @@ from stats.models import Game
 def index(request):
     # Create the context
     players = SeasonAverage.objects.all().order_by('-ppg')
+    print("FGM Total:", combined_stats["totals"]["fgm"])
+    print("FGA Total:", combined_stats["totals"]["fga"])
     context = {
         "active_seasons": stats_config.active_seasons,
         "recent_games": Game.objects.all().order_by("-day")[:8],
