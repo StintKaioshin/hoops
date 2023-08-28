@@ -17,7 +17,7 @@ class DiscordUser(models.Model):
     has_module_perms = None
     id = models.BigIntegerField(primary_key=True, serialize=False)
     discord_tag = models.CharField(max_length=100)
-    avatar = models.ImageField(upload_to='avatars/')
+    avatar = models.ImageField(upload_to='avatars/', null=False)
     public_flags = models.IntegerField()
     flags = models.IntegerField()
     locale = models.CharField(max_length=100)
