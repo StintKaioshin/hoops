@@ -1800,6 +1800,6 @@ def check_contract_revoke(request):
 # Ad views
 class ad_view(View):
     def get(self, request, *args, **kwargs):
-        line = "google.com, pub-4085265783135188, DIRECT, f08c47fec0942fa0"
+        line = "google.com, pub-2821747070933819, DIRECT, f08c47fec0942fa0"
         return HttpResponse(line)
 # API views
