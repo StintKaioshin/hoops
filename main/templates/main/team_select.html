@@ -2,36 +2,6 @@
 
 {% block content %}
 
-<styles>
-.team-list {
-    width: 200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-}
-
-.team-list ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.team-item {
-    margin-bottom: 10px;
-}
-
-.team-link {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
-
-.team-link:hover {
-    color: #007BFF; /* Change the hover color as you see fit */
-}
-
-</styles>
-
 <div class="team-list">
     <ul>
         {% for team in teams %}
