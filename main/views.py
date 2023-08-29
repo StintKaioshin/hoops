@@ -1,6 +1,7 @@
 # Django imports
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.http import HttpResponseForbidden
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
 from django.contrib.auth import logout as django_logout
