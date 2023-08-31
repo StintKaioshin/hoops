@@ -37,8 +37,6 @@ from stats.models import Game
 def index(request):
     # Create the context
     players = SeasonAverage.objects.all().order_by('-ppg')
-        players = PlayerStats.objects.all() # or however you are fetching the players
-
     for player in players:
         if player.fga != 0:
             player.fgp = (player.fgm / player.fga) * 100
