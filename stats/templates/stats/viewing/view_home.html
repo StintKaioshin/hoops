@@ -43,8 +43,9 @@
         </thead>
         <tbody>
         {% for player_data in sorted_stats %}
-                <tr>
-                    <td>{{ player.player.first_name }} {{ player.player.last_name }}</td>
+                    <td>{{ player_data.1.name }}</td>
+                    <td>{{ player_data.1.yearly_stats.totals.gp }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.gmsc }}</td>
                     <td>{{ player_data.1.yearly_stats.averages.ppg }}</td>
                     <td>{{ player_data.1.yearly_stats.averages.rpg }}</td>
                     <td>{{ player_data.1.yearly_stats.averages.apg }}</td>
@@ -55,7 +56,6 @@
                     <td>{{ player_data.1.yearly_stats.averages.fgp }}</td>
                     <td>{{ player_data.1.yearly_stats.averages.tpp }}</td>
                     <td>{{ player_data.1.yearly_stats.averages.ftp }}</td>
-                </tr>
             {% endfor %}
         </tbody>
     </table>
