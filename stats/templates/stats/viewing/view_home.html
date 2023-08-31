@@ -53,8 +53,8 @@
                     <td>{{ player.tpg }}</td>
                     <td>{{ player.fpg }}</td>
                     <td>{{ player.fgp|floatformat:2 }}%</td>
-                    <td>{{ player_data.1.yearly_stats.averages.tpp|default:"No TPP Data" }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.ftp|default:"No FTP Data" }}</td>
+                    <td>{{ player.tpp|floatformat:2 }}%</td>
+                    <td>{{ player.ftp|floatformat:2 }}%</td>
                 </tr>
             {% endfor %}
         </tbody>
