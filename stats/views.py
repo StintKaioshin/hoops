@@ -320,7 +320,7 @@ def sort_stats(request, page):
         "sort_options": stats_config.sort_by_options[index_to_use],
         "page": page_obj,
     }
-    html = render_to_string("stats/ajax/view_home.html", context)
+    html = render_to_string("stats/viewing/view_home.html", context)
     # Return the sorted stats fragment
     return HttpResponse(html)
     
