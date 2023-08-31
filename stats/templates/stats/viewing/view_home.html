@@ -1,9 +1,7 @@
 {% extends 'stats/base.html' %}
 {% load main_filters %}
-
 {% block content %}
 <div class="container mt-5">
-
     <!-- Leaders Section -->
     <div class="row">
         <div class="col-lg-6">
@@ -27,6 +25,7 @@
     <table class="table table-striped table-hover table-responsive">
         <thead>
             <tr>
+<h2 class="leaders-heading">Leaders - PPG</h2>  
                 <th scope="col">PLAYER</th>
                 <th scope="col">GP</th>
                 <th scope="col">PPG</th>
@@ -42,24 +41,24 @@
             </tr>
         </thead>
         <tbody>
-        {% for player_data in sorted_stats %}
-                    <td>{{ player_data.1.name }}</td>
-                    <td>{{ player_data.1.yearly_stats.totals.gp }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.gmsc }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.ppg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.rpg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.apg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.spg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.bpg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.tpg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.fpg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.fgp }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.tpp }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.ftp }}</td>
+            {% for player in players %}
+                <tr>
+                    <td>{{ player.player.first_name }} {{ player.player.last_name }}</td>
+                    <td>{{ player.gp }}</td>  <!-- Corrected from player.ppg to player.gp for Games Played -->
+                    <td>{{ player.ppg }}</td>
+                    <td>{{ player.rpg }}</td>
+                    <td>{{ player.apg }}</td>
+                    <td>{{ player.spg }}</td>
+                    <td>{{ player.bpg }}</td>
+                    <td>{{ player.tpg }}</td>
+                    <td>{{ player.fpg }}</td>
+                    <td>{{ player.fgp }}</td>
+                    <td>{{ player.tpp }}</td>
+                    <td>{{ player.ftp }}</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
-
     <!-- Standings Section -->
     <div class="standings-section">
         <h2 class="standings-heading">Standings</h2>
@@ -89,6 +88,5 @@
             </table>
         </div>
     </div>
-
 </div>
 {% endblock %}
