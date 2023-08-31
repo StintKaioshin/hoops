@@ -51,10 +51,9 @@
                     <td>{{ player.spg }}</td>
                     <td>{{ player.bpg }}</td>
                     <td>{{ player.tpg }}</td>
-                    <td>{{ player.fpg }}</td>
-                    <td>{{ player.fgp }}</td>
-                    <td>{{ player.tpp }}</td>
-                    <td>{{ player.ftp }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.fgp|default:"No FGP Data" }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.tpp|default:"No TPP Data" }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.ftp|default:"No FTP Data" }}</td>
                 </tr>
             {% endfor %}
         </tbody>
