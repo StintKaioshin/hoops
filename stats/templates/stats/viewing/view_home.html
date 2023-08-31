@@ -52,11 +52,11 @@
                     <td>{{ player.bpg }}</td>
                     <td>{{ player.tpg }}</td>
                     <td>{{ player.fpg }}</td>
-    {% if player.fga != 0 %}
-        {{ player.fgm|dividedby:player.fga|floatformat:2 }}%
-    {% else %}
-        0%
-    {% endif %}
+{% if player.fga != 0 %}
+    <td>{{ player.fgm|floatformat:2|mul:100|div:player.fga }}%</td>
+{% else %}
+    <td>0%</td>
+{% endif %}
                 </tr>
             {% endfor %}
         </tbody>
