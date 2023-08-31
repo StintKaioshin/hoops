@@ -45,17 +45,16 @@
             {% for player in players %}
                 <tr>
                     <td>{{ player.player.first_name }} {{ player.player.last_name }}</td>
-                    <td>{{ player.gp }}</td>  <!-- Corrected from player.ppg to player.gp for Games Played -->
-                    <td>{{ player.ppg }}</td>
-                    <td>{{ player.rpg }}</td>
-                    <td>{{ player.apg }}</td>
-                    <td>{{ player.spg }}</td>
-                    <td>{{ player.bpg }}</td>
-                    <td>{{ player.tpg }}</td>
-                    <td>{{ player.fpg }}</td>
-                    <td>{{ player.fgp }}</td>
-                    <td>{{ player.tpp }}</td>
-                    <td>{{ player.ftp }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.ppg }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.rpg }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.apg }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.spg }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.bpg }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.tpg }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.fpg }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.fgp }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.tpp }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.ftp }}</td>
                 </tr>
             {% endfor %}
         </tbody>
