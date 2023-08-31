@@ -293,8 +293,7 @@ def validate_game(request):
     
 def sort_stats(request, page):
     # Get the form data
-    season = request.POST.get("season")
-    sort_by = request.POST.get("sort_by")
+    season = 1
     # Validate both teams
     if not sort_by or not season:
         return HttpResponse("❌ Sort by or season is missing or wrong!")
@@ -302,8 +301,6 @@ def sort_stats(request, page):
     season_player_stats = stats_compile.all_player_stats(int(season))
     # Deciding which index to use
     index_to_use = "averages"
-    if sort_by in stats_config.totals_sort_options:
-        index_to_use = "totals"
     # Set 'index_to_use'
     # Sort the stats by the sort_by
     # Must make the sort_by options equivalent to the keys in the season_player_stats
