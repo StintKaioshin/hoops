@@ -1,6 +1,5 @@
 {% extends 'stats/base.html' %}
 {% load main_filters %}
-{% load custom_filters %}
 {% block content %}
 <div class="container mt-5">
     <!-- Leaders Section -->
@@ -20,7 +19,6 @@
             </div>
         </div>
     </div>
-
     <!-- Player Stats Table -->
     <h2 class="mt-4">Player Statistics (Sorted by PPG)</h2>
     <table class="table table-striped table-hover table-responsive">
@@ -40,6 +38,7 @@
                 <th scope="col">TPP</th>
                 <th scope="col">FTP</th>
             </tr>
+<h2 class="leaders-heading">Leaders - PPG</h2>
         </thead>
         <tbody>
             {% for player in players %}
@@ -53,11 +52,9 @@
                     <td>{{ player.bpg }}</td>
                     <td>{{ player.tpg }}</td>
                     <td>{{ player.fpg }}</td>
-{% if player.fga != 0 %}
-    <td>{% widthratio player.fgm 1 player.fga %}%</td>
-{% else %}
-    <td>0%</td>
-{% endif %}
+                    <td>{{ player_data.1.yearly_stats.totals.fga }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.tpp|default:"No TPP Data" }}</td>
+                    <td>{{ player_data.1.yearly_stats.averages.ftp|default:"No FTP Data" }}</td>
                 </tr>
             {% endfor %}
         </tbody>
