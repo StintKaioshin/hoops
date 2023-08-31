@@ -52,9 +52,11 @@
                     <td>{{ player.bpg }}</td>
                     <td>{{ player.tpg }}</td>
                     <td>{{ player.fpg }}</td>
-                    <td>{{ player.fga }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.tpp|default:"No TPP Data" }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.ftp|default:"No FTP Data" }}</td>
+                    {% if player.fga != 0 %}
+                        {{ player.fgm|floatformat:2|dividedby:player.fga|multiply:"100" }}%
+                    {% else %}
+                        0%
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>
