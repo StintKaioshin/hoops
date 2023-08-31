@@ -35,6 +35,7 @@
                 <th scope="col">BPG</th>
                 <th scope="col">TPG</th>
                 <th scope="col">FPG</th>
+                <th scope="col">FPG</th>
                 <th scope="col">TPP</th>
                 <th scope="col">FTP</th>
             </tr>
@@ -50,7 +51,8 @@
                     <td>{{ player.spg }}</td>
                     <td>{{ player.bpg }}</td>
                     <td>{{ player.tpg }}</td>
-                    <td>{{ player_data.1.yearly_stats.averages.fgp|default:"No FGP Data" }}</td>
+                    <td>{{ player.fpg }}</td>
+                    <td>{{ player_data.1.yearly_stats.totals.fga }}</td>
                     <td>{{ player_data.1.yearly_stats.averages.tpp|default:"No TPP Data" }}</td>
                     <td>{{ player_data.1.yearly_stats.averages.ftp|default:"No FTP Data" }}</td>
                 </tr>
