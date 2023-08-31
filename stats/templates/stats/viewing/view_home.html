@@ -53,11 +53,7 @@
                     <td>{{ player.bpg }}</td>
                     <td>{{ player.tpg }}</td>
                     <td>{{ player.fpg }}</td>
-{% if player.fga != 0 %}
-    <td>{{ player.fgm|floatformat:2|mul:100|div:player.fga }}%</td>
-{% else %}
-    <td>0%</td>
-{% endif %}
+                    <td></td>{{ player.fgm|floatformat:2|dividedby:player.fga|multiply:"100" }}%</td>
                 </tr>
             {% endfor %}
         </tbody>
