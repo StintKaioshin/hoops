@@ -42,6 +42,18 @@ def index(request):
             player.fgp = (player.fgm / player.fga) * 100
         else:
             player.fgp = 0
+    
+    for player in players:
+        if player.tpa != 0:
+            player.tpp = (player.tpm / player.tpa) * 100
+        else:
+            player.tpp = 0
+    
+    for player in players:
+        if player.fta != 0:
+            player.ftp = (player.fgm / player.fga) * 100
+        else:
+            player.ftp = 0
     context = {
         "active_seasons": stats_config.active_seasons,
         "recent_games": Game.objects.all().order_by("-day")[:8],
