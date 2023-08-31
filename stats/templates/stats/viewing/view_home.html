@@ -42,7 +42,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for player in players %}
+        {% for player_data in sorted_stats %}
                 <tr>
                     <td>{{ player.player.first_name }} {{ player.player.last_name }}</td>
                     <td>{{ player_data.1.yearly_stats.averages.ppg }}</td>
