@@ -53,9 +53,8 @@
                     <td>{{ player.bpg }}</td>
                     <td>{{ player.tpg }}</td>
                     <td>{{ player.fpg }}</td>
-                    {% widthratio player.fgm 1 player.fga %}
-                    {% if player.fga != 0 %}
-    <td>{{ player.fgm|widthratio:1:player.fga|floatformat:2 }}%</td>
+{% if player.fga != 0 %}
+    <td>{% widthratio player.fgm 1 player.fga %}%</td>
 {% else %}
     <td>0%</td>
 {% endif %}
