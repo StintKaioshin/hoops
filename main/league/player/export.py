@@ -314,10 +314,7 @@ def export_player(player):
     def set_related():
         # Define some variables
         for set in related_tendencies:
-            if set[0] in database_attributes:
-                related_attribute = database_attributes[set[0]]
-            else:
-                related_attribute = 60
+            related_attribute = database_attributes[set[0]]
             related_tendency = set[1]
             game_file[4]["data"][related_tendency] = str(related_attribute)
 
