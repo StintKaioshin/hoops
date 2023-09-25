@@ -140,6 +140,16 @@ def view_season_stats(request, id):
     }
 
     return render(request, "stats/viewing/view_stats.html", context)
+def view_home(request):
+    current_season_obj = YourModelToFetchCurrentSeason.objects.get(...)  # Adjust this line to fetch the current season object
+    active_seasons_list = list(YourModelToFetchSeasons.objects.values_list('id', flat=True))  # Adjust this line to get a list of active season IDs
+
+    context = {
+        "current_season": current_season_obj,
+        "active_seasons": active_seasons_list,
+    }
+    
+    return render(request, "stats/viewing/view_home.html", context)
 
 # HTMX check functions
 def check_stats_roster(request):
