@@ -14,7 +14,7 @@
         <div class="col-lg-12">
             <div class="btn-group" role="group" aria-label="Seasons">
                 {% for season_id in active_seasons %}
-                    <a href="{% url 'stats:view_season_stats' season%}" class="btn btn-secondary {% if season_id == current_season.id %}active{% endif %}">Season {{ season_id }}</a>
+                    <a href="{% url 'stats:view_season_stats' season %}" class="btn btn-secondary {% if season_id == current_season.id %}active{% endif %}">Season {{ season }}</a>
                 {% endfor %}
             </div>
         </div>
