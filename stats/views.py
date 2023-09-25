@@ -28,6 +28,7 @@ from stats.serializers import SeasonAverageSerializer
 from stats.serializers import SeasonTotalSerializer
 
 # Main application imports
+from .models import Season
 from main.models import Player
 from main.models import Team
 from stats.models import Statline
