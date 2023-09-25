@@ -161,7 +161,8 @@ def randView(request):
     context = {
         'all_players_stats': all_players_stats.values(),  # Extracts the player stat dictionaries
     }
-    return render(request, 'view_home.html', context)
+    return render(request, 'view_stats.html', context)
+    
 
 def validate_game(request):
     if request.method == "POST":
