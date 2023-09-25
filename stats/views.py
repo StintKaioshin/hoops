@@ -67,7 +67,7 @@ def index(request):
         "players": players
     }
     # Get standing based on current_season
-    return render(request, "stats/viewing/view_home.html", context)
+    return render(request, "stats/viewing/view_stats.html", context)
 
 # Game statistic functions
 def add_game(request):
