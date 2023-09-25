@@ -54,6 +54,12 @@ def index(request):
             player.ftp = (player.fgm / player.fga) * 100
         else:
             player.ftp = 0
+    print("SQL Query:", active_seasons.query)
+    print("Number of Active Seasons:", len(active_seasons))
+    
+    for season in active_seasons:
+        print(season.id, season.name)
+
     context = {
         "active_seasons": stats_config.active_seasons,
         "recent_games": Game.objects.all().order_by("-day")[:8],
