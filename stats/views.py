@@ -118,7 +118,7 @@ def view_season_stats(request, id):
     sorted_stats = list(sorted_stats.items())
     
     # Sort the stats by PPG in descending order
-    sorted_stats.sort(key=lambda x: x[1]['ppg'], reverse=True)
+    sorted_stats.sort(key=lambda x: x[1].get('ppg', 0), reverse=True)
     
     # Paginate sorted_stats
     paginator = Paginator(sorted_stats, 10)
