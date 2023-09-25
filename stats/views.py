@@ -36,23 +36,6 @@ from stats.models import Game
 # Index function
 def index(request):
     # Create the context
-    for player in players:
-        if player.fga != 0:
-            player.fgp = (player.fgm / player.fga) * 100
-        else:
-            player.fgp = 0
-    
-    for player in players:
-        if player.tpa != 0:
-            player.tpp = (player.tpm / player.tpa) * 100
-        else:
-            player.tpp = 0
-    
-    for player in players:
-        if player.fta != 0:
-            player.ftp = (player.fgm / player.fga) * 100
-        else:
-            player.ftp = 0
     #print("SQL Query:", stats_config.active_seasons.query)
     print("Number of Active Seasons:", len(stats_config.active_seasons))
     for season in stats_config.active_seasons:
@@ -113,8 +96,10 @@ def view_season(request, id):
 
 def view_season_stats(request, id):
     # Fetch the stats for the specified season
+    players = SeasonAverage.objects.filter(season=id).order_by('-ppg')
 
     for player in players:
+        
         if player.fga != 0:
             player.fgp = (player.fgm / player.fga) * 100
         else:
