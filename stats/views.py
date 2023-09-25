@@ -114,7 +114,7 @@ def view_season(request, id):
 
 def view_season_stats(request, id):
     # Fetch the stats for the specified season
-    players = SeasonAverage.objects.filter(season=id).order_by('-ppg')
+    players = SeasonAverage.objects.filter(season=league_config.current_season).order_by('-ppg')
 
     for player in players:
         if player.fga != 0:
