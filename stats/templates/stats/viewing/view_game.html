@@ -1,6 +1,17 @@
 {% extends 'stats/base.html' %}
+{% load main_filters %}
 {% block content %}
-<!-- Add game page -->
+<div class="container mt-5">
+    <!-- Season Buttons -->
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="btn-group" role="group" aria-label="Seasons">
+                {% for season in all_seasons %}
+                    <a href="{% url 'stats_by_season' season.id %}" class="btn btn-secondary">{{ season.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div><!-- Add game page -->
 <div class="container mt-5">
     <!-- Game title -->
     <h1>S{{ game.season }}D{{ game.day }} | {{ game.away }} @ {{ game.home }} </h1>
