@@ -48,7 +48,7 @@ def index(request):
         "season_id": league_config.current_season,
     }
     # Get standing based on current_season
-    return render(request, "stats/viewing/view_stats.html", context)
+    return render(request, "stats/viewing/view_home.html", context)
 
 # Game statistic functions
 def add_game(request):
