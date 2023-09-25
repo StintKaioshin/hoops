@@ -10,7 +10,7 @@ urlpatterns = [
     path('games/view/<int:id>/', views.view_game, name='view_game'),
     path('seasons/view/<int:id>/', views.view_season, name='view_season'),
     path('seasons/averages/view/<int:id>/', views.view_season_stats, name='view_season_stats'),
-
+    path('stats/season/<int:id>/', views.view_season_stats, name='stats_by_season'),
     # HTMX URL patterns
     path('roster/', views.check_stats_roster, name='check_stats_roster'),
     path('games/add/validate/', views.validate_game, name='validate_game'),
