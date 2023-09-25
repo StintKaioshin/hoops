@@ -54,7 +54,7 @@ def index(request):
             player.ftp = (player.fgm / player.fga) * 100
         else:
             player.ftp = 0
-    print("SQL Query:", stats_config.active_seasons.query)
+    #print("SQL Query:", stats_config.active_seasons.query)
     print("Number of Active Seasons:", len(stats_config.active_seasons))
     for season in stats_config.active_seasons:
         print(season.id, season.name)
