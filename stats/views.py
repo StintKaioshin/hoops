@@ -128,8 +128,9 @@ def view_season_stats(request, id):
     print(current_season)
     # Create the context
     context = {
-        "current_season": 
-        "id": id,
+        "current_season": {
+            "id": id,
+        },
         "sorted_stats": page_obj,
         "page": page_obj,
     }
