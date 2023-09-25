@@ -108,15 +108,23 @@ def view_season(request, id):
     return render(request, "stats/viewing/view_season.html", context)
 
 def view_season_stats(request, id):
+    # Fetch the actual season object
+    try:
+        current_season = Season.objects.get(pk=id)
+    except Season.DoesNotExist:
+        return HttpResponse("Season not found", status=404)
+
     # Get the season stats
     sorted_stats = PlayerStats.objects.all().order_by('-ppg')
+    
     # Paginate sorted_stats
     paginator = Paginator(sorted_stats, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    
     # Create the context
     context = {
-        "season": id,
+        "current_season": current_season,  # pass the actual season object
         "sorted_stats": page_obj,
         "sort_options": stats_config.average_sort_options,
         "page": page_obj,
