@@ -121,7 +121,6 @@ def view_season_stats(request, id):
     paginator = Paginator(sorted_stats, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
     # Create the context
     context = {
         "current_season": {"id": season_id},  # We'll create a dictionary with the season ID
