@@ -113,8 +113,8 @@ def view_season(request, id):
     return render(request, "stats/viewing/view_season.html", context)
 
 def view_season_stats(request, id):
-    # Try to get the specific season
-    season = get_object_or_404(Season, id=id)
+    # Use the season ID directly
+    season_id = id
 
     # Get the season stats
     sorted_stats = PlayerStats.objects.all().order_by('-ppg')
@@ -126,7 +126,7 @@ def view_season_stats(request, id):
     
     # Create the context
     context = {
-        "current_season": season,
+        "current_season": {"id": season_id},  # We'll create a dictionary with the season ID
         "sorted_stats": page_obj,
         "sort_options": stats_config.average_sort_options,
         "page": page_obj,
