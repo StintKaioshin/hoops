@@ -115,10 +115,8 @@ def view_season(request, id):
 def view_season_stats(request, id):
     # Use the season ID directly
     season_id = id
-
     # Get the season stats
     sorted_stats = PlayerStats.objects.all().order_by('-ppg')
-    
     # Paginate sorted_stats
     paginator = Paginator(sorted_stats, 10)
     page_number = request.GET.get('page')
