@@ -14,27 +14,10 @@
         <div class="col-lg-12">
             <div class="btn-group" role="group" aria-label="Seasons">
                 {% for season in active_seasons %}
-                    <a href="{% url 'stats:view_season_stats' season %}" class="btn btn-secondary {% if season_id == current_season.id %}active{% endif %}">Season {{ season }}</a>
+                    <a href="{% url 'stats:view_season_stats' season %}" class="btn btn-secondary {% if season == current_season.id %}active{% endif %}">Season {{ season }}</a>
                 {% endfor %}
             </div>
         </div>
     </div>
-
-    <!-- Leaders Section -->
-    <div class="row">
-        <div class="col-lg-6">
-            <h2 class="leaders-heading">Leaders - PPG</h2>
-            <hr class="divider">
-            <div class="leaders">
-                <ul class="leader-list">
-                    {% for player in leading_scorers %}
-                        <li class="leader-item">
-                            <a href="{% url 'player_gamelog' player.id %}" class="leader-name">{{ player.name }}</a>
-                            <span class="leader-stat">{{ player.ppg }} PPG</span>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
+</div>
 {% endblock %}
