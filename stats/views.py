@@ -113,22 +113,27 @@ def view_season(request, id):
     return render(request, "stats/viewing/view_season.html", context)
 
 def view_season_stats(request, id):
-    # Use the season ID directly
-    season_id = id
     # Get the season stats
-    sorted_stats = PlayerStats.objects.all().order_by('-ppg')
+    sorted_stats = stats_compile.all_player_stats(id)
+    sorted_stats = list(sorted_stats.items())
+    
+    # Sort the stats by PPG in descending order
+    sorted_stats.sort(key=lambda x: x[1]['ppg'], reverse=True)
+    
     # Paginate sorted_stats
     paginator = Paginator(sorted_stats, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    
     # Create the context
     context = {
-        "current_season": {"id": season_id},  # We'll create a dictionary with the season ID
+        "current_season": {
+            "id": id,
+        },
         "sorted_stats": page_obj,
-        "sort_options": stats_config.average_sort_options,
         "page": page_obj,
     }
-    return render(request, "stats/viewing/view_home.html", context)
+    return render(request, "stats/viewing/view_stats.html", context)
 
 # HTMX check functions
 def check_stats_roster(request):
