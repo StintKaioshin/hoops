@@ -113,25 +113,32 @@ def view_season(request, id):
     return render(request, "stats/viewing/view_season.html", context)
 
 def view_season_stats(request, id):
-    # Get the season stats
-    sorted_stats = stats_compile.all_player_stats(id)
-    sorted_stats = list(sorted_stats.items())
+    # Fetch the stats for the specified season
+    players = SeasonAverage.objects.filter(season_id=id).order_by('-ppg')
     
-    # Sort the stats by PPG in descending order
-    sorted_stats.sort(key=lambda x: x[1].get('ppg', 0), reverse=True)
+    for player in players:
+        if player.fga != 0:
+            player.fgp = (player.fgm / player.fga) * 100
+        else:
+            player.fgp = 0
     
-    # Paginate sorted_stats
-    paginator = Paginator(sorted_stats, 10)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    # Create the context
+        if player.tpa != 0:
+            player.tpp = (player.tpm / player.tpa) * 100
+        else:
+            player.tpp = 0
+    
+        if player.fta != 0:
+            player.ftp = (player.fgm / player.fga) * 100
+        else:
+            player.ftp = 0
+
+    current_season = stats_compile.one_season(id)  # Assuming this function provides the necessary season data
+
     context = {
-        "current_season": {
-            "id": id,
-        },
-        "sorted_stats": page_obj,
-        "page": page_obj,
+        "players": players,
+        "current_season": current_season
     }
+
     return render(request, "stats/viewing/view_stats.html", context)
 
 # HTMX check functions
