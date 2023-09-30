@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='player',
             name='use_game_tendencies',
-            field=models.BooleanField(default=True),
+            field=models.BooleanField(default=False),
         ),
     ]
