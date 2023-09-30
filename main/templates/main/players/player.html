@@ -368,17 +368,6 @@
                                     <p><b>Cyberface</b></p><hr>
                                     <input name="cyberface" class="form-control mb-2" type="number" style="width: 50%;" value="{{ player.cyberface }}"/>
                                 </div>
-                                <div class="col-md-2">
-                                    <p><b>Use Game Tendencies</b></p><hr>
-                                    <select class="form-select mb-2" name="use_game" style="width: 50%">
-                                        <option value="{{ player.use_game_tendencies }}">{{ player.use_game_tendencies }}</option>
-                                        {% if player.use_game_tendencies %}
-                                            <option value="False">False</option>
-                                        {% else %}
-                                            <option value="True">True</option>
-                                        {% endif %}
-                                    </select>
-                                </div>
                                 <br>
                                 <!-- Play styles -->
                                 <div class="col-md-2">
