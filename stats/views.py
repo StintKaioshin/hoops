@@ -110,7 +110,7 @@ def view_season_stats(request, id):
             player.tpp = 0
     
         if player.fta != 0:
-            player.ftp = (player.fgm / player.fga) * 100
+            player.ftp = (player.ftm / player.fta) * 100
         else:
             player.ftp = 0
 
