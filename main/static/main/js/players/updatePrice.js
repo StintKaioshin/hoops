@@ -8,7 +8,10 @@ let attributeUpgrades = document.getElementsByClassName("attributeUpgrade");
 let tendencyUpgrades = document.getElementsByClassName("tendencyUpgrade");
 let cartList = document.getElementById("cartList");
 let confirmationPriceLabel = document.getElementById("confirmationPrice");
-
+let hotzoneUpgrades = document.getElementsByClassName("hotzoneUpgrade");
+        for (let i = 0; i < hotzoneUpgrades.length; i++) {
+            hotzoneUpgrades[i].addEventListener('change', updatePrice);
+        }
 // show current badge level
 window.onload = function() {
     for (let i = 0; i < badgeUpgrades.length; i++) {
@@ -22,10 +25,7 @@ window.onload = function() {
                 currentIndex.options[i].disabled = true;
             }
         }
-        let hotzoneUpgrades = document.getElementsByClassName("hotzoneUpgrade");
-        for (let i = 0; i < hotzoneUpgrades.length; i++) {
-            hotzoneUpgrades[i].addEventListener('change', updatePrice);
-        }
+
 
     }
 }
