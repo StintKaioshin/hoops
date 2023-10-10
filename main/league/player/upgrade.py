@@ -137,15 +137,16 @@ def formatAndValidate(player, cleanedFormData):
                 "old": player.tendencies[k],
                 "new": v,
             }
-        print(f"Processing key: {k}")    
-        if k in hotzone_keys:
-            currentValue = player.hotzones.get(k, 0)
-            if currentValue != v:
-                upgradeData["hotzones"][k] = {
-                    "cost": hotzoneCost(),
-                    "old": currentValue,
-                    "new": v
-                }
+    print(f"Processing hotzones. Key: {k}")  # This will print every key being processed
+
+    if k in player.hotzones:
+        print(f"Upgrading hotzone: {k}")  # This will print the key if it matches a player's hotzone
+        upgradeData["hotzones"][k] = {
+        "cost": hotzoneCost(player, k, player.hotzones[k], v),
+        "old": player.hotzones[k],
+        "new": v,
+    }
+
     return [upgradeData, error]
 def createUpgrade(player, cleanedFormData):
     formatResponse = formatAndValidate(player, cleanedFormData)
