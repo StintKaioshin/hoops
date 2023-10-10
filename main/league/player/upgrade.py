@@ -151,16 +151,21 @@ def createUpgrade(player, cleanedFormData):
     formatResponse = formatAndValidate(player, cleanedFormData)
     upgradeData = formatResponse[0]
     upgradeError = formatResponse[1]
-
+    
     if upgradeError != "":
         return upgradeError
+    
+    totalCost = 0
+    for category in ["attributes", "badges", "tendencies", "hotzones"]:
+        for k, v in upgradeData[category].items():
+            totalCost += v["cost"]
+            print(f"{category} - {k}: {v['cost']}")  # Print the cost breakdown
 
-    totalCost = sum([v["cost"] for k, v in upgradeData["attributes"].items()]) + \
-                sum([v["cost"] for k, v in upgradeData["badges"].items()]) + \
-                sum([v["cost"] for k, v in upgradeData["tendencies"].items()]) + \
-                sum([v["cost"] for k, v in upgradeData["hotzones"].items()])
+    print(f"Total Cost: {totalCost}")  # Print total cost for better visibility
 
-    if totalCost <= 0:
+    # Check the conditions again
+    if totalCost <= 0 and not upgradeData["tendencies"]:
+        print(upgradeData)  # Print the entire upgradeData for visibility
         return "😕 Nothing to upgrade!"
     if player.cash < totalCost:
         return "❌ You don't have enough cash for this upgrade!"
