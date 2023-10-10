@@ -81,7 +81,6 @@ class UpgradeForm(forms.Form):
             )
         # For each key in hotzones, create choicefield
         for key in league_config.initial_hotzones:
-            print("Hotzone key:", key)  # Debugging print
             self.fields[key] = forms.ChoiceField(
             label=key,
             choices=league_config.hotzone_choices,
