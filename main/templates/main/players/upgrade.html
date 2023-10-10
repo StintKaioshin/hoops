@@ -376,8 +376,9 @@
 {% for field in upgrade_player_form %}
     {% if field.label in league_config.initial_hotzones %}
         <label for="{{ field.id_for_label }}" class="text-white" style="font-size: 11px;">{{ field.label }}</label>
-        {{ field|addclass:"form-control form-control-sm mt-1" }}
-        {{ field.errors }}
+                <span class="ml-0 mt-1 mb-1" style="font-size: 10px; text-decoration: none; text-transform: capitalize;">{{ field.label }}</span>    
+                {{ field.errors }}
+                {{ field|addclass:"form-control form-control-sm mt-1 hotzoneUpgrade" }}
     {% endif %}
 {% endfor %}
                         </div>
