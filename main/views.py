@@ -310,7 +310,7 @@ def player(request, id):
             plr.statics["playstyles"]["playstyle4"],
         ],
         # Hotzones
-        "hotzones": plr.hotzones,
+        "hotzones": league_config.initial_hotzones,
         # Awards
         "awards": awards,
         # Precalled methods
