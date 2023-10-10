@@ -377,10 +377,9 @@
                         <div class="h5 mb-0">
                             {{ upgrade_player_form.'Left Corner Three'.label_tag }}
                             {{ upgrade_player_form.'Left Corner Three' }}
-
 {% for field_name in league_config.initial_hotzones.keys %}
-    {{ upgrade_player_form.field_name.label_tag }}
-    {{ upgrade_player_form.field_name }}
+    {% for field_name in hotzone_fields %}
+    {{ upgrade_player_form|getattribute:field_name }}
 {% endfor %}
                         </div>
                     </div>
