@@ -22,6 +22,11 @@ window.onload = function() {
                 currentIndex.options[i].disabled = true;
             }
         }
+        let hotzoneUpgrades = document.getElementsByClassName("hotzoneUpgrade");
+        for (let i = 0; i < hotzoneUpgrades.length; i++) {
+            hotzoneUpgrades[i].addEventListener('change', updatePrice);
+        }
+
     }
 }
 
