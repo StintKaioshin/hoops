@@ -139,7 +139,7 @@ def formatAndValidate(player, cleanedFormData):
             }
         print(f"Processing hotzones. Key: {k}")  # This will print every key being processed
 
-        if k in player.hotzones:
+        if k in league_config.initial_hotzones:
             print(f"Upgrading hotzone: {k}")  # This will print the key if it matches a player's hotzone
             upgradeData["hotzones"][k] = {
             "cost": hotzoneCost(player, k, player.hotzones[k], v),
