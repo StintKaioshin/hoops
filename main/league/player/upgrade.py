@@ -47,10 +47,8 @@ def badgeCost(player, badge, currentValue, futureValue):
     # Return the upgrade cost
     return total_price
 def hotzoneCost(player, hotzones, currentValue, futureValue):
-    # Check if hotzone is upgraded (equipped)
-    if currentValue != futureValue:
-        return league_config.hotzone_price
-    return 0
+    return league_config.hotzone_price
+
 
 def formatAndValidate(player, cleanedFormData):
     hotzone_keys = ['Left Corner Three', 'Left Wing Three', "Middle Three", "Right Wing Three", "Right Corner Three", "Left Corner Midrange", "Left Wing Midrange", "Middle Midrange", "Right Wing Midrange", "Right Corner Midrange", "Inside Left", "Inside Middle" , "Inside Right", "Inside Center"]  # list all expected keys
