@@ -46,6 +46,28 @@ attributePriceRanges = {
     "97-99": [97, 99],
 }
 
+
+const calculateHotzonePrice = function() {
+    let price = 0;
+    let cart = {};
+    // Assuming you have an array like attributeUpgrades but for hotzones:
+    let hotzoneUpgrades = document.getElementsByClassName("hotzoneUpgrade");
+
+    for (let i = 0; i < hotzoneUpgrades.length; i++) {
+        let currentIndex = hotzoneUpgrades[i];
+        let futureZone = currentIndex.value; // Future state of the hotzone (e.g., "hot", "cold")
+        let currentZone = badgeAttributes[currentIndex.name]; // Current state (e.g., "hot", "cold")
+
+        // If there's a change in hotzone state, adjust the price
+        if (futureZone !== currentZone) {
+            cart[currentIndex.name] = futureZone; // Adding to cart for illustrative purposes
+            price += 250; // Assuming each change costs $50
+        }
+    }
+    return [price, cart];
+}
+
+
 // calculate price of attributes in the form
 const calculateAttributePrice = function() {
     let price = 0;
