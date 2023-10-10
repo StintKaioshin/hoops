@@ -182,8 +182,12 @@ const updatePrice = function() {
     const tendencyInfo = calculateTendencyPrice();
     const tendencyPrice = tendencyInfo[0];
     const tendencyCart = tendencyInfo[1];
-    // get the total price
-    const totalPrice = attributePrice + badgePrice + tendencyPrice;
+    const hotzoneInfo = calculateHotzonePrice();
+    const hotzonePrice = hotzoneInfo[0];
+    const hotzoneCart = hotzoneInfo[1];
+
+    // Incorporate hotzonePrice into the totalPrice calculation:
+    const totalPrice = attributePrice + badgePrice + tendencyPrice + hotzonePrice;
     // update price & cash labels
     priceLabel.innerText = totalPrice;
     cashLeft.innerText = cash - totalPrice;
@@ -219,6 +223,16 @@ const updatePrice = function() {
         listItem.className = "list-group-item";
         cartList.appendChild(listItem); 
     });
+    // Add hotzones to cart list
+    let buyingHotzones = Object.keys(hotzoneCart);
+    buyingHotzones.forEach(name => {
+        const value = hotzoneCart[name];  
+        let listItem = document.createElement("li");
+        listItem.innerText = `($50) ${name} changed to ${value}`;
+        listItem.className = "list-group-item";
+        cartList.appendChild(listItem); 
+    });
+
     // update confirmation modal price label
     confirmationPriceLabel.innerText = `$${totalPrice}`;
     // update status
