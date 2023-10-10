@@ -137,14 +137,14 @@ def formatAndValidate(player, cleanedFormData):
                 "old": player.tendencies[k],
                 "new": v,
             }
-    print(f"Processing hotzones. Key: {k}")  # This will print every key being processed
+        print(f"Processing hotzones. Key: {k}")  # This will print every key being processed
 
-    if k in player.hotzones:
-        print(f"Upgrading hotzone: {k}")  # This will print the key if it matches a player's hotzone
-        upgradeData["hotzones"][k] = {
-        "cost": hotzoneCost(player, k, player.hotzones[k], v),
-        "old": player.hotzones[k],
-        "new": v,
+        if k in player.hotzones:
+            print(f"Upgrading hotzone: {k}")  # This will print the key if it matches a player's hotzone
+            upgradeData["hotzones"][k] = {
+            "cost": hotzoneCost(player, k, player.hotzones[k], v),
+            "old": player.hotzones[k],
+            "new": v,
     }
 
     return [upgradeData, error]
