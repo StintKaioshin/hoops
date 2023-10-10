@@ -374,7 +374,6 @@
                         </div><hr>
                         <div class="h5 mb-0">
 {% for field in upgrade_player_form %}
-    {{ field.name }}
     {% if field.label in league_config.initial_hotzones %}
         <label for="{{ field.id_for_label }}" class="text-white" style="font-size: 11px;">{{ field.label }}</label>
                 <span class="ml-0 mt-1 mb-1" style="font-size: 10px; text-decoration: none; text-transform: capitalize;">{{ field.label }}</span>    
