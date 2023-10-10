@@ -146,7 +146,7 @@ def formatAndValidate(player, cleanedFormData):
             "old": player.hotzones[k],
             "new": v,
     }
-
+    print('Processed hotzones:', upgradeData["hotzones"])
     return [upgradeData, error]
 def createUpgrade(player, cleanedFormData):
     formatResponse = formatAndValidate(player, cleanedFormData)
