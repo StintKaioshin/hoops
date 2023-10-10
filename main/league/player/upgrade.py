@@ -57,7 +57,7 @@ def hotzoneCost(player, hotzones, currentValue, futureValue):
             if i == index:
                     total_price += hotzone_price
                     continue
-                else:
+            else:
                     total_price += hotzone_price
     print(total_price)
     return total_price
