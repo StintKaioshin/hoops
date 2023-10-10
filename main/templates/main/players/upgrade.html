@@ -376,12 +376,9 @@
                         </div><hr>
                         <div class="h5 mb-0">
 {% for field_name in league_config.initial_hotzones.keys %}
-    TEST: {{ field_name }}
-    {% get_form_field upgrade_player_form field_name as field %}
-    {{ field.label_tag }} {{ field }}
+    {{ upgrade_player_form.field_name.label_tag }}
+    {{ upgrade_player_form.field_name }}
 {% endfor %}
-
-
                         </div>
                     </div>
                 </div>
