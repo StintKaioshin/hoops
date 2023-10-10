@@ -5,6 +5,8 @@
     <!-- <link rel="stylesheet" href="{% static 'main/css/players/upgrade.css' %}"> -->
 {% endblock %}
 {% block content %}
+{% load custom_tags %}
+
         
 <div class="container">
     <form action="/player/upgrade/{{ player.id }}/" method="post">
