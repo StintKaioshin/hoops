@@ -263,7 +263,8 @@ def export_player(player):
 
     # Set the player's hotzones
     def set_hotzones():
-        pass  # game_file[3]["data"]
+        for hotzone, value in database_hotzones.items():
+            game_file[3]["data"][hotzone] = value
 
     # Set the player's tendencies
     def set_tendencies():
