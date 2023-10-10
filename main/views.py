@@ -362,7 +362,6 @@ def upgrade_player(request, id):
     user = request.user
     # Check if the player exists
     player = Player.objects.get(pk=id)
-    hotzone_fields = list(league_config.initial_hotzones.keys())
     if not player:
         return HttpResponse("Sorry, this player doesn't exist!")
     # Check if player has been integrated
@@ -411,10 +410,7 @@ def upgrade_player(request, id):
         # Tendency categories
         "initial_tendencies": league_config.initial_tendencies,
         "initial_hotzones": league_config.initial_hotzones,
-        "hotzone_field_names": list(league_config.initial_hotzones.keys()),
-
     }
-    print(league_config.initial_hotzones.keys())
     return render(request, "main/players/upgrade.html", context)
 import logging
 logger = logging.getLogger(__name__)
