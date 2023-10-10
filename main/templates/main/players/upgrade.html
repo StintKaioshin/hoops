@@ -374,8 +374,7 @@
                         </div><hr>
                         <div class="h5 mb-0">
 {% for field in upgrade_player_form %}
- {% for key, value in initial_hotzones.items %}
-    {{ key }}: {{ value }}
+{{ upgrade_player_form."Left Corner Three" }}
 {% endfor %}      
     {% if field.label in league_config.initial_hotzones %}
         <label for="{{ field.id_for_label }}" class="text-white" style="font-size: 11px;">{{ field.label }}</label>
