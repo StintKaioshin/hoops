@@ -47,9 +47,9 @@ def badgeCost(player, badge, currentValue, futureValue):
     # Return the upgrade cost
     return total_price
 def formatAndValidate(player, cleanedFormData):
-    print(formatFormData)
     # Format the cleaned form data (so it works with the database)
     formatFormData = cleanedFormData.copy()
+    print(formatFormData)
     # formatFormData = {k.title(): v for k, v in formatFormData.items()}
     # formatFormData = {k.replace("_", " "): v for k, v in formatFormData.items()}
     # Initialize the upgrade data (will be returned to upgrade the player with)
