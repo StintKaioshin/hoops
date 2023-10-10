@@ -47,20 +47,10 @@ def badgeCost(player, badge, currentValue, futureValue):
     # Return the upgrade cost
     return total_price
 def hotzoneCost(player, hotzones, currentValue, futureValue):
-    # Define some league config variables
-    total_price = 0
-    hotzone_price = league_config.hotzone_price
-    # Define some player variables
-    # Check the badge tier (Bronze, Silver, Gold, Hof)
-    for i in range((currentValue + 1), (futureValue + 1)):
-        for index, tier in hotzone_price.items():
-            if i == index:
-                    total_price += hotzone_price
-                    continue
-            else:
-                    total_price += hotzone_price
-    print(total_price)
-    return total_price
+    # Check if hotzone is upgraded (equipped)
+    if currentValue != futureValue:
+        return league_config.hotzone_price
+    return 0
 
 def formatAndValidate(player, cleanedFormData):
     hotzone_keys = ['Left Corner Three', 'Left Wing Three', "Middle Three", "Right Wing Three", "Right Corner Three", "Left Corner Midrange", "Left Wing Midrange", "Middle Midrange", "Right Wing Midrange", "Right Corner Midrange", "Inside Left", "Inside Middle" , "Inside Right", "Inside Center"]  # list all expected keys
@@ -181,7 +171,6 @@ def createUpgrade(player, cleanedFormData):
         totalCost += v["cost"]
     for k, v in upgradeData["hotzones"].items():
         totalCost += v["cost"]
-    print("Hotzone cost before:", totalCost)
     # Return if cost is below zero & no tendencies were upgraded, or player doesn't have enough cash
     if totalCost <= 0 and not upgradeData["tendencies"]:
         return "😕 Nothing to upgrade!"
