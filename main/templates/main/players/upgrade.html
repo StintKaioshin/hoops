@@ -361,10 +361,9 @@
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
- 
-    <div class="tab-pane fade" id="hotzones" role="tabpanel" aria-labelledby="hotzones-tab">
+        </div> 
+<div class="tab-pane fade" id="hotzones" role="tabpanel" aria-labelledby="hotzones-tab">
     <div class="mt-2 row">
         <!-- hotzones -->
         <div class="col-md-12 mb-4">
@@ -375,8 +374,8 @@
                             <span class="text-white" style="font-size: 12px;">Hotzones</span>
                         </div><hr>
                         <div class="h5 mb-0">
-{% for field in upgrade_player_form %}
-    {% if field.label in league_config.initial_hotzones %}
+                            {% for field in upgrade_player_form %}
+                                {% if field.label in initial_hotzones %}
         <label for="{{ field.id_for_label }}" class="text-white" style="font-size: 11px;">{{ field.label }}</label>
         {{ field|addclass:"form-control form-control-sm mt-1" }}
         {{ field.errors }}
