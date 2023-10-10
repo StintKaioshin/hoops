@@ -132,7 +132,8 @@ def formatAndValidate(player, cleanedFormData):
                 "old": player.tendencies[k],
                 "new": v,
             }
-        if k in player.hotzones:
+        hotzone_keys = ['Left Corner Three', 'Left Wing Three', "Middle Three", "Right Wing Three", "Right Corner Three", "Left Corner Midrange", "Left Wing Midrange", "Middle Midrange", "Right Wing Midrange", "Right Corner Midrange", "Inside Left", "Inside Middle" , "Inside Right", "Inside Center"]  # list all expected keys
+        if k in hotzone_keys:
     # Assume hotzones are represented by a 0 or 1 for cold and hot zones respectively
     # No upgrade cost for hotzones, they are just toggles
             print("Yes"),
