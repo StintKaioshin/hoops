@@ -160,7 +160,7 @@ def createUpgrade(player, cleanedFormData):
     for k, v in upgradeData["tendencies"].items():
         totalCost += v["cost"]
     for k, v in upgradeData["hotzones"].items():
-        player.hotzones[k] = v["new"]
+        player.hotzones[k] = v["cost"]
     # Return if cost is below zero & no tendencies were upgraded, or player doesn't have enough cash
     if totalCost <= 0 and not upgradeData["tendencies"]:
         return "😕 Nothing to upgrade!"
