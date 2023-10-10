@@ -309,6 +309,8 @@ def player(request, id):
             league_config.playstyles[plr.statics["playstyles"]["playstyle4"]],
             plr.statics["playstyles"]["playstyle4"],
         ],
+        # Hotzones
+        "hotzones": plr.hotzones,
         # Awards
         "awards": awards,
         # Precalled methods
