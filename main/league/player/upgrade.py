@@ -46,6 +46,26 @@ def badgeCost(player, badge, currentValue, futureValue):
                     total_price += tier["base"]
     # Return the upgrade cost
     return total_price
+def hotzoneCost(player, hotzones, currentValue, futureValue):
+    # Define some league config variables
+    total_price = 0
+    hotzone_price = league_config.badge_prices
+    # Define some player variables
+    primary_badges = player.primary_badges
+    secondary_badges = player.secondary_badges
+    # Check the badge tier (Bronze, Silver, Gold, Hof)
+    for i in range((currentValue + 1), (futureValue + 1)):
+        for index, tier in badge_prices.items():
+            if i == index:
+                if badge in primary_badges:
+                    total_price += tier["primary"]
+                    continue
+                elif badge in secondary_badges:
+                    total_price += tier["secondary"]
+                    continue
+                else:
+                    total_price += tier["base"]
+
 def formatAndValidate(player, cleanedFormData):
     hotzone_keys = ['Left Corner Three', 'Left Wing Three', "Middle Three", "Right Wing Three", "Right Corner Three", "Left Corner Midrange", "Left Wing Midrange", "Middle Midrange", "Right Wing Midrange", "Right Corner Midrange", "Inside Left", "Inside Middle" , "Inside Right", "Inside Center"]  # list all expected keys
     # Format the cleaned form data (so it works with the database)
