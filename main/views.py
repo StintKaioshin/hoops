@@ -413,6 +413,7 @@ def upgrade_player(request, id):
         "hotzone_field_names": list(league_config.initial_hotzones.keys()),
 
     }
+    print(league_config.initial_hotzones.keys())
     return render(request, "main/players/upgrade.html", context)
 import logging
 logger = logging.getLogger(__name__)
