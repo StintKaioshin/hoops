@@ -150,10 +150,9 @@ def formatAndValidate(player, cleanedFormData):
                 "new": v,
             }
         print(f"Processing key: {k}")    
-        if k in hotzone_keys and player.hotzones[k] != v:
+        if k in player.hotzones:
     # Assume hotzones are represented by a 0 or 1 for cold and hot zones respectively
     # No upgrade cost for hotzones, they are just toggles
-            print("Yes"),
             upgradeData["hotzones"][k] = {
             "cost": 250,
             "old": player.hotzones[k],
