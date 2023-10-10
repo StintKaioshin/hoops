@@ -154,7 +154,7 @@ def formatAndValidate(player, cleanedFormData):
     # Assume hotzones are represented by a 0 or 1 for cold and hot zones respectively
     # No upgrade cost for hotzones, they are just toggles
             upgradeData["hotzones"][k] = {
-            "cost": 250,
+            "cost": upgradeCost,
             "old": player.hotzones[k],
             "new": v,
     }
@@ -180,7 +180,7 @@ def createUpgrade(player, cleanedFormData):
     for k, v in upgradeData["tendencies"].items():
         totalCost += v["cost"]
     for k, v in upgradeData["hotzones"].items():
-        totalCost += "cost"
+        totalCost += v["cost"]
     print("Hotzone cost before:", totalCost)
     # Return if cost is below zero & no tendencies were upgraded, or player doesn't have enough cash
     if totalCost <= 0 and not upgradeData["tendencies"]:
