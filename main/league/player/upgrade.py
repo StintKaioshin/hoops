@@ -140,39 +140,29 @@ def formatAndValidate(player, cleanedFormData):
                 "new": v,
             }
         print(f"Processing key: {k}")    
-        if k in player.hotzones:
-    # Assume hotzones are represented by a 0 or 1 for cold and hot zones respectively
-    # No upgrade cost for hotzones, they are just toggles
+        if k in hotzone_keys:
+            currentValue = player.hotzones.get(k, 0)
             upgradeData["hotzones"][k] = {
-            "cost": upgradeCost,
-            "old": player.hotzones[k],
-            "new": v,
-    }
-    # Return the upgrade data
+                "cost": hotzoneCost(player, k, currentValue, v),
+                "old": currentValue,
+                "new": v
+            }
     return [upgradeData, error]
 
-
 def createUpgrade(player, cleanedFormData):
-    # Format the form data
     formatResponse = formatAndValidate(player, cleanedFormData)
     upgradeData = formatResponse[0]
     upgradeError = formatResponse[1]
-    # Check if there were any errors
+
     if upgradeError != "":
         return upgradeError
-    # Initialize the total cost
-    totalCost = 0
-    # Calculate the total cost
-    for k, v in upgradeData["attributes"].items():
-        totalCost += v["cost"]
-    for k, v in upgradeData["badges"].items():
-        totalCost += v["cost"]
-    for k, v in upgradeData["tendencies"].items():
-        totalCost += v["cost"]
-    for k, v in upgradeData["hotzones"].items():
-        totalCost += v["cost"]
-    # Return if cost is below zero & no tendencies were upgraded, or player doesn't have enough cash
-    if totalCost <= 0 and not upgradeData["tendencies"]:
+
+    totalCost = sum([v["cost"] for k, v in upgradeData["attributes"].items()]) + \
+                sum([v["cost"] for k, v in upgradeData["badges"].items()]) + \
+                sum([v["cost"] for k, v in upgradeData["tendencies"].items()]) + \
+                sum([v["cost"] for k, v in upgradeData["hotzones"].items()])
+
+    if totalCost <= 0:
         return "😕 Nothing to upgrade!"
     if player.cash < totalCost:
         return "❌ You don't have enough cash for this upgrade!"
