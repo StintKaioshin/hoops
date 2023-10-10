@@ -133,8 +133,8 @@ def formatAndValidate(player, cleanedFormData):
                 "old": player.tendencies[k],
                 "new": v,
             }
-        print(f"Processing key: {k}")    
-        if k in hotzone_keys and player.hotzones[k] != v:
+    print(f"Processing key: {k}")    
+    if k in hotzone_keys and player.hotzones[k] != v:
     # Assume hotzones are represented by a 0 or 1 for cold and hot zones respectively
     # No upgrade cost for hotzones, they are just toggles
             print("Yes"),
