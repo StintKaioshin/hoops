@@ -53,7 +53,7 @@ def formatAndValidate(player, cleanedFormData):
     # formatFormData = {k.replace("_", " "): v for k, v in formatFormData.items()}
     # Initialize the upgrade data (will be returned to upgrade the player with)
     # Basically, we'll just be adding the values that were changed and are valid to this dictionary
-    upgradeData = {"attributes": {}, "badges": {}, "tendencies": {}}
+    upgradeData = {"attributes": {}, "badges": {}, "tendencies": {}, "hotzones": {}}
     error = ""
     # Define some player variables
     primary_badges = player.primary_badges
@@ -131,6 +131,15 @@ def formatAndValidate(player, cleanedFormData):
                 "old": player.tendencies[k],
                 "new": v,
             }
+        if k in player.hotzones:
+    # Assume hotzones are represented by a 0 or 1 for cold and hot zones respectively
+    # No upgrade cost for hotzones, they are just toggles
+            upgradeData["hotzones"][k] = {
+            "cost": 250,
+            "old": player.hotzones[k],
+            "new": v,
+    }
+
     # Return the upgrade data
     return [upgradeData, error]
 def createUpgrade(player, cleanedFormData):
