@@ -410,6 +410,7 @@ def upgrade_player(request, id):
         # Tendency categories
         "initial_tendencies": league_config.initial_tendencies,
         "initial_hotzones": league_config.initial_hotzones,
+        "hotzone_field_names": list(league_config.initial_hotzones.keys()),
 
     }
     return render(request, "main/players/upgrade.html", context)
