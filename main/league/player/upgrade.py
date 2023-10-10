@@ -134,6 +134,7 @@ def formatAndValidate(player, cleanedFormData):
         if k in player.hotzones:
     # Assume hotzones are represented by a 0 or 1 for cold and hot zones respectively
     # No upgrade cost for hotzones, they are just toggles
+            print("Yes"),
             upgradeData["hotzones"][k] = {
             "cost": 250,
             "old": player.hotzones[k],
