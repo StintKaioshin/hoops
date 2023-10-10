@@ -47,6 +47,7 @@ def badgeCost(player, badge, currentValue, futureValue):
     # Return the upgrade cost
     return total_price
 def formatAndValidate(player, cleanedFormData):
+    hotzone_keys = ['Left Corner Three', 'Left Wing Three', "Middle Three", "Right Wing Three", "Right Corner Three", "Left Corner Midrange", "Left Wing Midrange", "Middle Midrange", "Right Wing Midrange", "Right Corner Midrange", "Inside Left", "Inside Middle" , "Inside Right", "Inside Center"]  # list all expected keys
     # Format the cleaned form data (so it works with the database)
     formatFormData = cleanedFormData.copy()
     print(formatFormData)
@@ -132,7 +133,6 @@ def formatAndValidate(player, cleanedFormData):
                 "old": player.tendencies[k],
                 "new": v,
             }
-        hotzone_keys = ['Left Corner Three', 'Left Wing Three', "Middle Three", "Right Wing Three", "Right Corner Three", "Left Corner Midrange", "Left Wing Midrange", "Middle Midrange", "Right Wing Midrange", "Right Corner Midrange", "Inside Left", "Inside Middle" , "Inside Right", "Inside Center"]  # list all expected keys
         if k in hotzone_keys:
     # Assume hotzones are represented by a 0 or 1 for cold and hot zones respectively
     # No upgrade cost for hotzones, they are just toggles
@@ -162,8 +162,6 @@ def createUpgrade(player, cleanedFormData):
         totalCost += v["cost"]
     for k, v in upgradeData["tendencies"].items():
         totalCost += v["cost"]
-    print("Hotzones Data:", upgradeData["hotzones"])
-    print("Hotzone cost before:", totalCost)
     for k, v in upgradeData["hotzones"].items():
         totalCost += v["cost"]
     print("Hotzone cost before:", totalCost)
