@@ -374,13 +374,14 @@
                             <span class="text-white" style="font-size: 12px;">Hotzones</span>
                         </div><hr>
                         <div class="h5 mb-0">
-                            {% for field in upgrade_player_form %}
-                                {% if field.label in initial_hotzones %}
+                 {% for field in upgrade_player_form %}
+    {% if field.label in initial_hotzones %}
         <label for="{{ field.id_for_label }}" class="text-white" style="font-size: 11px;">{{ field.label }}</label>
-        {{ field|addclass:"form-control form-control-sm mt-1" }}
+        {{ field|addclass:"form-control form-control-sm mt-1 hotzoneUpgrade" }}
         {{ field.errors }}
     {% endif %}
 {% endfor %}
+
                                     </select>
                         </div>
                     </div>
