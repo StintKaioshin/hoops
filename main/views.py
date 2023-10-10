@@ -362,6 +362,7 @@ def upgrade_player(request, id):
     user = request.user
     # Check if the player exists
     player = Player.objects.get(pk=id)
+    hotzone_fields = list(league_config.initial_hotzones.keys())
     if not player:
         return HttpResponse("Sorry, this player doesn't exist!")
     # Check if player has been integrated
