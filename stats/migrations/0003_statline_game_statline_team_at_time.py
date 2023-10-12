@@ -7,6 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('main', '0064_discorduser_can_update_styles_alter_player_styles'), 
         ('stats', '0002_statline_personal_fouls'),
     ]
 
