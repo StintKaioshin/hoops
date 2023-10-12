@@ -197,7 +197,7 @@ class GameLogPlayerSetting(models.Model):
     game_log = models.ForeignKey(GameLog, on_delete=models.CASCADE)
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     touches = models.IntegerField()
-    player_initiator = models.BooleanField(default=False)
+    play_initiator = models.BooleanField(default=False)
 
 
 
