@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0065_team_show_on_lists'),
+        ('main', '0059_alter_contractoffer_notes'),
         ('stats', '0008_alter_game_game_type'),
     ]
 
