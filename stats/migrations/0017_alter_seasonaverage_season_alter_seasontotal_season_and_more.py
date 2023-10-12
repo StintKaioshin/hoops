@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0065_team_show_on_lists'),
+        ('main', '0059_alter_contractoffer_notes'),
         ('stats', '0016_remove_seasontotal_gmsc'),
     ]
 
