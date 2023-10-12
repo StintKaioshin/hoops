@@ -94,14 +94,14 @@ class GameLogForm(forms.ModelForm):
         model = GameLog
         fields = ['team_name', 'playbook', 'offensive_focus', 'offensive_tempo', 'offensive_rebounding', 
                   'defensive_focus', 'defensive_aggression', 'defensive_rebounding', 
-                  'run_plays', 'offense_vs_defense', 'bench_depth', 'guards_vs_forwards', 
+                  'run_plays', 'offense_vs_defense', 'guards_vs_forwards', 
                   'zone_usage', 'inside_vs_outside']
 
 
 class GameLogPlayerSettingForm(forms.ModelForm):
     class Meta:
         model = GameLogPlayerSetting
-        fields = ['player', 'touches', 'player_initiator']
+        fields = ['player', 'touches', 'play_initiator']
     
     def __init__(self, *args, **kwargs):
         team = kwargs.pop('team', None)
