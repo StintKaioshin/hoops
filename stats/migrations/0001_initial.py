@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('main', '0064_discorduser_can_update_styles_alter_player_styles'),
+        ('main', '0059_alter_contractoffer_notes'),
     ]
 
     operations = [
