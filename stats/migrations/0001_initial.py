@@ -9,9 +9,6 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('main', '0059_alter_contractoffer_notes'),
-    ]
 
     operations = [
         migrations.CreateModel(
