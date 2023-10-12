@@ -34,7 +34,7 @@
                             {% else %}
                                 {{ player.primary_position }}
                             {% endif %}
-                            )
+                            ) - ${{ player.salary }}
                         </li>
                     {% endfor %}
                 {% else %}
@@ -44,7 +44,7 @@
                         {% if group.list.0.secondary_position %}
                             - {{ group.list.0.secondary_position }}
                         {% endif %}
-                        )
+                        ) - ${{ group.list.0.salary }}
                     </li>
                 {% endif %}
             {% endif %}
