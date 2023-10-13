@@ -739,7 +739,7 @@ badge_categories = {
     "defense": [
         "Box",
         "Brick Wall",
-        "Chase  Artist",
+        "Chase Artist",
         "Clamps",
         "Defensive Leader",
         "Heart Crusher",
