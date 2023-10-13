@@ -373,7 +373,7 @@ initial_badges = {
     "Showtime": start_badge,
     "Slithery Finisher": start_badge,
     "Tear Dropper": start_badge,
-    "Catch & Shoot": start_badge,
+    "Catch And Shoot": start_badge,
     "Clutch Shooter": start_badge,
     "Corner Specialist": start_badge,
     "Deadeye": start_badge,
