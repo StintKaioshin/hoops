@@ -117,7 +117,7 @@ mod_tools_badges = {
     "AGENT_3": "0",
     "AMPED": "0",
     "BLINDERS": "0",
-    "CATCH_SHOOT": "0",
+    "CATCH_AND_SHOOT": "0",
     "CLAYMORE": "0",
     "CLUTCH_SHOOTER": "0",
     "COMEBACK_KID": "0",
