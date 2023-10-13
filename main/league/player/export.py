@@ -156,7 +156,6 @@ mod_tools_badges = {
     "MENACE": "0",
     "OFF-BALL_PEST": "0",
     "PICK_DODGER": "0",
-    "PICK_POPPER": "0",
     "POST_LOCKDOWN": "0",
     "POGO_STICK": "0",
     "WORK_HORSE": "0",
@@ -185,6 +184,7 @@ attribute_formatting_cases = {
 badge_formatting_cases = {
     "DROP_STEPPER": "DROP-STEPPER",
     "AGENT_THREES": "AGENT_3",
+    "CATCH_AND_SHOOT": "CATCH_SHOOT",
     "SLIPPERY_OFF_BALL": "SLIPPERY_OFF-BALL",
     "OFF_BALL_PEST": "OFF-BALL_PEST",
 }
@@ -262,16 +262,16 @@ def export_player(player):
 
     # Set the player's hotzones
     def set_hotzones():
-        for hotzone, value in database_hotzones.items():
-            game_file[3]["data"][hotzone] = value
+        pass  # game_file[3]["data"]
 
     # Set the player's tendencies
     def set_tendencies():
         # We don't need to format these, they are already formatted
         # We do, however, need to convert the values to strings
         # In other words, if the player is using website/database tendencies
-        for tendency, value in database_tendencies.items():
-            game_file[4]["data"][tendency] = str(value)
+        if not player.use_game_tendencies:
+            for tendency, value in database_tendencies.items():
+                game_file[4]["data"][tendency] = str(value)
 
     # Set the player's statics
     def set_statics():
@@ -284,23 +284,8 @@ def export_player(player):
         game_file[0]["data"]["PLAY_TYPE_3"] = playstyles["playstyle3"]
         game_file[0]["data"]["PLAY_TYPE_4"] = playstyles["playstyle4"]
         # Signature statics
-        if "Three Point Shot" in database_attributes:
-            three_point = database_attributes["Three Point Shot"]
-        else:
-            three_point = 60        
-        if "Mid Range Shot" in database_attributes:
-            mid_range = database_attributes["Mid Range Shot"]
-        else:
-            mid_range = 60     
-        threshold = three_point if three_point > mid_range else mid_range
-        if threshold >= 99:
-            game_file[7]["data"]["RELEASE_TIMING"] = "4"
-        elif threshold >= 90:
-            game_file[7]["data"]["RELEASE_TIMING"] = "3"
-        elif threshold >= 75:
-            game_file[7]["data"]["RELEASE_TIMING"] = "2"
-        elif threshold < 75:
-            game_file[7]["data"]["RELEASE_TIMING"] = "1"
+        three_point = database_attributes["Three Point Shot"]
+        mid_range = database_attributes["Mid Range Shot"]
 
     # Set the player's ignores
     def set_ignores():
