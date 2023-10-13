@@ -391,7 +391,7 @@ initial_badges = {
     "Volume Shooter": start_badge,
     "Box": start_badge,
     "Brick Wall": start_badge,
-    "Chasedown Artist": start_badge,
+    "Chase Down Artist": start_badge,
     "Clamps": start_badge,
     "Defensive Leader": start_badge,
     "Heart Crusher": start_badge,
@@ -739,7 +739,7 @@ badge_categories = {
     "defense": [
         "Box",
         "Brick Wall",
-        "Chase Artist",
+        "Chase Down Artist",
         "Clamps",
         "Defensive Leader",
         "Heart Crusher",
