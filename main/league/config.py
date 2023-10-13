@@ -391,7 +391,7 @@ initial_badges = {
     "Volume Shooter": start_badge,
     "Box": start_badge,
     "Brick Wall": start_badge,
-    "Chase  Artist": start_badge,
+    "Chasedown Artist": start_badge,
     "Clamps": start_badge,
     "Defensive Leader": start_badge,
     "Heart Crusher": start_badge,
