@@ -185,7 +185,6 @@ attribute_formatting_cases = {
 badge_formatting_cases = {
     "DROP_STEPPER": "DROP-STEPPER",
     "AGENT_THREES": "AGENT_3",
-    "CATCH_AND_SHOOT": "CATCH_SHOOT",
     "SLIPPERY_OFF_BALL": "SLIPPERY_OFF-BALL",
     "OFF_BALL_PEST": "OFF-BALL_PEST",
 }
