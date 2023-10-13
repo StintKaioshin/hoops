@@ -425,7 +425,7 @@ def create_player(request):
         "playmaking": ["Passing Accuracy", "Ball Control", "Post Moves", "Pass IQ", "Pass Vision"],
     }
     badge_categories = { 
-        "finishing": ["Acrobat", "Aerial Wizard", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross-Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork", "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick & Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Slithery Finisher"],
+        "finishing": ["Acrobat", "Backdown Punisher", "Consistent Finisher", "Contact Finisher", "Cross-Key Scorer", "Deep Hooks", "Dropstepper", "Fancy Footwork", "Fastbreak Finisher", "Giant Slayer", "Lob City Finisher", "Pick & Roller", "Pro Touch", "Putback Boss", "Relentless Finisher", "Slithery Finisher"],
         "shooting": ["Catch & Shoot", "Clutch Shooter", "Corner Specialist", "Deadeye", "Difficult Shots", "Flexible Release", "Green Machine", "Hot Zone Hunter", "Quick Draw", "Range Extender", "Slippery Off-Ball", "Steady Shooter", "Tireless Shooter", "Volume Shooter"],
         "defense": ["Brick Wall", "Chase Down Artist", "Clamps", "Interceptor", "Intimidator", "Lightning Reflexes", "Moving Truck", "Off-Ball Pest", "Pick Dodger", "Pogo Stick", "Post Move Lockdown", "Rebound Chaser", "Rim Protector", "Tireless Defender", "Trapper"],
         "playmaking": ["Ankle Breaker", "Bail Out", "Break Starter", "Dimer", "Downhill", "Dream Shake", "Flashy Passer", "Handles For Days", "Needle Threader", "Post Spin Technician", "Quick First Step", "Space Creator", "Stop & Go", "Tight Handles", "Unpluckable"],
