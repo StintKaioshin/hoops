@@ -156,6 +156,7 @@ mod_tools_badges = {
     "MENACE": "0",
     "OFF-BALL_PEST": "0",
     "PICK_DODGER": "0",
+    "PICK_AND_POPPER": "0",
     "POST_LOCKDOWN": "0",
     "POGO_STICK": "0",
     "WORK_HORSE": "0",
