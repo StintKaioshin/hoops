@@ -717,7 +717,7 @@ badge_categories = {
         "Tear Dropper",
     ],
     "shooting": [
-        "Catch & Shoot",
+        "Catch Shoot",
         "Clutch Shooter",
         "Corner Specialist",
         "Deadeye",
