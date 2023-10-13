@@ -100,7 +100,6 @@ mod_tools_attributes = {
 
 mod_tools_badges = {
     "ACROBAT": "0",
-    "AERIAL_WIZARD": "0",
     "BACKDOWN_PUNISHER": "0",
     "BULLY": "0",
     "DREAM_SHAKE": "0",
