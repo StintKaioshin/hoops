@@ -42,18 +42,6 @@
         {% endfor %}
     </ul>
 </div>
-                    <li class="list-group-item">
-                        {{ group.list.0.first_name }} {{ group.list.0.last_name }} (
-                        {{ group.list.0.primary_position }}
-                        {% if group.list.0.secondary_position %}
-                            - {{ group.list.0.secondary_position }}
-                        {% endif %}
-                        ) - ${{ group.list.0.salary }}
-                    </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-</div>
 </div>
 <script src="{% static 'main/js/players/copyJSON.js' %}"></script>
 {% endblock %}
