@@ -25,19 +25,23 @@
         {% regroup team.player_set.all by primary_position as players_by_position %}
         {% for group in players_by_position reversed %}
             {% if group.grouper %}
-                {% if group.list|length > 1 %}
-                    {% for player in group.list|dictsort:"secondary_position" %}
-                        <li class="list-group-item">
-                            {{ player.first_name }} {{ player.last_name }} (
-                            {% if player.secondary_position %}
-                                {{ player.secondary_position }} - {{ player.primary_position }}
-                            {% else %}
-                                {{ player.primary_position }}
-                            {% endif %}
-                            ) - ${{ player.salary }}
-                        </li>
-                    {% endfor %}
-                {% else %}
+                {% for player in group.list|dictsort:"secondary_position" %}
+                    <li class="list-group-item">
+                        {{ player.first_name }} {{ player.last_name }} (
+                        {% if player.secondary_position %}
+                            {{ player.secondary_position }} - {{ player.primary_position }}
+                        {% else %}
+                            {{ player.primary_position }}
+                        {% endif %}
+                        ) - ${{ player.salary }}
+                        <button id="file_{{player.id}}" type="button" class="copyJSON btn btn-primary btn-sm" onClick="clipboard(this.id)">Copy File</button>
+                        <p id="json_file_{{player.id}}" class="file" style="font-size: 6px; display: none;">{{ player.file }}</p>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
                     <li class="list-group-item">
                         {{ group.list.0.first_name }} {{ group.list.0.last_name }} (
                         {{ group.list.0.primary_position }}
@@ -45,8 +49,6 @@
                             - {{ group.list.0.secondary_position }}
                         {% endif %}
                         ) - ${{ group.list.0.salary }}
-                        <button id="file_{{player.id}}" type="button" class="copyJSON btn btn-primary btn-sm" onClick="clipboard(this.id)">Copy File</button>
-                        <p id="json_file_{{player.id}}" class="file" style="font-size: 6px; display: none;">{{ player.file }}</p>
                     </li>
                 {% endif %}
             {% endif %}
