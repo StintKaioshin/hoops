@@ -1,3 +1,5 @@
+
+copyButtons = document.getElementsByClassName("copyJSON");
 function clipboard(clicked_id) {
     // Correctly generate the ID for the paragraph element
     let fileID = 'json_' + clicked_id.split("_")[1];
