@@ -34,7 +34,7 @@
         {{ player.primary_position }}
     {% endif %}
     ) - ${{ player.salary }}
-    <button id="file_{{player.id}}" type="button" class="copyJSON btn btn-primary btn-sm" onClick="clipboard(player.id)">Copy File</button>
+    <button id="file_{{player.id}}" type="button" class="copyJSON btn btn-primary btn-sm" onClick="clipboard(this.id)">Copy File</button>
     <p id="json_file_{{player.id}}" class="file" style="font-size: 6px; display: none;">{{ player.file }}</p>
 </li>
 
